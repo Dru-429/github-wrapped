@@ -2,26 +2,27 @@
 
 import { useState } from "react";
 import { ArrowRight } from "lucide-react";
+import { useRouter } from "next/router";
 
 export default function HomePage() {
-  const [username, setUsername] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [username, setUsername] = useState("")
+  const [isLoading, setIsLoading] = useState(false)
+  const router = useRouter()
 
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
-    if (!username.trim()) return;
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!username.trim()) return
 
-    setLoading(true);
-    // Extract username from URL if provided
-    let extractedUsername = username.trim();
-    if (extractedUsername.includes("github.com/")) {
-      extractedUsername = extractedUsername
-        .split("github.com/")[1]
-        .split("/")[0];
+    // Extract username from URL if pasted
+    let cleanUsername = username.trim()
+    if (cleanUsername.includes("github.com/")) {
+      cleanUsername = cleanUsername.split("github.com/")[1].split("/")[0]
     }
 
-    window.location.href = `/${extractedUsername}`;
-  };
+    setIsLoading(true)
+    router.push(`/wrap/${cleanUsername}`)
+  }
+
 
   return (
     <div className="min-h-screen bg-[#F6F7ED] relative overflow-hidden">
@@ -91,16 +92,16 @@ export default function HomePage() {
               onChange={(e) => setUsername(e.target.value)}
               placeholder="octocat or https://github.com/octocat"
               className="w-full px-6 py-4 bg-white border-2 border-[#001F3F]/10 rounded-xl text-lg font-nunito text-[#001F3F] placeholder:text-[#001F3F]/40 focus:outline-none focus:border-[#00804C] transition-colors"
-              disabled={loading}
+              disabled={isLoading}
             />
           </div>
 
           <button
             type="submit"
-            disabled={loading || !username.trim()}
+            disabled={isLoading || !username.trim()}
             className="w-full bg-[#001F3F] text-white py-5 rounded-full font-bebas-neue text-lg hover:bg-[#00804C] disabled:bg-[#001F3F]/30 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-3 group"
           >
-            {loading ? (
+            {isLoading ? (
               "Loading..."
             ) : (
               <>
