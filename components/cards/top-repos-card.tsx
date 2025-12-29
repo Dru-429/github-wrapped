@@ -9,7 +9,6 @@ export function TopReposCard({ data }: { data: GitHubData }) {
   return (
     <div className="relative w-full h-full">
       <div className="absolute inset-0 bg-[repeating-linear-gradient(90deg,#DBE64C_0px,#DBE64C_8px,transparent_8px,transparent_16px)] rounded-2xl p-3">
-        <div className="absolute inset-3 bg-[repeating-linear-gradient(0deg,#DBE64C_0px,#DBE64C_8px,transparent_8px,transparent_16px)] rounded-lg" />
         <div
           className="relative w-full h-full bg-[#001f3f] rounded-xl p-6 flex flex-col"
           style={{ fontFamily: "var(--font-sans)" }}

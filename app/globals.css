@@ -24,3 +24,43 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.bebas-neue-regular {
+  font-family: "Bebas Neue", sans-serif;
+  /* font-weight: 400;
+  font-style: normal; */
+}
+
+/* Montserrat (variable) helpers */
+.montserrat {
+  font-family: "Montserrat", sans-serif;
+  /* font-style: normal;
+  font-optical-sizing: auto; */
+}
+
+/* Weight helpers (optional, use as needed) */
+.montserrat-100 { font-weight: 100; }
+.montserrat-200 { font-weight: 200; }
+.montserrat-300 { font-weight: 300; }
+.montserrat-400 { font-weight: 400; }
+.montserrat-500 { font-weight: 500; }
+.montserrat-600 { font-weight: 600; }
+.montserrat-700 { font-weight: 700; }
+.montserrat-800 { font-weight: 800; }
+.montserrat-900 { font-weight: 900; }
+
+/* Theme helper: apply a theme font via CSS variable */
+.theme { font-family: var(--theme-font, inherit); }
+
+/* Theme variants - set the --theme-font to switch fonts */
+.theme-bebas { --theme-font: "Bebas Neue", sans-serif; }
+.theme-montserrat { --theme-font: "Montserrat", sans-serif; }
+
+/* Utilities - apply fonts directly */
+.font-bebas { font-family: "Bebas Neue", sans-serif; }
+.font-montserrat { font-family: "Montserrat", sans-serif; }
+
+/* Usage examples (HTML):
+   - Wrap area with <div class="theme theme-montserrat"> … </div> to set the theme font for that subtree
+   - Add <span class="font-bebas">Heading</span> to apply Bebas on a single element
+*/
