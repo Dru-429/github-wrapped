@@ -12,6 +12,7 @@ import { TimelineCard } from "@/components/cards/timeline-card"
 import { QuoteCard } from "@/components/cards/quote-card"
 import { useRouter } from "next/navigation"
 import type { GitHubData } from "@/lib/types"
+import { LOCCard } from "@/components/cards/loc"
 
 export function WrapPageClient({ username }: { username: string }) {
   const router = useRouter()
@@ -87,18 +88,20 @@ export function WrapPageClient({ username }: { username: string }) {
       case 0:
         return <ProfileCard data={data} />
       case 1:
-        return <TopReposCard data={data} />
+        return <LOCCard data={data}/>
       case 2:
-        return <TopLanguagesCard data={data} />
+        return <TopReposCard data={data} />
       case 3:
-        return <CommitsChartCard data={data} />
+        return <TopLanguagesCard data={data} />
       case 4:
-        return <StatsCard data={data} />
+        return <CommitsChartCard data={data} />
       case 5:
-        return <ActivityCard data={data} />
+        return <StatsCard data={data} />
       case 6:
-        return <TimelineCard data={data} />
+        return <ActivityCard data={data} />
       case 7:
+        return <TimelineCard data={data} />
+      case 8:
         return <QuoteCard />
       default:
         return null

@@ -6,14 +6,12 @@ import Image from "next/image"
 export function ProfileCard({ data }: { data: GitHubData }) {
   const { user } = data
   
-  // Static year for the design, or extract from data if available
   const year = "2025"
+  console.log(data)
   
   return (
     <div className="flex items-center justify-center w-full h-full min-h-[600px] p-5 bg-[#1A1A1A]">
-      {/* This outer wrapper simulates the wavy background context. 
-        In a real app, the pattern might be a parent container background.
-        Here we focus on the Card Component itself.
+      {/* outer wrapper
       */}
       
       <div className="relative w-full max-w-[400px] aspect-[9/14] bg-[#F3F3F1] border-[3px] border-black overflow-hidden flex flex-col shadow-2xl pt-4 rounded-3xl">
