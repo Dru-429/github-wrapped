@@ -17,6 +17,7 @@ import { CommitRaceCard } from "@/components/cards/commit-race-card"
 import { ContributionStreakCard } from "@/components/cards/contribution-streak-card"
 import { PlainTxt } from "@/components/cards/Plain-txt"
 import { PlainTxt2 } from "@/components/cards/Plain-txt2"
+import ResultCard from "@/components/cards/Result"
 
 export function WrapPageClient({ username }: { username: string }) {
   const router = useRouter()
@@ -26,7 +27,7 @@ export function WrapPageClient({ username }: { username: string }) {
   const [error, setError] = useState<string | null>(null)
   const [copied, setCopied] = useState(false)
 
-  const totalCards = 11
+  const totalCards = 12
 
   useEffect(() => {
     fetchGitHubData()
@@ -110,7 +111,7 @@ export function WrapPageClient({ username }: { username: string }) {
       case 9:
         return <TimelineCard data={data} />
       case 10:
-        return <ContributionStreakCard data={data} />
+        return <ResultCard data={data} />
       case 11:
         return <QuoteCard />
       default:

@@ -60,7 +60,7 @@ export function TopLanguagesCard({ data }: { data: GitHubData }) {
             })}
           </div>
 
-          {/* Footer (copied from ProfileCard) */}
+          {/* Footer */}
           <div className="w-full absolute bottom-4 px-4 -left-1 flex items-center justify-between">
             <svg
               height="32"
