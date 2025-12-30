@@ -15,6 +15,7 @@ import type { GitHubData } from "@/lib/types"
 import { LOCCard } from "@/components/cards/loc"
 import { CommitRaceCard } from "@/components/cards/commit-race-card"
 import { ContributionStreakCard } from "@/components/cards/contribution-streak-card"
+import { PlainTxt } from "@/components/cards/Plain-txt"
 
 export function WrapPageClient({ username }: { username: string }) {
   const router = useRouter()
@@ -96,7 +97,7 @@ export function WrapPageClient({ username }: { username: string }) {
       case 3:
         return <CommitRaceCard data={data} />
       case 4:
-        return <CommitsChartCard data={data} />
+        return <PlainTxt data={data} />
       case 5:
         return <StatsCard data={data} />
       case 6:

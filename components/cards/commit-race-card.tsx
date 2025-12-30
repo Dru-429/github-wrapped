@@ -64,7 +64,7 @@ export function CommitRaceCard({ data }: { data: GitHubData }) {
           { /* Header */}
           <div className="relative z-10 pt-6 text-center">
             <h2 className="text-xl font-bold tracking-tight text-[#f3f3f1] font-montserrat">
-              Code like yours can't be defined.
+              {`Code like yours can't be defined.`}
             </h2>
             <span className="text-lg font-semibold tracking-tight text-[#f3f3f1] font-montserrat">
               But if commit is a race then
