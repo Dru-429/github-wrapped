@@ -103,11 +103,11 @@ export function WrapPageClient({ username }: { username: string }) {
       case 6:
         return <StatsCard data={data} />
       case 7:
-        return <TimelineCard data={data} />
+        return <ActivityCard data={data} />
       case 8:
         return <QuoteCard />
       case 9:
-        return <ActivityCard data={data} />
+        return <TimelineCard data={data} />
       case 10:
         return <ContributionStreakCard data={data} />
       default:
