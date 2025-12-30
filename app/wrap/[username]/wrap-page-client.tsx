@@ -90,11 +90,11 @@ export function WrapPageClient({ username }: { username: string }) {
       case 0:
         return <ProfileCard data={data} />
       case 1:
-        return <LOCCard data={data}/>
+        return <LOCCard data={data} />
       case 2:
         return <TopLanguagesCard data={data} />
       case 3:
-        return <TopReposCard data={data} />
+        return <CommitRaceCard data={data} />
       case 4:
         return <CommitsChartCard data={data} />
       case 5:
@@ -106,7 +106,7 @@ export function WrapPageClient({ username }: { username: string }) {
       case 8:
         return <QuoteCard />
       case 9:
-        return <CommitRaceCard data={data} />
+        return <TopReposCard data={data} />
       case 10:
         return <ContributionStreakCard data={data} />
       default:
@@ -168,9 +168,8 @@ export function WrapPageClient({ username }: { username: string }) {
                 <button
                   key={index}
                   onClick={() => setCurrentCard(index)}
-                  className={`h-2 rounded-full transition-all ${
-                    index === currentCard ? "bg-white w-8" : "bg-white/40 w-2"
-                  }`}
+                  className={`h-2 rounded-full transition-all ${index === currentCard ? "bg-white w-8" : "bg-white/40 w-2"
+                    }`}
                   aria-label={`Go to card ${index + 1}`}
                 />
               ))}
