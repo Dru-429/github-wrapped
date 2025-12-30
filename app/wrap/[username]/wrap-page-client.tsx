@@ -13,6 +13,8 @@ import { QuoteCard } from "@/components/cards/quote-card"
 import { useRouter } from "next/navigation"
 import type { GitHubData } from "@/lib/types"
 import { LOCCard } from "@/components/cards/loc"
+import { CommitRaceCard } from "@/components/cards/commit-race-card"
+import { ContributionStreakCard } from "@/components/cards/contribution-streak-card"
 
 export function WrapPageClient({ username }: { username: string }) {
   const router = useRouter()
@@ -22,7 +24,7 @@ export function WrapPageClient({ username }: { username: string }) {
   const [error, setError] = useState<string | null>(null)
   const [copied, setCopied] = useState(false)
 
-  const totalCards = 8
+  const totalCards = 11
 
   useEffect(() => {
     fetchGitHubData()
@@ -90,9 +92,9 @@ export function WrapPageClient({ username }: { username: string }) {
       case 1:
         return <LOCCard data={data}/>
       case 2:
-        return <TopReposCard data={data} />
-      case 3:
         return <TopLanguagesCard data={data} />
+      case 3:
+        return <TopReposCard data={data} />
       case 4:
         return <CommitsChartCard data={data} />
       case 5:
@@ -103,6 +105,10 @@ export function WrapPageClient({ username }: { username: string }) {
         return <TimelineCard data={data} />
       case 8:
         return <QuoteCard />
+      case 9:
+        return <CommitRaceCard data={data} />
+      case 10:
+        return <ContributionStreakCard data={data} />
       default:
         return null
     }

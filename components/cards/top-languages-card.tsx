@@ -40,7 +40,7 @@ export function TopLanguagesCard({ data }: { data: GitHubData }) {
 
                   {/* Progress bar */}
                   <div className="flex justify-between items-center">
-                    <div className="h-3 bg-zinc-700 rounded-full overflow-hidden flex items-center w-[90%] ">
+                    <div className="h-3 bg-[#1a1a1abb] rounded-full overflow-hidden flex items-center w-[90%] ">
                       <div
                         className="h-full rounded-full"
                         style={{

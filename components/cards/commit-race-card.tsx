@@ -49,7 +49,6 @@ export function CommitRaceCard({ data }: { data: GitHubData }) {
           <p className="text-xl text-muted-foreground mt-2">{getMessage(stats.totalCommits)}</p>
         </div>
 
-        <p className="text-sm text-muted-foreground">Based on GitHub users with public activity in 2025</p>
       </div>
     </div>
   )
