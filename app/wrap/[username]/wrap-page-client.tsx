@@ -99,7 +99,7 @@ export function WrapPageClient({ username }: { username: string }) {
       case 4:
         return <PlainTxt data={data} />
       case 5:
-        return <StatsCard data={data} />
+        return <TopReposCard data={data} />
       case 6:
         return <ActivityCard data={data} />
       case 7:
@@ -107,7 +107,7 @@ export function WrapPageClient({ username }: { username: string }) {
       case 8:
         return <QuoteCard />
       case 9:
-        return <TopReposCard data={data} />
+        return <StatsCard data={data} />
       case 10:
         return <ContributionStreakCard data={data} />
       default:
