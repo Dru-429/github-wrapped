@@ -16,6 +16,7 @@ import { LOCCard } from "@/components/cards/loc"
 import { CommitRaceCard } from "@/components/cards/commit-race-card"
 import { ContributionStreakCard } from "@/components/cards/contribution-streak-card"
 import { PlainTxt } from "@/components/cards/Plain-txt"
+import { PlainTxt2 } from "@/components/cards/Plain-txt2"
 
 export function WrapPageClient({ username }: { username: string }) {
   const router = useRouter()
@@ -105,11 +106,13 @@ export function WrapPageClient({ username }: { username: string }) {
       case 7:
         return <ActivityCard data={data} />
       case 8:
-        return <QuoteCard />
+        return <PlainTxt2 />
       case 9:
         return <TimelineCard data={data} />
       case 10:
         return <ContributionStreakCard data={data} />
+      case 11:
+        return <QuoteCard />
       default:
         return null
     }
