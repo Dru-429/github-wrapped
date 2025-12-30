@@ -17,10 +17,6 @@ export function TimelineCard({ data }: { data: GitHubData }) {
     <div className="relative w-full h-full">
       <div className="absolute inset-0 bg-[repeating-linear-gradient(45deg,#000,#000_10px,#fff_10px,#fff_20px)] rounded-2xl p-3">
         <div className="relative w-full h-full bg-[oklch(0.55_0.18_290)] rounded-xl p-4 flex flex-col">
-          {/* Vertical "Wrapped" text */}
-          <div className="absolute left-6 top-1/2 -translate-y-1/2 -rotate-90 origin-center">
-            <span className="text-6xl font-black tracking-wider text-[oklch(0.75_0.20_290)]">WRAPPED</span>
-          </div>
 
           {/* Content area */}
           <div className="ml-16 flex-1 flex flex-col justify-between">
