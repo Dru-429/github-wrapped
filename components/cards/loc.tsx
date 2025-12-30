@@ -45,7 +45,7 @@ export function LOCCard({ data }: { data: GitHubData }) {
           {/* Big Number */}
           <div className="relative w-full flex items-center justify-center">
             <span 
-              className="text-[140px] leading-none font- text-[#968CFD] tracking-tightest font-bebas [-webkit-text-stroke:0px_white] drop-shadow-sm"
+              className="text-[140px] leading-none text-[#968CFD] tracking-tightest font-bebas [-webkit-text-stroke:1px_white] drop-shadow-sm"
             >
               {loc.toLocaleString()}
             </span>
