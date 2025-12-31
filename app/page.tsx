@@ -27,7 +27,7 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-[#F6F7ED] relative overflow-hidden">
       {/* Decorative elements inspired by Spotify Wrapped */}
-      <div className="absolute top-20 right-20 flex flex-col gap-3">
+      <div className="hidden md:flex  absolute top-20 right-20 flex-col gap-3">
         <div className="w-8 h-8 rounded-full bg-[#001F3F]"></div>
         <div className="w-8 h-8 rounded-full bg-[#00804C]"></div>
         <div className="w-8 h-8 rounded-full bg-[#DBE64C]"></div>

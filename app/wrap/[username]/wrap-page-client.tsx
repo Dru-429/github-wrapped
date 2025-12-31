@@ -1,7 +1,8 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { Github, Download, ChevronLeft, ChevronRight, Twitter, Linkedin, Copy, Check } from "lucide-react"
+import html2canvas from "html2canvas"
 import { ProfileCard } from "@/components/cards/profile-card"
 import { TopReposCard } from "@/components/cards/top-repos-card"
 import { TopLanguagesCard } from "@/components/cards/top-languages-card"
@@ -24,6 +25,40 @@ export function WrapPageClient({ username }: { username: string }) {
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [copied, setCopied] = useState(false)
+
+  const cardRef = useRef<HTMLDivElement | null>(null)
+  const [isDownloading, setIsDownloading] = useState(false)
+
+  const handleDownload = async () => {
+    if (!cardRef.current) return
+    setIsDownloading(true)
+    try {
+      // Prefer the second child inside the wrapper if it exists (index 1). Fallback to the wrapper itself.
+      const wrapper = cardRef.current
+      const secondChild = wrapper.children && wrapper.children.length > 1 ? (wrapper.children[1] as HTMLElement) : null
+      const target = (secondChild ?? wrapper) as HTMLElement
+
+      const canvas = await html2canvas(target, { backgroundColor: null, useCORS: true, scale: 2 })
+      canvas.toBlob((blob) => {
+        if (!blob) {
+          setIsDownloading(false)
+          return
+        }
+        const url = URL.createObjectURL(blob)
+        const link = document.createElement("a")
+        link.href = url
+        link.download = `github-wrapped-card-${currentCard + 1}.png`
+        document.body.appendChild(link)
+        link.click()
+        link.remove()
+        URL.revokeObjectURL(url)
+        setIsDownloading(false)
+      }, "image/png")
+    } catch (err) {
+      console.error("Download error:", err)
+      setIsDownloading(false)
+    }
+  }
 
   const totalCards = 12
 
@@ -138,7 +173,7 @@ export function WrapPageClient({ username }: { username: string }) {
               onClick={() => router.push("/")}
               className="flex items-center gap-2 hover:opacity-80 transition-opacity"
             >
-              <img src="/logo.png" alt="Logo" className="w-10 h-10 bg-white bg-clip-text rounded-sm object-cover" />
+              <img src="/logo.png" alt="Logo" className="w-8 h-8 bg-white px-1 py-1 rounded-sm object-cover" />
               <span className="font-bold text-lg text-white" style={{ fontFamily: "var(--font-heading)" }}>
                 GitHub Wrapped 2025
               </span>
@@ -175,7 +210,7 @@ export function WrapPageClient({ username }: { username: string }) {
           <div className="space-y-8 relative z-10">
             {/* Card Display */}
             <div className="flex items-center justify-center">
-              <div className="w-full max-w-2xl aspect-square">{renderCard()}</div>
+              <div className="w-full max-w-2xl aspect-square" ref={cardRef}>{renderCard()}</div>
             </div>
 
             {/* Navigation Dots */}
@@ -214,9 +249,14 @@ export function WrapPageClient({ username }: { username: string }) {
 
             {/* Action Buttons */}
             <div className="flex flex-wrap items-center justify-center gap-3">
-              <button className="px-4 py-2 gap-2 bg-white/20 backdrop-blur-sm border border-white/30 hover:bg-white/30 text-white rounded-md font-medium transition-colors flex items-center">
+              <button
+                onClick={handleDownload}
+                disabled={isDownloading}
+                className="px-4 py-2 gap-2 bg-white/20 backdrop-blur-sm border border-white/30 hover:bg-white/30 text-white rounded-md font-medium transition-colors flex items-center disabled:opacity-60"
+                aria-label="Download current card"
+              >
                 <Download className="w-4 h-4" />
-                Download All
+                {isDownloading ? "Downloading..." : "Download Card"}
               </button>
               <button
                 onClick={() => handleShare("twitter")}
