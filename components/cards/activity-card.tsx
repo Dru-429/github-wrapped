@@ -34,7 +34,7 @@ export function ActivityCard({ data }: { data: GitHubData }) {
     return "THE 'IT WORKS ON MY MACHINE' DEVELOPER"
   }
   return (
-    <div className="flex items-center justify-center w-full h-full min-h-[600px] p-5 bg-[#1A1A1A]">
+    <div className="flex items-center justify-center w-full h-full min-h-[600px] p-5 bg-[#1A1A1A] rounded-3xl">
       <div className="relative w-full max-w-[400px] aspect-[9/14] bg-[#F3F3F1] border-[3px] border-black overflow-hidden flex flex-col shadow-2xl pt-4 rounded-3xl">
 
         {/* --- CARD CONTENT --- */}

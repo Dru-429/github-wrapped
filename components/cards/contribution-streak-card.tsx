@@ -7,7 +7,7 @@ export function ContributionStreakCard({ data }: { data: GitHubData }) {
   const { stats } = data
 
   return (
-    <div className="w-full h-full bg-card border border-border rounded-3xl p-8 md:p-12 flex flex-col items-center justify-center text-center space-y-8 shadow-lg">
+    <div className="w-full h-full bg-card border border-border rounded-3xl p-8 md:p-12 flex flex-col items-center justify-center text-center space-y-8 shadow-lg rounded-3xl" >
       <div className="space-y-2">
         <p className="text-3xl">🔥 Your 2025</p>
       </div>

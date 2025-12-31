@@ -10,7 +10,7 @@ export function ProfileCard({ data }: { data: GitHubData }) {
   console.log(data)
   
   return (
-    <div className="flex items-center justify-center w-full h-full min-h-[600px] p-5 bg-[#1A1A1A]">
+    <div className="flex items-center justify-center w-full h-full min-h-[600px] p-5 bg-[#1A1A1A] rounded-3xl">
       {/* outer wrapper
       */}
       

@@ -58,9 +58,10 @@ export default function HomePage() {
 
       {/* Navbar */}
       <nav className="px-8 py-6 flex justify-between items-center">
-        <h1 className="text-2xl font-bebas-neue text-[#001F3F]">
-          GitHub Wrapped 2025
-        </h1>
+        <div className="flex items-center gap-3">
+          <img src="/logo.png" alt="Logo" className="w-10 h-10 rounded-sm object-cover" />
+          <h1 className="text-2xl font-bebas-neue text-[#001F3F]">GitHub Wrapped 2025</h1>
+        </div>
       </nav>
 
       {/* Main content */}

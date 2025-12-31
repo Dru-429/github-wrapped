@@ -118,19 +118,32 @@ export function WrapPageClient({ username }: { username: string }) {
   }
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen text-foreground relative" style={{ backgroundImage: "url('/bg.png')", backgroundSize: 'contain', backgroundPosition: 'center', backgroundRepeat: 'repeat' }}>
+      {/* subtle dark overlay for readability */}
+      <div className="absolute inset-0 bg-black/50 pointer-events-none" />
+
       {/* Navbar */}
-      <nav className="border-b border-white/20 bg-white/10 backdrop-blur-sm">
+      <nav className="backdrop-blur-sm">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-          <button
-            onClick={() => router.push("/")}
-            className="flex items-center gap-2 hover:opacity-80 transition-opacity"
-          >
-            <Github className="w-6 h-6 text-white" />
-            <span className="font-bold text-lg text-white" style={{ fontFamily: "var(--font-heading)" }}>
-              GitHub Wrapped 2025
-            </span>
-          </button>
+          <div className="flex items-center">
+            <button
+              onClick={() => router.back()}
+              className="p-2 mr-3 bg-white/10 hover:bg-white/20 rounded-md transition-colors"
+              aria-label="Go back"
+            >
+              <ChevronLeft className="w-5 h-5 text-white" />
+            </button>
+
+            <button
+              onClick={() => router.push("/")}
+              className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+            >
+              <img src="/logo.png" alt="Logo" className="w-10 h-10 bg-white bg-clip-text rounded-sm object-cover" />
+              <span className="font-bold text-lg text-white" style={{ fontFamily: "var(--font-heading)" }}>
+                GitHub Wrapped 2025
+              </span>
+            </button>
+          </div>
         </div>
       </nav>
 

@@ -2,7 +2,6 @@
 
 import { QUOTES } from "@/lib/constants"
 import { useEffect, useState } from "react"
-import { Share2 } from "lucide-react"
 
 export function QuoteCard() {
   const [quote, setQuote] = useState("")
@@ -13,7 +12,7 @@ export function QuoteCard() {
   }, [])
 
   return (
-    <div className="flex items-center justify-center w-full h-full min-h-[600px] p-4 bg-[#F3F3F1]">
+    <div className="flex items-center justify-center w-full h-full min-h-[600px] p-4 bg-[#F3F3F1] rounded-3xl">
       <div className="relative w-full max-w-[400px] aspect-[9/14] bg-[#0F0F0F] text-[#F3F3F1] overflow-hidden flex flex-col p-6 rounded-3xl shadow-2xl border-[3px] border-black">
 
         {/* Decorative arcs top */}

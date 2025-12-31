@@ -14,7 +14,7 @@ export function ResultCard({ data }: { data: GitHubData }) {
   const chartData = monthNames.map((month, i) => ({ month, commits: stats.monthlyCommits?.[i] || 0 }))
 
   return (
-    <div className="flex items-center justify-center w-full h-full min-h-[600px] p-4 bg-[#F3F3F1]">
+    <div className="flex items-center justify-center w-full h-full min-h-[600px] p-4 bg-[#F3F3F1] rounded-3xl">
 
       {/* Card Container */}
       <div className="relative w-full max-w-[420px] aspect-[9/14] bg-[#121212] text-[#F3F3F1] overflow-hidden flex flex-col p-6 rounded-3xl shadow-2xl border-[3px] border-black">
