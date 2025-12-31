@@ -33,12 +33,7 @@ export function WrapPageClient({ username }: { username: string }) {
     if (!cardRef.current) return
     setIsDownloading(true)
     try {
-      // Prefer the second child inside the wrapper if it exists (index 1). Fallback to the wrapper itself.
-      const wrapper = cardRef.current
-      const secondChild = wrapper.children && wrapper.children.length > 1 ? (wrapper.children[1] as HTMLElement) : null
-      const target = (secondChild ?? wrapper) as HTMLElement
-
-      const canvas = await html2canvas(target, { backgroundColor: null, useCORS: true, scale: 2 })
+      const canvas = await html2canvas(cardRef.current, { backgroundColor: null, useCORS: true, scale: 2 })
       canvas.toBlob((blob) => {
         if (!blob) {
           setIsDownloading(false)
@@ -173,7 +168,7 @@ export function WrapPageClient({ username }: { username: string }) {
               onClick={() => router.push("/")}
               className="flex items-center gap-2 hover:opacity-80 transition-opacity"
             >
-              <img src="/logo.png" alt="Logo" className="w-8 h-8 bg-white px-1 py-1 rounded-sm object-cover" />
+              <img src="/logo.png" alt="Logo" className="w-8 h-8 bg-white p-1 rounded-sm object-cover" />
               <span className="font-bold text-lg text-white" style={{ fontFamily: "var(--font-heading)" }}>
                 GitHub Wrapped 2025
               </span>
