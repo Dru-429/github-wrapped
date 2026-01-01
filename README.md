@@ -1,4 +1,6 @@
 # GitHub Wrapped 2025
+<img width="950" height="504" alt="image" src="https://github.com/user-attachments/assets/013ee121-cfa5-49e6-a4e1-0640e86358fc" />
+
 
 **GitHub Wrapped 2025** is a Next.js (app-dir) project that generates a year-in-review "wrapped" experience for any GitHub username — inspired by Spotify Wrapped 2025. The app fetches GitHub activity and presents highlights like top repositories, languages, commit streaks, seasonal activity, and a shareable image.
 
