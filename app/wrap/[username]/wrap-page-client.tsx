@@ -152,32 +152,44 @@ export function WrapPageClient({ username }: { username: string }) {
       {/* subtle dark overlay for readability */}
       <div className="absolute inset-0 bg-black/50 pointer-events-none" />
 
-      {/* Navbar */}
-      <nav className="backdrop-blur-sm">
-        <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-          <div className="flex items-center">
-            <button
-              onClick={() => router.back()}
-              className="p-2 mr-3 bg-white/10 hover:bg-white/20 rounded-md transition-colors"
-              aria-label="Go back"
-            >
-              <ChevronLeft className="w-5 h-5 text-white" />
-            </button>
+      {/* Navbar (centered pill) */}
+      <nav className="relative z-20">
+        <div className="absolute left-1/2 top-2 -translate-x-1/2 w-[90%] md:w-[40%]">
+          <div className="flex items-center justify-between gap-4 w-full bg-zinc-800/30 backdrop-blur-md border border-white/10 rounded-full px-4 py-2 shadow-[0_6px_20px_rgba(2,6,23,0.6)]">
+            {/* Left: logo & back */}
+            <div className="flex items-center gap-3 pl-1">
+              <button
+                onClick={() => router.back()}
+                className="p-2 bg-white/5 hover:bg-white/10 rounded-full transition-colors"
+                aria-label="Go back"
+              >
+                <ChevronLeft className="w-4 h-4 text-white" />
+              </button>
 
-            <button
-              onClick={() => router.push("/")}
-              className="flex items-center gap-2 hover:opacity-80 transition-opacity"
-            >
-              <img src="/logo.png" alt="Logo" className="w-8 h-8 bg-white p-1 rounded-sm object-cover" />
-              <span className="font-bold text-lg text-white" style={{ fontFamily: "var(--font-heading)" }}>
-                GitHub Wrapped 2025
-              </span>
-            </button>
+              <button
+                onClick={() => router.push("/")}
+                className="p-2 bg-white/5 hover:bg-white/10 rounded-full transition-colors flex items-center gap-2 text-white cursor-pointer font-medium"
+                aria-label="Home"
+              >
+                {/* <img src="/logo.png" alt="Logo" className="w-8 h-8 object-cover" /> */}
+                GITHUB WRAPPED 2025
+              </button>
+            </div>
+
+            {/* Right: social icons */}
+            <div className="flex items-center gap-3 pr-1">
+              <a href="https://github.com/Dru-429/github-wrapped" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository" className="p-2 rounded-full bg-white/5 hover:bg-white/10 transition-colors">
+                <Github className="w-5 h-5 text-white/90" />
+              </a>
+              <a href="https://x.com/dev_druv" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)" className="p-2 rounded-full bg-white/5 hover:bg-white/10 transition-colors">
+                <Twitter className="w-5 h-5 text-white/90" />
+              </a>
+            </div>
           </div>
         </div>
       </nav>
 
-      <main className="container mx-auto px-4 py-8 md:py-12 relative">
+      <main className="container mx-auto px-4 py-8 md:py-12 relative ">
         <div className="absolute inset-0 dotted-pattern opacity-20" />
 
         {isLoading && (
@@ -194,7 +206,7 @@ export function WrapPageClient({ username }: { username: string }) {
             <p className="text-white/80">{error}</p>
             <button
               onClick={fetchGitHubData}
-              className="px-4 py-2 bg-white text-[oklch(0.65_0.15_280)] hover:bg-white/90 rounded-md font-medium transition-colors"
+              className="p-2 bg-white/5 hover:bg-white/10 rounded-full text-white font-medium transition-colors"
             >
               Try Again
             </button>
@@ -202,7 +214,7 @@ export function WrapPageClient({ username }: { username: string }) {
         )}
 
         {!isLoading && !error && data && (
-          <div className="space-y-8 relative z-10">
+          <div className="space-y-8 relative z-10 mt-10">
             {/* Card Display */}
             <div className="flex items-center justify-center">
               <div className="w-full max-w-2xl aspect-square" ref={cardRef}>{renderCard()}</div>
@@ -225,7 +237,7 @@ export function WrapPageClient({ username }: { username: string }) {
             <div className="flex items-center justify-center gap-4">
               <button
                 onClick={handlePrevCard}
-                className="p-2 bg-white/20 backdrop-blur-sm border border-white/30 hover:bg-white/30 text-white rounded-md transition-colors"
+                className="p-2 bg-white/5 hover:bg-white/10 rounded-full transition-colors"
                 aria-label="Previous card"
               >
                 <ChevronLeft className="w-5 h-5" />
@@ -235,7 +247,7 @@ export function WrapPageClient({ username }: { username: string }) {
               </span>
               <button
                 onClick={handleNextCard}
-                className="p-2 bg-white/20 backdrop-blur-sm border border-white/30 hover:bg-white/30 text-white rounded-md transition-colors"
+                className="p-2 bg-white/5 hover:bg-white/10 rounded-full transition-colors"
                 aria-label="Next card"
               >
                 <ChevronRight className="w-5 h-5" />
@@ -247,7 +259,7 @@ export function WrapPageClient({ username }: { username: string }) {
               <button
                 onClick={handleDownload}
                 disabled={isDownloading}
-                className="px-4 py-2 gap-2 bg-white/20 backdrop-blur-sm border border-white/30 hover:bg-white/30 text-white rounded-md font-medium transition-colors flex items-center disabled:opacity-60"
+                className="p-2 bg-white/5 hover:bg-white/10 rounded-full transition-colors disabled:opacity-60 flex items-center gap-2"
                 aria-label="Download current card"
               >
                 <Download className="w-4 h-4" />
@@ -255,21 +267,21 @@ export function WrapPageClient({ username }: { username: string }) {
               </button>
               <button
                 onClick={() => handleShare("twitter")}
-                className="px-4 py-2 gap-2 bg-white/20 backdrop-blur-sm border border-white/30 hover:bg-white/30 text-white rounded-md font-medium transition-colors flex items-center"
+                className="p-2 bg-white/5 hover:bg-white/10 rounded-full transition-colors flex items-center gap-2"
               >
                 <Twitter className="w-4 h-4" />
                 Share on X
               </button>
               <button
                 onClick={() => handleShare("linkedin")}
-                className="px-4 py-2 gap-2 bg-white/20 backdrop-blur-sm border border-white/30 hover:bg-white/30 text-white rounded-md font-medium transition-colors flex items-center"
+                className="p-2 bg-white/5 hover:bg-white/10 rounded-full transition-colors flex items-center gap-2"
               >
                 <Linkedin className="w-4 h-4" />
                 Share on LinkedIn
               </button>
               <button
                 onClick={() => handleShare("copy")}
-                className="px-4 py-2 gap-2 bg-white/20 backdrop-blur-sm border border-white/30 hover:bg-white/30 text-white rounded-md font-medium transition-colors flex items-center"
+                className="p-2 bg-white/5 hover:bg-white/10 rounded-full transition-colors flex items-center gap-2"
               >
                 {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
                 {copied ? "Copied!" : "Copy Link"}
