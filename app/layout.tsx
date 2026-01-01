@@ -30,6 +30,7 @@ export const metadata: Metadata = {
   title: "GitHub Wrapped 2025",
   description: "Generate a Spotify-inspired GitHub Wrapped for any username — top repos, languages, commit streaks, and a shareable image.",
   metadataBase: new URL("https://githubwrapped-2025.vercel.app/"),
+  keywords: ["GitHub", "Wrapped", "Year in Code", "Developer Tools", "Open Source"],
   openGraph: {
     title: "GitHub Wrapped 2025",
     description: "Generate a Spotify-inspired GitHub Wrapped for any username — top repos, languages, commit streaks, and a shareable image.",
@@ -37,10 +38,10 @@ export const metadata: Metadata = {
     siteName: "GitHub Wrapped",
     images: [
       {
-        url: "/og-image.png",
+        url: "/logo.png",
         width: 1200,
         height: 630,
-        alt: "GitHub Wrapped 2025",
+        alt: "GitHub Wrapped 2025 — share your Year in Code",
       },
     ],
     locale: "en_US",
@@ -50,13 +51,31 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "GitHub Wrapped 2025",
     description: "Generate a Spotify-inspired GitHub Wrapped for any username — share your yearly GitHub highlights.",
-    images: ["/og-image.png"],
+    images: ["/logo.png"],
   },
   icons: {
     icon: "/favicon.ico",
     shortcut: "/favicon-16x16.png",
     apple: "/apple-touch-icon.png",
   },
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "GitHub Wrapped 2025",
+  url: "https://githubwrapped-2025.vercel.app",
+  description: "Generate a Spotify-inspired Year-in-Code summary for any GitHub username.",
+  applicationCategory: "DeveloperTool",
+  operatingSystem: "Web",
+  author: {
+    "@type": "Person",
+    name: "Dhruv Sahoo",
+    url: "https://peerlist.io/dev_dru",
+  },
+  screenshot: ["https://githubwrapped-2025.vercel.app/logo.png"],
+  softwareVersion: "1.0",
+  offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
 };
 
 export default function RootLayout({
@@ -66,6 +85,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${montserrat.variable} ${bebas.variable} antialiased`}
       >
