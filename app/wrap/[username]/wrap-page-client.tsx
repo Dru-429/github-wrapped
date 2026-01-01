@@ -168,7 +168,7 @@ export function WrapPageClient({ username }: { username: string }) {
 
               <button
                 onClick={() => router.push("/")}
-                className="p-2 bg-white/5 hover:bg-white/10 rounded-full transition-colors flex items-center gap-2 text-white cursor-pointer font-medium"
+                className="p-2 rounded-full transition-colors flex items-center gap-2 text-white cursor-pointer font-medium"
                 aria-label="Home"
               >
                 {/* <img src="/logo.png" alt="Logo" className="w-8 h-8 object-cover" /> */}
