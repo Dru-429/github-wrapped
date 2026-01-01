@@ -214,7 +214,7 @@ export function WrapPageClient({ username }: { username: string }) {
         )}
 
         {!isLoading && !error && data && (
-          <div className="space-y-8 relative z-10 mt-10">
+          <div className="space-y-8 relative z-10 mt-20 md:mt-12">
             {/* Card Display */}
             <div className="flex items-center justify-center">
               <div className="w-full max-w-2xl aspect-square" ref={cardRef}>{renderCard()}</div>
