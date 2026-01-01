@@ -1,36 +1,116 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# GitHub Wrapped 2025
 
-## Getting Started
+**GitHub Wrapped 2025** is a Next.js (app-dir) project that generates a year-in-review "wrapped" experience for any GitHub username — inspired by Spotify Wrapped 2025. The app fetches GitHub activity and presents highlights like top repositories, languages, commit streaks, seasonal activity, and a shareable image.
 
-First, run the development server:
+---
+
+## ✅ Features
+
+- Fetch GitHub user metrics (contributions, repos, languages, commit history)
+- Visual summaries: top repos, top languages, monthly/seasonal breakdowns, streaks, percentile
+- Client-side capture/export (uses `html2canvas`)
+- Accesssdfghjkl;'
+- ible UI built with Radix + Tailwind
+- TypeScript and server-side data fetching with caching-friendly patterns
+
+---
+
+## 🔧 Tech Stack
+
+- Next.js 16 (app directory)
+- React 19 + TypeScript
+- Tailwind CSS + Radix UI + Framer Motion + Recharts
+- GitHub GraphQL API for data
+
+---
+
+## 🚀 Quick start
+
+1. Clone the repository:
+
+```bash
+git clone <this-repo-url>
+cd github-wrapped
+```
+
+2. Install dependencies:
+
+```bash
+npm install
+```
+
+3. Provide a GitHub token (required):
+
+The app uses the GitHub GraphQL API. Set `GITHUB_TOKEN` in your environment before running the app.
+
+```bash
+# macOS / Linux
+export GITHUB_TOKEN="your_token_here"
+
+# PowerShell (Windows)
+$Env:GITHUB_TOKEN = "your_token_here"
+```
+
+4. Run the dev server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Visit http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+5. Generate a wrapped page by visiting:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+http://localhost:3000/wrap/<username>
+# Example: http://localhost:3000/wrap/octocat
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+> The GraphQL client in `lib/github.ts` will throw an error if `GITHUB_TOKEN` is missing.
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 🛠️ Environment variables
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `GITHUB_TOKEN` — **required**: GitHub GraphQL token with appropriate public scopes
+- (Optional) `NEXT_PUBLIC_BASE_URL` or `SITE_URL` — set your production base URL for canonical links, sitemaps, and sharing
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 📁 Key files
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- `app/wrap/[username]/page.tsx` — Server route that renders the Wrapped view
+- `app/wrap/wrap-page-client.tsx` — Client helpers (screenshot/export, interactions)
+- `lib/github.ts` — GraphQL queries / data shaping (throws if `GITHUB_TOKEN` is not present)
+- `site.xml` — Simple sitemap (replace `https://your-domain.com` with production URL)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 📦 Deployment
+
+- Recommended: Vercel (automatic Next.js support)
+- Add `GITHUB_TOKEN` to your deployment environment variables before deploying
+
+---
+
+## 💡 Notes
+
+- Watch for GitHub API rate limits when making many requests; consider caching responses
+- The screenshot/export feature uses `html2canvas`; cross-browser behavior may vary
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome — open an issue or PR. Please include tests for new logic and keep changes focused.
+
+---
+
+## 📄 License
+
+Add a `LICENSE` file to indicate how you want to license this repository (MIT is a common choice).
+
+---
+
+## ❤️ Credits
+
+Inspired by Spotify Wrapped 2025 and built to celebrate developer activity on GitHub.

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  site.xml — Sitemap for GitHub Wrapped 2025
+  - Replace `https://your-domain.com` with your production URL.
+  - The dynamic pages are listed with a templated URL for search engines and documentation.
+  - Last updated: 2026-01-01
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://your-domain.com/</loc>
+    <lastmod>2026-01-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://your-domain.com/wrap/</loc>
+    <lastmod>2026-01-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Template entry for individual user pages. Search engines and tools should expand this for each username. -->
+  <url>
+    <loc>https://your-domain.com/wrap/{username}</loc>
+    <lastmod>2026-01-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+</urlset>
