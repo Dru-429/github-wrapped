@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ArrowRight, Github, ChevronLeft, Twitter } from "lucide-react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export default function HomePage() {
   const [username, setUsername] = useState("")
@@ -26,21 +27,25 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-[#F6F7ED] relative overflow-hidden">
-      {/* Decorative elements inspired by Spotify Wrapped */}
+
       <div className="hidden md:flex  absolute top-20 right-20 flex-col gap-3">
         <div className="w-8 h-8 rounded-full bg-[#001F3F]"></div>
         <div className="w-8 h-8 rounded-full bg-[#00804C]"></div>
         <div className="w-8 h-8 rounded-full bg-[#DBE64C]"></div>
       </div>
 
-      <div className="absolute bottom-20 left-20 flex gap-3">
+      <div className="absolute bottom-5 left-5 md:bottom-20 md:left-20 flex gap-3 items-center">
         <div className="w-6 h-6 rounded-full bg-[#74C365]"></div>
         <div className="w-6 h-6 rounded-full bg-[#001F3F]"></div>
         <div className="w-6 h-6 rounded-full bg-[#1E488F]"></div>
         <div className="w-6 h-6 rounded-full bg-[#00804C]"></div>
+        <div
+          className="text-[#DBE64C] text-3xl font-bold "
+        >
+          2025
+        </div>
       </div>
 
-      {/* 2025 vertical text */}
       <div className="absolute right-12 top-1/2 -translate-y-1/2 hidden md:flex flex-col items-center">
         <div
           className="text-[#DBE64C] text-8xl font-bebas-neue tracking-tighter leading-[0.8]"
@@ -87,21 +92,36 @@ export default function HomePage() {
       </nav>
 
       {/* Main content */}
-      <div className="container mx-auto px-4 py-20 max-w-2xl">
+      <div className="container mx-auto px-4 py-20 max-w-2xl flex flex-col items-center justify-between md:justify-center min-h-screen z-10 relative">
+        
         <div className="text-center mb-12">
-          <h2 className="text-6xl md:text-9xl font-bebas-neue text-[#001F3F] mb-6 tracking-tight">
+          <span className="text-6xl md:text-9xl font-bebas text-[#001F3F] mb-6 tracking-wider">
             GitHub
-          </h2>
-          <h2 className="text-6xl md:text-9xl font-bebas-neue text-[#00804C] mb-8 tracking-tight">
+          </span>
+          <span className="text-6xl md:text-9xl font-bebas text-[#00804C] mb-8 tracking-wide">
             Wrapped
-          </h2>
+          </span>
           <p className="text-xl text-[#001F3F]/70 font-nunito font-medium">
             Discover your coding journey in 2025
           </p>
         </div>
+      
 
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg border-2 border-[#001F3F]/10">
+        <div className=" text-lg lg:text-sm tracking-tighter border-3 p-2 text-left rounded-3xl border-[#00804C] text-[#001F3F]/80 lg:max-w-3x lg:w-[35%] w-full lg:absolute top-[40%] -left-[50%] selection:bg-[#DBE64C]/90 selection:text-[#001F3F] ">
+          Watching everyone share their Spotify Wrapped on Insta
+          made me think Why don't developers have something like 
+          this for GitHub? So I built it. Introducing GitHub Wrapped 2025
+          <Image
+            src="/arrow.svg"
+            alt="Arrow"
+            width={150}
+            height={150}
+            className="md:mb-0 absolute top-32 left-[20%] md:-top-38 md:left-42"
+          />
+        </div>
+
+        <form onSubmit={handleSubmit} className="space-y-6 flex flex-col items-center w-full">
+          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg border-2 border-[#001F3F]/10 w-full">
             <label
               htmlFor="username"
               className="block text-sm font-bebas-neue text-[#001F3F]/70 mb-3 uppercase tracking-wide"
@@ -133,10 +153,13 @@ export default function HomePage() {
               </>
             )}
           </button>
+          <p className="text-sm text-[#001F3F]/50 font-nunito font-medium md:hidden block">
+            Powered by GitHub API • No data stored
+          </p>
         </form>
 
         <div className="mt-12 text-center">
-          <p className="text-sm text-[#001F3F]/50 font-nunito font-medium">
+          <p className="text-sm text-[#001F3F]/50 font-nunito font-medium hidden md:block">
             Powered by GitHub API • No data stored
           </p>
         </div>
