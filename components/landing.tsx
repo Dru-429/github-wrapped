@@ -1,15 +1,3 @@
-// Github Wrapped — entire landing page in one file.
-// Drop into src/routes/index.tsx (TanStack Start) or adapt to your router.
-//
-// Required deps already in this project:
-//   framer-motion, lucide-react, @tanstack/react-router,
-//   shadcn/ui Accordion at "@/components/ui/accordion",
-//   <SmoothScroll> wrapper at "@/components/SmoothScroll",
-//   image assets under "@/assets/features/*" and "@/assets/gallery/*",
-//   design tokens (--lime, --mantis, --cream, --nuit, --ink) and
-//   utility classes (.boxy, .boxy-sm, .bg-grid, .font-display) defined in
-//   src/styles.css.
-
 "use client";
 
 import { useRef, useState } from "react";
@@ -23,19 +11,12 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-// import locImg from "@/assets/features/loc.png";
-// import langImg from "@/assets/features/lang.png";
-// import overviewImg from "@/assets/features/overview.png";
-// import timelineImg from "@/assets/features/timeline.png";
-// import theme from "@/assets/gallery/theme.jpg";
-// import pic2 from "@/assets/gallery/pic2.jpg";
-
 const locImg = "/assets/loc.png";
 const langImg = "/assets/lang.png";
 const overviewImg = "/assets/overview.png";
 const timelineImg = "/assets/timeline.png";
 const theme = "/assets/theme.jpg";
-const pic2 = "/aassets/pic2.jpg";
+const pic2 = "/assets/dino_bg.png";
 
 export default function LandingPage() {
   return (
@@ -44,7 +25,6 @@ export default function LandingPage() {
         <Navbar />
         <Hero />
         <Features />
-        <Gallery />
         <Faq />
         <div className="h-32" />
       </div>
@@ -334,13 +314,15 @@ function Features() {
           </motion.div>
         ))}
       </motion.div>
+
+      <Gallery />
     </section>
   );
 }
 
 /* Gallery (drag inside box)                                          */
 const photos = [
-  { src: theme, alt: "Dev desk", top: "20%", left: "12%", rotate: -6 },
+  { src: theme, alt: "Theme", top: "20%", left: "12%", rotate: -6 },
   { src: pic2, alt: "Sticky board", top: "35%", left: "55%", rotate: 5 },
 ];
 
@@ -398,40 +380,40 @@ function Gallery() {
 const faqData = [
   {
     id: 1,
-    question: "Is my code secret-agent safe?",
+    question: "Is my data shared?",
     answer:
-      "Totally! We have a 'no-touchy' policy. We don't store your data or your code—we just fetch the public stuff from GitHub, make it look pretty, and then we forget we ever met. 🕵️‍♂️",
+      "Totally! JK ! We don't store your data or your code—we just fetch the public stuff from GitHub, make it look pretty, and then we forget we ever met.",
   },
   {
     id: 2,
     question: "What kind of stats am I getting?",
     answer:
-      "You'll get the full flex: total commits, lines of code, your favorite languages, and even your 'coding vibe'—like whether you're a 'Stand-up Survivor' or a weekend warrior. 🚀",
+      "Bruhhh... it's fun and jsut a click away, Go check it out!",
   },
   {
     id: 3,
     question: "Can it see my private repos?",
     answer:
-      "Nope! We only look at your public activity. No need to worry about us seeing that one 'test-project-final-v3' repo you've been hiding. 🙈",
+      "Sorry Nahh! We only look at your public activity. We are working on it",
   },
   {
     id: 4,
-    question: "How do I show this off?",
+    question: "Can we Download it or Share it ?",
     answer:
-      "The app generates sleek, story-ready cards. One click and you're ready to flex your 2025 wins on X, LinkedIn, or Instagram. 📸",
+      "Of course..it generates sleek, story-ready cards. One click and you're ready to flex your wins on X, LinkedIn, or Instagram. 📸",
   },
   {
     id: 5,
-    question: "Wait, I found a bug!",
+    question: "Wait, I found. a bug!",
     answer:
-      "Awesome! (Well, not the bug, but the fact that you found it). This is an open-source project, so head over to the GitHub repo and drop an issue or a PR. Let's build this together! 🛠️",
+      "Awesome! (Well, not the bug, but the fact that you found it). This is an open-source project, so head over to the GitHub repo and drop an issue or a PR. Let's build this together!",
   },
 ];
 
 function Faq() {
   return (
-    <section className="boxy mt-8 p-6 md:p-12">
-      <div className="mx-auto max-w-3xl">
+    <section id="faq" className="boxy mt-8 p-6 md:p-12">
+      <div className="mx-auto max-w-3xl ">
         <motion.h2
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -439,7 +421,7 @@ function Faq() {
           transition={{ duration: 0.5 }}
           className="font-display text-center text-5xl font-black tracking-tight text-ink md:text-6xl"
         >
-          faq
+          Faq's
         </motion.h2>
         <p className="mt-3 text-center text-sm text-muted-foreground md:text-base">
           The stuff everyone asks before clicking the button.
@@ -456,7 +438,7 @@ function Faq() {
             >
               <AccordionItem
                 value={`item-${item.id}`}
-                className="boxy-sm mt-3 rounded-sm border-2 border-ink bg-cream px-4"
+                className="relative boxy-sm mt-3 rounded-sm border-2 border-ink bg-cream px-4"
               >
                 <AccordionTrigger className="font-display text-left text-lg font-bold text-ink hover:no-underline md:text-xl">
                   {item.question}
