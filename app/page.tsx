@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowRight, Github, ChevronLeft, Twitter } from "lucide-react";
+import { ArrowRight, Github, Twitter } from "lucide-react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
@@ -109,7 +109,7 @@ export default function HomePage() {
 
         <div className=" text-lg lg:text-sm tracking-tighter border-3 p-2 text-left rounded-3xl border-[#00804C] text-[#001F3F]/80 lg:max-w-3x lg:w-[35%] w-full lg:absolute top-[40%] -left-[50%] selection:bg-[#DBE64C]/90 selection:text-[#001F3F] ">
           Watching everyone share their Spotify Wrapped on Insta
-          made me think Why don't developers have something like 
+          made me think Why do not developers have something like 
           this for GitHub? So I built it. Introducing GitHub Wrapped 2025
           <Image
             src="/arrow.svg"
