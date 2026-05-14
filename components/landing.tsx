@@ -18,6 +18,8 @@ const overviewImg = "/assets/overview.png";
 const timelineImg = "/assets/timeline.png";
 const theme = "/assets/theme.jpg";
 const pic2 = "/assets/dino_bg.png";
+const x = "/assets/x.png";
+const cards = "/assets/cards.png";
 
 export default function LandingPage() {
   return (
@@ -327,6 +329,8 @@ function Features() {
 const photos = [
   { src: theme, alt: "Theme", top: "12%", left: "10%", rotate: -5 },
   { src: pic2, alt: "Sticky board", top: "35%", left: "75%", rotate: 5 },
+  { src: x, alt: "Meet the developer", top: "55%", left: "15%", rotate: 5 },
+  { src: cards, alt: "Cards Collage", top: "10%", left: "45%", rotate: 5 },
 ];
 
 function Gallery() {
