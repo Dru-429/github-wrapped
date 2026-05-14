@@ -47,7 +47,7 @@ export default function LandingPage () {
 /* Navbar                                                             */
 const navLinks = [
   { label: 'Features', href: '#features' },
-  { label: 'How it works', href: '#how' },
+  { label: 'Contact', href: '#footer' },
   { label: 'FAQ', href: '#faq' }
 ]
 
@@ -81,11 +81,11 @@ function Navbar () {
       </div>
 
       <a
-        href='#'
+        href='https://github.com/Dru-429/github-wrapped'
         className='boxy-sm group inline-flex items-center gap-2 bg-[var(--nuit)] px-3 py-2 text-xs font-bold uppercase tracking-wider text-[var(--cream)] transition-transform hover:-translate-x-0.5 hover:-translate-y-0.5 md:px-4 md:text-sm'
       >
         <Github className='h-4 w-4' />
-        <span>Connect</span>
+        <span>Github</span>
       </a>
     </motion.nav>
   )
@@ -126,7 +126,7 @@ function Hero () {
   }
 
   return (
-    <section className='boxy mt-6 overflow-hidden'>
+    <section className='boxy mt-6 md:mt-14 overflow-hidden'>
       {/* Top bar: badge left, count right */}
       <div className='flex flex-wrap items-center justify-between gap-3 border-b-2 border-ink px-6 py-4 md:px-10'>
         <motion.div
@@ -232,7 +232,7 @@ const features = [
   {
     img: langImg,
     title: 'Find ur Fav Lang',
-    note: 'TypeScript supremacy?',
+    note: 'Many more',
     color: 'var(--mantis)',
     rotate: 1.8
   },
@@ -336,10 +336,10 @@ function Features () {
   )
 }
 
-/* Gallery (drag inside box)                                          */
+/* Gallery                                         */
 const photos = [
   { src: theme, alt: 'Theme', top: '12%', left: '10%', rotate: -5 },
-  { src: pic2, alt: 'Sticky board', top: '35%', left: '75%', rotate: 5 },
+  { src: pic2, alt: 'Hot', top: '35%', left: '75%', rotate: 5 },
   { src: x, alt: 'Meet the developer', top: '55%', left: '15%', rotate: 5 },
   { src: cards, alt: 'Cards Collage', top: '10%', left: '45%', rotate: 5 }
 ]
@@ -476,6 +476,7 @@ function Faq () {
 function Footer () {
   return (
     <footer
+      id="footer"
       className='boxy mt-20 p-4 md:p-5 relative overflow-hidden'
     >
       <div 
