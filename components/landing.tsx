@@ -10,10 +10,12 @@
 //   utility classes (.boxy, .boxy-sm, .bg-grid, .font-display) defined in
 //   src/styles.css.
 
+"use client";
+
 import { useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { ArrowRight, Github, Star, Users } from "lucide-react";
-import { SmoothScroll } from "@/components/SmoothScroll";
 import {
   Accordion,
   AccordionContent,
@@ -21,28 +23,32 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-import locImg from "@/assets/features/loc.png";
-import langImg from "@/assets/features/lang.png";
-import overviewImg from "@/assets/features/overview.png";
-import timelineImg from "@/assets/features/timeline.png";
-import pic1 from "@/assets/gallery/pic1.jpg";
-import pic2 from "@/assets/gallery/pic2.jpg";
+// import locImg from "@/assets/features/loc.png";
+// import langImg from "@/assets/features/lang.png";
+// import overviewImg from "@/assets/features/overview.png";
+// import timelineImg from "@/assets/features/timeline.png";
+// import theme from "@/assets/gallery/theme.jpg";
+// import pic2 from "@/assets/gallery/pic2.jpg";
 
+const locImg = "/assets/loc.png";
+const langImg = "/assets/lang.png";
+const overviewImg = "/assets/overview.png";
+const timelineImg = "/assets/timeline.png";
+const theme = "/assets/theme.jpg";
+const pic2 = "/aassets/pic2.jpg";
 
-function Index() {
+export default function LandingPage() {
   return (
-    <SmoothScroll>
-      <main className="bg-grid min-h-screen bg-background">
-        <div className="mx-auto max-w-7xl px-4 py-6 md:px-8 md:py-8">
-          <Navbar />
-          <Hero />
-          <Features />
-          <Gallery />
-          <Faq />
-          <div className="h-32" />
-        </div>
-      </main>
-    </SmoothScroll>
+    <main className="bg-grid min-h-screen bg-background">
+      <div className="mx-auto max-w-7xl px-4 py-6 md:px-8 md:py-8">
+        <Navbar />
+        <Hero />
+        <Features />
+        <Gallery />
+        <Faq />
+        <div className="h-32" />
+      </div>
+    </main>
   );
 }
 
@@ -111,10 +117,20 @@ const heroItem = {
 function Hero() {
   const [handle, setHandle] = useState("");
   const [count, setCount] = useState(631);
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleWrap = (e: React.FormEvent) => {
     e.preventDefault();
-    setCount((c) => c + 1);
+    if (!handle.trim()) return;
+
+    let cleanUsername = handle.trim();
+    if (cleanUsername.includes("github.com/")) {
+      cleanUsername = cleanUsername.split("github.com/")[1].split("/")[0];
+    }
+
+    setIsLoading(true);
+    router.push(`/wrap/${cleanUsername}`);
   };
 
   return (
@@ -198,10 +214,11 @@ function Hero() {
           />
           <button
             type="submit"
-            className="boxy-sm group inline-flex items-center justify-center gap-2 bg-[var(--nuit)] px-6 py-4 text-sm font-bold uppercase tracking-wider text-[var(--cream)] transition-transform hover:-translate-x-0.5 hover:-translate-y-0.5"
+            disabled={isLoading || !handle.trim()}
+            className="boxy-sm group inline-flex items-center justify-center gap-2 bg-[var(--nuit)] px-6 py-4 text-sm font-bold uppercase tracking-wider text-[var(--cream)] transition-transform hover:-translate-x-0.5 hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-x-0 disabled:hover:translate-y-0"
           >
-            Get my wrapped
-            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            {isLoading ? "Loading..." : "Get my wrapped"}
+            {!isLoading && <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />}
           </button>
         </motion.form>
       </motion.div>
@@ -323,7 +340,7 @@ function Features() {
 
 /* Gallery (drag inside box)                                          */
 const photos = [
-  { src: pic1, alt: "Dev desk", top: "20%", left: "12%", rotate: -6 },
+  { src: theme, alt: "Dev desk", top: "20%", left: "12%", rotate: -6 },
   { src: pic2, alt: "Sticky board", top: "35%", left: "55%", rotate: 5 },
 ];
 
