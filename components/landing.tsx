@@ -10,6 +10,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import Image from "next/legacy/image";
 
 const locImg = "/assets/loc.png";
 const langImg = "/assets/lang.png";
@@ -315,33 +316,35 @@ function Features() {
         ))}
       </motion.div>
 
-      <Gallery />
+      <div className="">
+        <Gallery />
+      </div>
     </section>
   );
 }
 
 /* Gallery (drag inside box)                                          */
 const photos = [
-  { src: theme, alt: "Theme", top: "20%", left: "12%", rotate: -6 },
-  { src: pic2, alt: "Sticky board", top: "35%", left: "55%", rotate: 5 },
+  { src: theme, alt: "Theme", top: "12%", left: "10%", rotate: -5 },
+  { src: pic2, alt: "Sticky board", top: "35%", left: "75%", rotate: 5 },
 ];
 
 function Gallery() {
   const boardRef = useRef<HTMLDivElement>(null);
 
   return (
-    <section className="mt-12 md:mt-20">
+    <section className="mt-40">
       <div
         ref={boardRef}
-        className="boxy relative h-[520px] w-full overflow-hidden md:h-[640px]"
+        className="boxy relative h-[500px] w-full overflow-hidden md:h-[640px]"
         style={{
           backgroundImage:
             "linear-gradient(to right, color-mix(in srgb, var(--ink) 10%, transparent) 1px, transparent 1px), linear-gradient(to bottom, color-mix(in srgb, var(--ink) 10%, transparent) 1px, transparent 1px)",
-          backgroundSize: "32px 32px",
+          backgroundSize: "24px 24px"
         }}
       >
-        <h2 className="font-display pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 select-none text-5xl font-black tracking-tight text-foreground/15 md:text-7xl">
-          gallery
+        <h2 className="font-display pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 select-none text-5xl font-black tracking-tight text-foreground/70 md:text-7xl">
+          GALLERY
         </h2>
 
         {photos.map((p, i) => (
@@ -354,10 +357,10 @@ function Gallery() {
             whileDrag={{ scale: 1.04, rotate: 0, zIndex: 50 }}
             whileHover={{ scale: 1.02 }}
             initial={{ rotate: p.rotate }}
-            className="boxy absolute cursor-grab touch-none bg-cream p-2 active:cursor-grabbing"
+            className="boxy absolute cursor-grab touch-none bg-foreground/30 p-2 active:cursor-grabbing"
             style={{ top: p.top, left: p.left, width: 200 }}
           >
-            <img
+            <Image 
               src={p.src}
               alt={p.alt}
               draggable={false}
@@ -366,7 +369,7 @@ function Gallery() {
               height={512}
               className="pointer-events-none block h-44 w-full object-cover"
             />
-            <div className="font-display pt-2 text-center text-sm text-ink">
+            <div className="font-display pt-2 text-center text-sm text-zinc-950 font-bold">
               {p.alt}
             </div>
           </motion.div>
