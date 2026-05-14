@@ -497,7 +497,7 @@ function Footer () {
               Github Wrapped
             </span>
             <p className='max-w-md text-zinc-100 font-bold text-lg leading-relaxed'>
-              Open source. Free forever. Built for developers to flex.
+              Open source. Built for developers to flex.
             </p>
           </div>
 
