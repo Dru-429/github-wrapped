@@ -201,7 +201,7 @@ function Hero () {
             type='text'
             value={handle}
             onChange={e => setHandle(e.target.value)}
-            placeholder='dru249 or https://github.com/Dru-429'
+            placeholder='Dru-429 or https://github.com/Dru-429'
             className='boxy-sm flex-1 bg-[var(--cream)] px-5 py-4 text-base font-medium text-ink placeholder:text-ink/40 focus:outline-none focus:ring-0'
           />
           <button
@@ -275,9 +275,7 @@ function Features () {
           <span className='boxy-sm bg-[var(--nuit)] px-5 py-2 font-display text-4xl font-black italic text-[var(--cream)] md:text-6xl'>
             Features
           </span>
-          <span className='font-display text-2xl italic text-foreground/60 md:text-3xl'>
-            … of course …
-          </span>
+
         </motion.div>
         <motion.p
           initial={{ opacity: 0 }}
@@ -286,10 +284,10 @@ function Features () {
           transition={{ duration: 0.5, delay: 0.15 }}
           className='mt-6 max-w-xl text-base text-foreground/70 md:text-lg'
         >
-          Everything you need to flex on LinkedIn this December.
+          Everything you need to flex on LinkedIn and X.
           <br />
           <span className='font-display italic'>
-            Pinned to the wall, sticky-note style.
+            Try it already, not gonna tell all the feature here...
           </span>
         </motion.p>
       </div>
