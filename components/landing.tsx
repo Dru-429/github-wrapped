@@ -3,7 +3,7 @@
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { ArrowRight, Github, Star, Users } from "lucide-react";
+import { ArrowRight, Github, Star, Users, Linkedin, Twitter, MessageCircle, Heart } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -29,7 +29,7 @@ export default function LandingPage() {
         <Hero />
         <Features />
         <Faq />
-        <div className="h-32" />
+        <Footer />
       </div>
     </main>
   );
@@ -364,7 +364,7 @@ function Gallery() {
             className="boxy absolute cursor-grab touch-none bg-foreground/30 p-2 active:cursor-grabbing"
             style={{ top: p.top, left: p.left, width: 200 }}
           >
-            <Image 
+            <Image
               src={p.src}
               alt={p.alt}
               draggable={false}
@@ -459,5 +459,59 @@ function Faq() {
         </Accordion>
       </div>
     </section>
+  );
+}
+
+/* Footer                                                             */
+function Footer() {
+  return (
+    <footer
+      className="boxy mt-20 p-8 md:p-12 relative overflow-hidden"
+      style={{
+        backgroundImage: `url('/assets/dino_bg.png')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center'
+      }}
+    >
+      {/* Semi-transparent overlay to ensure text readability if dino_bg is dark/busy */}
+      <div className="absolute inset-0 bg-white/40 pointer-events-none" />
+
+      <div className="relative z-10 flex flex-col gap-12">
+        {/* Top Section */}
+        <div className="flex flex-col md:flex-row justify-between items-start gap-8">
+          <div className="flex flex-col gap-5">
+            <div className="boxy bg-white px-6 py-4 inline-flex items-center gap-4 shadow-[6px_6px_0_0_rgba(0,0,0,1)] border-4 border-black">
+              <Star className="w-8 h-8 text-blue-600 fill-current" />
+              <span className="font-display text-3xl font-black uppercase tracking-tight">Github Wrapped</span>
+            </div>
+            <p className="max-w-md text-zinc-900 font-bold text-lg leading-relaxed">
+              Open source. Free forever. Built for developers who want to flex their 2025 coding journey.
+            </p>
+          </div>
+
+          <div className="flex flex-wrap gap-4">
+            {[
+              { label: "GitHub", href: "https://github.com/Dru-429/github-wrapped", color: "bg-blue-600" },
+              { label: "Twitter", href: "https://x.com/dev_druv", color: "bg-green-700" },
+              { label: "LinkedIn", href: "https://linkedin.com", color: "bg-orange-600" },
+              { label: "OSS Friends", href: "#", color: "bg-zinc-900" },
+            ].map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`boxy-sm ${link.color} text-white px-6 py-3 font-black text-sm uppercase tracking-wider hover:-translate-y-1 transition-transform border-2 border-black shadow-[4px_4px_0_0_rgba(0,0,0,1)]`}
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+        </div>
+
+        <div className="h-[2px] w-full bg-black/20" />
+
+      </div>
+    </footer>
   );
 }
