@@ -124,11 +124,6 @@
 .font-bebas { font-family: "Bebas Neue", sans-serif; }
 .font-montserrat { font-family: "Montserrat", sans-serif; }
 
-/* Usage examples (HTML):
-   - Wrap area with <div class="theme theme-montserrat"> … </div> to set the theme font for that subtree
-   - Add <span class="font-bebas">Heading</span> to apply Bebas on a single element
-*/
-
 :root {
   --radius: 0.25rem;
 
