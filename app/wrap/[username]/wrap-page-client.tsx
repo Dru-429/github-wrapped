@@ -17,6 +17,8 @@ import { CommitRaceCard } from "@/components/cards/commit-race-card"
 import { PlainTxt } from "@/components/cards/Plain-txt"
 import { PlainTxt2 } from "@/components/cards/Plain-txt2"
 import ResultCard from "@/components/cards/Result"
+import { motion } from 'framer-motion'
+
 
 export function WrapPageClient({ username }: { username: string }) {
   const router = useRouter()
@@ -147,39 +149,11 @@ export function WrapPageClient({ username }: { username: string }) {
     }
   }
 
+
   return (
     <div className='bg-grid min-h-screen bg-background pb-20'>
       {/* Navbar */}
-      <nav className='boxy flex items-center justify-between px-4 py-3 md:px-6 md:py-4 mx-4 mt-6 md:mx-8 md:mt-8 bg-white max-w-7xl lg:mx-auto shadow-[4px_4px_0_0_rgba(0,0,0,1)] border-2 border-black'>
-        <div className='flex items-center gap-4'>
-          <button
-            onClick={() => router.back()}
-            className='boxy-sm group inline-flex items-center justify-center bg-[var(--cream)] p-2 transition-transform hover:-translate-x-0.5 hover:-translate-y-0.5 shadow-[2px_2px_0_0_rgba(0,0,0,1)] border-2 border-black'
-            aria-label='Go back'
-          >
-            <ChevronLeft className='h-5 w-5 text-ink' />
-          </button>
-          
-          <button onClick={() => router.push("/")} className='flex items-center gap-2'>
-            <span className='grid h-8 w-8 place-items-center border-2 border-ink bg-[var(--lime)] font-display text-lg font-black text-ink shadow-[2px_2px_0_0_rgba(0,0,0,1)]'>
-              G
-            </span>
-            <span className='font-display text-xl font-bold tracking-tight text-ink hidden sm:block'>
-              Github Wrapped
-            </span>
-          </button>
-        </div>
-
-        <a
-          href='https://github.com/Dru-429/github-wrapped'
-          target='_blank'
-          rel='noopener noreferrer'
-          className='boxy-sm group inline-flex items-center gap-2 bg-[var(--nuit)] px-3 py-2 text-xs font-bold uppercase tracking-wider text-[var(--cream)] transition-transform hover:-translate-x-0.5 hover:-translate-y-0.5 md:px-4 md:text-sm shadow-[4px_4px_0_0_rgba(0,0,0,1)] border-2 border-black'
-        >
-          <Github className='h-4 w-4' />
-          <span className="hidden sm:inline">Github</span>
-        </a>
-      </nav>
+      <Navbar />
 
       <main className='container mx-auto px-4 py-8 md:py-12 relative max-w-7xl'>
         {isLoading && (
@@ -191,8 +165,7 @@ export function WrapPageClient({ username }: { username: string }) {
 
         {error && (
           <div className='flex flex-col items-center justify-center min-h-[60vh] space-y-6 max-w-md mx-auto text-center'>
-            <div className='text-8xl'>😕</div>
-            <h2 className='font-display text-4xl font-black text-ink'>Oops!</h2>
+            <h2 className='font-display text-4xl font-black text-ink'>Error 404</h2>
             <p className='text-ink/80 text-lg font-medium'>{error}</p>
             <button
               onClick={fetchGitHubData}
@@ -204,17 +177,12 @@ export function WrapPageClient({ username }: { username: string }) {
         )}
 
         {!isLoading && !error && data && (
-          <div className='boxy bg-white p-6 md:p-10 w-full mx-auto mt-4 md:mt-8 flex flex-col lg:flex-row gap-10 items-stretch shadow-[12px_12px_0_0_rgba(0,0,0,1)] border-4 border-black'>
+          <div className='boxy bg-cream p-6 md:p-10 w-full mx-auto mt-4 md:mt-8 flex flex-col lg:flex-row gap-10 items-stretch'>
             {/* Left side: Controls (35%) */}
             <div className='w-full lg:w-[35%] flex flex-col justify-between gap-8 h-full'>
-              <div>
-                <h1 className='font-display text-4xl md:text-5xl font-black uppercase tracking-tight text-ink mb-4'>
-                  Your 2025 Wrapped
-                </h1>
-                <p className='text-ink/80 font-bold text-base md:text-lg leading-relaxed'>
-                  Swipe through your Github journey, download the cards, and flex your stats to the world!
-                </p>
-              </div>
+              <span className='boxy-sm bg-[var(--nuit)] px-5 py-2 font-display text-4xl font-black italic text-[var(--cream)] md:text-6xl'>
+                Wrapped..
+              </span>
 
               <div className='flex flex-col gap-6 w-full'>
                 {/* Pagination Controls */}
@@ -247,11 +215,10 @@ export function WrapPageClient({ username }: { username: string }) {
                       <button
                         key={index}
                         onClick={() => setCurrentCard(index)}
-                        className={`h-3 transition-all border-2 border-ink shadow-[2px_2px_0_0_rgba(0,0,0,1)] ${
-                          index === currentCard 
-                            ? 'bg-[var(--lime)] w-8' 
+                        className={`h-3 transition-all border-2 border-ink shadow-[2px_2px_0_0_rgba(0,0,0,1)] ${index === currentCard
+                            ? 'bg-[var(--lime)] w-8'
                             : 'bg-white w-3 hover:bg-[var(--lime)]'
-                        }`}
+                          }`}
                         aria-label={`Go to card ${index + 1}`}
                       />
                     ))}
@@ -268,7 +235,7 @@ export function WrapPageClient({ username }: { username: string }) {
                     <Download className='h-6 w-6' />
                     {isDownloading ? 'Downloading...' : 'Download Card'}
                   </button>
-                  
+
                   <div className='grid grid-cols-2 gap-4'>
                     <button
                       onClick={() => handleShare('twitter')}
@@ -277,7 +244,7 @@ export function WrapPageClient({ username }: { username: string }) {
                       <Twitter className='h-4 w-4' />
                       Share
                     </button>
-                    
+
                     <button
                       onClick={() => handleShare('linkedin')}
                       className='boxy-sm group flex items-center justify-center gap-2 bg-blue-600 px-4 py-3 font-bold uppercase tracking-wider text-white transition-transform hover:-translate-y-1 border-2 border-black shadow-[4px_4px_0_0_rgba(0,0,0,1)]'
@@ -298,9 +265,9 @@ export function WrapPageClient({ username }: { username: string }) {
               </div>
             </div>
 
-            {/* Right side: Card Display (65%) */}
-            <div className='w-full lg:w-[65%] flex items-center justify-center bg-zinc-900 p-4 md:p-10 boxy shadow-[8px_8px_0_0_rgba(0,0,0,1)] border-4 border-black relative overflow-hidden'>
-              <div className="absolute inset-0 opacity-20" style={{ backgroundImage: "url('/bg.png')", backgroundSize: 'contain' }}></div>
+            {/* Right side: Card Display */}
+            <div className='w-full lg:w-[65%] flex items-center justify-center bg-zinc-900 p-4 md:p-10 boxy relative overflow-hidden'>
+              <div className="absolute inset-0" style={{ backgroundImage: "url('/bg.png')", backgroundSize: 'contain' }}></div>
               <div className='w-full max-w-xl aspect-square flex items-center justify-center relative z-10' ref={cardRef}>
                 {renderCard()}
               </div>
@@ -309,5 +276,43 @@ export function WrapPageClient({ username }: { username: string }) {
         )}
       </main>
     </div>
+  )
+}
+
+function Navbar() {
+  return (
+    <motion.nav
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, ease: 'easeOut' }}
+      className='boxy flex items-center justify-between px-4 py-3 md:px-6 md:py-4 mx-auto max-w-7xl '
+    >
+      <div className='flex items-center gap-4'>
+        <button
+          onClick={() => router.back()}
+          className='boxy-sm group inline-flex items-center justify-center bg-[var(--cream)] p-2 transition-transform hover:-translate-x-0.5 hover:-translate-y-0.5 shadow-[2px_2px_0_0_rgba(0,0,0,1)] border-2 border-black'
+          aria-label='Go back'
+        >
+          <ChevronLeft className='h-5 w-5 text-ink' />
+        </button>
+
+        <button className='flex items-center gap-2'>
+          <span className='grid h-8 w-8 place-items-center border-2 border-ink bg-[var(--lime)] font-display text-lg font-black text-ink shadow-[2px_2px_0_0_rgba(0,0,0,1)]'>
+            G
+          </span>
+          <span className='font-display text-xl font-bold tracking-tight text-ink hidden sm:block'>
+            Github Wrapped
+          </span>
+        </button>
+      </div>
+
+      <a
+        href='https://github.com/Dru-429/github-wrapped'
+        className='boxy-sm group inline-flex items-center gap-2 bg-[var(--nuit)] px-3 py-2 text-xs font-bold uppercase tracking-wider text-[var(--cream)] transition-transform hover:-translate-x-0.5 hover:-translate-y-0.5 md:px-4 md:text-sm'
+      >
+        <Github className='h-4 w-4' />
+        <span>Github</span>
+      </a>
+    </motion.nav>
   )
 }

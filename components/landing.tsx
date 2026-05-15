@@ -277,21 +277,7 @@ function Features () {
           </span>
 
         </motion.div>
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.15 }}
-          className='mt-6 max-w-xl text-base text-foreground/70 md:text-lg'
-        >
-          Everything you need to flex on LinkedIn and X.
-          <br />
-          <span className='font-display italic'>
-            Try it already, not gonna tell all the feature here...
-          </span>
-        </motion.p>
       </div>
-
       <motion.div
         initial='hidden'
         whileInView='show'
