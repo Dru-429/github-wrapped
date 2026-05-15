@@ -226,40 +226,40 @@ export function WrapPageClient({ username }: { username: string }) {
                 </div>
 
                 {/* Action Buttons */}
-                <div className='flex flex-col gap-4'>
+                <div className='flex flex-row md:flex-col gap-3 md:gap-4 w-full'>
                   <button
                     onClick={handleDownload}
                     disabled={isDownloading}
-                    className='boxy-sm group flex items-center justify-center gap-3 bg-[var(--lime)] px-5 py-4 font-black uppercase tracking-wider text-ink transition-transform hover:-translate-y-1 disabled:opacity-60 disabled:hover:translate-y-0 w-full text-lg border-2 border-black shadow-[6px_6px_0_0_rgba(0,0,0,1)]'
+                    className='flex-1 boxy-sm group flex items-center justify-center gap-3 bg-[var(--lime)] px-0 md:px-5 py-3 md:py-4 font-black uppercase tracking-wider text-ink transition-transform hover:-translate-y-1 disabled:opacity-60 disabled:hover:translate-y-0 md:w-full text-lg border-2 border-black shadow-[4px_4px_0_0_rgba(0,0,0,1)] md:shadow-[6px_6px_0_0_rgba(0,0,0,1)]'
                   >
                     <Download className='h-6 w-6' />
-                    {isDownloading ? 'Downloading...' : 'Download Card'}
+                    <span className="hidden md:inline">{isDownloading ? 'Downloading...' : 'Download Card'}</span>
                   </button>
-
-                  <div className='grid grid-cols-2 gap-4'>
+                  
+                  <div className='flex flex-row md:grid md:grid-cols-2 gap-3 md:gap-4 flex-[2] md:flex-none'>
                     <button
                       onClick={() => handleShare('twitter')}
-                      className='boxy-sm group flex items-center justify-center gap-2 bg-[var(--nuit)] px-4 py-3 font-bold uppercase tracking-wider text-white transition-transform hover:-translate-y-1 border-2 border-black shadow-[4px_4px_0_0_rgba(0,0,0,1)]'
+                      className='flex-1 boxy-sm group flex items-center justify-center gap-2 bg-[var(--nuit)] px-0 md:px-4 py-3 font-bold uppercase tracking-wider text-white transition-transform hover:-translate-y-1 border-2 border-black shadow-[4px_4px_0_0_rgba(0,0,0,1)]'
                     >
-                      <Twitter className='h-4 w-4' />
-                      Share
+                      <Twitter className='h-5 w-5 md:h-4 md:w-4' />
+                      <span className="hidden md:inline">Share</span>
                     </button>
-
+                    
                     <button
                       onClick={() => handleShare('linkedin')}
-                      className='boxy-sm group flex items-center justify-center gap-2 bg-blue-600 px-4 py-3 font-bold uppercase tracking-wider text-white transition-transform hover:-translate-y-1 border-2 border-black shadow-[4px_4px_0_0_rgba(0,0,0,1)]'
+                      className='flex-1 boxy-sm group flex items-center justify-center gap-2 bg-blue-600 px-0 md:px-4 py-3 font-bold uppercase tracking-wider text-white transition-transform hover:-translate-y-1 border-2 border-black shadow-[4px_4px_0_0_rgba(0,0,0,1)]'
                     >
-                      <Linkedin className='h-4 w-4' />
-                      Share
+                      <Linkedin className='h-5 w-5 md:h-4 md:w-4' />
+                      <span className="hidden md:inline">Share</span>
                     </button>
                   </div>
 
                   <button
                     onClick={() => handleShare('copy')}
-                    className='boxy-sm group flex items-center justify-center gap-2 bg-white px-5 py-3 font-bold uppercase tracking-wider text-ink transition-transform hover:-translate-y-1 w-full border-2 border-black shadow-[4px_4px_0_0_rgba(0,0,0,1)]'
+                    className='flex-1 boxy-sm group flex items-center justify-center gap-2 bg-white px-0 md:px-5 py-3 font-bold uppercase tracking-wider text-ink transition-transform hover:-translate-y-1 md:w-full border-2 border-black shadow-[4px_4px_0_0_rgba(0,0,0,1)]'
                   >
-                    {copied ? <Check className='h-4 w-4 text-green-600' /> : <Copy className='h-4 w-4' />}
-                    {copied ? 'Copied!' : 'Copy Link'}
+                    {copied ? <Check className='h-5 w-5 md:h-4 md:w-4 text-green-600' /> : <Copy className='h-5 w-5 md:h-4 md:w-4' />}
+                    <span className="hidden md:inline">{copied ? 'Copied!' : 'Copy Link'}</span>
                   </button>
                 </div>
               </div>
