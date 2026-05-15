@@ -10,10 +10,10 @@ export function LOCCard({ data }: { data: GitHubData }) {
   return (
     <div className="flex items-center justify-center w-full h-full min-h-[600px] bg-[#F3F3F1] p-4 rounded-3xl">
       {/* Card Container */}
-      <div className="relative w-full max-w-[400px] aspect-[9/14] bg-[#1A1A1A] text-[#F3F3F1] overflow-hidden flex flex-col items-center justify-between p-6 rounded-3xl shadow-2xl">
+      <div className="relative w-full h-full md:h-auto max-w-[400px] aspect-[9/14] bg-[#1A1A1A] text-[#F3F3F1]  flex flex-col items-center justify-between p-6 rounded-3xl shadow-2xl">
         
         {/* --- Decorative Background Lines --- */}
-        <div className="absolute top-0 left-0 w-full h-full pointer-events-none z-0">
+        <div className="absolute top-0 left-0 w-full h-full pointer-events-none ">
           <svg viewBox="0 0 400 400" className="w-full h-full opacity-90">
              <path 
                d="M -50 190 Q 100 80 450 10" 
@@ -40,12 +40,12 @@ export function LOCCard({ data }: { data: GitHubData }) {
         </div>
 
         {/* --- Main Content Area --- */}
-        <div className="relative z-10 flex-1 w-full flex flex-col items-center justify-center gap-5">
+        <div className="relative z-30 flex-1 w-full flex flex-col items-center justify-center gap-5">
           
           {/* Big Number */}
-          <div className="relative w-full flex items-center justify-center">
+          <div className="relative z-40 w-full flex items-center justify-center ">
             <span 
-              className="text-[140px] leading-none text-[#968CFD] tracking-tightest font-bebas [-webkit-text-stroke:1px_white] drop-shadow-sm"
+              className=" md:text-[140px] text-[120px] leading-none text-[#968CFD] tracking-tightest font-bebas [-webkit-text-stroke:1px_white] drop-shadow-sm"
             >
               {loc.toLocaleString()}
             </span>

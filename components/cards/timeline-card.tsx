@@ -132,7 +132,7 @@ export function TimelineCard({ data }: { data: GitHubData }) {
           </div>
         </div>
 
-                {/* --- Footer --- */}
+        {/* --- Footer --- */}
         <div className="w-full absolute bottom-4 px-4 flex items-center justify-between">
           <svg
             height="32"

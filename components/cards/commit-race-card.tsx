@@ -19,7 +19,7 @@ export function CommitRaceCard({ data }: { data: GitHubData }) {
     <div className="flex items-center justify-center w-full h-full min-h-[600px] bg-black p-4 rounded-3xl">
 
       {/* Card Container */}
-      <div className="relative w-full max-w-[400px] aspect-[9/14] bg-[#1A1A1A] text-[#F3F3F1] overflow-hidden flex flex-col items-center justify-between p-6 rounded-3xl shadow-2xl">
+      <div className="relative w-full h-full md:h-auto max-w-[400px] aspect-[9/14] bg-[#1A1A1A] text-[#F3F3F1] overflow-hidden flex flex-col items-center justify-between p-6 rounded-3xl shadow-2xl">
         {/* --- SVG Lines */}
         <div className="absolute -top-30 w-full h-full pointer-events-none z-0">
           <svg viewBox="0 0 400 400" className="w-full h-full opacity-90">
@@ -31,7 +31,6 @@ export function CommitRaceCard({ data }: { data: GitHubData }) {
               strokeWidth="2"
               className="opacity-70"
             />
-            {/* Tighter top curve */}
             <path
               d="M -10 40 C 100 -20, 300 60, 410 40"
               fill="none"
@@ -39,7 +38,6 @@ export function CommitRaceCard({ data }: { data: GitHubData }) {
               strokeWidth="2"
               className="opacity-40"
             />
-            {/* Sharp intersecting line */}
             <path
               d="M -30 20 C 150 120, 350 -40, 430 30"
               fill="none"
