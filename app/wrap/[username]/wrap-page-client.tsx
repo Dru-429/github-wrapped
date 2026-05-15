@@ -148,65 +148,55 @@ export function WrapPageClient({ username }: { username: string }) {
   }
 
   return (
-    <div className="min-h-screen text-foreground relative" style={{ backgroundImage: "url('/bg.png')", backgroundSize: 'contain', backgroundPosition: 'center', backgroundRepeat: 'repeat' }}>
-      {/* subtle dark overlay for readability */}
-      <div className="absolute inset-0 bg-black/50 pointer-events-none" />
-
-      {/* Navbar (centered pill) */}
-      <nav className="relative z-20">
-        <div className="absolute left-1/2 top-2 -translate-x-1/2 w-[90%] md:w-[40%]">
-          <div className="flex items-center justify-between gap-4 w-full bg-zinc-800/30 backdrop-blur-md border border-white/10 rounded-full px-4 py-2 shadow-[0_6px_20px_rgba(2,6,23,0.6)]">
-            {/* Left: logo & back */}
-            <div className="flex items-center gap-3 pl-1">
-              <button
-                onClick={() => router.back()}
-                className="p-2 bg-white/5 hover:bg-white/10 rounded-full transition-colors"
-                aria-label="Go back"
-              >
-                <ChevronLeft className="w-4 h-4 text-white" />
-              </button>
-
-              <button
-                onClick={() => router.push("/")}
-                className="p-2 rounded-full transition-colors flex items-center gap-2 text-white cursor-pointer font-medium"
-                aria-label="Home"
-              >
-                {/* <img src="/logo.png" alt="Logo" className="w-8 h-8 object-cover" /> */}
-                GITHUB WRAPPED 2025
-              </button>
-            </div>
-
-            {/* Right: social icons */}
-            <div className="flex items-center gap-3 pr-1">
-              <a href="https://github.com/Dru-429/github-wrapped" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository" className="p-2 rounded-full bg-white/5 hover:bg-white/10 transition-colors">
-                <Github className="w-5 h-5 text-white/90" />
-              </a>
-              <a href="https://x.com/dev_druv" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)" className="p-2 rounded-full bg-white/5 hover:bg-white/10 transition-colors">
-                <Twitter className="w-5 h-5 text-white/90" />
-              </a>
-            </div>
-          </div>
+    <div className='bg-grid min-h-screen bg-background pb-20'>
+      {/* Navbar */}
+      <nav className='boxy flex items-center justify-between px-4 py-3 md:px-6 md:py-4 mx-4 mt-6 md:mx-8 md:mt-8 bg-white max-w-7xl lg:mx-auto shadow-[4px_4px_0_0_rgba(0,0,0,1)] border-2 border-black'>
+        <div className='flex items-center gap-4'>
+          <button
+            onClick={() => router.back()}
+            className='boxy-sm group inline-flex items-center justify-center bg-[var(--cream)] p-2 transition-transform hover:-translate-x-0.5 hover:-translate-y-0.5 shadow-[2px_2px_0_0_rgba(0,0,0,1)] border-2 border-black'
+            aria-label='Go back'
+          >
+            <ChevronLeft className='h-5 w-5 text-ink' />
+          </button>
+          
+          <button onClick={() => router.push("/")} className='flex items-center gap-2'>
+            <span className='grid h-8 w-8 place-items-center border-2 border-ink bg-[var(--lime)] font-display text-lg font-black text-ink shadow-[2px_2px_0_0_rgba(0,0,0,1)]'>
+              G
+            </span>
+            <span className='font-display text-xl font-bold tracking-tight text-ink hidden sm:block'>
+              Github Wrapped
+            </span>
+          </button>
         </div>
+
+        <a
+          href='https://github.com/Dru-429/github-wrapped'
+          target='_blank'
+          rel='noopener noreferrer'
+          className='boxy-sm group inline-flex items-center gap-2 bg-[var(--nuit)] px-3 py-2 text-xs font-bold uppercase tracking-wider text-[var(--cream)] transition-transform hover:-translate-x-0.5 hover:-translate-y-0.5 md:px-4 md:text-sm shadow-[4px_4px_0_0_rgba(0,0,0,1)] border-2 border-black'
+        >
+          <Github className='h-4 w-4' />
+          <span className="hidden sm:inline">Github</span>
+        </a>
       </nav>
 
-      <main className="container mx-auto px-4 py-8 md:py-12 relative ">
-        <div className="absolute inset-0 dotted-pattern opacity-20" />
-
+      <main className='container mx-auto px-4 py-8 md:py-12 relative max-w-7xl'>
         {isLoading && (
-          <div className="flex flex-col items-center justify-center min-h-[600px] space-y-4 relative z-10">
-            <div className="w-12 h-12 border-4 border-white border-t-transparent rounded-full animate-spin" />
-            <p className="text-lg text-white font-medium">Loading your GitHub Wrap...</p>
+          <div className='flex flex-col items-center justify-center min-h-[60vh] space-y-6'>
+            <div className='h-16 w-16 border-8 border-ink border-t-[var(--lime)] rounded-full animate-spin' />
+            <p className='font-display text-3xl font-black text-ink animate-pulse'>Loading your Wrapped...</p>
           </div>
         )}
 
         {error && (
-          <div className="flex flex-col items-center justify-center min-h-[600px] space-y-4 max-w-md mx-auto text-center relative z-10">
-            <div className="text-6xl">😕</div>
-            <h2 className="text-2xl font-bold text-white">Oops! Something went wrong</h2>
-            <p className="text-white/80">{error}</p>
+          <div className='flex flex-col items-center justify-center min-h-[60vh] space-y-6 max-w-md mx-auto text-center'>
+            <div className='text-8xl'>😕</div>
+            <h2 className='font-display text-4xl font-black text-ink'>Oops!</h2>
+            <p className='text-ink/80 text-lg font-medium'>{error}</p>
             <button
               onClick={fetchGitHubData}
-              className="p-2 bg-white/5 hover:bg-white/10 rounded-full text-white font-medium transition-colors"
+              className='boxy-sm bg-[var(--lime)] px-8 py-4 font-display text-xl font-black uppercase tracking-widest text-ink transition-transform hover:-translate-y-1 shadow-[4px_4px_0_0_rgba(0,0,0,1)] border-2 border-black'
             >
               Try Again
             </button>
@@ -214,78 +204,106 @@ export function WrapPageClient({ username }: { username: string }) {
         )}
 
         {!isLoading && !error && data && (
-          <div className="space-y-8 relative z-10 mt-20 md:mt-12">
-            {/* Card Display */}
-            <div className="flex items-center justify-center">
-              <div className="w-full max-w-2xl aspect-square" ref={cardRef}>{renderCard()}</div>
+          <div className='boxy bg-white p-6 md:p-10 w-full mx-auto mt-4 md:mt-8 flex flex-col lg:flex-row gap-10 items-stretch shadow-[12px_12px_0_0_rgba(0,0,0,1)] border-4 border-black'>
+            {/* Left side: Controls (35%) */}
+            <div className='w-full lg:w-[35%] flex flex-col justify-between gap-8 h-full'>
+              <div>
+                <h1 className='font-display text-4xl md:text-5xl font-black uppercase tracking-tight text-ink mb-4'>
+                  Your 2025 Wrapped
+                </h1>
+                <p className='text-ink/80 font-bold text-base md:text-lg leading-relaxed'>
+                  Swipe through your Github journey, download the cards, and flex your stats to the world!
+                </p>
+              </div>
+
+              <div className='flex flex-col gap-6 w-full'>
+                {/* Pagination Controls */}
+                <div className='boxy bg-[var(--cream)] p-5 flex flex-col gap-5 border-2 border-black shadow-[4px_4px_0_0_rgba(0,0,0,1)]'>
+                  <div className='flex items-center justify-between'>
+                    <button
+                      onClick={handlePrevCard}
+                      className='boxy-sm bg-white p-3 transition-transform hover:-translate-x-1 border-2 border-black shadow-[4px_4px_0_0_rgba(0,0,0,1)]'
+                      aria-label='Previous card'
+                    >
+                      <ChevronLeft className='h-6 w-6 text-ink' />
+                    </button>
+                    <div className='flex flex-col items-center'>
+                      <span className='font-display text-2xl font-black text-ink'>
+                        {currentCard + 1} / {totalCards}
+                      </span>
+                    </div>
+                    <button
+                      onClick={handleNextCard}
+                      className='boxy-sm bg-white p-3 transition-transform hover:translate-x-1 border-2 border-black shadow-[4px_4px_0_0_rgba(0,0,0,1)]'
+                      aria-label='Next card'
+                    >
+                      <ChevronRight className='h-6 w-6 text-ink' />
+                    </button>
+                  </div>
+
+                  {/* Navigation Dots */}
+                  <div className='flex items-center justify-center gap-2 flex-wrap'>
+                    {Array.from({ length: totalCards }).map((_, index) => (
+                      <button
+                        key={index}
+                        onClick={() => setCurrentCard(index)}
+                        className={`h-3 transition-all border-2 border-ink shadow-[2px_2px_0_0_rgba(0,0,0,1)] ${
+                          index === currentCard 
+                            ? 'bg-[var(--lime)] w-8' 
+                            : 'bg-white w-3 hover:bg-[var(--lime)]'
+                        }`}
+                        aria-label={`Go to card ${index + 1}`}
+                      />
+                    ))}
+                  </div>
+                </div>
+
+                {/* Action Buttons */}
+                <div className='flex flex-col gap-4'>
+                  <button
+                    onClick={handleDownload}
+                    disabled={isDownloading}
+                    className='boxy-sm group flex items-center justify-center gap-3 bg-[var(--lime)] px-5 py-4 font-black uppercase tracking-wider text-ink transition-transform hover:-translate-y-1 disabled:opacity-60 disabled:hover:translate-y-0 w-full text-lg border-2 border-black shadow-[6px_6px_0_0_rgba(0,0,0,1)]'
+                  >
+                    <Download className='h-6 w-6' />
+                    {isDownloading ? 'Downloading...' : 'Download Card'}
+                  </button>
+                  
+                  <div className='grid grid-cols-2 gap-4'>
+                    <button
+                      onClick={() => handleShare('twitter')}
+                      className='boxy-sm group flex items-center justify-center gap-2 bg-[var(--nuit)] px-4 py-3 font-bold uppercase tracking-wider text-white transition-transform hover:-translate-y-1 border-2 border-black shadow-[4px_4px_0_0_rgba(0,0,0,1)]'
+                    >
+                      <Twitter className='h-4 w-4' />
+                      Share
+                    </button>
+                    
+                    <button
+                      onClick={() => handleShare('linkedin')}
+                      className='boxy-sm group flex items-center justify-center gap-2 bg-blue-600 px-4 py-3 font-bold uppercase tracking-wider text-white transition-transform hover:-translate-y-1 border-2 border-black shadow-[4px_4px_0_0_rgba(0,0,0,1)]'
+                    >
+                      <Linkedin className='h-4 w-4' />
+                      Share
+                    </button>
+                  </div>
+
+                  <button
+                    onClick={() => handleShare('copy')}
+                    className='boxy-sm group flex items-center justify-center gap-2 bg-white px-5 py-3 font-bold uppercase tracking-wider text-ink transition-transform hover:-translate-y-1 w-full border-2 border-black shadow-[4px_4px_0_0_rgba(0,0,0,1)]'
+                  >
+                    {copied ? <Check className='h-4 w-4 text-green-600' /> : <Copy className='h-4 w-4' />}
+                    {copied ? 'Copied!' : 'Copy Link'}
+                  </button>
+                </div>
+              </div>
             </div>
 
-            {/* Navigation Dots */}
-            <div className="flex items-center justify-center gap-2">
-              {Array.from({ length: totalCards }).map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentCard(index)}
-                  className={`h-2 rounded-full transition-all ${index === currentCard ? "bg-white w-8" : "bg-white/40 w-2"
-                    }`}
-                  aria-label={`Go to card ${index + 1}`}
-                />
-              ))}
-            </div>
-
-            {/* Navigation Buttons */}
-            <div className="flex items-center justify-center gap-4">
-              <button
-                onClick={handlePrevCard}
-                className="p-2 bg-white/5 hover:bg-white/10 rounded-full transition-colors"
-                aria-label="Previous card"
-              >
-                <ChevronLeft className="w-5 h-5" />
-              </button>
-              <span className="text-sm text-white font-medium min-w-[80px] text-center">
-                {currentCard + 1} / {totalCards}
-              </span>
-              <button
-                onClick={handleNextCard}
-                className="p-2 bg-white/5 hover:bg-white/10 rounded-full transition-colors"
-                aria-label="Next card"
-              >
-                <ChevronRight className="w-5 h-5" />
-              </button>
-            </div>
-
-            {/* Action Buttons */}
-            <div className="flex flex-wrap items-center justify-center gap-3">
-              <button
-                onClick={handleDownload}
-                disabled={isDownloading}
-                className="p-2 bg-white/5 hover:bg-white/10 rounded-full transition-colors disabled:opacity-60 flex items-center gap-2"
-                aria-label="Download current card"
-              >
-                <Download className="w-4 h-4" />
-                {isDownloading ? "Downloading..." : "Download Card"}
-              </button>
-              <button
-                onClick={() => handleShare("twitter")}
-                className="p-2 bg-white/5 hover:bg-white/10 rounded-full transition-colors flex items-center gap-2"
-              >
-                <Twitter className="w-4 h-4" />
-                Share on X
-              </button>
-              <button
-                onClick={() => handleShare("linkedin")}
-                className="p-2 bg-white/5 hover:bg-white/10 rounded-full transition-colors flex items-center gap-2"
-              >
-                <Linkedin className="w-4 h-4" />
-                Share on LinkedIn
-              </button>
-              <button
-                onClick={() => handleShare("copy")}
-                className="p-2 bg-white/5 hover:bg-white/10 rounded-full transition-colors flex items-center gap-2"
-              >
-                {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-                {copied ? "Copied!" : "Copy Link"}
-              </button>
+            {/* Right side: Card Display (65%) */}
+            <div className='w-full lg:w-[65%] flex items-center justify-center bg-zinc-900 p-4 md:p-10 boxy shadow-[8px_8px_0_0_rgba(0,0,0,1)] border-4 border-black relative overflow-hidden'>
+              <div className="absolute inset-0 opacity-20" style={{ backgroundImage: "url('/bg.png')", backgroundSize: 'contain' }}></div>
+              <div className='w-full max-w-xl aspect-square flex items-center justify-center relative z-10' ref={cardRef}>
+                {renderCard()}
+              </div>
             </div>
           </div>
         )}
