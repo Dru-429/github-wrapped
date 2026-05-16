@@ -5,17 +5,17 @@ import Image from "next/image"
 
 export function ProfileCard({ data }: { data: GitHubData }) {
   const { user } = data
-  
+
   const year = "2025"
   console.log(data)
-  
+
   return (
     <div className="flex items-center justify-center w-full h-full min-h-[600px] p-5 bg-[#1A1A1A] rounded-3xl">
       {/* outer wrapper
       */}
-      
-      <div className="relative w-full max-w-[400px] aspect-[9/14] bg-[#F3F3F1] border-[3px] border-black overflow-hidden flex flex-col shadow-2xl pt-4 rounded-3xl">
-        
+
+      <div className="relative w-full h-[600px] max-w-[400px] aspect-[9/14] bg-[#F3F3F1] border-[3px] border-black overflow-hidden flex flex-col shadow-2xl pt-4 rounded-3xl">
+
         {/* --- DECORATIVE NUMBERS (20 - 25) --- */}
         <div className="absolute top-2 w-full flex flex-col items-center justify-center pointer-events-none z-0 ">
           <span className="text-[160px] leading-[0.8] text-[#F94A36] [-webkit-text-stroke:0.5px_black] bebas-neue-regular font-semibold italic tracking-widest">
@@ -45,26 +45,28 @@ export function ProfileCard({ data }: { data: GitHubData }) {
 
           {/* User Details */}
           <div className="flex-1 flex flex-col items-start justify-start text-center w-full ">
-            
+
             {/* Name */}
             <h2 className="text-5xl font-black text-[#1A1A1A] tracking-tighter">
               {user.name}
             </h2>
 
             {/* Handle & Details */}
-            <div className="flex items-center gap-2 text-xl text-[#4A4A4A] font-medium">
+            <div className="flex flex-col md:flex-row items-center gap-2 text-xl text-[#4A4A4A] font-medium">
               <span>{user.login}</span>
-              <span>•</span>
-              {/* Fallback for pronouns if not in data */}
-              <span>he/him</span> 
+              <div className="flex gap-2">
+                <span>•</span>
+                <span>he/him</span>
+              </div>
             </div>
 
             {/* Stats Row */}
-            <div className="flex items-center gap-2 pt-2 text-lg font-semibold text-[#1A1A1A]">
-               <span>{user.followers} followers</span>
-               <span>•</span>
-               {/* Assuming 'following' exists in user type, otherwise hardcoded/optional */}
-               <span>{user.following || 0} following</span>
+            <div className="flex flex-col md:flex-row items-center gap-2 pt-2 text-lg font-semibold text-[#1A1A1A]">
+              <span>{user.followers} followers</span>
+              <div className="flex gap-2">
+                <span>•</span>
+                <span>{user.following || 0} following</span>
+              </div>
             </div>
 
             {/* Location */}
@@ -75,11 +77,11 @@ export function ProfileCard({ data }: { data: GitHubData }) {
 
           {/* Footer Logo */}
           <div className="w-full absolute bottom-4 px-4 flex items-center justify-between">
-            <svg 
-              height="32" 
-              viewBox="0 0 16 16" 
-              version="1.1" 
-              width="32" 
+            <svg
+              height="32"
+              viewBox="0 0 16 16"
+              version="1.1"
+              width="32"
               aria-hidden="true"
               className="fill-black"
             >
@@ -90,7 +92,7 @@ export function ProfileCard({ data }: { data: GitHubData }) {
               Github Wrapped
             </span>
           </div>
-          
+
         </div>
       </div>
     </div>

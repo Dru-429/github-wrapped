@@ -9,7 +9,7 @@ export function TopReposCard({ data }: { data: GitHubData }) {
       
   return (
     <div className="flex items-center justify-center w-full h-full min-h-[600px] p-5 bg-[#1A1A1A] rounded-3xl">
-      <div className="relative h-full w-full max-w-[400px] aspect-[9/14] bg-[#F3F3F1] overflow-hidden flex flex-col rounded-3xl shadow-2xl justify-center items-center">
+      <div className="relative h-full w-full md:h-auto max-w-[400px] aspect-[9/14] bg-[#F3F3F1] overflow-hidden flex flex-col rounded-3xl shadow-2xl justify-center items-center">
 
         {/* --- Decorative Top Line Art (subtle) --- */}
         <div className="absolute top-0 left-0 w-full h-[160px] pointer-events-none z-0">

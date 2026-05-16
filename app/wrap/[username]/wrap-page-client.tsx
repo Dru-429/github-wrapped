@@ -216,8 +216,8 @@ export function WrapPageClient({ username }: { username: string }) {
                         key={index}
                         onClick={() => setCurrentCard(index)}
                         className={`h-3 transition-all border-2 border-ink shadow-[2px_2px_0_0_rgba(0,0,0,1)] ${index === currentCard
-                          ? 'bg-[var(--lime)] w-8'
-                          : 'bg-white w-3 hover:bg-[var(--lime)]'
+                            ? 'bg-[var(--lime)] w-8'
+                            : 'bg-white w-3 hover:bg-[var(--lime)]'
                           }`}
                         aria-label={`Go to card ${index + 1}`}
                       />
@@ -235,7 +235,7 @@ export function WrapPageClient({ username }: { username: string }) {
                     <Download className='h-6 w-6' />
                     <span className="hidden md:inline">{isDownloading ? 'Downloading...' : 'Download Card'}</span>
                   </button>
-
+                  
                   <div className='flex flex-row md:grid md:grid-cols-2 gap-3 md:gap-4 flex-[2] md:flex-none'>
                     <button
                       onClick={() => handleShare('twitter')}
@@ -244,7 +244,7 @@ export function WrapPageClient({ username }: { username: string }) {
                       <Twitter className='h-5 w-5 md:h-4 md:w-4' />
                       <span className="hidden md:inline">Share</span>
                     </button>
-
+                    
                     <button
                       onClick={() => handleShare('linkedin')}
                       className='flex-1 boxy-sm group flex items-center justify-center gap-2 bg-blue-600 px-0 md:px-4 py-3 font-bold uppercase tracking-wider text-white transition-transform hover:-translate-y-1 border-2 border-black shadow-[4px_4px_0_0_rgba(0,0,0,1)]'
@@ -268,7 +268,7 @@ export function WrapPageClient({ username }: { username: string }) {
             {/* Right side: Card Display */}
             <div className='w-full lg:w-[65%] flex items-center justify-center bg-zinc-900 p-4 md:p-10 boxy relative overflow-hidden'>
               <div className="absolute inset-0" style={{ backgroundImage: "url('/bg.png')", backgroundSize: 'contain' }}></div>
-              <div className='w-full max-w-xl aspect-square flex items-center justify-center relative z-10' ref={cardRef}>
+              <div className='w-full max-w-md flex items-center justify-center relative z-10' ref={cardRef}>
                 {renderCard()}
               </div>
             </div>
