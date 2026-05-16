@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 import {
@@ -112,6 +112,13 @@ function Hero() {
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
 
+  useEffect(() => {
+    const savedCount = localStorage.getItem('wrapCount')
+    if (savedCount) {
+      setCount(parseInt(savedCount))
+    }
+  }, [])
+
   const handleWrap = (e: React.FormEvent) => {
     e.preventDefault()
     if (!handle.trim()) return
@@ -120,6 +127,12 @@ function Hero() {
     if (cleanUsername.includes('github.com/')) {
       cleanUsername = cleanUsername.split('github.com/')[1].split('/')[0]
     }
+
+    setCount((prev) => {
+      const newCount = prev + 1
+      localStorage.setItem('wrapCount', newCount.toString())
+      return newCount
+    })
 
     setIsLoading(true)
     router.push(`/wrap/${cleanUsername}`)
@@ -151,7 +164,7 @@ function Hero() {
             <span className='font-display text-sm'>
               {count.toLocaleString()}
             </span>{' '}
-            devs wrapped
+            devs flexed
           </span>
         </motion.div>
       </div>
@@ -389,7 +402,7 @@ const faqData = [
     id: 1,
     question: 'Is my data shared?',
     answer:
-      "Totally! JK ! We don't store your data or your code—we just fetch the public stuff from GitHub, make it look pretty, and then we forget we ever met."
+      "Totally! JK ! We don't store your data or your code we just fetch the public stuff from GitHub, make it look pretty, and then we forget we ever met."
   },
   {
     id: 2,
@@ -406,7 +419,7 @@ const faqData = [
     id: 4,
     question: 'Can we Download it or Share it ?',
     answer:
-      "Of course..it generates sleek, story-ready cards. One click and you're ready to flex your wins on X, LinkedIn, or Instagram. 📸"
+      "Of course..it generates sleek, story-ready cards. One click and you're ready to flex your wins on X, LinkedIn, or Instagram."
   },
   {
     id: 5,
