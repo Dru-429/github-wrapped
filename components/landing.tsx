@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 import {
@@ -112,13 +112,6 @@ function Hero() {
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
 
-  useEffect(() => {
-    const savedCount = localStorage.getItem('wrapCount')
-    if (savedCount) {
-      setCount(parseInt(savedCount))
-    }
-  }, [])
-
   const handleWrap = (e: React.FormEvent) => {
     e.preventDefault()
     if (!handle.trim()) return
@@ -127,12 +120,6 @@ function Hero() {
     if (cleanUsername.includes('github.com/')) {
       cleanUsername = cleanUsername.split('github.com/')[1].split('/')[0]
     }
-
-    setCount((prev) => {
-      const newCount = prev + 1
-      localStorage.setItem('wrapCount', newCount.toString())
-      return newCount
-    })
 
     setIsLoading(true)
     router.push(`/wrap/${cleanUsername}`)
