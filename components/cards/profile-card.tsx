@@ -14,7 +14,7 @@ export function ProfileCard({ data }: { data: GitHubData }) {
       {/* outer wrapper
       */}
 
-      <div className="relative w-full h-[600px] max-w-[400px] aspect-[9/14] bg-[#F3F3F1] border-[3px] border-black overflow-hidden flex flex-col shadow-2xl pt-4 rounded-3xl">
+      <div className="relative w-full h-[630px] max-w-[400px] aspect-[9/14] bg-[#F3F3F1] border-[3px] border-black overflow-hidden flex flex-col shadow-2xl pt-4 rounded-3xl">
 
         {/* --- DECORATIVE NUMBERS (20 - 25) --- */}
         <div className="absolute top-2 w-full flex flex-col items-center justify-center pointer-events-none z-0 ">
@@ -54,19 +54,13 @@ export function ProfileCard({ data }: { data: GitHubData }) {
             {/* Handle & Details */}
             <div className="flex flex-col md:flex-row items-center gap-2 text-xl text-[#4A4A4A] font-medium">
               <span>{user.login}</span>
-              <div className="flex gap-2">
-                <span>•</span>
-                <span>he/him</span>
-              </div>
             </div>
 
             {/* Stats Row */}
-            <div className="flex flex-col md:flex-row items-center gap-2 pt-2 text-lg font-semibold text-[#1A1A1A]">
+            <div className="flex flex-col md:flex-row items-center justify-start gap-2 pt-2 text-lg font-semibold text-[#1A1A1A]">
               <span>{user.followers} followers</span>
-              <div className="flex gap-2">
-                <span>•</span>
-                <span>{user.following || 0} following</span>
-              </div>
+              <span className=" hidden sm:block">•</span>
+              <span>{user.following || 0} following</span>
             </div>
 
             {/* Location */}
