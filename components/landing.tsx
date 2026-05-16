@@ -29,15 +29,15 @@ const theme = '/assets/theme.jpg'
 const pic2 = '/assets/dino_bg.png'
 const x = '/assets/x.png'
 const cards = '/assets/cards.png'
+const pic1 = '/assets/pic1.png'
 
-export default function LandingPage () {
+export default function LandingPage() {
   return (
     <main className='bg-grid min-h-screen bg-background'>
       <div className='mx-auto max-w-7xl px-4 py-6 md:px-8 md:py-8'>
         <Navbar />
         <Hero />
         <Features />
-        <Faq />
         <Footer />
       </div>
     </main>
@@ -51,7 +51,7 @@ const navLinks = [
   { label: 'FAQ', href: '#faq' }
 ]
 
-function Navbar () {
+function Navbar() {
   return (
     <motion.nav
       initial={{ opacity: 0, y: -20 }}
@@ -106,7 +106,7 @@ const heroItem = {
   }
 }
 
-function Hero () {
+function Hero() {
   const [handle, setHandle] = useState('')
   const [count, setCount] = useState(631)
   const router = useRouter()
@@ -261,7 +261,7 @@ const featureItem = {
   }
 }
 
-function Features () {
+function Features() {
   return (
     <section id='features' className='boxy mt-10 px-6 py-16 md:px-12 md:py-24'>
       <div className='mb-14 flex flex-col items-center text-center'>
@@ -316,6 +316,10 @@ function Features () {
       <div className=''>
         <Gallery />
       </div>
+
+      <div className='mt-20'>
+        <Faq />
+      </div>
     </section>
   )
 }
@@ -325,10 +329,11 @@ const photos = [
   { src: theme, alt: 'Theme', top: '12%', left: '10%', rotate: -5 },
   { src: pic2, alt: 'Hot', top: '35%', left: '75%', rotate: 5 },
   { src: x, alt: 'Meet the developer', top: '55%', left: '15%', rotate: 5 },
-  { src: cards, alt: 'Cards Collage', top: '10%', left: '45%', rotate: 5 }
+  { src: cards, alt: 'Cards Collage', top: '10%', left: '45%', rotate: 7 },
+  { src: pic1, alt: 'Neerdy', top: '60%', left: '45%', rotate: -7 }
 ]
 
-function Gallery () {
+function Gallery() {
   const boardRef = useRef<HTMLDivElement>(null)
 
   return (
@@ -411,9 +416,9 @@ const faqData = [
   }
 ]
 
-function Faq () {
+function Faq() {
   return (
-    <section id='faq' className='boxy mt-8 p-6 md:p-12'>
+    <section id='faq' className='mb-10 mt-8 p-6 md:p-12'>
       <div className='mx-auto max-w-3xl '>
         <motion.h2
           initial={{ opacity: 0, y: 16 }}
@@ -457,19 +462,19 @@ function Faq () {
 }
 
 /* Footer                                                             */
-function Footer () {
+function Footer() {
   return (
     <footer
       id="footer"
       className='boxy mt-20 p-4 md:p-5 relative overflow-hidden'
     >
-      <div 
+      <div
         className='relative z-10 flex flex-col gap-12 p-8 '
-              style={{
-        backgroundImage: `url('/assets/dino_bg_dark.png')`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center'
-      }}
+        style={{
+          backgroundImage: `url('/assets/dino_bg_dark.png')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center'
+        }}
       >
         {/* Top Section */}
         <div className='flex flex-col md:flex-row justify-between items-start gap-8 mb-14'>
@@ -531,7 +536,7 @@ function Footer () {
           </div>
         </div>
       </div>
-      
+
     </footer>
   )
 }

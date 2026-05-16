@@ -280,6 +280,7 @@ export function WrapPageClient({ username }: { username: string }) {
 }
 
 function Navbar() {
+  const router = useRouter()
   return (
     <motion.nav
       initial={{ opacity: 0, y: -20 }}

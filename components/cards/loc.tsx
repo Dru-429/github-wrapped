@@ -10,7 +10,7 @@ export function LOCCard({ data }: { data: GitHubData }) {
   return (
     <div className="flex items-center justify-center w-full h-full min-h-[600px] bg-[#F3F3F1] p-4 rounded-3xl">
       {/* Card Container */}
-      <div className="relative w-full h-[620px] md:h-auto max-w-[400px] aspect-[9/14] bg-[#1A1A1A] text-[#F3F3F1]  flex flex-col items-center justify-between p-6 rounded-3xl shadow-2xl">
+      <div className="relative w-full h-[600px] md:h-auto max-w-[400px] aspect-[9/14] bg-[#1A1A1A] text-[#F3F3F1]  flex flex-col items-center justify-between p-6 rounded-3xl shadow-2xl">
         
         {/* --- Decorative Background Lines --- */}
         <div className="absolute top-0 left-0 w-full h-full pointer-events-none ">
