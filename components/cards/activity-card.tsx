@@ -35,7 +35,7 @@ export function ActivityCard({ data }: { data: GitHubData }) {
   }
   return (
     <div className="flex items-center justify-center w-full h-full min-h-[600px] p-5 bg-[#1A1A1A] rounded-3xl">
-      <div className="relative w-full max-w-[400px] aspect-[9/14] bg-[#F3F3F1] border-[3px] border-black overflow-hidden flex flex-col shadow-2xl pt-4 rounded-3xl">
+      <div className="relative w-full h-[600px] max-w-[400px] aspect-[9/14] bg-[#F3F3F1] border-[3px] border-black overflow-hidden flex flex-col shadow-2xl pt-4 rounded-3xl">
 
         {/* --- CARD CONTENT --- */}
         <div className="relative z-10 flex flex-col h-full w-full px-6 py-8">
@@ -93,7 +93,7 @@ export function ActivityCard({ data }: { data: GitHubData }) {
 
             {/* Badge (center) */}
             <div className="text-center mt-4">
-              <p className="text-lg font-extrabold w-fit bg-[#1A1A1A] font-montserrat">{getDeveloperBadge()} <span className="ml-2">💼</span></p>
+              <p className="text-lg font-extrabold w-fit font-montserrat">{getDeveloperBadge()} <span className="ml-2">💼</span></p>
             </div>
           </div>
 

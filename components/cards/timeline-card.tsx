@@ -56,7 +56,7 @@ export function TimelineCard({ data }: { data: GitHubData }) {
 
   return (
     <div className="flex items-center justify-center w-full h-full min-h-[600px] p-5 bg-[#1A1A1A] rounded-3xl">
-      <div className="relative w-full max-w-[400px] aspect-9/14 bg-[#F3F3F1] border-[3px] border-black overflow-hidden flex flex-col shadow-2xl pt-6 rounded-3xl">
+      <div className="relative w-full h-[600px] max-w-[400px] aspect-9/14 bg-[#F3F3F1] border-[3px] border-black overflow-hidden flex flex-col shadow-2xl pt-6 rounded-3xl">
 
         {/* --- Decorative Top Line Art (subtle) --- */}
         <div className="absolute top-0 left-0 w-full h-[160px] pointer-events-none z-0">
@@ -98,7 +98,7 @@ export function TimelineCard({ data }: { data: GitHubData }) {
 
 
         {/* Card content */}
-        <div className="relative z-10 px-8 py-8">
+        <div className="relative z-10 px-4 py-8">
           <div className="text-center">
             <h2 className="text-2xl font-bold text-[#1A1A1A] font-montserrat">2025 Journey</h2>
           </div>
@@ -109,7 +109,7 @@ export function TimelineCard({ data }: { data: GitHubData }) {
           </div>
 
           {/* Grid stats */}
-          <div className="grid grid-cols-2 gap-6 text-[#1A1A1A]">
+          <div className="grid grid-cols-2 gap-6 text-[#1A1A1A] w-full">
             <div className="flex flex-col items-center">
               <div className="text-sm text-[#1A1A1A]/70">Peak Month</div>
               <div className="text-4xl font-extrabold mt-2">{peakMonth}</div>

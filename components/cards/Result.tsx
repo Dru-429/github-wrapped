@@ -17,9 +17,9 @@ export function ResultCard({ data }: { data: GitHubData }) {
     <div className="flex items-center justify-center w-full h-full min-h-[600px] p-4 bg-[#F3F3F1] rounded-3xl">
 
       {/* Card Container */}
-      <div className="relative w-full max-w-[420px] aspect-[9/14] bg-[#121212] text-[#F3F3F1] overflow-hidden flex flex-col p-6 rounded-3xl shadow-2xl border-[3px] border-black">
+      <div className="relative w-full h-[600px] max-w-[420px] aspect-[9/14] bg-[#121212] text-[#F3F3F1] overflow-hidden flex flex-col p-6 rounded-3xl shadow-2xl border-[3px] border-black">
 
-        {/* --- 2025 --- */}
+        {/*2025*/}
         <div className="absolute -left-1 -top-88 bottom-0 w-20 flex items-center justify-center pointer-events-none z-0">
           <div className="-rotate-90 text-[100px] font-black font-bebas text-[#9df04ad7] tracking-wider opacity-100 flex items-center gap-4">
             <span>2025</span>
@@ -30,7 +30,7 @@ export function ResultCard({ data }: { data: GitHubData }) {
           </div>
         </div>
 
-        {/* --- Top Section: Graph --- */}
+        {/*Graph*/}
         <div className="relative z-10 w-full flex flex-col items-center mt-4 ml-4">
           {/* Decorative circular pattern behind the frame */}
           <div className="absolute -bottom-10 w-full h-20 flex justify-around opacity-30">
@@ -65,8 +65,8 @@ export function ResultCard({ data }: { data: GitHubData }) {
           </div>
         </div>
 
-        {/* --- Middle Section: Split Lists --- */}
-        <div className="relative z-10 mt-10 grid grid-cols-2 gap-4 ml-14">
+        {/* Middle Section*/}
+        <div className="relative z-10 mt-10 grid grid-cols-2 gap-4 ml-0 md:ml-14">
           <div>
             <h3 className="text-xs font-bold text-gray-400 mb-2 uppercase tracking-widest">Top Languages</h3>
             <ol className="space-y-1">
@@ -90,8 +90,8 @@ export function ResultCard({ data }: { data: GitHubData }) {
           </div>
         </div>
 
-        {/* --- Bottom Section: Summary Stats --- */}
-        <div className="relative z-10 mt-10 mb-6 ml-14 flex flex-col gap-6">
+        {/*Bottom Section*/}
+        <div className="relative z-10 mt-10 mb-6 ml-0 md:ml-14 flex flex-col gap-6">
           <div className="flex flex-col">
             <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">Total Contributions</span>
             <span className="text-5xl font-black tracking-tighter mt-1">{total.toLocaleString()}</span>

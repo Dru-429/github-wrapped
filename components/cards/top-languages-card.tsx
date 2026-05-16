@@ -8,8 +8,7 @@ export function TopLanguagesCard({ data }: { data: GitHubData }) {
 
   return (
     <div className="flex items-center justify-center w-full h-full min-h-[600px] p-5 bg-[#1A1A1A] rounded-3xl">
-      <div className="relative w-full max-w-[400px] aspect-[9/14] bg-[#F3F3F1] border-[3px] border-black overflow-hidden flex flex-col shadow-2xl pt-4 rounded-3xl">
-
+      <div className="relative min-h-[600px] w-full max-w-[400px] aspect-[9/14] bg-[#F3F3F1] border-[3px] border-black overflow-hidden flex flex-col shadow-2xl pt-4 rounded-3xl">
 
         {/* --- CARD CONTENT --- */}
         <div className="relative z-10 flex flex-col h-full w-full px-6 py-8">
@@ -22,7 +21,7 @@ export function TopLanguagesCard({ data }: { data: GitHubData }) {
           </div>
 
           {/* Languages list */}
-          <div className="relative z-10 flex-1 flex flex-col gap-6 px-2 mt-10">
+          <div className="relative z-300 flex-1 flex flex-col gap-6 px-2 mt-10">
             {(stats.topLanguages || []).slice(0, 3).map((lang, index) => {
               const color = LANGUAGE_COLORS[lang.name] ?? '#F94A36'
               return (
@@ -39,7 +38,7 @@ export function TopLanguagesCard({ data }: { data: GitHubData }) {
                   </div>
 
                   {/* Progress bar */}
-                  <div className="flex justify-between items-center">
+                  <div className="flex justify-between items-center relative">
                     <div className="h-3 bg-[#1a1a1abb] rounded-full overflow-hidden flex items-center w-[90%] ">
                       <div
                         className="h-full rounded-full"
@@ -51,7 +50,7 @@ export function TopLanguagesCard({ data }: { data: GitHubData }) {
                     </div>
 
                     {/* percentage  */}
-                    <div className="text-sm font-semibold bg-[#1A1A1A] text-center">
+                    <div className="text-sm font-semibold text-center relative z-20">
                       {typeof (lang as any).repos === 'number' ? `${(lang as any).repos} repos` : `${Math.round(lang.percentage)}%`}
                     </div>
                   </div>
@@ -79,11 +78,11 @@ export function TopLanguagesCard({ data }: { data: GitHubData }) {
           </div>
 
           {/* Decorative Circle */}
-          <div className="h-1/2 w-full flex flex-col gap-4 absolute -bottom-10 left-38 -rotate-50">
+          <div className="h-1/2  w-full flex flex-col gap-4 absolute -bottom-10 left-38 -rotate-50 -z-10">
             <div className="flex gap-4 justify-between">
               <div className="bg-[#1A1A1A] rounded-full w-10 h-10 "></div>
-              <div className="bg-[#1A1A1A] rounded-full w-10 h-10 "></div>
-              <div className="bg-[#1A1A1A] rounded-full w-10 h-10 "></div>
+              <div className="bg-[#1A1A1A] rounded-full w-10 h-10 opacity-30 md:opacity-100 "></div>
+              <div className="bg-[#1A1A1A] rounded-full opacity-30 md:opacity-100 w-10 h-10 "></div>
               <div className="bg-[#1A1A1A] rounded-full w-10 h-10 "></div>
             </div>
             <div className="flex gap-4 justify-around">
@@ -91,7 +90,7 @@ export function TopLanguagesCard({ data }: { data: GitHubData }) {
               <div className="bg-[#1A1A1A] rounded-full w-10 h-10 "></div>
               <div className="bg-[#1A1A1A] rounded-full w-10 h-10 "></div>
             </div>
-            <div className="flex gap-4 justify-between">
+            <div className="flex gap-4 justify-between ">
               <div className="bg-[#1A1A1A] rounded-full w-10 h-10 "></div>
               <div className="bg-[#1A1A1A] rounded-full w-10 h-10 "></div>
               <div className="bg-[#1A1A1A] rounded-full w-10 h-10 "></div>

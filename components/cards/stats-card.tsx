@@ -15,7 +15,7 @@ export function StatsCard({ data }: { data: GitHubData }) {
   return (
     <div className="flex items-center justify-center w-full h-full min-h-[600px] p-5 bg-[#F3F3F1] rounded-3xl">
       {/* Card Container - Aspect 9:14 */}
-      <div className="relative w-full h-full max-w-[400px] aspect-[9/14] bg-[#1A1A1A] text-[#F3F3F1] overflow-hidden flex flex-col justify-center items-center p-6 rounded-3xl shadow-2xl">
+      <div className="relative w-full h-[600px] max-w-[400px] aspect-[9/14] bg-[#1A1A1A] text-[#F3F3F1] overflow-hidden flex flex-col justify-center items-center p-6 rounded-3xl shadow-2xl">
 
         {/* --- Checkerboard Decoration --- */}
         <div className="absolute top-0 left-0 w-48 h-16 pointer-events-none z-0">
