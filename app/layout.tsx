@@ -3,7 +3,7 @@ import { Geist, Geist_Mono, Montserrat, Bebas_Neue, Inter } from "next/font/goog
 import "./globals.css";
 import { cn } from "@/lib/utils";
 
-const inter = Inter({subsets:['latin'],variable:'--font-sans'});
+const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -18,7 +18,7 @@ const geistMono = Geist_Mono({
 const montserrat = Montserrat({
   variable: "--font-montserrat",
   subsets: ["latin"],
-  weight: ["100","200","300","400","500","600","700","800","900"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
   display: "swap",
 });
 
@@ -32,12 +32,46 @@ const bebas = Bebas_Neue({
 export const metadata: Metadata = {
   title: "GitHub Wrapped 2025",
   description: "Generate a Spotify-inspired GitHub Wrapped for any username — top repos, languages, commit streaks, and a shareable image.",
-  metadataBase: new URL("https://githubwrapped-2025.vercel.app/"),
-  keywords: ["GitHub", "Wrapped", "Year in Code", "Developer Tools", "Open Source"],
+  metadataBase: new URL("https://githubrapped.vercel.app/"),
+  keywords: [
+    // Core Brand Keywords
+    "GitHub Wrapped",
+    "GitHub Wrapped 2025",
+    "GitHub Wrapped 2026",
+    "Spotify Wrapped for developers",
+    "My Year in Code",
+    
+    // Feature & Sharing Keywords
+    "developer stats generator",
+    "git analytics report",
+    "shareable dev cards",
+    "commit statistics visualization",
+    "open source year in review",
+    
+    // Developer Flex & Cultural Terms
+    "code stats flex",
+    "top programming languages tracker",
+    "lines of code counter",
+    "coding journey 2025",
+    "terminal metrics dashboard",
+    "weekend vs weekday coder",
+    "standup survivor statistics",
+    
+    // General SEO
+    "GitHub",
+    "Wrapped",
+    "Year in Code",
+    "Developer Tools",
+    "Open Source",
+    "Dhruv Sahoo",
+    "Spotify Style GitHub Wrapped"
+  ],
+  authors: [{ name: "Dhruv Sahoo", url: "https://www.dhruvsahoo.me/" }],
+  creator: "Dhruv Sahoo",
   openGraph: {
     title: "GitHub Wrapped 2025",
     description: "Generate a Spotify-inspired GitHub Wrapped for any username — top repos, languages, commit streaks, and a shareable image.",
-    url: "/",
+    url: "https://githubrapped.vercel.app/",
     siteName: "GitHub Wrapped",
     images: [
       {
@@ -54,6 +88,8 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "GitHub Wrapped 2025",
     description: "Generate a Spotify-inspired GitHub Wrapped for any username — share your yearly GitHub highlights.",
+    creator: "@10xdhruv",
+    site: "@10xdhruv",
     images: ["/logo.png"],
   },
   icons: {
@@ -67,16 +103,32 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
   name: "GitHub Wrapped 2025",
-  url: "https://githubwrapped-2025.vercel.app",
+  url: "https://githubrapped.vercel.app",
   description: "Generate a Spotify-inspired Year-in-Code summary for any GitHub username.",
   applicationCategory: "DeveloperTool",
   operatingSystem: "Web",
   author: {
     "@type": "Person",
     name: "Dhruv Sahoo",
-    url: "https://peerlist.io/dev_dru",
+    url: "https://www.dhruvsahoo.me/",
+    sameAs: [
+      "https://x.com/10xdhruv",
+      "https://www.linkedin.com/in/dhruvsahoo/",
+      "https://github.com/Dru-429"
+    ]
   },
-  screenshot: ["https://githubwrapped-2025.vercel.app/logo.png"],
+  screenshot: [
+    "https://githubrapped.vercel.app/logo.png",
+    "https://githubrapped.vercel.app/assets/loc.png",
+    "https://githubrapped.vercel.app/assets/lang.png",
+    "https://githubrapped.vercel.app/assets/overview.png",
+    "https://githubrapped.vercel.app/assets/timeline.png",
+    "https://githubrapped.vercel.app/assets/theme.jpg",
+    "https://githubrapped.vercel.app/assets/dino_bg.png",
+    "https://githubrapped.vercel.app/assets/x.png",
+    "https://githubrapped.vercel.app/assets/cards.png",
+    "https://githubrapped.vercel.app/assets/pic1.png"
+  ],
   softwareVersion: "1.0",
   offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
 };
