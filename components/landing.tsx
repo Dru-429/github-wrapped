@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 import {
@@ -10,7 +10,6 @@ import {
   Users,
   Linkedin,
   Twitter,
-  MessageCircle,
   Heart
 } from 'lucide-react'
 import {
@@ -108,9 +107,37 @@ const heroItem = {
 
 function Hero() {
   const [handle, setHandle] = useState('')
-  const [count, setCount] = useState(631)
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
+  const [totalWrapped, setTotalWrapped] = useState<number | null>(null);
+
+  // Function to load the initial stats metric
+  const fetchCurrentCount = async () => {
+    try {
+      const response = await fetch('/api/count');
+      const data = await response.json();
+      setTotalWrapped(data.count);
+    } catch (err) {
+      console.error("Error reading data metric tracker:", err);
+    }
+  };
+
+  // Function to trigger an increment update safely after canvas generation
+  const handleWrappedGenerated = async () => {
+    try {
+      const response = await fetch('/api/count', { method: 'POST' });
+      const data = await response.json();
+      if (data.count) {
+        setTotalWrapped(data.count); // UI state updates live automatically!
+      }
+    } catch (err) {
+      console.error("Failed to bump analytics tracker:", err);
+    }
+  };
+
+  useEffect(() => {
+    fetchCurrentCount();
+  }, []);
 
   const handleWrap = (e: React.FormEvent) => {
     e.preventDefault()
@@ -140,7 +167,7 @@ function Hero() {
         </motion.div>
 
         <motion.div
-          key={count}
+          key={totalWrapped}
           initial={{ scale: 0.92, opacity: 0.7 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ type: 'spring', stiffness: 320, damping: 18 }}
@@ -149,7 +176,7 @@ function Hero() {
           <Users className='h-3.5 w-3.5' />
           <span>
             <span className='font-display text-sm'>
-              {count.toLocaleString()}
+              {totalWrapped !== null ? totalWrapped.toLocaleString() : "---"}
             </span>{' '}
             devs flexed
           </span>
@@ -207,6 +234,7 @@ function Hero() {
           <button
             type='submit'
             disabled={isLoading || !handle.trim()}
+            onClick={handleWrappedGenerated}
             className='boxy-sm group inline-flex items-center justify-center gap-2 bg-[var(--nuit)] px-6 py-4 text-sm font-bold uppercase tracking-wider text-[var(--cream)] transition-transform hover:-translate-x-0.5 hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-x-0 disabled:hover:translate-y-0'
           >
             {isLoading ? 'Loading...' : 'Get my wrapped'}

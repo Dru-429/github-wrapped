@@ -19,6 +19,7 @@ export async function GET() {
     const { rows } = await pool.query(query);
     
     const totalCount = rows[0]?.count ?? 0;
+    console.log(totalCount);
     return NextResponse.json({ count: totalCount }, { status: 200 });
   } catch (error) {
     console.error("Database Fetch Error:", error);
