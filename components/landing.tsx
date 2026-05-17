@@ -105,6 +105,30 @@ const heroItem = {
   }
 }
 
+const LoadingUnderscores = () => {
+  return (
+    <span className="inline-flex gap-1 items-center" style={{ height: '14px', lineHeight: '10px' }}>
+      {[0, 1, 2].map((i) => (
+        <motion.span
+          key={i}
+          animate={{
+            y: [2, -4, 2],
+          }}
+          transition={{
+            duration: 0.9,
+            repeat: Infinity,
+            delay: i * 0.2,
+            ease: "easeInOut",
+          }}
+          className="inline-block font-black text-sm"
+        >
+          _
+        </motion.span>
+      ))}
+    </span>
+  );
+};
+
 function Hero() {
   const [handle, setHandle] = useState('')
   const router = useRouter()
@@ -122,13 +146,12 @@ function Hero() {
     }
   };
 
-  // Function to trigger an increment update safely after canvas generation
   const handleWrappedGenerated = async () => {
     try {
       const response = await fetch('/api/count', { method: 'POST' });
       const data = await response.json();
       if (data.count) {
-        setTotalWrapped(data.count); // UI state updates live automatically!
+        setTotalWrapped(data.count);
       }
     } catch (err) {
       console.error("Failed to bump analytics tracker:", err);
@@ -171,12 +194,13 @@ function Hero() {
           initial={{ scale: 0.92, opacity: 0.7 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ type: 'spring', stiffness: 320, damping: 18 }}
-          className='boxy-sm inline-flex items-center gap-2 bg-[var(--nuit)] px-3 py-1.5 text-xs font-bold uppercase tracking-widest text-[var(--cream)]'
+          className='relative boxy-sm inline-flex items-center gap-2 bg-[var(--nuit)] px-3 py-1.5 text-xs font-bold uppercase tracking-widest text-[var(--cream)]'
         >
+          <div className='shadow-xl/30 shadow-blue-600  w-full h-full absolute rounded-xl -left-1'></div>
           <Users className='h-3.5 w-3.5' />
           <span>
-            <span className='font-display text-sm'>
-              {totalWrapped !== null ? totalWrapped.toLocaleString() : "---"}
+            <span className='font-display text-sm inline-flex items-center justify-center min-w-[28px]'>
+              {totalWrapped !== null ? totalWrapped.toLocaleString() : <LoadingUnderscores />}
             </span>{' '}
             devs flexed
           </span>
