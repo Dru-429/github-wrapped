@@ -158,8 +158,12 @@ export function WrapPageClient({ username }: { username: string }) {
       <main className='container mx-auto px-4 py-8 md:py-12 relative max-w-7xl'>
         {isLoading && (
           <div className='flex flex-col items-center justify-center min-h-[60vh] space-y-6'>
-            <div className='h-16 w-16 border-8 border-ink border-t-[var(--lime)] rounded-full animate-spin' />
-            <p className='font-display text-3xl font-black text-ink animate-pulse'>Loading your Wrapped...</p>
+            <img 
+              src="/assets/github_logo_loader.gif" 
+              alt="Loading GitHub Wrapped" 
+              className='h-44 w-44 object-cover'
+            />
+            <p className='font-display text-3xl font-black text-ink animate-pulse'>LET ME COOOK ...</p>
           </div>
         )}
 
