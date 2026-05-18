@@ -1,6 +1,5 @@
 # GitHub Wrapped 2025
-[Live demo](https://githubrapped.vercel.app) • [Product Hunt](https://www.producthunt.com/products/github-wrapped-2025?launch=github-wrapped-2025) • [Peerlist](https://peerlist.io/dev_dru/project/github-wrapped-2025)
-
+[Live demo](https://githubrapped.vercel.app) • [Product Hunt](https://www.producthunt.com/products/github-wrapped-2025?launch=github-wrapped-2025) 
 <img width="950" height="504" alt="image" src="https://github.com/user-attachments/assets/013ee121-cfa5-49e6-a4e1-0640e86358fc" />
 
 
