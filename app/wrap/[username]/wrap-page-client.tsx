@@ -9,7 +9,7 @@ import { TopLanguagesCard } from "@/components/cards/top-languages-card"
 import { StatsCard } from "@/components/cards/stats-card"
 import { ActivityCard } from "@/components/cards/activity-card"
 import { TimelineCard } from "@/components/cards/timeline-card"
-import { QuoteCard } from "@/components/cards/quote-card"
+import { ThanksCard } from "@/components/cards/thanks-card"
 import { useRouter } from "next/navigation"
 import type { GitHubData } from "@/lib/types"
 import { LOCCard } from "@/components/cards/loc"
@@ -143,7 +143,7 @@ export function WrapPageClient({ username }: { username: string }) {
       case 10:
         return <ResultCard data={data} />
       case 11:
-        return <QuoteCard />
+        return <ThanksCard />
       default:
         return null
     }

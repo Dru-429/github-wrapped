@@ -1,9 +1,10 @@
 "use client"
 
 import { QUOTES } from "@/lib/constants"
+import Image from "next/image"
 import { useEffect, useState } from "react"
 
-export function QuoteCard() {
+export function ThanksCard() {
   const [quote, setQuote] = useState("")
 
   useEffect(() => {
@@ -16,23 +17,52 @@ export function QuoteCard() {
       <div className="relative w-full h-[600px] max-w-[400px] aspect-[9/14] bg-[#0F0F0F] text-[#F3F3F1] overflow-hidden flex flex-col p-6 rounded-3xl shadow-2xl border-[3px] border-black">
 
         {/* Decorative arcs top */}
-        <div className="absolute top-6 left-6 right-6 pointer-events-none opacity-40">
-          <svg viewBox="0 0 400 60" className="w-full h-12">
-            <path d="M0 40 C120 -10 280 -10 400 40" stroke="#ffffff30" strokeWidth="2" fill="none" />
-            <path d="M0 48 C120 0 280 0 400 48" stroke="#ffffff20" strokeWidth="2" fill="none" />
+        <div className="absolute top-0 left-0 w-full h-full pointer-events-none z-0">
+          <svg viewBox="0 0 400 400" className="w-full h-full opacity-90">
+            <path
+              d="M -50 190 Q 100 80 450 10"
+              fill="none"
+              stroke="red"
+              strokeWidth="1.5"
+              className="opacity-60"
+            />
+            <path
+              d="M -50 -190 Q 150 120 450 30"
+              fill="none"
+              stroke="red"
+              strokeWidth="1.5"
+              className="opacity-40"
+            />
+            <path
+              d="M -50 20 Q 200 -200 450 20"
+              fill="none"
+              stroke="red"
+              strokeWidth="1.5"
+              className="opacity-60"
+            />
           </svg>
         </div>
 
+
         {/* THANK YOU header */}
         <div className="relative z-10 flex-1 flex flex-col items-center justify-center px-6 text-center">
-          <h1 className="text-5xl font-extrabold tracking-tight mb-6 bg-gradient-to-r from-[#0EA5FF] via-[#7C3AED] to-[#F472B6] bg-clip-text text-transparent font-montserrat">
+
+          <div className="relative h-50 w-80 mb-6 rounded-xl">
+            <Image
+              src="/assets/thanksbg.jpg"
+              alt="Thnks"
+              fill
+              className="object-cover rounded-2xl"
+            />
+          </div>
+
+          <h1 className="text-5xl font-extrabold tracking-tight mb-6 bg-gradient-to-r from-red-500 to-secondary bg-clip-text text-transparent font-montserrat">
             THANK YOU
           </h1>
 
-          <p className="max-w-[80%] text-center text-lg text-[#d8d8d8] leading-relaxed mb-6 font-montserrat">
-            Thanks for using our site! Your code, your stories, and your wins in 2025 inspired us. Here&apos;s to bigger goals and cleaner commits in 2026 — Happy New Year! 🎉
+          <p className="text-center text-lg text-[#d8d8d8] leading-relaxed mb-6 font-montserrat">
+            Thanks for using our site, may god bless u with the PORSCHE 911 GT3 RS 4.0
           </p>
-
           {/* Optional rotating short quote */}
           <blockquote className="mt-2 text-center">
             <p className="text-sm italic text-[#d8d8d8]/70">"{quote}"</p>
