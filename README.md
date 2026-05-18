@@ -1,33 +1,35 @@
-# GitHub Wrapped 2025
-[Live demo](https://githubrapped.vercel.app) • [Product Hunt](https://www.producthunt.com/products/github-wrapped-2025?launch=github-wrapped-2025) 
-<img width="950" height="504" alt="image" src="https://github.com/user-attachments/assets/013ee121-cfa5-49e6-a4e1-0640e86358fc" />
+# GitHub Wrapped 
+[Live demo](https://githubrapped.vercel.app)   •   [Product Hunt](https://www.producthunt.com/products/github-wrapped-2025?launch=github-wrapped-2025) 
+
+<img width="477" height="57" alt="image" src="https://github.com/user-attachments/assets/82226175-19e5-442f-8a4f-055d52808939" />
 
 
-**GitHub Wrapped 2025** is a Next.js (app-dir) project that generates a year-in-review "wrapped" experience for any GitHub username — inspired by Spotify Wrapped. The app fetches GitHub activity and presents highlights like top repositories, languages, commit streaks, seasonal activity, and a shareable image.
+**GitHub Wrapped** generates a year-in-review "wrapped" experience for any GitHub username, just like Spotify Wrapped 2025. The app fetches GitHub activity and presents highlights like top repositories, languages, commit streaks, seasonal activity, and a shareable image.
 
 ---
 
-## ✅ Features
+## Features
 
 - Fetch GitHub user metrics (contributions, repos, languages, commit history)
 - Visual summaries: top repos, top languages, monthly/seasonal breakdowns, streaks, percentile
 - Client-side capture/export (uses `html2canvas`)
-- Accesssdfghjkl;'
-- ible UI built with Radix + Tailwind
-- TypeScript and server-side data fetching with caching-friendly patterns
 
 ---
 
-## 🔧 Tech Stack
+## Tech Stack
 
 - Next.js 16 (app directory)
 - React 19 + TypeScript
-- Tailwind CSS + Radix UI + Framer Motion + Recharts
+- Tailwind CSS + Framer Motion + Recharts
 - GitHub GraphQL API for data
 
 ---
 
-## 🚀 Quick start
+## Preview
+<img width="1266" height="852" alt="image" src="https://github.com/user-attachments/assets/d8028aae-6961-42a1-b528-f5b973ab26c6" />
+<img width="1283" height="907" alt="image" src="https://github.com/user-attachments/assets/815ef04a-2923-46f7-ae74-00e9199eaed3" />
+
+## Quick start
 
 1. Clone the repository:
 
@@ -72,37 +74,28 @@ http://localhost:3000/wrap/<username>
 
 ---
 
-## 🛠️ Environment variables
+## Environment variables
 
 - `GITHUB_TOKEN` — **required**: GitHub GraphQL token with appropriate public scopes
 - (Optional) `NEXT_PUBLIC_BASE_URL` or `SITE_URL` — set your production base URL for canonical links, sitemaps, and sharing
-
+  
 ---
 
-## 📁 Key files
-
-- `app/wrap/[username]/page.tsx` — Server route that renders the Wrapped view
-- `app/wrap/wrap-page-client.tsx` — Client helpers (screenshot/export, interactions)
-- `lib/github.ts` — GraphQL queries / data shaping (throws if `GITHUB_TOKEN` is not present)
-- `site.xml` — Simple sitemap (replace `https://your-domain.com` with production URL)
-
----
-
-## 📦 Deployment
+##  Deployment
 
 - Recommended: Vercel (automatic Next.js support)
 - Add `GITHUB_TOKEN` to your deployment environment variables before deploying
 
 ---
 
-## 💡 Notes
+## Notes
 
 - Watch for GitHub API rate limits when making many requests; consider caching responses
 - The screenshot/export feature uses `html2canvas`; cross-browser behavior may vary
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome — open an issue or PR. Please include tests for new logic and keep changes focused.
 
