@@ -18,7 +18,7 @@ import { PlainTxt } from "@/components/cards/Plain-txt"
 import { PlainTxt2 } from "@/components/cards/Plain-txt2"
 import ResultCard from "@/components/cards/Result"
 import { motion } from 'framer-motion'
-
+import Image from "next/image"
 
 export function WrapPageClient({ username }: { username: string }) {
   const router = useRouter()
@@ -158,10 +158,13 @@ export function WrapPageClient({ username }: { username: string }) {
       <main className='container mx-auto px-4 py-8 md:py-12 relative max-w-7xl'>
         {isLoading && (
           <div className='flex flex-col items-center justify-center min-h-[60vh] space-y-6'>
-            <img 
-              src="/assets/github_logo_loader.gif" 
-              alt="Loading GitHub Wrapped" 
-              className='h-44 w-44 object-cover'
+            <Image
+              src="/assets/github_logo_loader.gif"
+              alt="Loading GitHub Wrapped"
+              width={176}
+              height={176}
+              className='object-cover'
+              priority
             />
             <p className='font-display text-3xl font-black text-ink animate-pulse'>LET ME COOOK ...</p>
           </div>
@@ -220,8 +223,8 @@ export function WrapPageClient({ username }: { username: string }) {
                         key={index}
                         onClick={() => setCurrentCard(index)}
                         className={`h-3 transition-all border-2 border-ink shadow-[2px_2px_0_0_rgba(0,0,0,1)] ${index === currentCard
-                            ? 'bg-[var(--lime)] w-8'
-                            : 'bg-white w-3 hover:bg-[var(--lime)]'
+                          ? 'bg-[var(--lime)] w-8'
+                          : 'bg-white w-3 hover:bg-[var(--lime)]'
                           }`}
                         aria-label={`Go to card ${index + 1}`}
                       />
@@ -239,7 +242,7 @@ export function WrapPageClient({ username }: { username: string }) {
                     <Download className='h-6 w-6' />
                     <span className="hidden md:inline">{isDownloading ? 'Downloading...' : 'Download Card'}</span>
                   </button>
-                  
+
                   <div className='flex flex-row md:grid md:grid-cols-2 gap-3 md:gap-4 flex-[2] md:flex-none'>
                     <button
                       onClick={() => handleShare('twitter')}
@@ -248,7 +251,7 @@ export function WrapPageClient({ username }: { username: string }) {
                       <Twitter className='h-5 w-5 md:h-4 md:w-4' />
                       <span className="hidden md:inline">Share</span>
                     </button>
-                    
+
                     <button
                       onClick={() => handleShare('linkedin')}
                       className='flex-1 boxy-sm group flex items-center justify-center gap-2 bg-blue-600 px-0 md:px-4 py-3 font-bold uppercase tracking-wider text-white transition-transform hover:-translate-y-1 border-2 border-black shadow-[4px_4px_0_0_rgba(0,0,0,1)]'

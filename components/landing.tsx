@@ -18,7 +18,7 @@ import {
   AccordionItem,
   AccordionTrigger
 } from '@/components/ui/accordion'
-import Image from 'next/legacy/image'
+import Image from 'next/image'
 
 const locImg = '/assets/loc.png'
 const langImg = '/assets/lang.png'
@@ -346,9 +346,11 @@ function Features() {
             className='boxy flex aspect-[3/4] flex-col p-3 transition-shadow hover:shadow-[10px_10px_0_0_var(--ink)]'
           >
             <div className='relative h-[70%] w-full overflow-hidden border-2 border-ink bg-[var(--ink)]'>
-              <img
+              <Image
                 src={f.img}
                 alt={f.title}
+                fill
+                sizes="(max-width: 768px) 100vw, 25vw"
                 className='h-full w-full object-cover'
                 loading='lazy'
               />
