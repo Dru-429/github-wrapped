@@ -8,7 +8,7 @@ export function TopReposCard({ data }: { data: GitHubData }) {
   const repos = stats.topRepos || []
       
   return (
-    <div className="flex items-center justify-center w-full h-full min-h-[600px] p-5 bg-[#1A1A1A] rounded-3xl">
+    <div className="flex items-center justify-center w-full h-full min-h-[600px] p-1 md:p-4 bg-[#1A1A1A] rounded-3xl">
       <div className="relative w-full h-[600px] max-w-[400px] aspect-[9/14] bg-[#F3F3F1] overflow-hidden flex flex-col rounded-3xl shadow-2xl justify-center items-center">
 
         {/* --- Decorative Top Line Art (subtle) --- */}

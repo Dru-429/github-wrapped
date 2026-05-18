@@ -5,46 +5,46 @@ import type { GitHubData } from "@/lib/types"
 export function LOCCard({ data }: { data: GitHubData }) {
   const { stats } = data
   const loc = stats.linesOfCode || 0
-  const commits = stats.totalCommits || 0 
+  const commits = stats.totalCommits || 0
 
   return (
-    <div className="flex items-center justify-center w-full h-full min-h-[600px] bg-[#F3F3F1] p-4 rounded-3xl">
+    <div className="flex items-center justify-center w-full h-full min-h-[600px] bg-[#F3F3F1] p-1 md:p-4  rounded-3xl">
       {/* Card Container */}
       <div className="relative w-full h-[600px] md:h-auto max-w-[400px] aspect-[9/14] bg-[#1A1A1A] text-[#F3F3F1]  flex flex-col items-center justify-between p-6 rounded-3xl shadow-2xl">
-        
+
         {/* --- Decorative Background Lines --- */}
         <div className="absolute top-0 left-0 w-full h-full pointer-events-none ">
           <svg viewBox="0 0 400 400" className="w-full h-full opacity-90">
-             <path 
-               d="M -50 190 Q 100 80 450 10" 
-               fill="none" 
-               stroke="white" 
-               strokeWidth="1.5" 
-               className="opacity-60"
-             />
-             <path 
-               d="M -50 -190 Q 150 120 450 30" 
-               fill="none" 
-               stroke="white" 
-               strokeWidth="1.5" 
-               className="opacity-40"
-             />
-              <path 
-               d="M -50 20 Q 200 -200 450 20" 
-               fill="none" 
-               stroke="white" 
-               strokeWidth="1.5" 
-               className="opacity-50"
-             />
+            <path
+              d="M -50 190 Q 100 80 450 10"
+              fill="none"
+              stroke="white"
+              strokeWidth="1.5"
+              className="opacity-60"
+            />
+            <path
+              d="M -50 -190 Q 150 120 450 30"
+              fill="none"
+              stroke="white"
+              strokeWidth="1.5"
+              className="opacity-40"
+            />
+            <path
+              d="M -50 20 Q 200 -200 450 20"
+              fill="none"
+              stroke="white"
+              strokeWidth="1.5"
+              className="opacity-50"
+            />
           </svg>
         </div>
 
         {/* --- Main Content Area --- */}
         <div className="relative z-30 flex-1 w-full flex flex-col items-center justify-center gap-5">
-          
+
           {/* Big Number */}
           <div className="relative z-40 w-full flex items-center justify-center ">
-            <span 
+            <span
               className=" md:text-[140px] text-[120px] leading-none text-[#968CFD] tracking-tightest font-bebas [-webkit-text-stroke:1px_white] drop-shadow-sm"
             >
               {loc.toLocaleString()}
@@ -53,21 +53,21 @@ export function LOCCard({ data }: { data: GitHubData }) {
 
           {/* Descriptive Text */}
           <div className="text-center space-y-2 max-w-[90%]">
-             <p className="text-md text-[#f3f3f1ca] font-medium leading-relaxed font-montserrat">
-               You wrote <span className="text-white font-bold">{loc.toLocaleString()}</span> lines of code. 
-               That&apos;s <span className="text-white font-bold">{commits}</span> commits. Awesome.
-             </p>
+            <p className="text-md text-[#f3f3f1ca] font-medium leading-relaxed font-montserrat">
+              You wrote <span className="text-white font-bold">{loc.toLocaleString()}</span> lines of code.
+              That&apos;s <span className="text-white font-bold">{commits}</span> commits. Awesome.
+            </p>
           </div>
 
         </div>
 
         {/* --- Footer --- */}
         <div className="w-full relative z-10 flex items-center justify-between px-2 pt-4">
-          <svg 
-            height="32" 
-            viewBox="0 0 16 16" 
-            version="1.1" 
-            width="32" 
+          <svg
+            height="32"
+            viewBox="0 0 16 16"
+            version="1.1"
+            width="32"
             aria-hidden="true"
             className="fill-[#F3F3F1]"
           >
@@ -77,7 +77,7 @@ export function LOCCard({ data }: { data: GitHubData }) {
           <span className="font-bold text-lg tracking-tight text-[#F3F3F1]">
             Github Wrapped
           </span>
-          
+
         </div>
       </div>
     </div>
