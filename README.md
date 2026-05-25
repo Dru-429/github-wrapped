@@ -1,6 +1,7 @@
 # GitHub Wrapped 
 
 <img width="477" height="57" alt="image" src="https://github.com/user-attachments/assets/82226175-19e5-442f-8a4f-055d52808939" />
+
 [Live Now](https://githubrapped.vercel.app)  
 
 
