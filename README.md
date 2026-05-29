@@ -1,7 +1,8 @@
 # GitHub Wrapped 
-[Live demo](https://githubrapped.vercel.app)   •   [Product Hunt](https://www.producthunt.com/products/github-wrapped-2025?launch=github-wrapped-2025) 
 
 <img width="477" height="57" alt="image" src="https://github.com/user-attachments/assets/82226175-19e5-442f-8a4f-055d52808939" />
+
+[Live Now](https://githubrapped.vercel.app)  
 
 
 **GitHub Wrapped** generates a year-in-review "wrapped" experience for any GitHub username, just like Spotify Wrapped 2025. The app fetches GitHub activity and presents highlights like top repositories, languages, commit streaks, seasonal activity, and a shareable image.
