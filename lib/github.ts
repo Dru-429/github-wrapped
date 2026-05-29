@@ -32,8 +32,23 @@ async function graphqlQuery(query: string, variables?: Record<string, any>) {
 
 export async function fetchGitHubData(username: string): Promise<GitHubData> {
   try {
+    // First, fetch the user's GraphQL ID
+    const idQuery = `
+      query GetUserId($userName: String!) {
+        user(login: $userName) {
+          id
+        }
+      }
+    `
+    const idResult = await graphqlQuery(idQuery, { userName: username })
+    const userId = idResult?.user?.id
+
+    if (!userId) {
+      throw new Error("User not found")
+    }
+
     const userDataQuery = `
-      query GetUserData($userName:String!) {
+      query GetUserData($userName: String!, $authorId: ID!) {
         user(login: $userName) {
           name
           login
@@ -47,7 +62,7 @@ export async function fetchGitHubData(username: string): Promise<GitHubData> {
             totalCount
           }
           url
-          repositories(first: 100, orderBy: {field: UPDATED_AT, direction: DESC}) {
+          repositories(first: 100, isFork: false, orderBy: {field: UPDATED_AT, direction: DESC}) {
             nodes {
               name
               stargazerCount
@@ -59,7 +74,7 @@ export async function fetchGitHubData(username: string): Promise<GitHubData> {
               defaultBranchRef {
                 target {
                   ... on Commit {
-                    history(first: 0) {
+                    history(first: 0, author: { id: $authorId }) {
                       totalCount
                     }
                   }
@@ -80,7 +95,7 @@ export async function fetchGitHubData(username: string): Promise<GitHubData> {
       }
     `
 
-    const result = await graphqlQuery(userDataQuery, { userName: username })
+    const result = await graphqlQuery(userDataQuery, { userName: username, authorId: userId })
     const userData = result.user
 
     if (!userData) {
@@ -116,6 +131,7 @@ async function calculateStats(userData: any, username: string): Promise<GitHubSt
   const languageCounts: Record<string, number> = {}
   const repoCommits: Repository[] = []
   const monthlyCommits: number[] = new Array(12).fill(0)
+  const weekdayCommits: number[] = new Array(7).fill(0)
 
   for (const repo of repos) {
     totalCommits += repo.defaultBranchRef?.target?.history?.totalCount || 0
@@ -168,6 +184,8 @@ async function calculateStats(userData: any, username: string): Promise<GitHubSt
         const date = new Date(day.date)
         const month = date.getMonth()
         monthlyCommits[month] += day.contributionCount
+        const dayOfWeek = date.getDay()
+        weekdayCommits[dayOfWeek] += day.contributionCount
       })
     })
   } catch (error) {
@@ -202,9 +220,19 @@ async function calculateStats(userData: any, username: string): Promise<GitHubSt
   const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
   // Calculate weekday vs weekend from contribution data
-  const totalActivity = monthlyCommits.reduce((a, b) => a + b, 0)
-  const weekdayPercent = Math.round(Math.random() * 20) + 70 // Weekday coding is typically 70-90%
+  const weekdayTotal = weekdayCommits[1] + weekdayCommits[2] + weekdayCommits[3] + weekdayCommits[4] + weekdayCommits[5]
+  const weekendTotal = weekdayCommits[0] + weekdayCommits[6]
+  const totalContributionsCount = weekdayTotal + weekendTotal
+  
+  let weekdayPercent = 70 // fallback
+  if (totalContributionsCount > 0) {
+    weekdayPercent = Math.round((weekdayTotal / totalContributionsCount) * 100)
+  }
 
+  const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+  const peakDayIndex = weekdayCommits.indexOf(Math.max(...weekdayCommits))
+  const mostActiveDay = totalContributionsCount > 0 ? dayNames[peakDayIndex] : "Monday"
+ 
   const totalContributions = userData.contributionsCollection.totalCommitContributions
   const prsMerged = userData.contributionsCollection.totalPullRequestContributions
   const issuesClosed = userData.contributionsCollection.totalIssueContributions
@@ -227,7 +255,8 @@ async function calculateStats(userData: any, username: string): Promise<GitHubSt
     linesOfCode: totalCommits * 25,
     prsMerged,
     issuesClosed,
-    weekdayPercent,
+    weekdayPercent,     
+    mostActiveDay,
   }
 }
 

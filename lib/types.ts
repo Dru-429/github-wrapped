@@ -41,6 +41,7 @@ export interface GitHubStats {
   prsMerged?: number
   issuesClosed?: number
   weekdayPercent?: number
+  mostActiveDay?: string
 }
 
 export interface GitHubData {

@@ -93,7 +93,13 @@ export function ActivityCard({ data }: { data: GitHubData }) {
 
             {/* Badge (center) */}
             <div className="text-center mt-4">
-              <p className="text-lg font-extrabold w-fit font-montserrat">{getDeveloperBadge()} <span className="ml-2">💼</span></p>
+              <p className="text-lg font-extrabold font-montserrat text-[#1A1A1A]">
+                You ship most on
+                <span className="text-[#F94A36] pl-2 text-2xl">
+                  {stats.mostActiveDay || "Monday"}
+                </span>
+                <span className="ml-2">🚀</span>
+              </p>
             </div>
           </div>
 
