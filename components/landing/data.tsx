@@ -12,16 +12,17 @@ const pic1 = '/assets/pic1.png'
 const tweets = [
   {
     id: 1,
+    link: "",
     name: "Aarav Sharma",
     handle: "aaravbuilds",
     avatarColor: "var(--lime)",
     text: "Github Wrapped just told me I wrote 42k lines of TypeScript this year. My therapist is gonna hear about this. 😭",
     date: "Dec 18",
     verified: true,
-    link: "https://x.com/aaravbuilds/status/1234567890123456789"
   },
   {
     id: 2,
+    link: "",
     name: "Maya Chen",
     handle: "mayacodes",
     avatarColor: "var(--mantis)",
@@ -30,6 +31,7 @@ const tweets = [
   },
   {
     id: 3,
+    link: "",
     name: "Leo Park",
     handle: "leobyte",
     avatarColor: "var(--nuit)",
@@ -39,6 +41,7 @@ const tweets = [
   },
   {
     id: 4,
+    link: "",
     name: "Priya Nair",
     handle: "priya_dev",
     avatarColor: "var(--deep-green)",
@@ -47,20 +50,12 @@ const tweets = [
   },
   {
     id: 5,
+    link: "",
     name: "Sam Holloway",
     handle: "samh_eng",
     avatarColor: "var(--ink)",
     text: "shipped 1,204 commits this year apparently. one of them probably even worked. great tool @githubwrapped",
     date: "Dec 14",
-  },
-  {
-    id: 6,
-    name: "Zara Ahmed",
-    handle: "zaracodes",
-    avatarColor: "var(--lime)",
-    text: "the sticky note feature cards on the landing page?? whoever designed this — marry me. 💍",
-    date: "Dec 13",
-    verified: true,
   },
 ];
 

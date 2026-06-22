@@ -3,10 +3,11 @@
 import { tweets } from "./data";
 import { motion } from 'framer-motion'
 import Image from 'next/image'
-
+import Link from 'next/link'
 
 type Tweet = {
   id: number;
+  link: string;
   name: string;
   handle: string;
   avatarColor: string;
@@ -27,15 +28,14 @@ function VerifiedBadge() {
 }
 
 function TweetCard({ t, i }: { t: Tweet; i: number }) {
-  const rotations = ["-rotate-1", "rotate-1", "-rotate-[0.5deg]", "rotate-[0.5deg]"];
   return (
     <motion.article
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.4, delay: i * 0.06 }}
-      whileHover={{ y: -4, rotate: 0 }}
-      className={`boxy break-inside-avoid mb-5 p-5 bg-cream ${rotations[i % rotations.length]} transition-transform`}
+      transition={{ duration: 0.1, delay: i * 0.03 }}
+      whileHover={{ y: -4, rotate: 0.5 }}
+      className={`boxy group break-inside-avoid mb-5 p-5 bg-zinc-100 transition-transform`}
     >
       <header className="flex items-start gap-3">
         <div
@@ -55,12 +55,39 @@ function TweetCard({ t, i }: { t: Tweet; i: number }) {
             @{t.handle} · {t.date}
           </div>
         </div>
-        <svg viewBox="0 0 24 24" className="h-5 w-5 shrink-0" aria-label="X">
-          <path
-            fill="var(--ink)"
-            d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
-          />
-        </svg>
+        
+        <Link 
+          className="h-5 w-5 shrink-0 relative overflow-hidden cursor-pointer"
+          href={t.link}
+          target="_blank"
+        >
+          {/* X Logo*/}
+          <svg 
+            viewBox="0 0 24 24" 
+            className="h-5 w-5 absolute inset-0 transition-all duration-200 transform scale-0 opacity-0 group-hover:scale-100 group-hover:opacity-100" 
+            aria-label="X"
+          >
+            <path
+              fill="var(--ink)"
+              d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+            />
+          </svg>
+
+          <svg 
+            viewBox="0 0 24 24" 
+            className="h-5 w-5 absolute inset-0 transition-all duration-200 transform scale-100 opacity-100 group-hover:scale-0 group-hover:opacity-0" 
+            aria-label="Arrow"
+          >
+            <path
+              fill="none"
+              stroke="var(--ink)"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M7 17L17 7M17 7H7M17 7V17"
+            />
+          </svg>
+        </Link>
       </header>
       <p className="mt-3 font-display text-[17px] leading-snug text-[color:var(--ink)]">
         {t.text}
@@ -72,6 +99,7 @@ function TweetCard({ t, i }: { t: Tweet; i: number }) {
 export default function Reviews() {
   return (
     <section className="mt-26 md:mt-40 py-14">
+
       <div className="flex flex-col items-center text-center mb-10">
         <span className="boxy-sm bg-[color:var(--lime)] px-3 py-1 text-xs uppercase tracking-widest font-bold">
           What devs are saying
