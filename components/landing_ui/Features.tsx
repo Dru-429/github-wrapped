@@ -34,42 +34,44 @@ export default function Features() {
 
         </motion.div>
       </div>
-      <motion.div
-        initial='hidden'
-        whileInView='show'
-        viewport={{ once: true, margin: '-100px' }}
-        transition={{ staggerChildren: 0.1 }}
-        className='mx-auto grid max-w-6xl grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4'
-      >
-        {features.map(f => (
-          <motion.div
-            key={f.title}
-            variants={featureItem}
-            whileHover={{ rotate: 0, y: -6, scale: 1.02 }}
-            style={{ rotate: `${f.rotate}deg`, background: f.color }}
-            className='boxy flex aspect-[3/4] flex-col p-3 transition-shadow hover:shadow-[10px_10px_0_0_var(--ink)]'
-          >
-            <div className='relative h-[70%] w-full overflow-hidden border-2 border-ink bg-[var(--ink)]'>
-              <Image
-                src={f.img}
-                alt={f.title}
-                fill
-                sizes="(max-width: 768px) 100vw, 25vw"
-                className='h-full w-full object-cover'
-                loading='lazy'
-              />
-            </div>
-            <div className='flex flex-1 flex-col justify-center px-2 pt-3'>
-              <h3 className='font-display text-xl font-black leading-tight text-ink md:text-2xl'>
-                {f.title}
-              </h3>
-              <p className='mt-1 text-xs font-medium text-ink/70 md:text-sm'>
-                {f.note}
-              </p>
-            </div>
-          </motion.div>
-        ))}
-      </motion.div>
+      <div className='flex flex-col md:flex-row gap-16 md:gap-24 items-center'>
+        <motion.div
+          initial='hidden'
+          whileInView='show'
+          viewport={{ once: true, margin: '-100px' }}
+          transition={{ staggerChildren: 0.1 }}
+          className='mx-auto  grid max-w-6xl grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4'
+        >
+          {features.map(f => (
+            <motion.div
+              key={f.title}
+              variants={featureItem}
+              whileHover={{ rotate: 0, y: -6, scale: 1.02 }}
+              style={{ rotate: `${f.rotate}deg`, background: f.color }}
+              className='boxy flex aspect-square h-[30vh] md:h-auto  md:aspect-[3/4] flex-col p-3 transition-shadow hover:shadow-[10px_10px_0_0_var(--ink)]'
+            >
+              <div className='relative h-[70%] w-full overflow-hidden border-2 border-ink bg-[var(--ink)]'>
+                <Image
+                  src={f.img}
+                  alt={f.title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 25vw"
+                  className='h-full w-full object-cover'
+                  loading='lazy'
+                />
+              </div>
+              <div className='flex flex-1 flex-col justify-center px-2 pt-3'>
+                <h3 className='font-display text-xl font-black leading-tight text-ink md:text-2xl'>
+                  {f.title}
+                </h3>
+                <p className='mt-1 text-xs font-medium text-ink/70 md:text-sm'>
+                  {f.note}
+                </p>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
 
       <div className=''>
         <Gallery />

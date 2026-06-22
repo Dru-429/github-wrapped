@@ -6,7 +6,7 @@ import Image from 'next/image'
 import { photos } from '@/components/landing_ui/data'
 
 /* Gallery                                         */
-export default function Gallery() {
+export default function Gallery () {
   const boardRef = useRef<HTMLDivElement>(null)
 
   return (
@@ -34,7 +34,8 @@ export default function Gallery() {
             whileDrag={{ scale: 1.04, rotate: 0, zIndex: 50 }}
             whileHover={{ scale: 1.02 }}
             initial={{ rotate: p.rotate }}
-            className='boxy absolute cursor-grab touch-none bg-foreground/30 p-2 active:cursor-grabbing'
+            className={`boxy absolute cursor-grab touch-none bg-foreground/30 p-2 active:cursor-grabbing 
+              ${i % 2 != 0 ? 'hidden md:block' : ''}`}
             style={{ top: p.top, left: p.left, width: 200 }}
           >
             <Image
