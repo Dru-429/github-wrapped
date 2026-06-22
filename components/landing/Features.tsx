@@ -4,6 +4,8 @@ import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { features } from '@/components/landing/data' 
 import Gallery from './Gallery';
+import Faq from './Faq';
+import Reviews from './Reviews';
 
 /* Features                                                           */
 const featureItem = {
@@ -73,6 +75,9 @@ export default function Features() {
         <Gallery />
       </div>
 
+      <div className=''>
+        <Reviews />
+      </div>
       <div className='mt-20'>
         <Faq />
       </div>
