@@ -10,7 +10,7 @@ type Tweet = {
   link: string;
   name: string;
   handle: string;
-  avatarColor: string;
+  avatarSrc: string;
   text: string;
   date: string;
   verified?: boolean;
@@ -35,63 +35,70 @@ function TweetCard({ t, i }: { t: Tweet; i: number }) {
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.1, delay: i * 0.03 }}
       whileHover={{ y: -4, rotate: 0.5 }}
-      className={`boxy group break-inside-avoid mb-5 p-5 bg-zinc-100 transition-transform`}
+      className={`boxy group flex flex-col justify-between p-5 bg-zinc-100 transition-transform h-full`}
     >
-      <header className="flex items-start gap-3">
-        <div
-          className="h-11 w-11 shrink-0 border-2 border-[color:var(--ink)] flex items-center justify-center font-display font-bold text-[color:var(--ink)]"
-          style={{ background: t.avatarColor }}
-        >
-          {t.name.charAt(0)}
-        </div>
-        <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-1 flex-wrap">
-            <span className="font-display font-bold text-[color:var(--ink)] leading-tight">
-              {t.name}
-            </span>
-            {t.verified && <VerifiedBadge />}
-          </div>
-          <div className="text-sm text-[color:var(--muted-foreground)] leading-tight">
-            @{t.handle} · {t.date}
-          </div>
-        </div>
-        
-        <Link 
-          className="h-5 w-5 shrink-0 relative overflow-hidden cursor-pointer"
-          href={t.link}
-          target="_blank"
-        >
-          {/* X Logo*/}
-          <svg 
-            viewBox="0 0 24 24" 
-            className="h-5 w-5 absolute inset-0 transition-all duration-200 transform scale-0 opacity-0 group-hover:scale-100 group-hover:opacity-100" 
-            aria-label="X"
+      <div>
+        <header className="flex items-start gap-3">
+          <div
+            className="rounded-full h-11 w-11 shrink-0 border-2 border-[color:var(--ink)] shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] flex items-center justify-center overflow-hidden"
           >
-            <path
-              fill="var(--ink)"
-              d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+            <img 
+              src={t.avatarSrc}
+              alt={`${t.name}'s avatar`}
+              className="h-full w-full object-cover rounded-full"
+              width={44}
+              height={44}
             />
-          </svg>
+          </div>
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-1 flex-wrap">
+              <span className="font-display font-bold text-[color:var(--ink)] leading-tight">
+                {t.name}
+              </span>
+              {t.verified && <VerifiedBadge />}
+            </div>
+            <div className="text-sm text-[color:var(--muted-foreground)] leading-tight">
+              @{t.handle} · {t.date}
+            </div>
+          </div>
+          
+          <Link 
+            className="h-5 w-5 shrink-0 relative overflow-hidden cursor-pointer"
+            href={t.link}
+            target="_blank"
+          >
+            {/* X Logo */}
+            <svg 
+              viewBox="0 0 24 24" 
+              className="h-5 w-5 absolute inset-0 transition-all duration-200 transform scale-100 opacity-100 group-hover:scale-0 group-hover:opacity-0" 
+              aria-label="X"
+            >
+              <path
+                fill="var(--ink)"
+                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+              />
+            </svg>
 
-          <svg 
-            viewBox="0 0 24 24" 
-            className="h-5 w-5 absolute inset-0 transition-all duration-200 transform scale-100 opacity-100 group-hover:scale-0 group-hover:opacity-0" 
-            aria-label="Arrow"
-          >
-            <path
-              fill="none"
-              stroke="var(--ink)"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M7 17L17 7M17 7H7M17 7V17"
-            />
-          </svg>
-        </Link>
-      </header>
-      <p className="mt-3 font-display text-[17px] leading-snug text-[color:var(--ink)]">
-        {t.text}
-      </p>
+            <svg 
+              viewBox="0 0 24 24" 
+              className="h-5 w-5 absolute inset-0 transition-all duration-200 transform scale-0 opacity-0 group-hover:scale-100 group-hover:opacity-100" 
+              aria-label="Arrow"
+            >
+              <path
+                fill="none"
+                stroke="var(--ink)"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M7 17L17 7M17 7H7M17 7V17"
+              />
+            </svg>
+          </Link>
+        </header>
+        <p className="mt-3 font-display text-[17px] leading-snug text-[color:var(--ink)]">
+          {t.text}
+        </p>
+      </div>
     </motion.article>
   );
 }
@@ -99,20 +106,17 @@ function TweetCard({ t, i }: { t: Tweet; i: number }) {
 export default function Reviews() {
   return (
     <section className="mt-26 md:mt-40 py-14">
-
       <div className="flex flex-col items-center text-center mb-10">
-        <span className="boxy-sm bg-[color:var(--lime)] px-3 py-1 text-xs uppercase tracking-widest font-bold">
-          What devs are saying
+        <span className="boxy-sm bg-[color:var(--lime)] px-3 py-1 text-sm uppercase tracking-widest font-bold">
+          Reviews
         </span>
         <h2 className="font-display text-4xl md:text-6xl font-black mt-4 text-[color:var(--ink)]">
-          Straight from the <span className="italic text-[color:var(--nuit)]">timeline</span>
+          Straight from the 
+          <span className="italic bg-[color:var(--nuit)] text-cream px-2 mx-2">timeline</span>
         </h2>
-        <p className="mt-3 max-w-xl text-[color:var(--muted-foreground)]">
-          Real tweets. Real flexes. Real existential crises about lines of code.
-        </p>
       </div>
 
-      <div className="columns-1 md:columns-2 lg:columns-3 gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 items-stretch">
         {tweets.map((t, i) => (
           <TweetCard key={t.id} t={t} i={i} />
         ))}
