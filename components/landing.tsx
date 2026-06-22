@@ -19,16 +19,8 @@ import {
   AccordionTrigger
 } from '@/components/ui/accordion'
 import Image from 'next/image'
+import Navbar from './landing/Navbar';
 
-const locImg = '/assets/loc.png'
-const langImg = '/assets/lang.png'
-const overviewImg = '/assets/overview.png'
-const timelineImg = '/assets/timeline.png'
-const theme = '/assets/theme.jpg'
-const pic2 = '/assets/dino_bg.png'
-const x = '/assets/x.png'
-const cards = '/assets/cards.png'
-const pic1 = '/assets/pic1.png'
 
 export default function LandingPage() {
   return (
@@ -37,58 +29,14 @@ export default function LandingPage() {
         <Navbar />
         <Hero />
         <Features />
-        <Footer />
+        <Reviews />
+        <Footer /> 
       </div>
     </main>
   )
 }
 
-/* Navbar                                                             */
-const navLinks = [
-  { label: 'Features', href: '#features' },
-  { label: 'Contact', href: '#footer' },
-  { label: 'FAQ', href: '#faq' }
-]
 
-function Navbar() {
-  return (
-    <motion.nav
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, ease: 'easeOut' }}
-      className='boxy flex items-center justify-between px-4 py-3 md:px-6 md:py-4'
-    >
-      <a href='#' className='flex items-center gap-2'>
-        <span className='grid h-8 w-8 place-items-center border-2 border-ink bg-[var(--lime)] font-display text-lg font-black'>
-          G
-        </span>
-        <span className='font-display text-xl font-bold tracking-tight'>
-          Github Wrapped
-        </span>
-      </a>
-
-      <div className='hidden items-center gap-8 md:flex'>
-        {navLinks.map(l => (
-          <a
-            key={l.label}
-            href={l.href}
-            className='relative text-sm font-medium text-foreground/80 transition-colors hover:text-foreground after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-foreground after:transition-all hover:after:w-full'
-          >
-            {l.label}
-          </a>
-        ))}
-      </div>
-
-      <a
-        href='https://github.com/Dru-429/github-wrapped'
-        className='boxy-sm group inline-flex items-center gap-2 bg-[var(--nuit)] px-3 py-2 text-xs font-bold uppercase tracking-wider text-[var(--cream)] transition-transform hover:-translate-x-0.5 hover:-translate-y-0.5 md:px-4 md:text-sm'
-      >
-        <Github className='h-4 w-4' />
-        <span>Github</span>
-      </a>
-    </motion.nav>
-  )
-}
 
 /* Hero                                                               */
 const heroContainer = {
@@ -273,37 +221,6 @@ function Hero() {
 }
 
 /* Features                                                           */
-const features = [
-  {
-    img: locImg,
-    title: 'Count LoC & Commits',
-    note: 'Every line, every push.',
-    color: 'var(--lime)',
-    rotate: -2.5
-  },
-  {
-    img: langImg,
-    title: 'Find ur Fav Lang',
-    note: 'Many more',
-    color: 'var(--mantis)',
-    rotate: 1.8
-  },
-  {
-    img: overviewImg,
-    title: 'Show an Overview',
-    note: 'PRs, issues, the lot.',
-    color: 'var(--cream)',
-    rotate: -1.2
-  },
-  {
-    img: timelineImg,
-    title: 'Year Timeline',
-    note: 'Q1 to Q4, mapped.',
-    color: 'var(--lime)',
-    rotate: 2.2
-  }
-]
-
 const featureItem = {
   hidden: { opacity: 0, y: 40 },
   show: {
@@ -379,14 +296,6 @@ function Features() {
 }
 
 /* Gallery                                         */
-const photos = [
-  { src: theme, alt: 'Theme', top: '12%', left: '10%', rotate: -5 },
-  { src: pic2, alt: 'Hot', top: '35%', left: '75%', rotate: 5 },
-  { src: x, alt: 'Meet the developer', top: '55%', left: '15%', rotate: 5 },
-  { src: cards, alt: 'Cards Collage', top: '10%', left: '45%', rotate: 7 },
-  { src: pic1, alt: 'Neerdy', top: '60%', left: '45%', rotate: -7 }
-]
-
 function Gallery() {
   const boardRef = useRef<HTMLDivElement>(null)
 
@@ -438,38 +347,6 @@ function Gallery() {
 }
 
 /* FAQ                                                                */
-const faqData = [
-  {
-    id: 1,
-    question: 'Is my data shared?',
-    answer:
-      "Totally! JK ! We don't store your data or your code we just fetch the public stuff from GitHub, make it look pretty, and then we forget we ever met."
-  },
-  {
-    id: 2,
-    question: 'What kind of stats am I getting?',
-    answer: "Bruhhh... it's fun and jsut a click away, Go check it out!"
-  },
-  {
-    id: 3,
-    question: 'Can it see my private repos?',
-    answer:
-      'Sorry Nahh! We only look at your public activity. We are working on it'
-  },
-  {
-    id: 4,
-    question: 'Can we Download it or Share it ?',
-    answer:
-      "Of course..it generates sleek, story-ready cards. One click and you're ready to flex your wins on X, LinkedIn, or Instagram."
-  },
-  {
-    id: 5,
-    question: 'Wait, I found. a bug!',
-    answer:
-      "Awesome! (Well, not the bug, but the fact that you found it). This is an open-source project, so head over to the GitHub repo and drop an issue or a PR. Let's build this together!"
-  }
-]
-
 function Faq() {
   return (
     <section id='faq' className='mb-10 mt-8 p-6 md:p-12'>
@@ -593,4 +470,82 @@ function Footer() {
 
     </footer>
   )
+}
+
+function VerifiedBadge() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-4 w-4" aria-label="Verified">
+      <path
+        fill="var(--nuit)"
+        d="M22.5 12.5c0-1.58-.875-2.95-2.148-3.6.154-.435.238-.905.238-1.4 0-2.21-1.71-3.998-3.818-3.998-.47 0-.92.084-1.336.25C14.818 2.415 13.51 1.5 12 1.5s-2.816.917-3.437 2.25c-.415-.165-.866-.25-1.336-.25-2.11 0-3.818 1.79-3.818 4 0 .494.083.964.237 1.4-1.272.65-2.147 2.018-2.147 3.6 0 1.495.782 2.798 1.942 3.486-.02.17-.032.34-.032.514 0 2.21 1.708 4 3.818 4 .47 0 .92-.086 1.335-.25.62 1.334 1.926 2.25 3.437 2.25 1.512 0 2.818-.916 3.437-2.25.415.163.865.248 1.336.248 2.11 0 3.818-1.79 3.818-4 0-.174-.012-.344-.033-.513 1.158-.687 1.943-1.99 1.943-3.484zm-6.616-3.334l-4.334 6.5c-.145.217-.382.334-.625.334-.143 0-.288-.04-.416-.126l-.115-.094-2.415-2.415c-.293-.293-.293-.768 0-1.06s.768-.294 1.06 0l1.77 1.767 3.825-5.74c.23-.345.696-.436 1.04-.207.346.23.44.696.21 1.04z"
+      />
+    </svg>
+  );
+}
+
+function TweetCard({ t, i }: { t: Tweet; i: number }) {
+  const rotations = ["-rotate-1", "rotate-1", "-rotate-[0.5deg]", "rotate-[0.5deg]"];
+  return (
+    <motion.article
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.4, delay: i * 0.06 }}
+      whileHover={{ y: -4, rotate: 0 }}
+      className={`boxy break-inside-avoid mb-5 p-5 bg-cream ${rotations[i % rotations.length]} transition-transform`}
+    >
+      <header className="flex items-start gap-3">
+        <div
+          className="h-11 w-11 shrink-0 border-2 border-[color:var(--ink)] flex items-center justify-center font-display font-bold text-[color:var(--ink)]"
+          style={{ background: t.avatarColor }}
+        >
+          {t.name.charAt(0)}
+        </div>
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-1 flex-wrap">
+            <span className="font-display font-bold text-[color:var(--ink)] leading-tight">
+              {t.name}
+            </span>
+            {t.verified && <VerifiedBadge />}
+          </div>
+          <div className="text-sm text-[color:var(--muted-foreground)] leading-tight">
+            @{t.handle} · {t.date}
+          </div>
+        </div>
+        <svg viewBox="0 0 24 24" className="h-5 w-5 shrink-0" aria-label="X">
+          <path
+            fill="var(--ink)"
+            d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+          />
+        </svg>
+      </header>
+      <p className="mt-3 font-display text-[17px] leading-snug text-[color:var(--ink)]">
+        {t.text}
+      </p>
+    </motion.article>
+  );
+}
+
+function Reviews() {
+  return (
+    <section className="mt-16 md:mt-24">
+      <div className="flex flex-col items-center text-center mb-10">
+        <span className="boxy-sm bg-[color:var(--lime)] px-3 py-1 text-xs uppercase tracking-widest font-bold">
+          What devs are saying
+        </span>
+        <h2 className="font-display text-4xl md:text-6xl font-black mt-4 text-[color:var(--ink)]">
+          Straight from the <span className="italic text-[color:var(--nuit)]">timeline</span>
+        </h2>
+        <p className="mt-3 max-w-xl text-[color:var(--muted-foreground)]">
+          Real tweets. Real flexes. Real existential crises about lines of code.
+        </p>
+      </div>
+
+      <div className="columns-1 md:columns-2 lg:columns-3 gap-5">
+        {tweets.map((t, i) => (
+          <TweetCard key={t.id} t={t} i={i} />
+        ))}
+      </div>
+    </section>
+  );
 }
