@@ -19,6 +19,7 @@ import { PlainTxt2 } from "@/components/cards/Plain-txt2"
 import ResultCard from "@/components/cards/Result"
 import { motion } from 'framer-motion'
 import Image from "next/image"
+import Footer from "@/components/landing_ui/Footer";
 
 export function WrapPageClient({ username }: { username: string }) {
   const router = useRouter()
@@ -184,101 +185,106 @@ export function WrapPageClient({ username }: { username: string }) {
         )}
 
         {!isLoading && !error && data && (
-          <div className='boxy bg-cream p-6 md:p-10 w-full mx-auto mt-4 md:mt-8 flex flex-col lg:flex-row gap-10 items-stretch'>
-            {/* Left side: Controls (35%) */}
-            <div className='w-full lg:w-[35%] flex flex-col justify-between gap-8 h-full'>
-              <span className='boxy-sm bg-[var(--nuit)] px-5 py-2 font-display text-4xl font-black italic text-[var(--cream)] md:text-6xl'>
-                Wrapped..
-              </span>
+          <div className=' w-full mx-auto '>
+            <div className="boxy bg-cream p-6 md:p-10 w-full mx-auto my-4 md:my-8 flex flex-col lg:flex-row gap-10 items-stretch">
+              {/* Left side: Controls (35%) */}
+              <div className='w-full lg:w-[35%] flex flex-col justify-between gap-8 h-full'>
+                <span className='boxy-sm bg-[var(--nuit)] px-5 py-2 font-display text-4xl font-black italic text-[var(--cream)] md:text-6xl'>
+                  Wrapped..
+                </span>
 
-              <div className='flex flex-col gap-6 w-full'>
-                {/* Pagination Controls */}
-                <div className='boxy bg-[var(--cream)] p-5 flex flex-col gap-5 border-2 border-black shadow-[4px_4px_0_0_rgba(0,0,0,1)]'>
-                  <div className='flex items-center justify-between'>
-                    <button
-                      onClick={handlePrevCard}
-                      className='boxy-sm bg-white p-3 transition-transform hover:-translate-x-1 border-2 border-black shadow-[4px_4px_0_0_rgba(0,0,0,1)]'
-                      aria-label='Previous card'
-                    >
-                      <ChevronLeft className='h-6 w-6 text-ink' />
-                    </button>
-                    <div className='flex flex-col items-center'>
-                      <span className='font-display text-2xl font-black text-ink'>
-                        {currentCard + 1} / {totalCards}
-                      </span>
-                    </div>
-                    <button
-                      onClick={handleNextCard}
-                      className='boxy-sm bg-white p-3 transition-transform hover:translate-x-1 border-2 border-black shadow-[4px_4px_0_0_rgba(0,0,0,1)]'
-                      aria-label='Next card'
-                    >
-                      <ChevronRight className='h-6 w-6 text-ink' />
-                    </button>
-                  </div>
-
-                  {/* Navigation Dots */}
-                  <div className='flex items-center justify-center gap-2 flex-wrap'>
-                    {Array.from({ length: totalCards }).map((_, index) => (
+                <div className='flex flex-col gap-6 w-full'>
+                  {/* Pagination Controls */}
+                  <div className='boxy bg-[var(--cream)] p-5 flex flex-col gap-5 border-2 border-black shadow-[4px_4px_0_0_rgba(0,0,0,1)]'>
+                    <div className='flex items-center justify-between'>
                       <button
-                        key={index}
-                        onClick={() => setCurrentCard(index)}
-                        className={`h-3 transition-all border-2 border-ink shadow-[2px_2px_0_0_rgba(0,0,0,1)] ${index === currentCard
-                          ? 'bg-[var(--lime)] w-8'
-                          : 'bg-white w-3 hover:bg-[var(--lime)]'
-                          }`}
-                        aria-label={`Go to card ${index + 1}`}
-                      />
-                    ))}
+                        onClick={handlePrevCard}
+                        className='boxy-sm bg-white p-3 transition-transform hover:-translate-x-1 border-2 border-black shadow-[4px_4px_0_0_rgba(0,0,0,1)]'
+                        aria-label='Previous card'
+                      >
+                        <ChevronLeft className='h-6 w-6 text-ink' />
+                      </button>
+                      <div className='flex flex-col items-center'>
+                        <span className='font-display text-2xl font-black text-ink'>
+                          {currentCard + 1} / {totalCards}
+                        </span>
+                      </div>
+                      <button
+                        onClick={handleNextCard}
+                        className='boxy-sm bg-white p-3 transition-transform hover:translate-x-1 border-2 border-black shadow-[4px_4px_0_0_rgba(0,0,0,1)]'
+                        aria-label='Next card'
+                      >
+                        <ChevronRight className='h-6 w-6 text-ink' />
+                      </button>
+                    </div>
+
+                    {/* Navigation Dots */}
+                    <div className='flex items-center justify-center gap-2 flex-wrap'>
+                      {Array.from({ length: totalCards }).map((_, index) => (
+                        <button
+                          key={index}
+                          onClick={() => setCurrentCard(index)}
+                          className={`h-3 transition-all border-2 border-ink shadow-[2px_2px_0_0_rgba(0,0,0,1)] ${index === currentCard
+                            ? 'bg-[var(--lime)] w-8'
+                            : 'bg-white w-3 hover:bg-[var(--lime)]'
+                            }`}
+                          aria-label={`Go to card ${index + 1}`}
+                        />
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Action Buttons */}
+                  <div className='flex flex-row md:flex-col gap-3 md:gap-4 w-full'>
+                    <button
+                      onClick={handleDownload}
+                      disabled={isDownloading}
+                      className='flex-1 boxy-sm group flex items-center justify-center gap-3 bg-[var(--lime)] px-0 md:px-5 py-3 md:py-4 font-black uppercase tracking-wider text-ink transition-transform hover:-translate-y-1 disabled:opacity-60 disabled:hover:translate-y-0 md:w-full text-lg border-2 border-black shadow-[4px_4px_0_0_rgba(0,0,0,1)] md:shadow-[6px_6px_0_0_rgba(0,0,0,1)]'
+                    >
+                      <Download className='h-6 w-6' />
+                      <span className="hidden md:inline">{isDownloading ? 'Downloading...' : 'Download Card'}</span>
+                    </button>
+
+                    <div className='flex flex-row md:grid md:grid-cols-2 gap-3 md:gap-4 flex-[2] md:flex-none'>
+                      <button
+                        onClick={() => handleShare('twitter')}
+                        className='flex-1 boxy-sm group flex items-center justify-center gap-2 bg-[var(--nuit)] px-0 md:px-4 py-3 font-bold uppercase tracking-wider text-white transition-transform hover:-translate-y-1 border-2 border-black shadow-[4px_4px_0_0_rgba(0,0,0,1)]'
+                      >
+                        <Twitter className='h-5 w-5 md:h-4 md:w-4' />
+                        <span className="hidden md:inline">Share</span>
+                      </button>
+
+                      <button
+                        onClick={() => handleShare('linkedin')}
+                        className='flex-1 boxy-sm group flex items-center justify-center gap-2 bg-blue-600 px-0 md:px-4 py-3 font-bold uppercase tracking-wider text-white transition-transform hover:-translate-y-1 border-2 border-black shadow-[4px_4px_0_0_rgba(0,0,0,1)]'
+                      >
+                        <Linkedin className='h-5 w-5 md:h-4 md:w-4' />
+                        <span className="hidden md:inline">Share</span>
+                      </button>
+                    </div>
+
+                    <button
+                      onClick={() => handleShare('copy')}
+                      className='flex-1 boxy-sm group flex items-center justify-center gap-2 bg-white px-0 md:px-5 py-3 font-bold uppercase tracking-wider text-ink transition-transform hover:-translate-y-1 md:w-full border-2 border-black shadow-[4px_4px_0_0_rgba(0,0,0,1)]'
+                    >
+                      {copied ? <Check className='h-5 w-5 md:h-4 md:w-4 text-green-600' /> : <Copy className='h-5 w-5 md:h-4 md:w-4' />}
+                      <span className="hidden md:inline">{copied ? 'Copied!' : 'Copy Link'}</span>
+                    </button>
                   </div>
                 </div>
+              </div>
 
-                {/* Action Buttons */}
-                <div className='flex flex-row md:flex-col gap-3 md:gap-4 w-full'>
-                  <button
-                    onClick={handleDownload}
-                    disabled={isDownloading}
-                    className='flex-1 boxy-sm group flex items-center justify-center gap-3 bg-[var(--lime)] px-0 md:px-5 py-3 md:py-4 font-black uppercase tracking-wider text-ink transition-transform hover:-translate-y-1 disabled:opacity-60 disabled:hover:translate-y-0 md:w-full text-lg border-2 border-black shadow-[4px_4px_0_0_rgba(0,0,0,1)] md:shadow-[6px_6px_0_0_rgba(0,0,0,1)]'
-                  >
-                    <Download className='h-6 w-6' />
-                    <span className="hidden md:inline">{isDownloading ? 'Downloading...' : 'Download Card'}</span>
-                  </button>
-
-                  <div className='flex flex-row md:grid md:grid-cols-2 gap-3 md:gap-4 flex-[2] md:flex-none'>
-                    <button
-                      onClick={() => handleShare('twitter')}
-                      className='flex-1 boxy-sm group flex items-center justify-center gap-2 bg-[var(--nuit)] px-0 md:px-4 py-3 font-bold uppercase tracking-wider text-white transition-transform hover:-translate-y-1 border-2 border-black shadow-[4px_4px_0_0_rgba(0,0,0,1)]'
-                    >
-                      <Twitter className='h-5 w-5 md:h-4 md:w-4' />
-                      <span className="hidden md:inline">Share</span>
-                    </button>
-
-                    <button
-                      onClick={() => handleShare('linkedin')}
-                      className='flex-1 boxy-sm group flex items-center justify-center gap-2 bg-blue-600 px-0 md:px-4 py-3 font-bold uppercase tracking-wider text-white transition-transform hover:-translate-y-1 border-2 border-black shadow-[4px_4px_0_0_rgba(0,0,0,1)]'
-                    >
-                      <Linkedin className='h-5 w-5 md:h-4 md:w-4' />
-                      <span className="hidden md:inline">Share</span>
-                    </button>
-                  </div>
-
-                  <button
-                    onClick={() => handleShare('copy')}
-                    className='flex-1 boxy-sm group flex items-center justify-center gap-2 bg-white px-0 md:px-5 py-3 font-bold uppercase tracking-wider text-ink transition-transform hover:-translate-y-1 md:w-full border-2 border-black shadow-[4px_4px_0_0_rgba(0,0,0,1)]'
-                  >
-                    {copied ? <Check className='h-5 w-5 md:h-4 md:w-4 text-green-600' /> : <Copy className='h-5 w-5 md:h-4 md:w-4' />}
-                    <span className="hidden md:inline">{copied ? 'Copied!' : 'Copy Link'}</span>
-                  </button>
+              {/* Right side: Card Display */}
+              <div className='w-full lg:w-[65%] flex items-center justify-center bg-zinc-900 p-4 md:p-10 boxy relative overflow-hidden'>
+                <div className="absolute inset-0" style={{ backgroundImage: "url('/bg.png')", backgroundSize: 'contain' }}></div>
+                <div className='w-full max-w-md flex items-center justify-center relative z-10' ref={cardRef}>
+                  {renderCard()}
                 </div>
               </div>
             </div>
 
-            {/* Right side: Card Display */}
-            <div className='w-full lg:w-[65%] flex items-center justify-center bg-zinc-900 p-4 md:p-10 boxy relative overflow-hidden'>
-              <div className="absolute inset-0" style={{ backgroundImage: "url('/bg.png')", backgroundSize: 'contain' }}></div>
-              <div className='w-full max-w-md flex items-center justify-center relative z-10' ref={cardRef}>
-                {renderCard()}
-              </div>
-            </div>
+            <Footer />
+
           </div>
         )}
       </main>
