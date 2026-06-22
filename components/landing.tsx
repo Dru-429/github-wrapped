@@ -1,9 +1,9 @@
 'use client'
 
-import Navbar from './landing/Navbar';
-import Hero from './landing/Hero';
-import Features from './landing/Features';
-import Footer from './landing/Footer';
+import Navbar from './landing_ui/Navbar';
+import Hero from './landing_ui/Hero';
+import Features from './landing_ui/Features';
+import Footer from './landing_ui/Footer';
 
 export default function LandingPage() {
   return (

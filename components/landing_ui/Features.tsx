@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import Image from 'next/image'
-import { features } from '@/components/landing/data' 
+import { features } from '@/components/landing_ui/data' 
 import Gallery from './Gallery';
 import Faq from './Faq';
 import Reviews from './Reviews';

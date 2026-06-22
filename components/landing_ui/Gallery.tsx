@@ -3,7 +3,7 @@
 import { useRef } from 'react'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
-import { photos } from '@/components/landing/data'
+import { photos } from '@/components/landing_ui/data'
 
 /* Gallery                                         */
 export default function Gallery() {
