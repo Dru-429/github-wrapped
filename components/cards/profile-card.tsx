@@ -16,7 +16,6 @@ export function ProfileCard({ data }: { data: GitHubData }) {
 
       <div className="relative w-full h-[630px] max-w-[400px] aspect-[9/14] bg-[#F3F3F1] border-[3px] border-black overflow-hidden flex flex-col shadow-2xl pt-4 rounded-3xl">
 
-        {/* --- DECORATIVE NUMBERS (20 - 25) --- */}
         <div className="absolute top-2 w-full flex flex-col items-center justify-center pointer-events-none z-0 ">
           <span className="text-[160px] leading-[0.8] text-[#F94A36] [-webkit-text-stroke:0.5px_black] bebas-neue-regular font-semibold italic tracking-widest">
             {year}

@@ -32,23 +32,18 @@ const bebas = Bebas_Neue({
 export const metadata: Metadata = {
   title: "GitHub Wrapped 2025",
   description: "Generate a Spotify-inspired GitHub Wrapped for any username — top repos, languages, commit streaks, and a shareable image.",
-  metadataBase: new URL("https://githubrapped.vercel.app/"),
+  metadataBase: new URL("https://githubrapped.vercel.app"),
   keywords: [
-    // Core Brand Keywords
     "GitHub Wrapped",
     "GitHub Wrapped 2025",
     "GitHub Wrapped 2026",
     "Spotify Wrapped for developers",
     "My Year in Code",
-    
-    // Feature & Sharing Keywords
     "developer stats generator",
     "git analytics report",
     "shareable dev cards",
     "commit statistics visualization",
     "open source year in review",
-    
-    // Developer Flex & Cultural Terms
     "code stats flex",
     "top programming languages tracker",
     "lines of code counter",
@@ -56,8 +51,6 @@ export const metadata: Metadata = {
     "terminal metrics dashboard",
     "weekend vs weekday coder",
     "standup survivor statistics",
-    
-    // General SEO
     "GitHub",
     "Wrapped",
     "Year in Code",
@@ -75,10 +68,10 @@ export const metadata: Metadata = {
     siteName: "GitHub Wrapped",
     images: [
       {
-        url: "/logo.png",
+        url: "/opengraph-image.png", // Pointing directly to your asset
         width: 1200,
         height: 630,
-        alt: "GitHub Wrapped 2025 — share your Year in Code",
+        alt: "GitHub Wrapped 2025 — Share your Year in Code",
       },
     ],
     locale: "en_US",
@@ -90,7 +83,7 @@ export const metadata: Metadata = {
     description: "Generate a Spotify-inspired GitHub Wrapped for any username — share your yearly GitHub highlights.",
     creator: "@10xdhruv",
     site: "@10xdhruv",
-    images: ["/logo.png"],
+    images: ["/opengraph-image.png"], // Updated to asset name
   },
   icons: {
     icon: "/favicon.ico",
@@ -118,7 +111,7 @@ const jsonLd = {
     ]
   },
   screenshot: [
-    "https://githubrapped.vercel.app/logo.png",
+    "https://githubrapped.vercel.app/opengraph-image.png", // Updated JSON-LD target path
     "https://githubrapped.vercel.app/assets/loc.png",
     "https://githubrapped.vercel.app/assets/lang.png",
     "https://githubrapped.vercel.app/assets/overview.png",
