@@ -68,7 +68,7 @@ export const metadata: Metadata = {
     siteName: "GitHub Wrapped",
     images: [
       {
-        url: "/opengraph-image.png", // Pointing directly to your asset
+        url: "/twitter-card.png", // Connected to your new public asset
         width: 1200,
         height: 630,
         alt: "GitHub Wrapped 2025 — Share your Year in Code",
@@ -83,7 +83,7 @@ export const metadata: Metadata = {
     description: "Generate a Spotify-inspired GitHub Wrapped for any username — share your yearly GitHub highlights.",
     creator: "@10xdhruv",
     site: "@10xdhruv",
-    images: ["/opengraph-image.png"], // Updated to asset name
+    images: ["/twitter-card.png"], // Updated to point directly to twitter-card.png
   },
   icons: {
     icon: "/favicon.ico",
@@ -111,7 +111,7 @@ const jsonLd = {
     ]
   },
   screenshot: [
-    "https://githubrapped.vercel.app/opengraph-image.png", // Updated JSON-LD target path
+    "https://githubrapped.vercel.app/twitter-card.png", // Reflected new default layout banner here
     "https://githubrapped.vercel.app/assets/loc.png",
     "https://githubrapped.vercel.app/assets/lang.png",
     "https://githubrapped.vercel.app/assets/overview.png",
