@@ -12,56 +12,92 @@ const pic1 = '/assets/pic1.png'
 const tweets = [
   {
     id: 1,
-    link: "https://x.com/nitish_boht/status/2056305865007980829?s=20",
-    name: "ullu ka protha",
-    handle: "nitish_boht",
-    avatarSrc: "https://pbs.twimg.com/profile_images/1942179926439829504/Ot5VrFC-.jpg",
-    text: "HOLY ANIMATION! \n",
-    date: "May 20",
-    verified: true,
+    link: 'https://x.com/nitish_boht/status/2056305865007980829?s=20',
+    name: 'ullu ka protha',
+    handle: 'nitish_boht',
+    avatarSrc:
+      'https://pbs.twimg.com/profile_images/1942179926439829504/Ot5VrFC-.jpg',
+    text: 'HOLY ANIMATION! \n',
+    date: 'May 20',
+    verified: true
   },
   {
     id: 2,
-    link: "https://x.com/kshvbgde/status/2058895967416685028?s=20",
-    name: "keshav",
-    handle: "kshvbgde",
-    avatarSrc: "https://pbs.twimg.com/profile_images/2054213507433074688/0fE_oyME.jpg",
-    text: "great work on the design, love the cooking animation.",
-    date: "May 25",
-    verified: true,
+    link: 'https://x.com/kshvbgde/status/2058895967416685028?s=20',
+    name: 'keshav',
+    handle: 'kshvbgde',
+    avatarSrc:
+      'https://pbs.twimg.com/profile_images/2054213507433074688/0fE_oyME.jpg',
+    text: 'great work on the design, love the cooking animation.',
+    date: 'May 25',
+    verified: true
   },
   {
     id: 3,
-    link: "https://x.com/_nako_o0/status/2060155258907590743?s=20",
-    name: "nakooo",
-    handle: "_nako_o0",
-    avatarSrc: "https://pbs.twimg.com/profile_images/1610408591931965442/oJ9tXixB.jpg",
-    text: "Oh I love those Spotify-style recaps! \n",
-    date: "May 29",
-    verified: true,
+    link: 'https://x.com/_nako_o0/status/2069347208135115145?s=20',
+    name: 'nakooo',
+    handle: '_nako_o0',
+    avatarSrc:'https://pbs.twimg.com/profile_images/1610408591931965442/oJ9tXixB.jpg',
+    text: 'A small open-source tool that I stumbled upon by chance and that I love!\n',
+    date: 'Jun 23',
+    verified: true
   },
   {
     id: 4,
-    link: "https://x.com/vidit_odedra/status/2060290095312523334?s=20",
-    name: "vidit._od",
-    handle: "vidit_odedra",
-    avatarSrc: "https://pbs.twimg.com/profile_images/1943399068643852291/BmlXn6UN.jpg",
-    text: "Just tried it again 🥰\nReally cool",
-    date: "May 29",
-    verified: true,
+    link: 'https://x.com/vidit_odedra/status/2060290095312523334?s=20',
+    name: 'vidit._od',
+    handle: 'vidit_odedra',
+    avatarSrc:
+      'https://pbs.twimg.com/profile_images/1943399068643852291/BmlXn6UN.jpg',
+    text: 'Just tried it again 🥰\nReally cool',
+    date: 'May 29',
+    verified: true
   },
   {
     id: 5,
-    link: "https://x.com/vansh1029/status/2060719366313029873?s=20",
-    name: "Vansh N.",
-    handle: "vansh1029",
-    avatarSrc: "https://pbs.twimg.com/profile_images/2068233312875986945/GDT53_4Q.png",
+    link: 'https://x.com/vansh1029/status/2060719366313029873?s=20',
+    name: 'Vansh N.',
+    handle: 'vansh1029',
+    avatarSrc:
+      'https://pbs.twimg.com/profile_images/2068233312875986945/GDT53_4Q.png',
     text: "Cool design bro \nHow did you get this 😂\nIt's my favorite car",
-    date: "May 30",
-    verified: true,
+    date: 'May 30',
+    verified: true
   },
+  {
+    id: 6,
+    link: 'https://x.com/anurag__kochar/status/2069451247044923489?s=20',
+    name: 'Anurag Kochar',
+    handle: 'anurag__kochar',
+    avatarSrc:
+      'https://pbs.twimg.com/profile_images/2035496482569342976/coNLuPcW.jpg',
+    text: "loved the site's brutalist ui ♥",
+    date: 'Jun 23',
+    verified: true
+  },
+  {
+    id: 7,
+    link: 'https://x.com/Ashutosh_7x7/status/2069318511105835340?s=20',
+    name: 'Ashutoshx7',
+    handle: 'Ashutosh_7x7',
+    avatarSrc:
+      'https://pbs.twimg.com/profile_images/2043730524922093568/m11Filo2.jpg',
+    text: 'crazyyyy looks good!',
+    date: 'Jun 23',
+    verified: true
+  },
+  {
+    id: 8,
+    link: 'https://x.com/nirajxdev/status/2069529852064227621?s=20',
+    name: 'Niraj',
+    handle: 'nirajxdev',
+    avatarSrc:
+      'https://pbs.twimg.com/profile_images/2061911186631954432/iz0kKLQT.jpg',
+    text: 'you cooked UI bro 😍😍🫶🫶',
+    date: 'Jun 23',
+    verified: true
+  }
 ]
-
 
 //Feature
 const features = [
