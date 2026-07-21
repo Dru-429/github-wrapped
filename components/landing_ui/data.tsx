@@ -27,7 +27,7 @@ const tweets = [
     name: 'keshav',
     handle: 'kshvbgde',
     avatarSrc:
-      'https://pbs.twimg.com/profile_images/2054213507433074688/0fE_oyME.jpg',
+      'https://pbs.twimg.com/profile_images/2073010304032935936/WXSqXZVS_400x400.jpg',
     text: 'great work on the design, love the cooking animation.',
     date: 'May 25',
     verified: true
