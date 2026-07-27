@@ -28,7 +28,7 @@ export type ReadmeTemplate = {
   about?: string
   contact?: ContactLink[]
   tools?: string[]
-  os?: string
+  os?: string[]
   uptime?: UptimeState
 }
 
@@ -101,9 +101,9 @@ function SectionCard ({
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -8 }}
-      className='boxy-sm bg-cream rounded-sm'
+      className='boxy-xs bg-cream rounded-sm'
     >
-      <div className='flex items-center justify-between border-b-2 border-ink px-3 py-2'>
+      <div className='flex items-center justify-between border-b-1 border-ink px-3 py-2'>
         <h4 className='font-display text-lg font-bold text-ink lowercase'>
           {title}
         </h4>
@@ -166,14 +166,14 @@ function LanguageGroup ({
   }
 
   return (
-    <div className='boxy-sm bg-cream rounded-sm'>
-      <div className='flex items-center justify-between border-b-2 border-ink px-3 py-2'>
+    <div className='boxy-xs bg-cream rounded-sm'>
+      <div className='flex items-center justify-between border-b-1 border-ink px-3 py-2'>
         <h5 className='font-display text-base font-bold text-ink lowercase'>
           {title}
         </h5>
       </div>
       <div className='space-y-2 p-3'>
-        <div className='flex items-center gap-2 border-2 border-ink bg-cream px-2'>
+        <div className='flex items-center gap-2 border-1 border-ink bg-cream px-2'>
           <Search size={14} className='text-ink' />
           <input
             value={query}
@@ -190,7 +190,7 @@ function LanguageGroup ({
           {query && (
             <button
               onClick={() => add(query)}
-              className='grid h-6 w-6 place-items-center border-l-2 border-ink hover:bg-lime'
+              className='grid h-6 w-6 place-items-center border border-ink hover:bg-lime'
               aria-label='Add'
             >
               <Plus size={14} strokeWidth={3} />
@@ -250,7 +250,7 @@ export default function TemplateEditor () {
       if (k === 'about' && next.about === undefined) next.about = ''
       if (k === 'contact' && !next.contact) next.contact = []
       if (k === 'tools' && !next.tools) next.tools = []
-      if (k === 'os' && !next.os) next.os = ''
+      if (k === 'os' && !next.os) next.os = []
       if (k === 'uptime' && !next.uptime)
         next.uptime = { years: '', months: '', days: '' }
       return next
@@ -298,7 +298,7 @@ export default function TemplateEditor () {
 
         <div className='grid gap-6 md:grid-cols-[280px_1fr]'>
           {/* ---------------- LEFT: section picker ---------------- */}
-          <aside className='boxy h-fit bg-cream p-4'>
+          <aside className='boxy h-fit md:min-h-[520px] bg-cream p-4'>
             <h3 className='font-display mb-3 text-xl font-bold text-ink lowercase'>
               sections
             </h3>
@@ -329,7 +329,7 @@ export default function TemplateEditor () {
           </aside>
 
           {/* ---------------- RIGHT: editor panel ---------------- */}
-          <section className='boxy min-h-[420px] bg-cream p-4'>
+          <section className='boxy min-h-[520px] bg-cream p-4'>
             {active.length === 0 ? (
               <div className='grid h-full min-h-[380px] place-items-center text-center'>
                 <div>
@@ -391,7 +391,7 @@ export default function TemplateEditor () {
                             }
                             placeholder='type here…'
                             rows={5}
-                            className='w-full resize-y border-2 border-ink bg-cream px-3 py-2 text-sm text-ink outline-none placeholder:text-muted-foreground'
+                            className='w-full resize-y boxy-xs border-ink bg-cream px-3 py-2 text-sm text-ink outline-none placeholder:text-muted-foreground'
                           />
                         </SectionCard>
                       )
@@ -420,8 +420,8 @@ export default function TemplateEditor () {
                                     copy[i] = { ...c, name: e.target.value }
                                     update(copy)
                                   }}
-                                  placeholder='X'
-                                  className='w-24 border-2 border-ink bg-cream px-2 py-1.5 text-sm text-ink outline-none placeholder:text-muted-foreground'
+                                  placeholder='Name'
+                                  className='w-24 boxy-xs border-ink bg-cream px-2 py-1.5 text-sm text-ink outline-none placeholder:text-muted-foreground'
                                 />
                                 <input
                                   value={c.url}
@@ -431,13 +431,13 @@ export default function TemplateEditor () {
                                     update(copy)
                                   }}
                                   placeholder='https://x.com/10xdhruv'
-                                  className='min-w-0 flex-1 border-2 border-ink bg-cream px-2 py-1.5 text-sm text-ink outline-none placeholder:text-muted-foreground'
+                                  className='min-w-0 flex-1 boxy-xs bg-cream px-2 py-1.5 text-sm text-ink outline-none placeholder:text-muted-foreground'
                                 />
                                 <button
                                   onClick={() =>
                                     update(list.filter(x => x.id !== c.id))
                                   }
-                                  className='grid h-8 w-8 place-items-center border-2 border-ink bg-cream text-ink hover:bg-lime'
+                                  className='grid h-8 w-8 place-items-center boxy-xs bg-cream text-ink hover:bg-lime'
                                   aria-label='Remove contact'
                                 >
                                   <X size={14} strokeWidth={3} />
@@ -476,24 +476,63 @@ export default function TemplateEditor () {
                     }
 
                     if (k === 'os') {
+                      const list = template.os ?? []
+                      const toggle = (o: string) =>
+                        setTemplate(t => ({
+                          ...t,
+                          os: list.includes(o)
+                            ? list.filter(x => x !== o)
+                            : [...list, o]
+                        }))
+                      const addCustom = (v: string) => {
+                        const t = v.trim()
+                        if (!t || list.includes(t)) return
+                        setTemplate(s => ({ ...s, os: [...list, t] }))
+                      }
                       return (
                         <SectionCard
                           key={k}
                           title='os'
                           onRemove={() => removeSection(k)}
                         >
+                          <div className='my-3 flex items-center gap-2 border-2 border-ink bg-cream px-2'>
+                            <input
+                              onKeyDown={e => {
+                                if (e.key === 'Enter') {
+                                  e.preventDefault()
+                                  addCustom(
+                                    (e.target as HTMLInputElement).value
+                                  )
+                                  ;(e.target as HTMLInputElement).value = ''
+                                }
+                              }}
+                              placeholder='type your own'
+                              className='w-full bg-transparent py-1.5 text-sm text-ink outline-none placeholder:text-muted-foreground'
+                            />
+                            <button
+                              onClick={e => {
+                                const input =
+                                  e.currentTarget.parentElement?.querySelector(
+                                    'input'
+                                  ) as HTMLInputElement
+                                addCustom(input.value)
+                                input.value = ''
+                              }}
+                              className='grid h-7 w-7 place-items-center border-l-2 border-ink hover:bg-lime'
+                              aria-label='Add custom OS'
+                            >
+                              <Plus size={14} strokeWidth={3} />
+                            </button>
+                            
+                          </div>
+
                           <div className='flex flex-wrap gap-2'>
                             {OS_OPTIONS.map(o => {
-                              const on = template.os === o
+                              const on = list.includes(o)
                               return (
                                 <button
                                   key={o}
-                                  onClick={() =>
-                                    setTemplate(t => ({
-                                      ...t,
-                                      os: on ? '' : o
-                                    }))
-                                  }
+                                  onClick={() => toggle(o)}
                                   className={cx(
                                     'border-2 border-ink px-3 py-1.5 text-sm font-semibold text-ink',
                                     on
@@ -506,14 +545,22 @@ export default function TemplateEditor () {
                               )
                             })}
                           </div>
-                          <input
-                            value={template.os ?? ''}
-                            onChange={e =>
-                              setTemplate(t => ({ ...t, os: e.target.value }))
-                            }
-                            placeholder='or type your own…'
-                            className='mt-3 w-full border-2 border-ink bg-cream px-3 py-2 text-sm text-ink outline-none placeholder:text-muted-foreground'
-                          />
+
+                          <div className='mt-2 flex flex-wrap gap-1.5'>
+                            {list.length === 0 ? (
+                              <span className='text-xs text-muted-foreground'>
+                                no OS selected yet
+                              </span>
+                            ) : (
+                              list.map(o => (
+                                <TagPill
+                                  key={o}
+                                  label={o}
+                                  onRemove={() => toggle(o)}
+                                />
+                              ))
+                            )}
+                          </div>
                         </SectionCard>
                       )
                     }
@@ -554,7 +601,7 @@ export default function TemplateEditor () {
                                     } as Partial<UptimeState>)
                                   }
                                   placeholder='0'
-                                  className='border-2 border-ink bg-cream px-3 py-2 text-center text-lg font-bold text-ink outline-none'
+                                  className='border border-ink bg-cream px-3 py-2 text-center text-lg font-bold text-ink outline-none'
                                 />
                               </label>
                             ))}
@@ -607,7 +654,7 @@ function ToolsInput ({
   }
   return (
     <div className='space-y-2'>
-      <div className='flex items-center gap-2 border-2 border-ink bg-cream px-2'>
+      <div className='flex items-center gap-2 boxy-xs border-ink bg-cream px-2'>
         <input
           value={draft}
           onChange={e => setDraft(e.target.value)}
@@ -622,7 +669,7 @@ function ToolsInput ({
         />
         <button
           onClick={add}
-          className='grid h-7 w-7 place-items-center border-l-2 border-ink hover:bg-lime'
+          className='grid h-7 w-7 place-items-center border border-ink hover:bg-lime'
           aria-label='Add tool'
         >
           <Plus size={14} strokeWidth={3} />
