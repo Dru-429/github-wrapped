@@ -1,16 +1,9 @@
 import { useCallback, useRef, useState } from "react";
+import type { Dispatch, SetStateAction } from "react";
 import { motion } from "framer-motion";
 import { Upload, X, Loader2 } from "lucide-react";
+import type { ReadmeTemplate } from "./editor-state";
 
-/* ------------------------------------------------------------------
- * Image → ASCII component
- * Left 60% : upload zone (drop / pick, up to 10 MB, 1:1 crop, 45 chars wide)
- * Right 40%: terminal-style preview of the generated ASCII art
- *
- * Note: `image-to-ascii` is a Node-only library (requires canvas & fs) and
- * cannot run in the browser bundle. We do the same job here with a plain
- * <canvas> — sample pixel luminance and map it to an ASCII ramp.
- * ------------------------------------------------------------------ */
 
 const MAX_BYTES = 10 * 1024 * 1024; // 10 MB
 const ASCII_WIDTH = 45; // characters per row
@@ -69,7 +62,11 @@ function imageToAscii(img: HTMLImageElement, width = ASCII_WIDTH): string {
   return out;
 }
 
-export default function ImageUpload() {
+type ImageUploadProps = {
+  setTemplateAction: Dispatch<SetStateAction<ReadmeTemplate>>;
+};
+
+export default function ImageUpload({ setTemplateAction }: ImageUploadProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [preview, setPreview] = useState<string | null>(null);
   const [ascii, setAscii] = useState<string>("");
@@ -96,12 +93,14 @@ export default function ImageUpload() {
       setPreview(dataUrl);
       setFileName(file.name);
       setAscii(art);
-    } catch (e) {
+      // Store the final ascii string on the shared template object.
+      setTemplateAction(current => ({ ...current, image: art }));
+    } catch {
       setError("could not read that image");
     } finally {
       setBusy(false);
     }
-  }, []);
+  }, [setTemplateAction]);
 
   const onFiles = (files: FileList | null) => {
     if (files && files[0]) process(files[0]);
@@ -112,6 +111,11 @@ export default function ImageUpload() {
     setAscii("");
     setFileName("");
     setError(null);
+    setTemplateAction(current => {
+      const next = { ...current };
+      delete next.image;
+      return next;
+    });
     if (inputRef.current) inputRef.current.value = "";
   };
 

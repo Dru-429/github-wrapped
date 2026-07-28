@@ -18,6 +18,7 @@ export type UptimeState = {
 }
 
 export type ReadmeTemplate = {
+  image?: string
   language?: LanguageState
   about?: string
   contact?: ContactLink[]

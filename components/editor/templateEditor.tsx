@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import type { Dispatch, SetStateAction } from 'react'
 import { AnimatePresence } from 'framer-motion'
 import { Plus, Minus } from 'lucide-react'
 import SectionCard from './SectionCard'
@@ -21,16 +22,23 @@ import {
   type UptimeState
 } from './editor-state'
 
-export default function TemplateEditor () {
+type TemplateEditorProps = {
+  template: ReadmeTemplate
+  setTemplateAction: Dispatch<SetStateAction<ReadmeTemplate>>
+}
+
+export default function TemplateEditor ({
+  template,
+  setTemplateAction
+}: TemplateEditorProps) {
   const [active, setActive] = useState<SectionKey[]>([])
-  const [template, setTemplate] = useState<ReadmeTemplate>({})
 
   const isActive = (k: SectionKey) => active.includes(k)
 
   const addSection = (k: SectionKey) => {
     if (isActive(k)) return
     setActive(a => [...a, k])
-    setTemplate(t => {
+    setTemplateAction(t => {
       const next = { ...t }
       if (k === 'language' && !next.language)
         next.language = { frontend: [], backend: [] }
@@ -46,7 +54,7 @@ export default function TemplateEditor () {
 
   const removeSection = (k: SectionKey) => {
     setActive(a => a.filter(x => x !== k))
-    setTemplate(t => {
+    setTemplateAction(t => {
       const next = { ...t }
       delete next[k as keyof typeof next]
       return next
@@ -57,7 +65,7 @@ export default function TemplateEditor () {
     isActive(k) ? removeSection(k) : addSection(k)
 
   const updateLanguage = (patch: Partial<LanguageState>) =>
-    setTemplate(t => ({
+    setTemplateAction(t => ({
       ...t,
       language: { ...(t.language ?? { frontend: [], backend: [] }), ...patch }
     }))
@@ -167,7 +175,7 @@ export default function TemplateEditor () {
                           <textarea
                             value={template.about ?? ''}
                             onChange={e =>
-                              setTemplate(t => ({
+                              setTemplateAction(t => ({
                                 ...t,
                                 about: e.target.value
                               }))
@@ -183,7 +191,7 @@ export default function TemplateEditor () {
                     if (k === 'contact') {
                       const list = template.contact ?? []
                       const update = (next: ContactLink[]) =>
-                        setTemplate(t => ({ ...t, contact: next }))
+                        setTemplateAction(t => ({ ...t, contact: next }))
                       return (
                         <SectionCard
                           key={k}
@@ -198,7 +206,7 @@ export default function TemplateEditor () {
                     if (k === 'tools') {
                       const list = template.tools ?? []
                       const update = (next: string[]) =>
-                        setTemplate(t => ({ ...t, tools: next }))
+                        setTemplateAction(t => ({ ...t, tools: next }))
                       return (
                         <SectionCard
                           key={k}
@@ -213,7 +221,7 @@ export default function TemplateEditor () {
                     if (k === 'os') {
                       const list = template.os ?? []
                       const toggle = (o: string) =>
-                        setTemplate(t => {
+                        setTemplateAction(t => {
                           const current = t.os ?? []
                           return {
                             ...t,
@@ -225,7 +233,7 @@ export default function TemplateEditor () {
                       const addCustom = (v: string) => {
                         const value = v.trim()
                         if (!value) return
-                        setTemplate(s => {
+                        setTemplateAction(s => {
                           const current = s.os ?? []
                           if (current.includes(value)) return s
                           return { ...s, os: [...current, value] }
@@ -311,7 +319,7 @@ export default function TemplateEditor () {
                         days: ''
                       }
                       const upd = (patch: Partial<UptimeState>) =>
-                        setTemplate(t => ({ ...t, uptime: { ...u, ...patch } }))
+                        setTemplateAction(t => ({ ...t, uptime: { ...u, ...patch } }))
                       return (
                         <SectionCard
                           key={k}
