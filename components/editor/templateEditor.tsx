@@ -1,238 +1,25 @@
-import { useMemo, useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Plus, X, Search, Minus } from 'lucide-react'
+'use client'
 
-/* ------------------------------ Types ------------------------------ */
-
-type SectionKey = 'language' | 'about' | 'contact' | 'tools' | 'os' | 'uptime'
-
-type LanguageState = {
-  frontend: string[]
-  backend: string[]
-}
-
-type ContactLink = {
-  id: string
-  name: string
-  url: string
-}
-
-type UptimeState = {
-  years: string
-  months: string
-  days: string
-}
-
-export type ReadmeTemplate = {
-  language?: LanguageState
-  about?: string
-  contact?: ContactLink[]
-  tools?: string[]
-  os?: string[]
-  uptime?: UptimeState
-}
-
-/* --------------------------- Data / Config -------------------------- */
-
-const SECTION_LIST: { key: SectionKey; label: string }[] = [
-  { key: 'language', label: 'Language' },
-  { key: 'about', label: 'About' },
-  { key: 'contact', label: 'Contact' },
-  { key: 'tools', label: 'Tools' },
-  { key: 'os', label: 'OS' },
-  { key: 'uptime', label: 'Uptime / Age' }
-]
-
-const FRONTEND_SUGGESTIONS = [
-  'React',
-  'Vue',
-  'Svelte',
-  'Angular',
-  'Next.js',
-  'Astro',
-  'HTML',
-  'CSS',
-  'Tailwind',
-  'TypeScript'
-]
-const BACKEND_SUGGESTIONS = [
-  'Node.js',
-  'Express',
-  'Django',
-  'Flask',
-  'Rails',
-  'Go',
-  'Rust',
-  'Java',
-  'Spring',
-  'PostgreSQL'
-]
-const OS_OPTIONS = [
-  'macOS',
-  'Windows',
-  'Linux (Ubuntu)',
-  'Linux (Arch)',
-  'Fedora',
-  'NixOS'
-]
-
-/* --------------------------- Small helpers -------------------------- */
-
-const cx = (...c: (string | false | undefined)[]) => c.filter(Boolean).join(' ')
-
-function uid () {
-  return Math.random().toString(36).slice(2, 9)
-}
-
-/* ------------------------- Presentational bits ---------------------- */
-
-function SectionCard ({
-  title,
-  onRemove,
-  children
-}: {
-  title: string
-  onRemove: () => void
-  children: React.ReactNode
-}) {
-  return (
-    <motion.div
-      layout
-      initial={{ opacity: 0, y: 8 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -8 }}
-      className='boxy-xs bg-cream rounded-sm'
-    >
-      <div className='flex items-center justify-between border-b-1 border-ink px-3 py-2'>
-        <h4 className='font-display text-lg font-bold text-ink lowercase'>
-          {title}
-        </h4>
-        <button
-          onClick={onRemove}
-          className='grid h-6 w-6 place-items-center border-2 border-ink bg-cream text-ink hover:bg-lime'
-          aria-label={`Remove ${title}`}
-        >
-          <Minus size={14} strokeWidth={3} />
-        </button>
-      </div>
-      <div className='p-3'>{children}</div>
-    </motion.div>
-  )
-}
-
-function TagPill ({ label, onRemove }: { label: string; onRemove: () => void }) {
-  return (
-    <span className='inline-flex items-center gap-1 border-2 border-ink bg-lime px-2 py-0.5 text-sm font-medium text-ink'>
-      {label}
-      <button
-        onClick={onRemove}
-        className='grid h-4 w-4 place-items-center hover:bg-ink hover:text-cream'
-        aria-label={`Remove ${label}`}
-      >
-        <X size={10} strokeWidth={3} />
-      </button>
-    </span>
-  )
-}
-
-/* ------------------------- Language sub-block ----------------------- */
-
-function LanguageGroup ({
-  title,
-  suggestions,
-  values,
-  onChange
-}: {
-  title: string
-  suggestions: string[]
-  values: string[]
-  onChange: (next: string[]) => void
-}) {
-  const [query, setQuery] = useState('')
-
-  const filtered = useMemo(() => {
-    const q = query.trim().toLowerCase()
-    if (!q) return []
-    return suggestions.filter(
-      s => s.toLowerCase().includes(q) && !values.includes(s)
-    )
-  }, [query, suggestions, values])
-
-  const add = (v: string) => {
-    const t = v.trim()
-    if (!t || values.includes(t)) return
-    onChange([...values, t])
-    setQuery('')
-  }
-
-  return (
-    <div className='boxy-xs bg-cream rounded-sm'>
-      <div className='flex items-center justify-between border-b-1 border-ink px-3 py-2'>
-        <h5 className='font-display text-base font-bold text-ink lowercase'>
-          {title}
-        </h5>
-      </div>
-      <div className='space-y-2 p-3'>
-        <div className='flex items-center gap-2 border-1 border-ink bg-cream px-2'>
-          <Search size={14} className='text-ink' />
-          <input
-            value={query}
-            onChange={e => setQuery(e.target.value)}
-            onKeyDown={e => {
-              if (e.key === 'Enter') {
-                e.preventDefault()
-                add(query)
-              }
-            }}
-            placeholder='search'
-            className='w-full bg-transparent py-1.5 text-sm text-ink outline-none placeholder:text-muted-foreground'
-          />
-          {query && (
-            <button
-              onClick={() => add(query)}
-              className='grid h-6 w-6 place-items-center border border-ink hover:bg-lime'
-              aria-label='Add'
-            >
-              <Plus size={14} strokeWidth={3} />
-            </button>
-          )}
-        </div>
-
-        {filtered.length > 0 && (
-          <div className='flex flex-wrap gap-1.5 border-2 border-dashed border-ink/40 p-2'>
-            {filtered.map(s => (
-              <button
-                key={s}
-                onClick={() => add(s)}
-                className='inline-flex items-center gap-1 border-2 border-ink bg-cream px-2 py-0.5 text-xs font-medium text-ink hover:bg-lime'
-              >
-                {s} <Plus size={10} strokeWidth={3} />
-              </button>
-            ))}
-          </div>
-        )}
-
-        <div className='flex flex-wrap gap-1.5'>
-          {values.length === 0 ? (
-            <span className='text-xs text-muted-foreground'>
-              nothing added yet
-            </span>
-          ) : (
-            values.map(v => (
-              <TagPill
-                key={v}
-                label={v}
-                onRemove={() => onChange(values.filter(x => x !== v))}
-              />
-            ))
-          )}
-        </div>
-      </div>
-    </div>
-  )
-}
-
-/* ------------------------------ Main ------------------------------- */
+import { useState } from 'react'
+import { AnimatePresence } from 'framer-motion'
+import { Plus, Minus } from 'lucide-react'
+import SectionCard from './SectionCard'
+import TlanguageGroup from './languageGroup'
+import ToolsInput from './ToolsInput'
+import Contact from './Contact'
+import TagPill from './TagPill'
+import {
+  BACKEND_SUGGESTIONS,
+  FRONTEND_SUGGESTIONS,
+  OS_OPTIONS,
+  cx,
+  SECTION_LIST,
+  type ContactLink,
+  type LanguageState,
+  type ReadmeTemplate,
+  type SectionKey,
+  type UptimeState
+} from './editor-state'
 
 export default function TemplateEditor () {
   const [active, setActive] = useState<SectionKey[]>([])
@@ -261,7 +48,7 @@ export default function TemplateEditor () {
     setActive(a => a.filter(x => x !== k))
     setTemplate(t => {
       const next = { ...t }
-      delete next[k as keyof ReadmeTemplate]
+      delete next[k as keyof typeof next]
       return next
     })
   }
@@ -269,7 +56,6 @@ export default function TemplateEditor () {
   const toggle = (k: SectionKey) =>
     isActive(k) ? removeSection(k) : addSection(k)
 
-  /* --------- update helpers --------- */
   const updateLanguage = (patch: Partial<LanguageState>) =>
     setTemplate(t => ({
       ...t,
@@ -279,7 +65,6 @@ export default function TemplateEditor () {
   return (
     <div className='min-h-screen bg-background bg-grid boxy px-4 py-10'>
       <div className='mx-auto max-w-6xl'>
-        {/* Top bar */}
         <div className='boxy mb-6 flex items-center justify-between bg-cream px-4 py-3'>
           <div className='flex items-center gap-3 text-ink'>
             <span className='font-display text-xl font-bold'>Edit</span>
@@ -297,7 +82,6 @@ export default function TemplateEditor () {
         </div>
 
         <div className='grid gap-6 md:grid-cols-[280px_1fr]'>
-          {/* ---------------- LEFT: section picker ---------------- */}
           <aside className='boxy h-fit md:min-h-[520px] bg-cream p-4'>
             <h3 className='font-display mb-3 text-xl font-bold text-ink lowercase'>
               sections
@@ -328,7 +112,6 @@ export default function TemplateEditor () {
             </div>
           </aside>
 
-          {/* ---------------- RIGHT: editor panel ---------------- */}
           <section className='boxy min-h-[520px] bg-cream p-4'>
             {active.length === 0 ? (
               <div className='grid h-full min-h-[380px] place-items-center text-center'>
@@ -357,13 +140,13 @@ export default function TemplateEditor () {
                           onRemove={() => removeSection(k)}
                         >
                           <div className='grid gap-3 md:grid-cols-2'>
-                            <LanguageGroup
+                            <TlanguageGroup
                               title='frontend'
                               suggestions={FRONTEND_SUGGESTIONS}
                               values={lang.frontend}
                               onChange={v => updateLanguage({ frontend: v })}
                             />
-                            <LanguageGroup
+                            <TlanguageGroup
                               title='backend'
                               suggestions={BACKEND_SUGGESTIONS}
                               values={lang.backend}
@@ -407,55 +190,7 @@ export default function TemplateEditor () {
                           title='contact'
                           onRemove={() => removeSection(k)}
                         >
-                          <div className='space-y-2'>
-                            {list.map((c, i) => (
-                              <div
-                                key={c.id}
-                                className='flex flex-wrap items-center gap-2'
-                              >
-                                <input
-                                  value={c.name}
-                                  onChange={e => {
-                                    const copy = [...list]
-                                    copy[i] = { ...c, name: e.target.value }
-                                    update(copy)
-                                  }}
-                                  placeholder='Name'
-                                  className='w-24 boxy-xs border-ink bg-cream px-2 py-1.5 text-sm text-ink outline-none placeholder:text-muted-foreground'
-                                />
-                                <input
-                                  value={c.url}
-                                  onChange={e => {
-                                    const copy = [...list]
-                                    copy[i] = { ...c, url: e.target.value }
-                                    update(copy)
-                                  }}
-                                  placeholder='https://x.com/10xdhruv'
-                                  className='min-w-0 flex-1 boxy-xs bg-cream px-2 py-1.5 text-sm text-ink outline-none placeholder:text-muted-foreground'
-                                />
-                                <button
-                                  onClick={() =>
-                                    update(list.filter(x => x.id !== c.id))
-                                  }
-                                  className='grid h-8 w-8 place-items-center boxy-xs bg-cream text-ink hover:bg-lime'
-                                  aria-label='Remove contact'
-                                >
-                                  <X size={14} strokeWidth={3} />
-                                </button>
-                              </div>
-                            ))}
-                            <button
-                              onClick={() =>
-                                update([
-                                  ...list,
-                                  { id: uid(), name: '', url: '' }
-                                ])
-                              }
-                              className='inline-flex items-center gap-1 border-2 border-ink bg-lime px-3 py-1.5 text-sm font-bold text-ink hover:bg-mantis'
-                            >
-                              <Plus size={14} strokeWidth={3} /> add social
-                            </button>
-                          </div>
+                          <Contact values={list} onChange={update} />
                         </SectionCard>
                       )
                     }
@@ -478,16 +213,23 @@ export default function TemplateEditor () {
                     if (k === 'os') {
                       const list = template.os ?? []
                       const toggle = (o: string) =>
-                        setTemplate(t => ({
-                          ...t,
-                          os: list.includes(o)
-                            ? list.filter(x => x !== o)
-                            : [...list, o]
-                        }))
+                        setTemplate(t => {
+                          const current = t.os ?? []
+                          return {
+                            ...t,
+                            os: current.includes(o)
+                              ? current.filter(x => x !== o)
+                              : [...current, o]
+                          }
+                        })
                       const addCustom = (v: string) => {
-                        const t = v.trim()
-                        if (!t || list.includes(t)) return
-                        setTemplate(s => ({ ...s, os: [...list, t] }))
+                        const value = v.trim()
+                        if (!value) return
+                        setTemplate(s => {
+                          const current = s.os ?? []
+                          if (current.includes(value)) return s
+                          return { ...s, os: [...current, value] }
+                        })
                       }
                       return (
                         <SectionCard
@@ -500,9 +242,7 @@ export default function TemplateEditor () {
                               onKeyDown={e => {
                                 if (e.key === 'Enter') {
                                   e.preventDefault()
-                                  addCustom(
-                                    (e.target as HTMLInputElement).value
-                                  )
+                                  addCustom((e.target as HTMLInputElement).value)
                                   ;(e.target as HTMLInputElement).value = ''
                                 }
                               }}
@@ -523,7 +263,6 @@ export default function TemplateEditor () {
                             >
                               <Plus size={14} strokeWidth={3} />
                             </button>
-                            
                           </div>
 
                           <div className='flex flex-wrap gap-2'>
@@ -594,7 +333,7 @@ export default function TemplateEditor () {
                                 </span>
                                 <input
                                   inputMode='numeric'
-                                  value={(u as any)[f.key]}
+                                  value={(u as Record<string, string>)[f.key]}
                                   onChange={e =>
                                     upd({
                                       [f.key]: e.target.value.replace(/\D/g, '')
@@ -622,7 +361,6 @@ export default function TemplateEditor () {
           </section>
         </div>
 
-        {/* Debug: current template object */}
         <details className='boxy mt-6 bg-cream p-4'>
           <summary className='cursor-pointer font-display text-lg font-bold text-ink lowercase'>
             template object
@@ -631,62 +369,6 @@ export default function TemplateEditor () {
             {JSON.stringify(template, null, 2)}
           </pre>
         </details>
-      </div>
-    </div>
-  )
-}
-
-/* ------------------------ Tools free-input list ---------------------- */
-
-function ToolsInput ({
-  values,
-  onChange
-}: {
-  values: string[]
-  onChange: (next: string[]) => void
-}) {
-  const [draft, setDraft] = useState('')
-  const add = () => {
-    const t = draft.trim()
-    if (!t || values.includes(t)) return
-    onChange([...values, t])
-    setDraft('')
-  }
-  return (
-    <div className='space-y-2'>
-      <div className='flex items-center gap-2 boxy-xs border-ink bg-cream px-2'>
-        <input
-          value={draft}
-          onChange={e => setDraft(e.target.value)}
-          onKeyDown={e => {
-            if (e.key === 'Enter') {
-              e.preventDefault()
-              add()
-            }
-          }}
-          placeholder='figma, vscode, docker…'
-          className='w-full bg-transparent py-1.5 text-sm text-ink outline-none placeholder:text-muted-foreground'
-        />
-        <button
-          onClick={add}
-          className='grid h-7 w-7 place-items-center border border-ink hover:bg-lime'
-          aria-label='Add tool'
-        >
-          <Plus size={14} strokeWidth={3} />
-        </button>
-      </div>
-      <div className='flex flex-wrap gap-1.5'>
-        {values.length === 0 ? (
-          <span className='text-xs text-muted-foreground'>no tools yet</span>
-        ) : (
-          values.map(v => (
-            <TagPill
-              key={v}
-              label={v}
-              onRemove={() => onChange(values.filter(x => x !== v))}
-            />
-          ))
-        )}
       </div>
     </div>
   )

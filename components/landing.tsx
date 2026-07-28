@@ -4,7 +4,7 @@ import Navbar from './landing_ui/Navbar';
 import Hero from './landing_ui/Hero';
 import Features from './landing_ui/Features';
 import Footer from './landing_ui/Footer';
-import TemplateEditor from './templates/templateEditor';
+import TemplateEditor from './editor/templateEditor';
 
 export default function LandingPage() {
   return (
@@ -14,7 +14,7 @@ export default function LandingPage() {
         <Hero />
         <TemplateEditor />
         <Features />  {/* Feature + Gallery + Reviews + Faq */}
-        <Footer /> 
+        <Footer />
       </div>
     </main>
   )
