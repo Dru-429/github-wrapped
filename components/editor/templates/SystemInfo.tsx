@@ -157,6 +157,16 @@ export default function SystemInfo({
               <p className="text-cream">{t.about}</p>
             </div>
           )}
+          {t.bio?.trim() && (
+            <div className="mb-3">
+              <div className="mb-1 flex items-center gap-2 text-cream/60">
+                <span>-</span>
+                <span className="uppercase tracking-wide">Bio</span>
+                <span className="flex-1 border-t border-dashed border-cream/20" />
+              </div>
+              <div className="text-cream whitespace-pre-line leading-relaxed">{t.bio}</div>
+            </div>
+          )}
           <Section title="Contact" items={contactRows} />
           <Section title="GitHub Stats" items={statRows} />
           {t.quote?.trim() && (

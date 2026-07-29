@@ -138,13 +138,26 @@ export default function DevTerminal({
           </>
         )}
 
+        {!!t.bio?.trim() && (
+          <>
+            <Prompt>$</Prompt> cat /bio.md{"\n"}
+            {t.bio!.split("\n").map((line, idx) => (
+              <span key={idx}>
+                <Arrow /> {line}
+                {"\n"}
+              </span>
+            ))}
+            {"\n"}
+          </>
+        )}
+
         <Prompt>$</Prompt> ./show-stats.sh{"\n"}
         <Arrow /> Fetching data...
 
         {!!t.quote?.trim() && (
           <>
             {"\n\n"}
-            <Comment>{t.quote}</Comment>
+            <Comment>&ldquo;{t.quote}&rdquo;</Comment>
           </>
         )}
       </pre>

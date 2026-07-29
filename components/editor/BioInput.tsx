@@ -74,26 +74,12 @@ export default function BioInput({ value, onChange }: BioInputProps) {
     <div className="flex flex-col gap-3">
       {/* Helper prompt pills */}
       <div className="flex flex-wrap items-center gap-1.5 text-xs">
-        <span className="font-semibold text-muted-foreground mr-1">
-          Insert placeholder:
-        </span>
-        {BIO_PROMPTS.map((prompt) => {
-          const isUsed = value.includes(prompt.trim());
-          return (
-            <button
-              key={prompt}
-              type="button"
-              onClick={() => insertPrompt(prompt)}
-              className={`border-2 border-ink px-2 py-1 font-mono font-medium transition-all ${
-                isUsed
-                  ? "bg-cream text-muted-foreground opacity-60 line-through"
-                  : "bg-cream hover:bg-lime text-ink"
-              }`}
-            >
-              + {prompt.trim()}
-            </button>
-          );
-        })}
+        <div className="mt-1 flex items-center justify-between text-[13px] text-muted-foreground">
+          <span className="inline-flex items-center gap-1 italic">
+            <CornerDownLeft size={12} /> Press <kbd className="border border-ink bg-cream px-1 font-mono font-bold text-ink">TAB</kbd> to auto-complete next line prompt
+          </span>
+        </div>
+
         <button
           type="button"
           onClick={autofillAll}
@@ -114,13 +100,9 @@ export default function BioInput({ value, onChange }: BioInputProps) {
           rows={6}
           className="w-full resize-y boxy-xs border-ink bg-cream p-3 font-mono text-xs text-ink outline-none placeholder:text-muted-foreground/60 leading-relaxed"
         />
-        <div className="mt-1 flex items-center justify-between text-[11px] text-muted-foreground">
-          <span className="inline-flex items-center gap-1 italic">
-            <CornerDownLeft size={12} /> Press <kbd className="border border-ink bg-cream px-1 font-mono font-bold text-ink">TAB</kbd> inside editor to auto-complete next line prompt
-          </span>
-          <span className="font-mono">{value.split("\n").filter(Boolean).length} lines</span>
-        </div>
+
       </div>
     </div>
   );
 }
+ 
