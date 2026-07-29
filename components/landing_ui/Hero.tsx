@@ -3,19 +3,13 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
-import {
-  ArrowRight,
-  Star,
-  Users,
-} from 'lucide-react'
-
+import { ArrowRight, FileCode2, Star, Users } from 'lucide-react'
 
 /* Hero                                                               */
 const heroContainer = {
   hidden: {},
   show: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } }
 }
-
 
 const heroItem = {
   hidden: { opacity: 0, y: 24 },
@@ -28,60 +22,78 @@ const heroItem = {
 
 const LoadingUnderscores = () => {
   return (
-    <span className="inline-flex gap-1 items-center" style={{ height: '14px', lineHeight: '10px' }}>
-      {[0, 1, 2].map((i) => (
+    <span
+      className='inline-flex gap-1 items-center'
+      style={{ height: '14px', lineHeight: '10px' }}
+    >
+      {[0, 1, 2].map(i => (
         <motion.span
           key={i}
           animate={{
-            y: [2, -4, 2],
+            y: [2, -4, 2]
           }}
           transition={{
             duration: 0.9,
             repeat: Infinity,
             delay: i * 0.2,
-            ease: "easeInOut",
+            ease: 'easeInOut'
           }}
-          className="inline-block font-black text-sm"
+          className='inline-block font-black text-sm'
         >
           _
         </motion.span>
       ))}
     </span>
-  );
-};
+  )
+}
 
-export default function Hero() {
+function parseUsername(raw: string): string {
+  const trimmed = raw.trim();
+  if (!trimmed) return "";
+  try {
+    if (/^https?:\/\//i.test(trimmed)) {
+      const u = new URL(trimmed);
+      const seg = u.pathname.split("/").filter(Boolean)[0];
+      return seg ?? "";
+    }
+  } catch {
+    // fall through
+  }
+  return trimmed.replace(/^@/, "").split("/")[0];
+}
+
+export default function Hero () {
   const [handle, setHandle] = useState('')
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
-  const [totalWrapped, setTotalWrapped] = useState<number | null>(null);
+  const [totalWrapped, setTotalWrapped] = useState<number | null>(null)
 
   // Function to load the initial stats metric
   const fetchCurrentCount = async () => {
     try {
-      const response = await fetch('/api/count');
-      const data = await response.json();
-      setTotalWrapped(data.count);
+      const response = await fetch('/api/count')
+      const data = await response.json()
+      setTotalWrapped(data.count)
     } catch (err) {
-      console.error("Error reading data metric tracker:", err);
+      console.error('Error reading data metric tracker:', err)
     }
-  };
+  }
 
   const handleWrappedGenerated = async () => {
     try {
-      const response = await fetch('/api/count', { method: 'POST' });
-      const data = await response.json();
+      const response = await fetch('/api/count', { method: 'POST' })
+      const data = await response.json()
       if (data.count) {
-        setTotalWrapped(data.count);
+        setTotalWrapped(data.count)
       }
     } catch (err) {
-      console.error("Failed to bump analytics tracker:", err);
+      console.error('Failed to bump analytics tracker:', err)
     }
-  };
+  }
 
   useEffect(() => {
-    fetchCurrentCount();
-  }, []);
+    fetchCurrentCount()
+  }, [])
 
   const handleWrap = (e: React.FormEvent) => {
     e.preventDefault()
@@ -121,7 +133,11 @@ export default function Hero() {
           <Users className='h-3.5 w-3.5' />
           <span>
             <span className='font-display text-sm inline-flex items-center justify-center min-w-[28px]'>
-              {totalWrapped !== null ? totalWrapped.toLocaleString() : <LoadingUnderscores />}
+              {totalWrapped !== null ? (
+                totalWrapped.toLocaleString()
+              ) : (
+                <LoadingUnderscores />
+              )}
             </span>{' '}
             devs flexed
           </span>
@@ -187,6 +203,27 @@ export default function Hero() {
               <ArrowRight className='h-4 w-4 transition-transform group-hover:translate-x-1' />
             )}
           </button>
+          <button
+            type='submit'
+            disabled={isLoading || !handle.trim()}
+            onClick={handleWrappedGenerated}
+            className='boxy-sm group inline-flex items-center justify-center gap-2 bg-[var(--nuit)] px-6 py-4 text-sm font-bold uppercase tracking-wider text-[var(--cream)] transition-transform hover:-translate-x-0.5 hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-x-0 disabled:hover:translate-y-0'
+          >
+            {isLoading ? 'Loading...' : 'Get my wrapped'}
+            {!isLoading && (
+              <ArrowRight className='h-4 w-4 transition-transform group-hover:translate-x-1' />
+            )}
+          </button>
+            <button
+              type='button'
+              // onClick={goToReadme}
+              disabled={!parseUsername(handle)}
+              className='boxy-sm group inline-flex items-center justify-center gap-2 bg-[var(--lime)] px-6 py-3 text-sm font-bold uppercase tracking-wider text-ink transition-transform hover:-translate-x-0.5 hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-x-0 disabled:hover:translate-y-0'
+            >
+              <FileCode2 className='h-4 w-4' />
+              Generate Readme
+              <ArrowRight className='h-4 w-4 transition-transform group-hover:translate-x-1' />
+            </button>
         </motion.form>
       </motion.div>
     </section>
