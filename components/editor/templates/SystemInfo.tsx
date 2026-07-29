@@ -1,10 +1,10 @@
 import { useRef } from "react";
 import { Copy } from "lucide-react";
-import type { ReadmeTemplate } from "./templateEditor";
+import type { ReadmeTemplate } from "../editor-state";
+
 
 /**
  * SystemInfo — neofetch-style README with ASCII art on the left
- * and a key/value info block on the right. Skips missing fields.
  */
 export default function SystemInfo({
   templateObject,

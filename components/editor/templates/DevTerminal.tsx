@@ -1,6 +1,7 @@
 import { Copy } from "lucide-react";
 import { useMemo, useRef } from "react";
-import type { ReadmeTemplate } from "./templateEditor";
+import type { ReadmeTemplate } from "../editor-state";
+// import type { ReadmeTemplate } from "./templateEditor";
 
 /**
  * DevTerminal — bash-style README preview.

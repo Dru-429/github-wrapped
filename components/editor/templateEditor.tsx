@@ -9,6 +9,7 @@ import TlanguageGroup from './languageGroup'
 import ToolsInput from './ToolsInput'
 import Contact from './Contact'
 import TagPill from './TagPill'
+import Preview from './preview'
 import {
   BACKEND_SUGGESTIONS,
   FRONTEND_SUGGESTIONS,
@@ -22,6 +23,12 @@ import {
   type UptimeState
 } from './editor-state'
 
+// Hardcoded until /readme/[username]/[template] pages are wired up.
+const HARDCODED_USERNAME = 'dru-429'
+const HARDCODED_TEMPLATE_NO = 2
+
+type Tab = 'edit' | 'preview'
+
 type TemplateEditorProps = {
   template: ReadmeTemplate
   setTemplateAction: Dispatch<SetStateAction<ReadmeTemplate>>
@@ -31,6 +38,7 @@ export default function TemplateEditor ({
   template,
   setTemplateAction
 }: TemplateEditorProps) {
+  const [tab, setTab] = useState<Tab>('edit')
   const [active, setActive] = useState<SectionKey[]>([])
 
   const isActive = (k: SectionKey) => active.includes(k)
@@ -75,9 +83,27 @@ export default function TemplateEditor ({
       <div className='mx-auto max-w-6xl'>
         <div className='boxy mb-6 flex items-center justify-between bg-cream px-4 py-3'>
           <div className='flex items-center gap-3 text-ink'>
-            <span className='font-display text-xl font-bold'>Edit</span>
+            <button
+              type='button'
+              onClick={() => setTab('edit')}
+              className={cx(
+                'font-display text-xl font-bold transition-opacity',
+                tab === 'edit' ? 'text-ink' : 'text-muted-foreground opacity-50 hover:opacity-80'
+              )}
+            >
+              Edit
+            </button>
             <span className='opacity-40'>|</span>
-            <span className='text-sm text-muted-foreground'>Preview</span>
+            <button
+              type='button'
+              onClick={() => setTab('preview')}
+              className={cx(
+                'font-display text-xl font-bold transition-opacity',
+                tab === 'preview' ? 'text-ink' : 'text-muted-foreground opacity-50 hover:opacity-80'
+              )}
+            >
+              Preview
+            </button>
           </div>
           <button
             onClick={() => {
@@ -89,285 +115,297 @@ export default function TemplateEditor ({
           </button>
         </div>
 
-        <div className='grid gap-6 md:grid-cols-[280px_1fr]'>
-          <aside className='boxy h-fit md:min-h-[520px] bg-cream p-4'>
-            <h3 className='font-display mb-3 text-xl font-bold text-ink lowercase'>
-              sections
-            </h3>
-            <div className='flex flex-col gap-2'>
-              {SECTION_LIST.map(s => {
-                const on = isActive(s.key)
-                return (
-                  <button
-                    key={s.key}
-                    onClick={() => toggle(s.key)}
-                    className={cx(
-                      'flex items-center justify-between border-2 border-ink px-3 py-2 text-left text-sm font-semibold text-ink transition-transform hover:-translate-y-[2px]',
-                      on ? 'bg-lime' : 'bg-cream hover:bg-cream/70'
-                    )}
-                  >
-                    <span>{s.label}</span>
-                    <span className='grid h-5 w-5 place-items-center border-2 border-ink bg-cream'>
-                      {on ? (
-                        <Minus size={12} strokeWidth={3} />
-                      ) : (
-                        <Plus size={12} strokeWidth={3} />
+        {tab === 'preview' ? (
+          <div className='boxy min-h-[520px] bg-cream p-4'>
+            <Preview
+              templateObject={template}
+              templateNo={HARDCODED_TEMPLATE_NO}
+              handle={HARDCODED_USERNAME}
+              name={HARDCODED_USERNAME}
+              repoName='README.md'
+            />
+          </div>
+        ) : (
+          <div className='grid gap-6 md:grid-cols-[280px_1fr]'>
+            <aside className='boxy h-fit md:min-h-[520px] bg-cream p-4'>
+              <h3 className='font-display mb-3 text-xl font-bold text-ink lowercase'>
+                sections
+              </h3>
+              <div className='flex flex-col gap-2'>
+                {SECTION_LIST.map(s => {
+                  const on = isActive(s.key)
+                  return (
+                    <button
+                      key={s.key}
+                      onClick={() => toggle(s.key)}
+                      className={cx(
+                        'flex items-center justify-between border-2 border-ink px-3 py-2 text-left text-sm font-semibold text-ink transition-transform hover:-translate-y-[2px]',
+                        on ? 'bg-lime' : 'bg-cream hover:bg-cream/70'
                       )}
-                    </span>
-                  </button>
-                )
-              })}
-            </div>
-          </aside>
+                    >
+                      <span>{s.label}</span>
+                      <span className='grid h-5 w-5 place-items-center border-2 border-ink bg-cream'>
+                        {on ? (
+                          <Minus size={12} strokeWidth={3} />
+                        ) : (
+                          <Plus size={12} strokeWidth={3} />
+                        )}
+                      </span>
+                    </button>
+                  )
+                })}
+              </div>
+            </aside>
 
-          <section className='boxy min-h-[520px] bg-cream p-4'>
-            {active.length === 0 ? (
-              <div className='grid h-full min-h-[380px] place-items-center text-center'>
-                <div>
-                  <p className='font-display text-2xl font-bold text-ink lowercase'>
-                    pick a section on the left
-                  </p>
-                  <p className='mt-1 text-sm text-muted-foreground'>
-                    Everything you add gets saved into the template object.
-                  </p>
+            <section className='boxy min-h-[520px] bg-cream p-4'>
+              {active.length === 0 ? (
+                <div className='grid h-full min-h-[380px] place-items-center text-center'>
+                  <div>
+                    <p className='font-display text-2xl font-bold text-ink lowercase'>
+                      pick a section on the left
+                    </p>
+                    <p className='mt-1 text-sm text-muted-foreground'>
+                      Everything you add gets saved into the template object.
+                    </p>
+                  </div>
                 </div>
-              </div>
-            ) : (
-              <div className='flex flex-col gap-4'>
-                <AnimatePresence initial={false}>
-                  {active.map(k => {
-                    if (k === 'language') {
-                      const lang = template.language ?? {
-                        frontend: [],
-                        backend: []
+              ) : (
+                <div className='flex flex-col gap-4'>
+                  <AnimatePresence initial={false}>
+                    {active.map(k => {
+                      if (k === 'language') {
+                        const lang = template.language ?? {
+                          frontend: [],
+                          backend: []
+                        }
+                        return (
+                          <SectionCard
+                            key={k}
+                            title='language'
+                            onRemove={() => removeSection(k)}
+                          >
+                            <div className='grid gap-3 md:grid-cols-2'>
+                              <TlanguageGroup
+                                title='frontend'
+                                suggestions={FRONTEND_SUGGESTIONS}
+                                values={lang.frontend}
+                                onChange={v => updateLanguage({ frontend: v })}
+                              />
+                              <TlanguageGroup
+                                title='backend'
+                                suggestions={BACKEND_SUGGESTIONS}
+                                values={lang.backend}
+                                onChange={v => updateLanguage({ backend: v })}
+                              />
+                            </div>
+                          </SectionCard>
+                        )
                       }
-                      return (
-                        <SectionCard
-                          key={k}
-                          title='language'
-                          onRemove={() => removeSection(k)}
-                        >
-                          <div className='grid gap-3 md:grid-cols-2'>
-                            <TlanguageGroup
-                              title='frontend'
-                              suggestions={FRONTEND_SUGGESTIONS}
-                              values={lang.frontend}
-                              onChange={v => updateLanguage({ frontend: v })}
-                            />
-                            <TlanguageGroup
-                              title='backend'
-                              suggestions={BACKEND_SUGGESTIONS}
-                              values={lang.backend}
-                              onChange={v => updateLanguage({ backend: v })}
-                            />
-                          </div>
-                        </SectionCard>
-                      )
-                    }
 
-                    if (k === 'about') {
-                      return (
-                        <SectionCard
-                          key={k}
-                          title='about'
-                          onRemove={() => removeSection(k)}
-                        >
-                          <textarea
-                            value={template.about ?? ''}
-                            onChange={e =>
-                              setTemplateAction(t => ({
-                                ...t,
-                                about: e.target.value
-                              }))
+                      if (k === 'about') {
+                        return (
+                          <SectionCard
+                            key={k}
+                            title='about'
+                            onRemove={() => removeSection(k)}
+                          >
+                            <textarea
+                              value={template.about ?? ''}
+                              onChange={e =>
+                                setTemplateAction(t => ({
+                                  ...t,
+                                  about: e.target.value
+                                }))
+                              }
+                              placeholder='type here…'
+                              rows={5}
+                              className='w-full resize-y boxy-xs border-ink bg-cream px-3 py-2 text-sm text-ink outline-none placeholder:text-muted-foreground'
+                            />
+                          </SectionCard>
+                        )
+                      }
+
+                      if (k === 'contact') {
+                        const list = template.contact ?? []
+                        const update = (next: ContactLink[]) =>
+                          setTemplateAction(t => ({ ...t, contact: next }))
+                        return (
+                          <SectionCard
+                            key={k}
+                            title='contact'
+                            onRemove={() => removeSection(k)}
+                          >
+                            <Contact values={list} onChange={update} />
+                          </SectionCard>
+                        )
+                      }
+
+                      if (k === 'tools') {
+                        const list = template.tools ?? []
+                        const update = (next: string[]) =>
+                          setTemplateAction(t => ({ ...t, tools: next }))
+                        return (
+                          <SectionCard
+                            key={k}
+                            title='tools'
+                            onRemove={() => removeSection(k)}
+                          >
+                            <ToolsInput values={list} onChange={update} />
+                          </SectionCard>
+                        )
+                      }
+
+                      if (k === 'os') {
+                        const list = template.os ?? []
+                        const toggle = (o: string) =>
+                          setTemplateAction(t => {
+                            const current = t.os ?? []
+                            return {
+                              ...t,
+                              os: current.includes(o)
+                                ? current.filter(x => x !== o)
+                                : [...current, o]
                             }
-                            placeholder='type here…'
-                            rows={5}
-                            className='w-full resize-y boxy-xs border-ink bg-cream px-3 py-2 text-sm text-ink outline-none placeholder:text-muted-foreground'
-                          />
-                        </SectionCard>
-                      )
-                    }
-
-                    if (k === 'contact') {
-                      const list = template.contact ?? []
-                      const update = (next: ContactLink[]) =>
-                        setTemplateAction(t => ({ ...t, contact: next }))
-                      return (
-                        <SectionCard
-                          key={k}
-                          title='contact'
-                          onRemove={() => removeSection(k)}
-                        >
-                          <Contact values={list} onChange={update} />
-                        </SectionCard>
-                      )
-                    }
-
-                    if (k === 'tools') {
-                      const list = template.tools ?? []
-                      const update = (next: string[]) =>
-                        setTemplateAction(t => ({ ...t, tools: next }))
-                      return (
-                        <SectionCard
-                          key={k}
-                          title='tools'
-                          onRemove={() => removeSection(k)}
-                        >
-                          <ToolsInput values={list} onChange={update} />
-                        </SectionCard>
-                      )
-                    }
-
-                    if (k === 'os') {
-                      const list = template.os ?? []
-                      const toggle = (o: string) =>
-                        setTemplateAction(t => {
-                          const current = t.os ?? []
-                          return {
-                            ...t,
-                            os: current.includes(o)
-                              ? current.filter(x => x !== o)
-                              : [...current, o]
-                          }
-                        })
-                      const addCustom = (v: string) => {
-                        const value = v.trim()
-                        if (!value) return
-                        setTemplateAction(s => {
-                          const current = s.os ?? []
-                          if (current.includes(value)) return s
-                          return { ...s, os: [...current, value] }
-                        })
-                      }
-                      return (
-                        <SectionCard
-                          key={k}
-                          title='os'
-                          onRemove={() => removeSection(k)}
-                        >
-                          <div className='my-3 flex items-center gap-2 border-2 border-ink bg-cream px-2'>
-                            <input
-                              onKeyDown={e => {
-                                if (e.key === 'Enter') {
-                                  e.preventDefault()
-                                  addCustom((e.target as HTMLInputElement).value)
-                                  ;(e.target as HTMLInputElement).value = ''
-                                }
-                              }}
-                              placeholder='type your own'
-                              className='w-full bg-transparent py-1.5 text-sm text-ink outline-none placeholder:text-muted-foreground'
-                            />
-                            <button
-                              onClick={e => {
-                                const input =
-                                  e.currentTarget.parentElement?.querySelector(
-                                    'input'
-                                  ) as HTMLInputElement
-                                addCustom(input.value)
-                                input.value = ''
-                              }}
-                              className='grid h-7 w-7 place-items-center border-l-2 border-ink hover:bg-lime'
-                              aria-label='Add custom OS'
-                            >
-                              <Plus size={14} strokeWidth={3} />
-                            </button>
-                          </div>
-
-                          <div className='flex flex-wrap gap-2'>
-                            {OS_OPTIONS.map(o => {
-                              const on = list.includes(o)
-                              return (
-                                <button
-                                  key={o}
-                                  onClick={() => toggle(o)}
-                                  className={cx(
-                                    'border-2 border-ink px-3 py-1.5 text-sm font-semibold text-ink',
-                                    on
-                                      ? 'bg-lime'
-                                      : 'bg-cream hover:bg-cream/70'
-                                  )}
-                                >
-                                  {o}
-                                </button>
-                              )
-                            })}
-                          </div>
-
-                          <div className='mt-2 flex flex-wrap gap-1.5'>
-                            {list.length === 0 ? (
-                              <span className='text-xs text-muted-foreground'>
-                                no OS selected yet
-                              </span>
-                            ) : (
-                              list.map(o => (
-                                <TagPill
-                                  key={o}
-                                  label={o}
-                                  onRemove={() => toggle(o)}
-                                />
-                              ))
-                            )}
-                          </div>
-                        </SectionCard>
-                      )
-                    }
-
-                    if (k === 'uptime') {
-                      const u = template.uptime ?? {
-                        years: '',
-                        months: '',
-                        days: ''
-                      }
-                      const upd = (patch: Partial<UptimeState>) =>
-                        setTemplateAction(t => ({ ...t, uptime: { ...u, ...patch } }))
-                      return (
-                        <SectionCard
-                          key={k}
-                          title='uptime / age'
-                          onRemove={() => removeSection(k)}
-                        >
-                          <div className='grid grid-cols-3 gap-2'>
-                            {[
-                              { key: 'years', label: 'years' },
-                              { key: 'months', label: 'months' },
-                              { key: 'days', label: 'days' }
-                            ].map(f => (
-                              <label
-                                key={f.key}
-                                className='flex flex-col gap-1'
-                              >
-                                <span className='text-xs font-semibold uppercase tracking-wide text-muted-foreground'>
-                                  {f.label}
-                                </span>
-                                <input
-                                  inputMode='numeric'
-                                  value={(u as Record<string, string>)[f.key]}
-                                  onChange={e =>
-                                    upd({
-                                      [f.key]: e.target.value.replace(/\D/g, '')
-                                    } as Partial<UptimeState>)
+                          })
+                        const addCustom = (v: string) => {
+                          const value = v.trim()
+                          if (!value) return
+                          setTemplateAction(s => {
+                            const current = s.os ?? []
+                            if (current.includes(value)) return s
+                            return { ...s, os: [...current, value] }
+                          })
+                        }
+                        return (
+                          <SectionCard
+                            key={k}
+                            title='os'
+                            onRemove={() => removeSection(k)}
+                          >
+                            <div className='my-3 flex items-center gap-2 border-2 border-ink bg-cream px-2'>
+                              <input
+                                onKeyDown={e => {
+                                  if (e.key === 'Enter') {
+                                    e.preventDefault()
+                                    addCustom((e.target as HTMLInputElement).value)
+                                    ;(e.target as HTMLInputElement).value = ''
                                   }
-                                  placeholder='0'
-                                  className='border border-ink bg-cream px-3 py-2 text-center text-lg font-bold text-ink outline-none'
-                                />
-                              </label>
-                            ))}
-                          </div>
-                          <p className='mt-2 text-xs text-muted-foreground'>
-                            saved as: {u.years || 0} yr, {u.months || 0} mons,{' '}
-                            {u.days || 0} days
-                          </p>
-                        </SectionCard>
-                      )
-                    }
+                                }}
+                                placeholder='type your own'
+                                className='w-full bg-transparent py-1.5 text-sm text-ink outline-none placeholder:text-muted-foreground'
+                              />
+                              <button
+                                onClick={e => {
+                                  const input =
+                                    e.currentTarget.parentElement?.querySelector(
+                                      'input'
+                                    ) as HTMLInputElement
+                                  addCustom(input.value)
+                                  input.value = ''
+                                }}
+                                className='grid h-7 w-7 place-items-center border-l-2 border-ink hover:bg-lime'
+                                aria-label='Add custom OS'
+                              >
+                                <Plus size={14} strokeWidth={3} />
+                              </button>
+                            </div>
 
-                    return null
-                  })}
-                </AnimatePresence>
-              </div>
-            )}
-          </section>
-        </div>
+                            <div className='flex flex-wrap gap-2'>
+                              {OS_OPTIONS.map(o => {
+                                const on = list.includes(o)
+                                return (
+                                  <button
+                                    key={o}
+                                    onClick={() => toggle(o)}
+                                    className={cx(
+                                      'border-2 border-ink px-3 py-1.5 text-sm font-semibold text-ink',
+                                      on
+                                        ? 'bg-lime'
+                                        : 'bg-cream hover:bg-cream/70'
+                                    )}
+                                  >
+                                    {o}
+                                  </button>
+                                )
+                              })}
+                            </div>
+
+                            <div className='mt-2 flex flex-wrap gap-1.5'>
+                              {list.length === 0 ? (
+                                <span className='text-xs text-muted-foreground'>
+                                  no OS selected yet
+                                </span>
+                              ) : (
+                                list.map(o => (
+                                  <TagPill
+                                    key={o}
+                                    label={o}
+                                    onRemove={() => toggle(o)}
+                                  />
+                                ))
+                              )}
+                            </div>
+                          </SectionCard>
+                        )
+                      }
+
+                      if (k === 'uptime') {
+                        const u = template.uptime ?? {
+                          years: '',
+                          months: '',
+                          days: ''
+                        }
+                        const upd = (patch: Partial<UptimeState>) =>
+                          setTemplateAction(t => ({ ...t, uptime: { ...u, ...patch } }))
+                        return (
+                          <SectionCard
+                            key={k}
+                            title='uptime / age'
+                            onRemove={() => removeSection(k)}
+                          >
+                            <div className='grid grid-cols-3 gap-2'>
+                              {[
+                                { key: 'years', label: 'years' },
+                                { key: 'months', label: 'months' },
+                                { key: 'days', label: 'days' }
+                              ].map(f => (
+                                <label
+                                  key={f.key}
+                                  className='flex flex-col gap-1'
+                                >
+                                  <span className='text-xs font-semibold uppercase tracking-wide text-muted-foreground'>
+                                    {f.label}
+                                  </span>
+                                  <input
+                                    inputMode='numeric'
+                                    value={(u as Record<string, string>)[f.key]}
+                                    onChange={e =>
+                                      upd({
+                                        [f.key]: e.target.value.replace(/\D/g, '')
+                                      } as Partial<UptimeState>)
+                                    }
+                                    placeholder='0'
+                                    className='border border-ink bg-cream px-3 py-2 text-center text-lg font-bold text-ink outline-none'
+                                  />
+                                </label>
+                              ))}
+                            </div>
+                            <p className='mt-2 text-xs text-muted-foreground'>
+                              saved as: {u.years || 0} yr, {u.months || 0} mons,{' '}
+                              {u.days || 0} days
+                            </p>
+                          </SectionCard>
+                        )
+                      }
+
+                      return null
+                    })}
+                  </AnimatePresence>
+                </div>
+              )}
+            </section>
+          </div>
+        )}
 
         <details className='boxy mt-6 bg-cream p-4'>
           <summary className='cursor-pointer font-display text-lg font-bold text-ink lowercase'>
