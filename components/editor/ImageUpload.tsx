@@ -120,7 +120,7 @@ export default function ImageUpload({ setTemplateAction }: ImageUploadProps) {
   };
 
   return (
-    <div className="max-h-screen bg-background bg-grid boxy py-10">
+    <div className="w-full bg-cream boxy p-4 md:p-6">
       <div className="mx-auto max-w-6xl">
         <div className="boxy mb-6 flex items-center justify-between bg-cream px-4 py-3">
           <div className="flex items-baseline gap-3">

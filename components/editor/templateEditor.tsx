@@ -23,7 +23,7 @@ import {
   type UptimeState
 } from './editor-state'
 
-// Hardcoded until /readme/[username]/[template] pages are wired up.
+// Default fallback parameters if props are omitted
 const HARDCODED_USERNAME = 'dru-429'
 const HARDCODED_TEMPLATE_NO = 2
 
@@ -32,11 +32,15 @@ type Tab = 'edit' | 'preview'
 type TemplateEditorProps = {
   template: ReadmeTemplate
   setTemplateAction: Dispatch<SetStateAction<ReadmeTemplate>>
+  username?: string
+  templateNo?: number
 }
 
 export default function TemplateEditor ({
   template,
-  setTemplateAction
+  setTemplateAction,
+  username = HARDCODED_USERNAME,
+  templateNo = HARDCODED_TEMPLATE_NO
 }: TemplateEditorProps) {
   const [tab, setTab] = useState<Tab>('edit')
   const [active, setActive] = useState<SectionKey[]>([])
@@ -79,7 +83,7 @@ export default function TemplateEditor ({
     }))
 
   return (
-    <div className='min-h-screen bg-background bg-grid boxy px-4 py-10'>
+    <div className='w-full boxy bg-cream p-4 md:p-6'>
       <div className='mx-auto max-w-6xl'>
         <div className='boxy mb-6 flex items-center justify-between bg-cream px-4 py-3'>
           <div className='flex items-center gap-3 text-ink'>
@@ -119,9 +123,9 @@ export default function TemplateEditor ({
           <div className='boxy min-h-[520px] bg-cream p-4'>
             <Preview
               templateObject={template}
-              templateNo={HARDCODED_TEMPLATE_NO}
-              handle={HARDCODED_USERNAME}
-              name={HARDCODED_USERNAME}
+              templateNo={templateNo}
+              handle={username}
+              name={username}
               repoName='README.md'
             />
           </div>
