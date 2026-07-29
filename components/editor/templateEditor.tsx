@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import type { Dispatch, SetStateAction } from 'react'
 import { AnimatePresence } from 'framer-motion'
 import { Plus, Minus } from 'lucide-react'
@@ -46,6 +46,41 @@ export default function TemplateEditor ({
 }: TemplateEditorProps) {
   const [tab, setTab] = useState<Tab>('edit')
   const [active, setActive] = useState<SectionKey[]>([])
+
+  // Automatically activate section cards when template object receives data (e.g. via fetch)
+  useEffect(() => {
+    if (!template) return
+    const keysToActivate: SectionKey[] = []
+
+    if (template.language && (template.language.frontend?.length || template.language.backend?.length)) {
+      keysToActivate.push('language')
+    }
+    if (template.about !== undefined && template.about.trim() !== '') {
+      keysToActivate.push('about')
+    }
+    if (template.bio !== undefined && template.bio.trim() !== '') {
+      keysToActivate.push('bio')
+    }
+    if (template.contact && template.contact.length > 0) {
+      keysToActivate.push('contact')
+    }
+    if (template.tools && template.tools.length > 0) {
+      keysToActivate.push('tools')
+    }
+    if (template.os && template.os.length > 0) {
+      keysToActivate.push('os')
+    }
+    if (template.uptime && (template.uptime.years || template.uptime.months || template.uptime.days)) {
+      keysToActivate.push('uptime')
+    }
+    if (template.quote !== undefined && template.quote.trim() !== '') {
+      keysToActivate.push('quote')
+    }
+
+    if (keysToActivate.length > 0) {
+      setActive(prev => Array.from(new Set([...prev, ...keysToActivate])))
+    }
+  }, [template])
 
   const isActive = (k: SectionKey) => active.includes(k)
 
