@@ -10,6 +10,8 @@ import ToolsInput from './ToolsInput'
 import Contact from './Contact'
 import TagPill from './TagPill'
 import Preview from './preview'
+import Quotes from './Quotes'
+import BioInput from './BioInput'
 import {
   BACKEND_SUGGESTIONS,
   FRONTEND_SUGGESTIONS,
@@ -55,11 +57,13 @@ export default function TemplateEditor ({
       if (k === 'language' && !next.language)
         next.language = { frontend: [], backend: [] }
       if (k === 'about' && next.about === undefined) next.about = ''
+      if (k === 'bio' && next.bio === undefined) next.bio = ''
       if (k === 'contact' && !next.contact) next.contact = []
       if (k === 'tools' && !next.tools) next.tools = []
       if (k === 'os' && !next.os) next.os = []
       if (k === 'uptime' && !next.uptime)
         next.uptime = { years: '', months: '', days: '' }
+      if (k === 'quote' && next.quote === undefined) next.quote = ''
       return next
     })
   }
@@ -224,6 +228,26 @@ export default function TemplateEditor ({
                               placeholder='type here…'
                               rows={5}
                               className='w-full resize-y boxy-xs border-ink bg-cream px-3 py-2 text-sm text-ink outline-none placeholder:text-muted-foreground'
+                            />
+                          </SectionCard>
+                        )
+                      }
+
+                      if (k === 'bio') {
+                        return (
+                          <SectionCard
+                            key={k}
+                            title='bio'
+                            onRemove={() => removeSection(k)}
+                          >
+                            <BioInput
+                              value={template.bio ?? ''}
+                              onChange={v =>
+                                setTemplateAction(t => ({
+                                  ...t,
+                                  bio: v
+                                }))
+                              }
                             />
                           </SectionCard>
                         )
@@ -398,6 +422,23 @@ export default function TemplateEditor ({
                               saved as: {u.years || 0} yr, {u.months || 0} mons,{' '}
                               {u.days || 0} days
                             </p>
+                          </SectionCard>
+                        )
+                      }
+
+                      if (k === 'quote') {
+                        return (
+                          <SectionCard
+                            key={k}
+                            title='quote'
+                            onRemove={() => removeSection(k)}
+                          >
+                            <Quotes
+                              value={template.quote ?? ''}
+                              onChange={next =>
+                                setTemplateAction(t => ({ ...t, quote: next }))
+                              }
+                            />
                           </SectionCard>
                         )
                       }

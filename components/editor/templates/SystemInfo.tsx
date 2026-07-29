@@ -2,6 +2,30 @@ import { useRef } from "react";
 import { Copy } from "lucide-react";
 import type { ReadmeTemplate } from "../editor-state";
 
+function Section ({
+  title,
+  items,
+}: {
+  title: string;
+  items: { label: string; value: string }[];
+}) {
+  if (!items.length) return null;
+  return (
+    <div className="mb-3">
+      <div className="mb-1 flex items-center gap-2 text-cream/60">
+        <span>-</span>
+        <span className="uppercase tracking-wide">{title}</span>
+        <span className="flex-1 border-t border-dashed border-cream/20" />
+      </div>
+      {items.map((r) => (
+        <div key={r.label} className="grid grid-cols-[180px_1fr] gap-3">
+          <span className="text-mantis">{r.label}:</span>
+          <span className="text-right text-cream">{r.value}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
 
 /**
  * SystemInfo — neofetch-style README with ASCII art on the left
@@ -44,7 +68,6 @@ export default function SystemInfo({
   if (stats?.kernel) rows.push({ label: "Kernel", value: String(stats.kernel) });
   if (stats?.ide) rows.push({ label: "IDE", value: String(stats.ide) });
 
-  // spacer
   const langRows: { label: string; value: string }[] = [];
   if (t.language?.frontend?.length)
     langRows.push({
@@ -82,31 +105,6 @@ export default function SystemInfo({
   const copy = () => {
     const txt = wrapRef.current?.innerText ?? "";
     navigator.clipboard?.writeText(txt);
-  };
-
-  const Section = ({
-    title,
-    items,
-  }: {
-    title: string;
-    items: { label: string; value: string }[];
-  }) => {
-    if (!items.length) return null;
-    return (
-      <div className="mb-3">
-        <div className="mb-1 flex items-center gap-2 text-cream/60">
-          <span>-</span>
-          <span className="uppercase tracking-wide">{title}</span>
-          <span className="flex-1 border-t border-dashed border-cream/20" />
-        </div>
-        {items.map((r) => (
-          <div key={r.label} className="grid grid-cols-[180px_1fr] gap-3">
-            <span className="text-mantis">{r.label}:</span>
-            <span className="text-right text-cream">{r.value}</span>
-          </div>
-        ))}
-      </div>
-    );
   };
 
   const defaultAscii = `        g@M%@%%@N%Nw,,
@@ -161,6 +159,11 @@ export default function SystemInfo({
           )}
           <Section title="Contact" items={contactRows} />
           <Section title="GitHub Stats" items={statRows} />
+          {t.quote?.trim() && (
+            <div className="mt-4 border-t border-dashed border-cream/20 pt-3 text-cream/70 italic">
+              &ldquo;{t.quote}&rdquo;
+            </div>
+          )}
         </div>
       </div>
     </div>

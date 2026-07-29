@@ -1,7 +1,6 @@
 import { Copy } from "lucide-react";
-import { useMemo, useRef } from "react";
+import { useRef } from "react";
 import type { ReadmeTemplate } from "../editor-state";
-// import type { ReadmeTemplate } from "./templateEditor";
 
 /**
  * DevTerminal — bash-style README preview.
@@ -26,8 +25,6 @@ export default function DevTerminal({
   const hasOs = !!t.os?.length;
   const hasUptime =
     !!t.uptime && (t.uptime.years || t.uptime.months || t.uptime.days);
-
-  const plain = useMemo(() => preRef.current?.innerText ?? "", []);
 
   const copy = () => {
     const txt = preRef.current?.innerText ?? "";
@@ -143,6 +140,13 @@ export default function DevTerminal({
 
         <Prompt>$</Prompt> ./show-stats.sh{"\n"}
         <Arrow /> Fetching data...
+
+        {!!t.quote?.trim() && (
+          <>
+            {"\n\n"}
+            <Comment>{t.quote}</Comment>
+          </>
+        )}
       </pre>
     </div>
   );
