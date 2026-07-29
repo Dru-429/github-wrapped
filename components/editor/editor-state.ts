@@ -50,7 +50,18 @@ export const FRONTEND_SUGGESTIONS = [
   'HTML',
   'CSS',
   'Tailwind',
-  'TypeScript'
+  'TypeScript',
+  "javascript",
+  "typescript",
+  "html",
+  "css",
+  "vue",
+  "react",
+  "svelte",
+  "angular",
+  "tailwind",
+  "scss",
+  "astro",
 ]
 
 export const BACKEND_SUGGESTIONS = [
@@ -63,7 +74,22 @@ export const BACKEND_SUGGESTIONS = [
   'Rust',
   'Java',
   'Spring',
-  'PostgreSQL'
+  'PostgreSQL',
+  "python",
+  "go",
+  "rust",
+  "java",
+  "c++",
+  "c#",
+  "ruby",
+  "php",
+  "node.js",
+  "express",
+  "django",
+  "postgresql",
+  "shell",
+  "docker",
+
 ]
 
 export const OS_OPTIONS = [
