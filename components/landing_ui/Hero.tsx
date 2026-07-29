@@ -62,7 +62,7 @@ function parseUsername(raw: string): string {
   return trimmed.replace(/^@/, "").split("/")[0];
 }
 
-export default function Hero () {
+export default function Hero() {
   const [handle, setHandle] = useState('')
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
@@ -108,6 +108,13 @@ export default function Hero () {
     router.push(`/wrap/${cleanUsername}`)
   }
 
+  const handelReadme = () => {
+    const username = parseUsername(handle);
+    if (!username) return;
+
+    const target = `/readme/${encodeURIComponent(username)}`;
+    router.push(target)
+  };
   return (
     <section className='boxy mt-6 md:mt-14 overflow-hidden'>
       {/* Top bar: badge left, count right */}
@@ -183,7 +190,7 @@ export default function Hero () {
         <motion.form
           variants={heroItem}
           onSubmit={handleWrap}
-          className='mt-12 flex w-full max-w-2xl flex-col items-stretch gap-3 sm:flex-row'
+          className='mt-12 flex flex-col w-full max-w-2xl  items-stretch gap-3'
         >
           <input
             type='text'
@@ -192,38 +199,29 @@ export default function Hero () {
             placeholder='Dru-429 or https://github.com/Dru-429'
             className='boxy-sm flex-1 bg-[var(--cream)] px-5 py-4 text-base font-medium text-ink placeholder:text-ink/40 focus:outline-none focus:ring-0'
           />
-          <button
-            type='submit'
-            disabled={isLoading || !handle.trim()}
-            onClick={handleWrappedGenerated}
-            className='boxy-sm group inline-flex items-center justify-center gap-2 bg-[var(--nuit)] px-6 py-4 text-sm font-bold uppercase tracking-wider text-[var(--cream)] transition-transform hover:-translate-x-0.5 hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-x-0 disabled:hover:translate-y-0'
-          >
-            {isLoading ? 'Loading...' : 'Get my wrapped'}
-            {!isLoading && (
-              <ArrowRight className='h-4 w-4 transition-transform group-hover:translate-x-1' />
-            )}
-          </button>
-          <button
-            type='submit'
-            disabled={isLoading || !handle.trim()}
-            onClick={handleWrappedGenerated}
-            className='boxy-sm group inline-flex items-center justify-center gap-2 bg-[var(--nuit)] px-6 py-4 text-sm font-bold uppercase tracking-wider text-[var(--cream)] transition-transform hover:-translate-x-0.5 hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-x-0 disabled:hover:translate-y-0'
-          >
-            {isLoading ? 'Loading...' : 'Get my wrapped'}
-            {!isLoading && (
-              <ArrowRight className='h-4 w-4 transition-transform group-hover:translate-x-1' />
-            )}
-          </button>
+          <div className='flex flex-col md:flex-row gap-3 w-full'>
+            <button
+              type='submit'
+              disabled={isLoading || !handle.trim()}
+              onClick={handleWrappedGenerated}
+              className='boxy-sm sm:w-1/2 group inline-flex items-center justify-center gap-2 bg-[var(--nuit)] px-6 py-4 text-sm font-bold uppercase tracking-wider text-[var(--cream)] transition-transform hover:-translate-x-0.5 hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-x-0 disabled:hover:translate-y-0'
+            >
+              {isLoading ? 'Loading...' : 'Get my wrapped'}
+              {!isLoading && (
+                <ArrowRight className='h-4 w-4 transition-transform group-hover:translate-x-1' />
+              )}
+            </button>
             <button
               type='button'
-              // onClick={goToReadme}
+              onClick={handelReadme}
               disabled={!parseUsername(handle)}
-              className='boxy-sm group inline-flex items-center justify-center gap-2 bg-[var(--lime)] px-6 py-3 text-sm font-bold uppercase tracking-wider text-ink transition-transform hover:-translate-x-0.5 hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-x-0 disabled:hover:translate-y-0'
+              className='boxy-sm sm:w-1/2 group inline-flex items-center justify-center gap-2 bg-[var(--lime)] px-6 py-3 text-sm font-bold uppercase tracking-wider text-ink transition-transform hover:-translate-x-0.5 hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-x-0 disabled:hover:translate-y-0'
             >
               <FileCode2 className='h-4 w-4' />
               Generate Readme
               <ArrowRight className='h-4 w-4 transition-transform group-hover:translate-x-1' />
             </button>
+          </div>
         </motion.form>
       </motion.div>
     </section>
