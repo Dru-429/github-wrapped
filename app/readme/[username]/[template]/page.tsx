@@ -58,13 +58,20 @@ export default function ReadmeTemplatePage() {
         {/* Main Content Area following wireframe vertical layout */}
         <div className="flex flex-col gap-8">
           {/* Top Box: Image Upload (Left: Upload controls, Right: Image preview) */}
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-          >
-            <ImageUpload setTemplateAction={setTemplate} />
-          </motion.div>
+          {
+            templateNo == 1 ?
+            (
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+              >
+                <ImageUpload setTemplateAction={setTemplate} />
+              </motion.div>
+            ): (
+              ""
+            )
+          }
 
           {/* Bottom Box: Template Editor (Header: Edit | Preview + COPY, Content: Section Editor / Preview) */}
           <motion.div
@@ -74,7 +81,7 @@ export default function ReadmeTemplatePage() {
           >
             <TemplateEditor
               template={template}
-              setTemplateAction={setTemplate}
+              setTemplateAction={setTemplate} 
               username={rawUsername}
               templateNo={templateNo}
             />
