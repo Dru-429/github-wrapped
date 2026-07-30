@@ -35,7 +35,7 @@ export default function ReadmeTemplatePage() {
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   return (
-    <main className="min-h-screen bg-background bg-grid text-foreground">
+    <main className="relative min-h-screen bg-background bg-grid text-foreground">
       <div className="mx-auto max-w-6xl px-4 py-8 md:px-8 md:py-12">
         {/* Top Header Row / Navigation matching wireframe route title */}
         <motion.div
@@ -93,37 +93,29 @@ export default function ReadmeTemplatePage() {
         </motion.div>
 
         {/* Status Feedback Alerts */}
-        {successMsg && (
+        {(successMsg || errorMsg) && (
           <motion.div
             initial={{ opacity: 0, y: -5 }}
             animate={{ opacity: 1, y: 0 }}
-            className="boxy-sm mb-6 flex items-center justify-between bg-[var(--lime)] px-4 py-2.5 text-xs font-bold text-ink"
+            className={`boxy-sm absolute top-5 right-3 max-w-2xl wrap-normal flex items-center justify-between gap-7 px-5 py-2.5 text font-semibold ${successMsg
+                ? "bg-[var(--lime)] text-ink"
+                : "bg-destructive text-destructive-foreground"
+              }`}
           >
             <span className="flex items-center gap-2">
-              <CheckCircle2 className="h-4 w-4" />
-              {successMsg}
-            </span>
-            <button
-              onClick={() => setSuccessMsg(null)}
-              className="font-mono text-sm font-black hover:opacity-75"
-            >
-              ✕
-            </button>
-          </motion.div>
-        )}
+              {successMsg ? (
+                <CheckCircle2 className="h-4 w-4" />
+              ) : (
+                <AlertCircle className="h-4 w-4" />
+              )}
 
-        {errorMsg && (
-          <motion.div
-            initial={{ opacity: 0, y: -5 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="boxy-sm mb-6 flex items-center justify-between bg-destructive px-4 py-2.5 text-xs font-bold text-destructive-foreground"
-          >
-            <span className="flex items-center gap-2">
-              <AlertCircle className="h-4 w-4" />
-              {errorMsg}
+              {successMsg ? successMsg : errorMsg}
             </span>
+
             <button
-              onClick={() => setErrorMsg(null)}
+              onClick={() =>
+                successMsg ? setSuccessMsg(null) : setErrorMsg(null)
+              }
               className="font-mono text-sm font-black hover:opacity-75"
             >
               ✕
