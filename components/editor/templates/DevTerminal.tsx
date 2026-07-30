@@ -40,7 +40,17 @@ export default function DevTerminal({
   );
 
   return (
-    <div className="boxy rounded-sm bg-ink text-cream">
+    <div className="boxy rounded-sm bg-ink text-cream overflow-hidden">
+      {t.banner?.url && t.banner.position === "up" && (
+        <div className="w-full border-b-2 border-cream/20 overflow-hidden">
+          <img
+            src={t.banner.url}
+            alt="Header Banner"
+            className="w-full h-36 md:h-48 object-cover"
+          />
+        </div>
+      )}
+
       <div className="flex items-center justify-between border-b-2 border-cream/20 px-3 py-2">
         <div className="flex items-center gap-2">
           <span className="h-3 w-3 rounded-full bg-[#ff5f56]" />
@@ -169,6 +179,16 @@ export default function DevTerminal({
           </>
         )}
       </pre>
+
+      {t.banner?.url && t.banner.position === "down" && (
+        <div className="w-full border-t-2 border-cream/20 overflow-hidden">
+          <img
+            src={t.banner.url}
+            alt="Footer Banner"
+            className="w-full h-36 md:h-48 object-cover"
+          />
+        </div>
+      )}
     </div>
   );
 }

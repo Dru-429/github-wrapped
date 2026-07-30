@@ -121,7 +121,17 @@ export default function SystemInfo({
    i r @@@mmHM @@@ \`^****M*,p ,`;
 
   return (
-    <div className="boxy rounded-sm bg-ink text-cream" ref={wrapRef}>
+    <div className="boxy rounded-sm bg-ink text-cream overflow-hidden" ref={wrapRef}>
+      {t.banner?.url && t.banner.position === "up" && (
+        <div className="w-full border-b-2 border-cream/20 overflow-hidden">
+          <img
+            src={t.banner.url}
+            alt="Header Banner"
+            className="w-full h-36 md:h-48 object-cover"
+          />
+        </div>
+      )}
+
       <div className="flex items-center justify-between border-b-2 border-cream/20 px-3 py-2 font-mono text-xs">
         <span className="text-cream/70">
           <span className="text-lime">{handle.split("@")[0]}</span>/
@@ -212,6 +222,16 @@ export default function SystemInfo({
           )}
         </div>
       </div>
+
+      {t.banner?.url && t.banner.position === "down" && (
+        <div className="w-full border-t-2 border-cream/20 overflow-hidden">
+          <img
+            src={t.banner.url}
+            alt="Footer Banner"
+            className="w-full h-36 md:h-48 object-cover"
+          />
+        </div>
+      )}
     </div>
   );
 }
