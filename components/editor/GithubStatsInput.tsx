@@ -66,37 +66,6 @@ export default function GithubStatsInput({
 
   return (
     <div className="flex flex-col gap-4">
-      {/* Top Fetch Action Bar inside Section Card */}
-      <div className="flex flex-wrap items-center justify-between gap-2 border-2 border-ink bg-cream p-3">
-        <div className="flex items-center gap-2">
-          <Sparkles className="h-4 w-4 text-ink" />
-          <span className="font-display text-xs font-bold uppercase tracking-wide text-ink">
-            Fetch Stats for @{username}
-          </span>
-        </div>
-        <button
-          type="button"
-          onClick={handleFetchClick}
-          disabled={loading || !username || username === "anonymous"}
-          className="border-2 border-ink bg-lime px-3 py-1 text-xs font-bold uppercase tracking-wider text-ink transition-transform hover:-translate-y-0.5 hover:bg-mantis disabled:opacity-50"
-        >
-          {loading ? (
-            <span className="inline-flex items-center gap-1">
-              <Loader2 className="h-3 w-3 animate-spin" /> Fetching...
-            </span>
-          ) : (
-            <span className="inline-flex items-center gap-1">
-              <Download className="h-3 w-3" /> Fetch Stats
-            </span>
-          )}
-        </button>
-      </div>
-
-      {statusMsg && (
-        <p className="text-xs font-bold text-ink bg-lime/30 border border-ink p-1.5 text-center">
-          {statusMsg}
-        </p>
-      )}
 
       {/* Grid of Inputs */}
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
@@ -115,6 +84,25 @@ export default function GithubStatsInput({
           </label>
         ))}
       </div>
+      <div className="flex flex-wrap items-center justify-end ">
+        <button
+          type="button"
+          onClick={handleFetchClick}
+          disabled={loading || !username || username === "anonymous"}
+          className="border-2 border-ink bg-lime px-3 py-1 text-xs font-bold uppercase tracking-wider text-ink transition-transform hover:-translate-y-0.5 hover:bg-mantis disabled:opacity-50"
+        >
+          {loading ? (
+            <span className="inline-flex items-center gap-1">
+              <Loader2 className="h-3 w-3 animate-spin" /> Fetching...
+            </span>
+          ) : (
+            <span className="inline-flex items-center gap-1 tracking">
+              <Download className="h-3 w-3" /> Fetch Stats form github/{username}
+            </span>
+          )}
+        </button>
+      </div>
+
     </div>
   );
 }
