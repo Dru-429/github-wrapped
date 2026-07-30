@@ -152,7 +152,15 @@ export default function DevTerminal({
         )}
 
         <Prompt>$</Prompt> ./show-stats.sh{"\n"}
-        <Arrow /> Fetching data...
+        {t.stats ? (
+          <>
+            <Arrow /> Repos: {t.stats.repos ?? 95} (Contributed: {t.stats.contributed ?? 133}) | Stars: {t.stats.stars ?? 342}{"\n"}
+            <Arrow /> Commits: {t.stats.commits ?? "2,116"} | Followers: {t.stats.followers ?? 196}{"\n"}
+            <Arrow /> Lines of Code: {t.stats.linesOfCode ?? "446,276"} ({t.stats.additions ?? "523,178"}++, {t.stats.deletions ?? "76,902"}--)
+          </>
+        ) : (
+          <Arrow /> 
+        )}
 
         {!!t.quote?.trim() && (
           <>

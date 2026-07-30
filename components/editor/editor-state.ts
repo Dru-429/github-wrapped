@@ -1,4 +1,4 @@
-export type SectionKey = 'language' | 'about' | 'bio' | 'contact' | 'tools' | 'os' | 'uptime' | 'quote'
+export type SectionKey = 'language' | 'about' | 'bio' | 'contact' | 'tools' | 'os' | 'uptime' | 'quote' | 'stats'
 
 export type LanguageState = {
   frontend: string[]
@@ -17,6 +17,17 @@ export type UptimeState = {
   days: string
 }
 
+export type GitHubStatsState = {
+  repos?: number | string
+  contributed?: number | string
+  stars?: number | string
+  commits?: number | string
+  followers?: number | string
+  linesOfCode?: number | string
+  additions?: number | string
+  deletions?: number | string
+}
+
 export type ReadmeTemplate = {
   image?: string
   language?: LanguageState
@@ -27,6 +38,7 @@ export type ReadmeTemplate = {
   os?: string[]
   uptime?: UptimeState
   quote?: string
+  stats?: GitHubStatsState
 }
 
 export const SECTION_LIST: { key: SectionKey; label: string }[] = [
@@ -37,7 +49,8 @@ export const SECTION_LIST: { key: SectionKey; label: string }[] = [
   { key: 'tools', label: 'Tools' },
   { key: 'os', label: 'OS' },
   { key: 'uptime', label: 'Uptime / Age' },
-  { key: 'quote', label: 'Quote' }
+  { key: 'quote', label: 'Quote' },
+  { key: 'stats', label: 'GitHub Stats' }
 ]
 
 export const FRONTEND_SUGGESTIONS = [

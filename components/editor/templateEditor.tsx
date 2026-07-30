@@ -12,6 +12,7 @@ import TagPill from './TagPill'
 import Preview from './preview'
 import Quotes from './Quotes'
 import BioInput from './BioInput'
+import GithubStatsInput from './GithubStatsInput'
 import {
   BACKEND_SUGGESTIONS,
   FRONTEND_SUGGESTIONS,
@@ -76,6 +77,9 @@ export default function TemplateEditor ({
     if (template.quote !== undefined && template.quote.trim() !== '') {
       keysToActivate.push('quote')
     }
+    if (template.stats && Object.keys(template.stats).length > 0) {
+      keysToActivate.push('stats')
+    }
 
     if (keysToActivate.length > 0) {
       setActive(prev => Array.from(new Set([...prev, ...keysToActivate])))
@@ -99,6 +103,17 @@ export default function TemplateEditor ({
       if (k === 'uptime' && !next.uptime)
         next.uptime = { years: '', months: '', days: '' }
       if (k === 'quote' && next.quote === undefined) next.quote = ''
+      if (k === 'stats' && !next.stats)
+        next.stats = {
+          repos: 95,
+          contributed: 133,
+          stars: 342,
+          commits: '2,116',
+          followers: '196',
+          linesOfCode: '446,276',
+          additions: '523,178',
+          deletions: '76,902'
+        }
       return next
     })
   }
@@ -473,6 +488,24 @@ export default function TemplateEditor ({
                               onChange={next =>
                                 setTemplateAction(t => ({ ...t, quote: next }))
                               }
+                            />
+                          </SectionCard>
+                        )
+                      }
+
+                      if (k === 'stats') {
+                        return (
+                          <SectionCard
+                            key={k}
+                            title='github stats'
+                            onRemove={() => removeSection(k)}
+                          >
+                            <GithubStatsInput
+                              value={template.stats ?? {}}
+                              onChange={next =>
+                                setTemplateAction(t => ({ ...t, stats: next }))
+                              }
+                              username={username}
                             />
                           </SectionCard>
                         )

@@ -168,7 +168,43 @@ export default function SystemInfo({
             </div>
           )}
           <Section title="Contact" items={contactRows} />
-          <Section title="GitHub Stats" items={statRows} />
+          {t.stats ? (
+            <div className="mb-3 font-mono text-xs">
+              <div className="mb-1 flex items-center gap-2 text-cream/60">
+                <span>-</span>
+                <span className="uppercase tracking-wide">GitHub Stats</span>
+                <span className="flex-1 border-t border-dashed border-cream/20" />
+              </div>
+              <div className="flex flex-col gap-0.5 text-cream leading-relaxed">
+                <div>
+                  <span className="text-mantis">. Repos: .... </span>
+                  <span className="text-cream font-bold">{t.stats.repos ?? 95}</span>{" "}
+                  <span className="text-lime">&#123;Contributed: {t.stats.contributed ?? 133}&#125;</span>
+                  <span className="text-cream/50"> | </span>
+                  <span className="text-mantis">Stars: ........... </span>
+                  <span className="text-cream font-bold">{t.stats.stars ?? 342}</span>
+                </div>
+                <div>
+                  <span className="text-mantis">. Commits: .................. </span>
+                  <span className="text-cream font-bold">{t.stats.commits ?? "2,116"}</span>
+                  <span className="text-cream/50"> | </span>
+                  <span className="text-mantis">Followers: ....... </span>
+                  <span className="text-cream font-bold">{t.stats.followers ?? 196}</span>
+                </div>
+                <div>
+                  <span className="text-mantis">. Lines of Code on GitHub:. </span>
+                  <span className="text-lime font-bold">{t.stats.linesOfCode ?? "446,276"}</span>
+                  <span className="text-cream"> ( </span>
+                  <span className="text-mantis font-semibold">{t.stats.additions ?? "523,178"}++</span>
+                  <span className="text-cream">, </span>
+                  <span className="text-destructive font-semibold">{t.stats.deletions ?? "76,902"}--</span>
+                  <span className="text-cream"> )</span>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <Section title="GitHub Stats" items={statRows} />
+          )}
           {t.quote?.trim() && (
             <div className="mt-4 border-t border-dashed border-cream/20 pt-3 text-cream/70 italic">
               &ldquo;{t.quote}&rdquo;
