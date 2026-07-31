@@ -5,9 +5,7 @@ import { ReadmeTemplate } from "./editor-state";
 import BashStyle from "./templates/Bash";
 import SystemInfo from "./templates/System";
 import Yaml from "./templates/YAML";
-// import DevTerminal from "./DevTerminal";
-// import SystemInfo from "./SystemInfo";
-// import type { ReadmeTemplate } from "./templateEditor";
+import PackageJSON from "./templates/packageJSON";
 
 export default function Preview({
   templateObject,
@@ -73,6 +71,17 @@ export default function Preview({
       name={name}
       role={role}
     />
+    )
+  }
+
+  else if (tpl === 4){
+    return(
+      <PackageJSON
+        templateObject={templateObject}
+        name={name}
+        role={role}
+        handle={handle}
+      />
     )
   }
 
