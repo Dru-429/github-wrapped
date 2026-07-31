@@ -74,15 +74,15 @@ export default function DevTerminal({
       await navigator.clipboard.write([new ClipboardItem({ "image/png": blob })]);
       setCopied(true);
       setTimeout(() => setCopied(false), 1600);
-    } catch {
-      /* clipboard image unsupported */
+    } catch (err) {
+      console.log(err)
     }
   };
 
   const Prompt = ({ children }: { children: React.ReactNode }) => (
     <span className="text-mantis">{children}</span>
   );
-  const Arrow = () => <span className="text-lime">{">"}</span>;
+  const Arrow = () => <span className="text-[#FF7B68]">{">"}</span>;
   const Comment = ({ children }: { children: React.ReactNode }) => (
     <span className="text-cream/40"># {children}</span>
   );
@@ -91,7 +91,7 @@ export default function DevTerminal({
     <div className="relative">
       <button
         onClick={copy}
-        className="absolute right-3 top-3 z-10 grid h-8 w-8 place-items-center rounded-sm border-2 border-cream/25 bg-ink/80 text-cream/70 hover:bg-cream/10"
+        className="absolute right-3 top-3 z-10 grid h-8 w-8 place-items-center rounded-sm border-2 border-cream/25 bg-x/80 text-cream/70 hover:bg-cream/10"
         aria-label="Copy as image"
         title={copied ? "Copied as image!" : "Copy as image"}
       >
@@ -100,19 +100,20 @@ export default function DevTerminal({
 
       <div
         ref={cardRef}
-        className="boxy overflow-hidden rounded-sm bg-ink text-cream"
+        className=" overflow-hidden rounded-sm bg-[#151B23] text-white"
       >
         {t.banner?.url && t.banner.position === "up" && (
           <div className="w-full overflow-hidden border-b-2 border-cream/20">
             <img
               src={t.banner.url}
+              // src="/banner_header.jpg"
               alt="Header Banner"
               className="h-36 w-full object-cover md:h-48"
             />
           </div>
         )}
 
-        <pre className="overflow-x-auto whitespace-pre p-6 font-mono text-[13px] leading-6">
+        <pre className="overflow-x-auto whitespace-pre p-6 font-mono font-semibold text-[13px] leading-6">
           {hasAbout && (
             <>
               <Prompt>$</Prompt> About Me{"\n"}
