@@ -1,3 +1,5 @@
+"usew client"
+
 import { Copy } from "lucide-react";
 import { useRef, useState } from "react";
 import { toBlob } from "html-to-image";
@@ -39,10 +41,10 @@ function columns(items: string[]) {
 }
 
 /**
- * DevTerminal — bash-style README preview.
+ * bash-style README preview.
  * Renders whatever exists on `templateObject`; missing keys are skipped.
  */
-export default function DevTerminal({
+export default function BashStyle({
   templateObject,
   name = "dhruv sahoo",
   role = "Design Engineer",

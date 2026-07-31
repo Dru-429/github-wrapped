@@ -2,26 +2,12 @@
 
 import { useEffect, useState } from "react";
 import { ReadmeTemplate } from "./editor-state";
-import DevTerminal from "./templates/DevTerminal";
-import SystemInfo from "./templates/SystemInfo";
+import BashStyle from "./templates/Bash";
+import SystemInfo from "./templates/System";
 // import DevTerminal from "./DevTerminal";
 // import SystemInfo from "./SystemInfo";
 // import type { ReadmeTemplate } from "./templateEditor";
 
-/**
- * Preview — renders a README template based on the template number in the URL.
- *
- * Resolution order for the template number:
- *   1. `templateNo` prop (explicit override)
- *   2. Next.js dynamic route param `[temp]` or `[templateNo]`
- *      (e.g. /readme/[username]/[temp])
- *   3. `?t=` / `?template=` search param
- *   4. Defaults to 1
- *
- * Mapping:
- *   1 -> SystemInfo (neofetch-style)
- *   2 -> DevTerminal (bash-style)
- */
 export default function Preview({
   templateObject,
   templateNo,
@@ -61,7 +47,7 @@ export default function Preview({
   return (
     <div className="w-full">
       {tpl === 2 ? (
-        <DevTerminal
+        <BashStyle
           templateObject={templateObject}
           name={name}
           role={role}
