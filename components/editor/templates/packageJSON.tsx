@@ -1,7 +1,7 @@
 "use client";
 
 import { Copy } from "lucide-react";
-import { useRef, useState } from "react";
+import { useRef, useState, } from "react";
 import { toBlob } from "html-to-image";
 import type { ReadmeTemplate as BaseTemplate } from "../editor-state";
 
@@ -32,6 +32,7 @@ const Str = ({ value, comma = true }: { value: string; comma?: boolean }) => (
   </span>
 );
 
+
 const Num = ({ value, comma = true }: { value: number | string; comma?: boolean }) => (
   <span>
     <span className="text-[#b392f0]">{value}</span>
@@ -53,10 +54,6 @@ const Arr = ({ items, comma = true }: { items: string[]; comma?: boolean }) => (
   </span>
 );
 
-/**
- * package.json theme README preview matching the terminal layout screenshot,
- * using the exact dark background color (`#151B23`) and font (`font-mono`) from `Bash.tsx`.
- */
 export default function PackageJSON({
   templateObject,
   name = "dhruv-sahoo",
@@ -83,9 +80,8 @@ export default function PackageJSON({
 
   const uptimeStr =
     t.uptime && (t.uptime.years || t.uptime.months || t.uptime.days)
-      ? `${t.uptime.years || 0} years, ${t.uptime.months || 0} months, ${
-          t.uptime.days || 0
-        } days`
+      ? `${t.uptime.years || 0} years, ${t.uptime.months || 0} months, ${t.uptime.days || 0
+      } days`
       : null;
 
   /** Copies the rendered terminal to the clipboard as a PNG image matching Bash.tsx */
@@ -118,16 +114,6 @@ export default function PackageJSON({
         ref={cardRef}
         className="overflow-hidden rounded-sm bg-[#151B23] text-white"
       >
-        {/* Top Header Banner */}
-        {t.banner?.url && t.banner.position === "up" && (
-          <div className="w-full overflow-hidden border-b-2 border-cream/20">
-            <img
-              src={t.banner.url}
-              alt="Header Banner"
-              className="h-36 w-full object-cover md:h-48"
-            />
-          </div>
-        )}
 
         {/* Terminal Window Header */}
         <div className="flex items-center gap-2 border-b border-cream/15 bg-black/20 px-4 py-3">
@@ -137,7 +123,19 @@ export default function PackageJSON({
           <span className="ml-3 font-mono text-xs text-cream/50">package.json</span>
         </div>
 
-        <div className="p-6 font-mono font-medium text-[13px] leading-6">
+        <div className="p-6 font-mono font-medium text-[13.5px] tracking-wide leading-8">
+          {/* Top Header Banner */}
+          {t.banner?.url && t.banner.position === "up" && (
+            <div className="w-full overflow-hidden border-b-2 border-cream/20">
+              <img
+                src={t.banner.url}
+                alt="Header Banner"
+                className="h-36 w-full object-cover md:h-48"
+              />
+            </div>
+          )}
+
+
           {/* Terminal Command Line */}
           <div className="mb-4">
             <span className="text-mantis">{handle}:~$</span>{" "}
@@ -152,7 +150,7 @@ export default function PackageJSON({
             {"  "}<Key name="tagline" />: <Str value={t.about?.trim() || "Building soothing designs, i.e., clean, fun & functional."} />,{"\n"}
             {!!t.bio?.trim() && (
               <>
-                {"  "}<Key name="bio" />: <Str value={t.bio.replace(/\n/g, " ")} />,{"\n"}
+                {"  "}<Key name="bio" />: <Str value={t.bio.replace(/\n/g, "\n           ")} />{"\n"}
               </>
             )}
             {os.length > 0 && (
@@ -163,11 +161,6 @@ export default function PackageJSON({
             {uptimeStr && (
               <>
                 {"  "}<Key name="uptime" />: <Str value={uptimeStr} />,{"\n"}
-              </>
-            )}
-            {!!t.quote?.trim() && (
-              <>
-                {"  "}<Key name="quote" />: <Str value={t.quote} />,{"\n"}
               </>
             )}
             {hasSkills && (
@@ -227,9 +220,16 @@ export default function PackageJSON({
           </pre>
 
           {/* Bottom Prompt Line with Cursor */}
-          <div className="mt-4 flex items-center gap-1.5">
-            <span className="text-mantis">{handle}:~$</span>
-            <span className="inline-block h-4 w-2.5 bg-mantis animate-pulse" />
+          <div className="mt-4 flex items-start flex-col gap-1.5">
+            <div className="flex gap-1.5 w-full overflow-y-auto items-start relative" >
+              <span className="text-mantis text-nowrap">{handle}:~$</span>
+              <span className=" relative top-2 inline-block h-4 w-2.5 bg-mantis animate-pulse" />
+              {!!t.quote?.trim() && (
+                <>
+                  <Str value={t.quote} />
+                </>
+              )}
+            </div>
           </div>
         </div>
 
