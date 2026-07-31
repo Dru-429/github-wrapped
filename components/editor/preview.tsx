@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { ReadmeTemplate } from "./editor-state";
 import BashStyle from "./templates/Bash";
 import SystemInfo from "./templates/System";
+import Yaml from "./templates/YAML";
 // import DevTerminal from "./DevTerminal";
 // import SystemInfo from "./SystemInfo";
 // import type { ReadmeTemplate } from "./templateEditor";
@@ -44,22 +45,43 @@ export default function Preview({
   const resolved = Number(templateNo ?? fromUrl ?? 1);
   const tpl = Number.isFinite(resolved) && resolved > 0 ? resolved : 1;
 
-  return (
-    <div className="w-full">
-      {tpl === 2 ? (
-        <BashStyle
-          templateObject={templateObject}
-          name={name}
-          role={role}
-        />
-      ) : (
+  if (tpl === 1) {
+    return(
+
         <SystemInfo
           templateObject={templateObject}
           handle={handle}
           repoName={repoName}
           stats={stats}
         />
-      )}
+    )
+  }
+
+  else if (tpl === 2) {
+    return (
+
+      <BashStyle
+        templateObject={templateObject}
+        name={name}
+        role={role}
+      />
+    )
+  }
+
+  else if (tpl === 3){
+    return(
+      <Yaml
+      templateObject={templateObject}
+      name={name}
+      role={role}
+    />
+
+    )
+  }
+
+  return (
+    <div className="w-full">
+      
     </div>
   );
 }

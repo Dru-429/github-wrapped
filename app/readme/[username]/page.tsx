@@ -47,7 +47,7 @@ const templates: Template[] = [
   },
   {
     no: 3,
-    name: "Minimal Card",
+    name: "YAML ",
     tag: "coming soon",
     desc: "Compact single-card layout with stats and top languages.",
     bg: "bg-[var(--lime)]",
