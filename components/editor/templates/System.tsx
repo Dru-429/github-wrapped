@@ -159,6 +159,7 @@ export default function SystemInfo({
             />
           </div>
         )}
+        
         <div className="w-full grid gap-6 md:grid-cols-[auto_1fr]">
           {/* Left Side: ASCII Art */}
           <pre className="whitespace-pre text-[10.5px] leading-[1.35] text-[#58a6ff]">
@@ -343,18 +344,19 @@ export default function SystemInfo({
             )}
           </div>
         </div>
-      </div>
 
-      {/* Bottom Banner (Position DOWN) */}
-      {t.banner?.url && t.banner.position === "down" && (
-        <div className="w-full overflow-hidden border-t border-[#30363d]">
-          <img
-            src={t.banner.url}
-            alt="Footer Banner"
-            className="h-36 w-full object-cover md:h-48"
-          />
-        </div>
-      )}
+        {/* Bottom Banner (Position DOWN) */}
+        {t.banner?.url && t.banner.position === "down" && (
+          <div className="w-full overflow-hidden border-t border-[#30363d]">
+            <img
+              src={t.banner.url}
+              alt="Footer Banner"
+              className="h-36 w-full object-cover md:h-48"
+            />
+          </div>
+        )}
+      </div>
+      
     </div>
   );
 }
