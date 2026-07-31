@@ -47,7 +47,6 @@ export default function Preview({
 
   if (tpl === 1) {
     return(
-
         <SystemInfo
           templateObject={templateObject}
           handle={handle}
@@ -59,7 +58,6 @@ export default function Preview({
 
   else if (tpl === 2) {
     return (
-
       <BashStyle
         templateObject={templateObject}
         name={name}
@@ -75,7 +73,6 @@ export default function Preview({
       name={name}
       role={role}
     />
-
     )
   }
 

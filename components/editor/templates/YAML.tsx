@@ -50,10 +50,6 @@ function Column({ title, items }: { title: string; items: string[] }) {
   );
 }
 
-/**
- * Yaml — `cat profile.yaml` style README preview.
- * Renders whatever exists on `templateObject`; missing keys are skipped.
- */
 export default function Yaml({
   templateObject,
   name = "Dhruv Sahoo",
@@ -107,17 +103,17 @@ export default function Yaml({
         ref={cardRef}
         className="boxy overflow-hidden rounded-sm bg-[#141414] text-cream"
       >
-        {t.banner?.url && t.banner.position === "up" && (
-          <div className="w-full overflow-hidden border-b-2 border-cream/20">
-            <img
-              src={t.banner.url}
-              alt="Header Banner"
-              className="h-36 w-full object-cover md:h-48"
-            />
-          </div>
-        )}
 
         <div className="overflow-x-auto p-6 font-mono text-[13px] leading-[1.65]">
+          {t.banner?.url && t.banner.position === "up" && (
+            <div className="w-full mb-5 overflow-hidden border-b-2 border-cream/20">
+              <img
+                src={t.banner.url}
+                alt="Header Banner"
+                className="h-36 w-full object-cover md:h-48"
+              />
+            </div>
+          )}
           {/* prompt */}
           <div className="mb-2">
             <span className="text-mantis">{handle}</span>
@@ -166,6 +162,7 @@ export default function Yaml({
                 {!!fe.length && <Column title="frontend" items={fe} />}
                 {!!be.length && <Column title="backend" items={be} />}
                 {!!de.length && <Column title="design" items={de} />}
+                {!!t.tools.length && <Column title="tool" items={t.tools} />}
               </div>
             </div>
           )}
@@ -176,12 +173,7 @@ export default function Yaml({
               <Val>: [{de.join(", ")}]</Val>
             </div>
           )}
-          {!!t.tools?.length && (
-            <div>
-              <Key>tools</Key>
-              <Val>: [{t.tools.join(", ")}]</Val>
-            </div>
-          )}
+
           {!!t.os?.length && (
             <div>
               <Key>os</Key>
