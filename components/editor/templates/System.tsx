@@ -1,6 +1,7 @@
-import { useRef } from "react";
+import { useRef,useState } from "react";
 import { Copy } from "lucide-react";
 import type { ReadmeTemplate as BaseTemplate } from "../editor-state";
+import { toBlob } from "html-to-image";
 
 type ReadmeTemplate = BaseTemplate & {
   image?: string;
@@ -30,13 +31,13 @@ function InfoRow({
   valueColor?: string;
 }) {
   return (
-    <div className="flex items-baseline font-mono text-[12.5px] leading-6">
+    <div className="flex items-baseline font-mono text-[13px] leading-auto tracking-wide">
       <span className="mr-1 select-none text-[#e39257]">.</span>
       <span className={`${labelColor} shrink-0 font-semibold`}>{label}:</span>
-      <span className="mx-1.5 flex-1 overflow-hidden whitespace-nowrap select-none text-[#2c3848]">
+      <span className="mx-1.5 flex-1 overflow-hidden whitespace-nowrap select-none text-zinc-500">
         ....................................................................................................
       </span>
-      <span className={`${valueColor} shrink-0 text-right font-medium`}>{value}</span>
+      <span className={`${valueColor} shrink-0 text-right font-medium tracking-normal`}>{value}</span>
     </div>
   );
 }
@@ -44,19 +45,15 @@ function InfoRow({
 /** Section header divider matching Screenshot 2: `- Section ------------------------------------` */
 function SectionHeader({ title }: { title: string }) {
   return (
-    <div className="my-2.5 flex items-center font-mono text-[12.5px]">
-      <span className="mr-1.5 select-none font-semibold text-[#8b949e]">- {title}</span>
-      <span className="flex-1 overflow-hidden whitespace-nowrap select-none text-[#30363d]">
+    <div className="mt-3 flex items-center font-mono text-[13px]">
+      <span className="mr-1.5 select-none font-semibold text-zinc-200">- {title}</span>
+      <span className="flex-1 overflow-hidden whitespace-nowrap select-none text-zinc-200">
         ----------------------------------------------------------------------------------------------------
       </span>
     </div>
   );
 }
 
-/**
- * SystemInfo — neofetch-style README mapping all sections (Banner, OS, Uptime, Languages,
- * Tools, Contact, About, Bio, Quote, GitHub Stats) with the dot-leader terminal UI.
- */
 export default function SystemInfo({
   templateObject,
   handle = "andrew@grant",
@@ -78,7 +75,8 @@ export default function SystemInfo({
   };
 }) {
   const t = (templateObject ?? {}) as ReadmeTemplate;
-  const wrapRef = useRef<HTMLDivElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [copied, setCopied] = useState(false);
 
   const uptimeStr =
     t.uptime && (t.uptime.years || t.uptime.months || t.uptime.days)
@@ -86,10 +84,20 @@ export default function SystemInfo({
       } days`
       : null;
 
-  const copy = () => {
-    const txt = wrapRef.current?.innerText ?? "";
-    navigator.clipboard?.writeText(txt);
+  const copy = async () => {
+    const node = cardRef.current;
+    if (!node) return;
+    try {
+      const blob = await toBlob(node, { pixelRatio: 2, cacheBust: true });
+      if (!blob) return;
+      await navigator.clipboard.write([new ClipboardItem({ "image/png": blob })]);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1600);
+    } catch (err) {
+      console.log(err)
+    }
   };
+
 
   const defaultAscii = `                                             
             %%%%%        %%%%%               
@@ -127,7 +135,7 @@ export default function SystemInfo({
 
   return (
     <div
-      ref={wrapRef}
+      ref={cardRef}
       className="w-full overflow-hidden rounded-xl border border-[#30363d] bg-[#151B23] font-mono text-[#c9d1d9]"
     >
 
@@ -148,7 +156,7 @@ export default function SystemInfo({
       </div>
 
       {/* Main Panel Content */}
-      <div className="flex flex-col gap-6 p-5 text-[12.5px] leading-[1.55] md:grid-cols-[auto_1fr]">
+      <div className="flex flex-col gap-6 p-5 text-[13px] leading-[1.55] md:grid-cols-[auto_1fr]">
         {/* Top Banner (Position UP) */}
         {t.banner?.url && t.banner.position === "up" && (
           <div className="w-full overflow-hidden border-b border-[#30363d]">
@@ -159,7 +167,7 @@ export default function SystemInfo({
             />
           </div>
         )}
-        
+
         <div className="w-full grid gap-6 md:grid-cols-[auto_1fr]">
           {/* Left Side: ASCII Art */}
           <pre className="whitespace-pre text-[10.5px] leading-[1.35] text-[#58a6ff]">
@@ -168,10 +176,9 @@ export default function SystemInfo({
 
           {/* Right Side: Dotted Info Rows */}
           <div className="min-w-0">
-            {/* Main Top Header: andrew@grant ---------------------------------------------------- */}
             <div className="mb-2 flex items-center text-[13px]">
               <span className="mr-2 font-bold text-[#58a6ff]">{handle}</span>
-              <span className="flex-1 overflow-hidden whitespace-nowrap select-none text-[#30363d]">
+              <span className="flex-1 overflow-hidden whitespace-nowrap select-none text-zinc-300">
                 ----------------------------------------------------------------------------------------------------
               </span>
             </div>
@@ -193,7 +200,7 @@ export default function SystemInfo({
 
                 <InfoRow
                   label="Host"
-                  value={stats?.host ?? "TTM Technologies, Inc."}
+                  value={stats?.host ?? "PLANET EARTH, P2360"}
                 />
                 <InfoRow
                   label="Kernel"
@@ -231,20 +238,6 @@ export default function SystemInfo({
               </div>
             )}
 
-            {/* Contact Section */}
-            {!!t.contact?.length && (
-              <div>
-                <SectionHeader title="Contact" />
-                {t.contact.map((c) => (
-                  <InfoRow
-                    key={c.id || c.name}
-                    label={c.name || "Link"}
-                    value={c.url}
-                  />
-                ))}
-              </div>
-            )}
-
             {/* About Section */}
             {!!t.about?.trim() && (
               <div>
@@ -263,13 +256,17 @@ export default function SystemInfo({
               </div>
             )}
 
-            {/* Quote Section */}
-            {!!t.quote?.trim() && (
+            {/* Contact Section */}
+            {!!t.contact?.length && (
               <div>
-                <SectionHeader title="Quote" />
-                <div className="my-1.5 italic text-[#8b949e]">
-                  &ldquo;{t.quote}&rdquo;
-                </div>
+                <SectionHeader title="Contact" />
+                {t.contact.map((c) => (
+                  <InfoRow
+                    key={c.id || c.name}
+                    label={c.name || "Link"}
+                    value={c.url}
+                  />
+                ))}
               </div>
             )}
 
@@ -277,7 +274,7 @@ export default function SystemInfo({
             {t.stats && (
               <div>
                 <SectionHeader title="GitHub Stats" />
-                <div className="flex flex-col gap-1 text-[12.5px] leading-6">
+                <div className="flex flex-col gap-1 text-[13px] leading-6">
                   <div className="flex items-baseline justify-between flex-wrap">
                     <div>
                       <span className="mr-1 select-none text-[#e39257]">.</span>
@@ -342,6 +339,17 @@ export default function SystemInfo({
                 </div>
               </div>
             )}
+
+            {/* Quote Section */}
+            {!!t.quote?.trim() && (
+              <div>
+                <SectionHeader title="Quote" />
+                <div className="my-1.5 italic text-[#8b949e]">
+                  &ldquo;{t.quote}&rdquo;
+                </div>
+              </div>
+            )}
+
           </div>
         </div>
 
@@ -356,7 +364,7 @@ export default function SystemInfo({
           </div>
         )}
       </div>
-      
+
     </div>
   );
 }
