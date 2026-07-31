@@ -125,14 +125,22 @@ export default function PackageJSON({
 
         <div className="p-6 font-mono font-medium text-[13.5px] tracking-wide leading-8">
           {/* Top Header Banner */}
+
           {t.banner?.url && t.banner.position === "up" && (
-            <div className="w-full overflow-hidden border-b-2 border-cream/20">
-              <img
-                src={t.banner.url}
-                alt="Header Banner"
-                className="h-36 w-full object-cover md:h-48"
-              />
-            </div>
+            <>
+              <div className="">
+                <span className="text-mantis">{handle}:~$</span>{" "}
+                <span className="text-white font-bold">cat Banner.json</span>
+              </div>
+
+              <div className="w-full overflow-hidden border-b-2 border-cream/20 mb-4">
+                <img
+                  src={t.banner.url}
+                  alt="Header Banner"
+                  className="h-36 w-full object-cover md:h-48"
+                />
+              </div>
+            </>
           )}
 
 
