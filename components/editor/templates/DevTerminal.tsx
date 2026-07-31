@@ -1,9 +1,46 @@
 import { Copy } from "lucide-react";
-import { useRef } from "react";
-import type { ReadmeTemplate } from "../editor-state";
+import { useRef, useState } from "react";
+import { toBlob } from "html-to-image";
+import type { ReadmeTemplate as BaseTemplate } from "../editor-state";
+
+type ReadmeTemplate = BaseTemplate & {
+  image?: string;
+  bio?: string;
+  quote?: string;
+  banner?: { url?: string; position?: "up" | "down" };
+  design?: string[];
+  stats?: {
+    repos?: number | string;
+    contributed?: number | string;
+    stars?: number | string;
+    commits?: number | string;
+    followers?: number | string;
+    linesOfCode?: number | string;
+    additions?: number | string;
+    deletions?: number | string;
+  };
+};
+
+/** Lay items out in fixed-width columns, like the terminal screenshot. */
+const COLS = 5;
+function columns(items: string[]) {
+  const width = Math.max(...items.map((i) => i.length)) + 3;
+  const rows: string[] = [];
+  for (let i = 0; i < items.length; i += COLS) {
+    rows.push(
+      "  " +
+        items
+          .slice(i, i + COLS)
+          .map((it, idx, arr) => (idx === arr.length - 1 ? it : it.padEnd(width)))
+          .join("")
+    );
+  }
+  return rows.join("\n");
+}
 
 /**
  * DevTerminal — bash-style README preview.
+ * Renders whatever exists on `templateObject`; missing keys are skipped.
  */
 export default function DevTerminal({
   templateObject,
@@ -14,21 +51,32 @@ export default function DevTerminal({
   name?: string;
   role?: string;
 }) {
-  const t = templateObject ?? {};
-  const preRef = useRef<HTMLPreElement>(null);
+  const t = (templateObject ?? {}) as ReadmeTemplate;
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [copied, setCopied] = useState(false);
 
   const hasLang =
     !!t.language && ((t.language.frontend?.length ?? 0) + (t.language.backend?.length ?? 0) > 0);
   const hasTools = !!t.tools?.length;
+  const hasDesign = !!t.design?.length;
   const hasContact = !!t.contact?.length;
   const hasAbout = !!t.about?.trim();
   const hasOs = !!t.os?.length;
-  const hasUptime =
-    !!t.uptime && (t.uptime.years || t.uptime.months || t.uptime.days);
+  const hasUptime = !!t.uptime && (t.uptime.years || t.uptime.months || t.uptime.days);
 
-  const copy = () => {
-    const txt = preRef.current?.innerText ?? "";
-    navigator.clipboard?.writeText(txt);
+  /** Copies the rendered terminal to the clipboard as a PNG image. */
+  const copy = async () => {
+    const node = cardRef.current;
+    if (!node) return;
+    try {
+      const blob = await toBlob(node, { pixelRatio: 2, cacheBust: true });
+      if (!blob) return;
+      await navigator.clipboard.write([new ClipboardItem({ "image/png": blob })]);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1600);
+    } catch {
+      /* clipboard image unsupported */
+    }
   };
 
   const Prompt = ({ children }: { children: React.ReactNode }) => (
@@ -40,155 +88,160 @@ export default function DevTerminal({
   );
 
   return (
-    <div className="boxy rounded-sm bg-ink text-cream overflow-hidden">
-      {t.banner?.url && t.banner.position === "up" && (
-        <div className="w-full border-b-2 border-cream/20 overflow-hidden">
-          <img
-            src={t.banner.url}
-            alt="Header Banner"
-            className="w-full h-36 md:h-48 object-cover"
-          />
-        </div>
-      )}
-
-      <div className="flex items-center justify-between border-b-2 border-cream/20 px-3 py-2">
-        <div className="flex items-center gap-2">
-          <span className="h-3 w-3 rounded-full bg-[#ff5f56]" />
-          <span className="h-3 w-3 rounded-full bg-[#ffbd2e]" />
-          <span className="h-3 w-3 rounded-full bg-[#27c93f]" />
-          <span className="ml-3 font-mono text-xs text-cream/60">~/readme.sh</span>
-        </div>
-        <button
-          onClick={copy}
-          className="grid h-7 w-7 place-items-center border-2 border-cream/30 text-cream/70 hover:bg-cream/10"
-          aria-label="Copy"
-          title="Copy"
-        >
-          <Copy size={14} />
-        </button>
-      </div>
-
-      <pre
-        ref={preRef}
-        className="whitespace-pre-wrap p-4 font-mono text-[13px] leading-6"
+    <div className="relative">
+      <button
+        onClick={copy}
+        className="absolute right-3 top-3 z-10 grid h-8 w-8 place-items-center rounded-sm border-2 border-cream/25 bg-ink/80 text-cream/70 hover:bg-cream/10"
+        aria-label="Copy as image"
+        title={copied ? "Copied as image!" : "Copy as image"}
       >
-        {hasAbout && (
-          <>
-            <Prompt>$</Prompt> About Me{"\n"}
-            <Arrow /> {name}
-            {"\n"}
-            <Arrow /> {role}
-            {"\n"}
-            <Arrow /> {t.about}
-            {"\n\n"}
-          </>
+        <Copy size={14} />
+      </button>
+
+      <div
+        ref={cardRef}
+        className="boxy overflow-hidden rounded-sm bg-ink text-cream"
+      >
+        {t.banner?.url && t.banner.position === "up" && (
+          <div className="w-full overflow-hidden border-b-2 border-cream/20">
+            <img
+              src={t.banner.url}
+              alt="Header Banner"
+              className="h-36 w-full object-cover md:h-48"
+            />
+          </div>
         )}
 
-        {hasLang && (
-          <>
-            <Prompt>$</Prompt> ls /tech-stack{"\n\n"}
-            {!!t.language?.frontend?.length && (
-              <>
-                <Arrow /> frontend/{"\n"}
-                {"  "}
-                {t.language.frontend.join("  ")}
-                {"\n\n"}
-              </>
-            )}
-            {!!t.language?.backend?.length && (
-              <>
-                <Arrow /> backend/{"\n"}
-                {"  "}
-                {t.language.backend.join("  ")}
-                {"\n\n"}
-              </>
-            )}
-          </>
-        )}
+        <pre className="overflow-x-auto whitespace-pre p-6 font-mono text-[13px] leading-6">
+          {hasAbout && (
+            <>
+              <Prompt>$</Prompt> About Me{"\n"}
+              <Arrow /> {name}
+              {"\n"}
+              <Arrow /> {role}
+              {"\n"}
+              <Arrow /> {t.about}
+              {"\n\n"}
+            </>
+          )}
 
-        {hasTools && (
-          <>
-            <Arrow /> tools/{"\n"}
-            {"  "}
-            {t.tools!.join("  ")}
-            {"\n\n"}
-          </>
-        )}
+          {!!t.bio?.trim() && (
+            <>
+              <Prompt>$</Prompt> cat /bio.txt{"\n"}
+              {t.bio.split("\n").map((line, idx) => (
+                <span key={idx}>
+                  <Arrow /> {line}
+                  {"\n"}
+                </span>
+              ))}
+              {"\n"}
+            </>
+          )}
 
-        {hasOs && (
-          <>
-            <Arrow /> os/{"\n"}
-            {"  "}
-            {t.os!.join("  ")}
-            {"\n\n"}
-          </>
-        )}
+          {(hasLang || hasTools || hasDesign) && (
+            <>
+              <Prompt>$</Prompt> ls /tech-stack{"\n\n"}
+              {!!t.language?.frontend?.length && (
+                <>
+                  <Arrow /> frontend/{"\n"}
+                  {columns(t.language.frontend)}
+                  {"\n\n"}
+                </>
+              )}
+              {!!t.language?.backend?.length && (
+                <>
+                  <Arrow /> backend/{"\n"}
+                  {columns(t.language.backend)}
+                  {"\n\n"}
+                </>
+              )}
+              {hasDesign && (
+                <>
+                  <Arrow /> design/{"\n"}
+                  {columns(t.design!)}
+                  {"\n\n"}
+                </>
+              )}
+              {hasTools && (
+                <>
+                  <Arrow /> tools/{"\n"}
+                  {columns(t.tools!)}
+                  {"\n\n"}
+                </>
+              )}
+            </>
+          )}
 
-        {hasUptime && (
-          <>
-            <Prompt>$</Prompt> uptime{"\n"}
-            <Arrow /> {t.uptime!.years || 0} yr, {t.uptime!.months || 0} mons,{" "}
-            {t.uptime!.days || 0} days{"\n\n"}
-          </>
-        )}
+          {hasOs && (
+            <>
+              <Arrow /> os/{"\n"}
+              {columns(t.os!)}
+              {"\n\n"}
+            </>
+          )}
 
-        {hasContact && (
-          <>
-            <Prompt>$</Prompt> ls /socials{"\n"}
-            {t.contact!.map((c) => (
-              <span key={c.id}>
-                <Arrow /> {c.name || "link"}
-                {"\n  "}
-                <span className="text-lime underline">{c.url}</span>{" "}
-                <Comment>social</Comment>
-                {"\n"}
-              </span>
-            ))}
-            {"\n"}
-          </>
-        )}
+          {hasUptime && (
+            <>
+              <Prompt>$</Prompt> uptime{"\n"}
+              <Arrow /> {t.uptime!.years || 0} yr, {t.uptime!.months || 0} mons,{" "}
+              {t.uptime!.days || 0} days{"\n\n"}
+            </>
+          )}
 
-        {!!t.bio?.trim() && (
-          <>
-            <Prompt>$</Prompt> cat /bio.md{"\n"}
-            {t.bio!.split("\n").map((line, idx) => (
-              <span key={idx}>
-                <Arrow /> {line}
-                {"\n"}
-              </span>
-            ))}
-            {"\n"}
-          </>
-        )}
+          {hasContact && (
+            <>
+              <Prompt>$</Prompt> ls /socials{"\n"}
+              {t.contact!.map((c) => (
+                <span key={c.id}>
+                  <Arrow /> {c.name || "link"}
+                  {"\n"}
+                  <span className="text-lime underline">
+                    [{c.url}]({c.url})
+                  </span>
+                  {"    "}
+                  <Comment>social</Comment>
+                  {"\n\n"}
+                </span>
+              ))}
+            </>
+          )}
 
-        <Prompt>$</Prompt> ./show-stats.sh{"\n"}
-        {t.stats ? (
-          <>
-            <Arrow /> Repos: {t.stats.repos ?? 95} (Contributed: {t.stats.contributed ?? 133}) | Stars: {t.stats.stars ?? 342}{"\n"}
-            <Arrow /> Commits: {t.stats.commits ?? "2,116"} | Followers: {t.stats.followers ?? 196}{"\n"}
-            <Arrow /> Lines of Code: {t.stats.linesOfCode ?? "446,276"} ({t.stats.additions ?? "523,178"}++, {t.stats.deletions ?? "76,902"}--)
-          </>
-        ) : (
-          <Arrow /> 
-        )}
+          <Prompt>$</Prompt> ./show-stats.sh{"\n"}
+          {t.stats ? (
+            <>
+              <Arrow /> Repos: {t.stats.repos ?? 95} (Contributed:{" "}
+              {t.stats.contributed ?? 133}) | Stars: {t.stats.stars ?? 342}
+              {"\n"}
+              <Arrow /> Commits: {t.stats.commits ?? "2,116"} | Followers:{" "}
+              {t.stats.followers ?? 196}
+              {"\n"}
+              <Arrow /> Lines of Code: {t.stats.linesOfCode ?? "446,276"} (
+              {t.stats.additions ?? "523,178"}++, {t.stats.deletions ?? "76,902"}--)
+            </>
+          ) : (
+            <>
+              <Arrow /> Fetching data...
+            </>
+          )}
 
-        {!!t.quote?.trim() && (
-          <>
-            {"\n\n"}
-            <Comment>&ldquo;{t.quote}&rdquo;</Comment>
-          </>
-        )}
-      </pre>
+          {!!t.quote?.trim() && (
+            <>
+              {"\n\n"}
+              <Comment>&ldquo;{t.quote}&rdquo;</Comment>
+            </>
+          )}
+        </pre>
 
-      {t.banner?.url && t.banner.position === "down" && (
-        <div className="w-full border-t-2 border-cream/20 overflow-hidden">
-          <img
-            src={t.banner.url}
-            alt="Footer Banner"
-            className="w-full h-36 md:h-48 object-cover"
-          />
-        </div>
-      )}
+        {t.banner?.url && t.banner.position === "down" && (
+          <div className="w-full overflow-hidden border-t-2 border-cream/20">
+            <img
+              src={t.banner.url}
+              alt="Footer Banner"
+              className="h-36 w-full object-cover md:h-48"
+            />
+          </div>
+        )}
+      </div>
     </div>
   );
 }
