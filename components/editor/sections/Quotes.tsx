@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { Plus } from 'lucide-react'
-import { QUOTE_SUGGESTIONS, cx } from './editor-state'
+import { QUOTE_SUGGESTIONS, cx } from '../editor-state'
 
 type QuotesProps = {
   value: string

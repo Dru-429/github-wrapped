@@ -1,4 +1,4 @@
-"usew client"
+"use client";
 
 import { Copy } from "lucide-react";
 import { useRef, useState } from "react";

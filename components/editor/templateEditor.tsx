@@ -4,15 +4,15 @@ import { useState, useEffect } from 'react'
 import type { Dispatch, SetStateAction } from 'react'
 import { AnimatePresence } from 'framer-motion'
 import { Plus, Minus } from 'lucide-react'
-import SectionCard from './SectionCard'
-import TlanguageGroup from './languageGroup'
-import ToolsInput from './ToolsInput'
-import Contact from './Contact'
-import TagPill from './TagPill'
+import SectionCard from './ui/SectionCard'
+import TlanguageGroup from './sections/languageGroup'
+import ToolsInput from './sections/ToolsInput'
+import Contact from './sections/Contact'
+import TagPill from './ui/TagPill'
 import Preview from './preview'
-import Quotes from './Quotes'
-import BioInput from './BioInput'
-import GithubStatsInput from './GithubStatsInput'
+import Quotes from './sections/Quotes'
+import BioInput from './sections/BioInput'
+import GithubStatsInput from './sections/GithubStatsInput'
 import {
   BACKEND_SUGGESTIONS,
   BANNER_URL,
@@ -26,7 +26,7 @@ import {
   type SectionKey,
   type UptimeState
 } from './editor-state'
-import BannerInput from './Banner'
+import BannerInput from './sections/Banner'
 
 // Default fallback parameters if props are omitted
 const HARDCODED_USERNAME = 'dru-429'

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Download, Loader2, Sparkles } from "lucide-react";
-import type { GitHubStatsState } from "./editor-state";
+import type { GitHubStatsState } from "../editor-state";
 import handleFetchGitHubData from "@/lib/github_readme";
 
 type GithubStatsInputProps = {

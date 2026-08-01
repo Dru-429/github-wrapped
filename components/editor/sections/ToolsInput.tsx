@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { Plus } from 'lucide-react'
-import TagPill from './TagPill'
+import TagPill from '../ui/TagPill'
 
 type ToolsInputProps = {
   values: string[]

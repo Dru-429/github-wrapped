@@ -12,7 +12,7 @@ import {
   AlertCircle,
   Download,
 } from "lucide-react";
-import ImageUpload from "@/components/editor/ImageUpload";
+import ImageUpload from "@/components/editor/sections/ImageUpload";
 import TemplateEditor from "@/components/editor/templateEditor";
 import { uid, type ReadmeTemplate, FRONTEND_SUGGESTIONS, BACKEND_SUGGESTIONS } from "@/components/editor/editor-state";
 import handleFetchGitHubData from "@/lib/github_readme";

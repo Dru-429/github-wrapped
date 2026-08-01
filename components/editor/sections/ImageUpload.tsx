@@ -2,7 +2,7 @@ import { useCallback, useRef, useState } from "react";
 import type { Dispatch, SetStateAction } from "react";
 import { motion } from "framer-motion";
 import { Upload, X, Loader2 } from "lucide-react";
-import type { ReadmeTemplate } from "./editor-state";
+import type { ReadmeTemplate } from "../editor-state";
 
 
 const MAX_BYTES = 10 * 1024 * 1024; // 10 MB

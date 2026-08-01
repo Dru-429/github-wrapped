@@ -1,4 +1,6 @@
-import { useRef,useState } from "react";
+"use client";
+
+import { useRef, useState } from "react";
 import { Copy } from "lucide-react";
 import type { ReadmeTemplate as BaseTemplate } from "../editor-state";
 import { toBlob } from "html-to-image";

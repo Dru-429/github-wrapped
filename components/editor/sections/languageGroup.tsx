@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from 'react'
 import { Plus, Search } from 'lucide-react'
-import TagPill from './TagPill'
+import TagPill from '../ui/TagPill'
 
 type TlanguageGroupProps = {
   title: string

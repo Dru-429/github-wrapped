@@ -1,3 +1,5 @@
+"use client";
+
 import { Copy } from "lucide-react";
 import { useRef, useState } from "react";
 import { toBlob } from "html-to-image";

@@ -1,6 +1,6 @@
 "use client"
 
-import { BANNER_URL, cx, type BannerState } from "./editor-state"
+import { BANNER_URL, cx, type BannerState } from "../editor-state"
 
 type BannerInputProps = {
   value?: BannerState
