@@ -96,14 +96,14 @@ export default function SelectTemplatePage() {
               key={no}
               type="button"
               onClick={() => pick(no)}
-              className="boxy group flex flex-col overflow-hidden rounded-sm bg-cream text-left transition-transform hover:-translate-y-1 focus:outline-none focus-visible:-translate-y-1 max-w-2xl"
+              className="boxy group flex flex-col overflow-hidden rounded-sm bg-cream text-left transition-transform hover:-translate-y-1 focus:outline-none focus-visible:-translate-y-1"
             >
               {/* window chrome */}
               <div className="flex items-center gap-2 border-b-2 border-ink bg-cream px-3 py-2">
                 <span className="h-2.5 w-2.5 rounded-full border border-ink bg-[#ff5f56]" />
                 <span className="h-2.5 w-2.5 rounded-full border border-ink bg-lime" />
                 <span className="h-2.5 w-2.5 rounded-full border border-ink bg-mantis" />
-                <span className="ml-1 font-mono text-[13px] tracking-wide font-bold tracking-widest">
+                <span className="ml-1 font-mono text-[10px] font-bold tracking-widest">
                   {file}
                 </span>
                 <span className="ml-auto font-mono text-[10px] uppercase tracking-widest text-ink/40">
@@ -111,14 +111,14 @@ export default function SelectTemplatePage() {
                 </span>
               </div>
 
-              {/* preview */}
-              <div className="relative h-[400px] overflow-hidden border-b-2 border-ink">
-                <Image
-                  src={Preview}
-                  alt={label}
-                  width={1200}
-                  height={800}
-                  className="h-full w-full object-cover object-top"
+              {/* real preview */}
+              <div className="relative h-[448px] overflow-hidden border-b-2 border-ink">
+                <Image 
+                  src = {Preview}
+                  alt = {label}
+                  height={3500}
+                  width={300}
+                  className="object-fit  h-[500px] w-[300px]"
                 />
                 <span className="pointer-events-none absolute inset-x-0 bottom-0 h-8 bg-gradient-to-t from-ink/40 to-transparent" />
               </div>
