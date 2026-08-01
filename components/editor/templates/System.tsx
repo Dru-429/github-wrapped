@@ -156,12 +156,9 @@ export default function SystemInfo({
           <Copy size={14} />
         </button>
       </div>
-
-      {/* Main Panel Content */}
-      <div className="flex flex-col gap-6 p-5 text-[13px] leading-[1.55] md:grid-cols-[auto_1fr]">
         {/* Top Banner (Position UP) */}
         {t.banner?.url && t.banner.position === "up" && (
-          <div className="w-full overflow-hidden border-b border-[#30363d]">
+          <div className="w-full overflow-hidden mb-5 border-b border-[#30363d]">
             <img
               src={t.banner.url}
               alt="Header Banner"
@@ -170,9 +167,12 @@ export default function SystemInfo({
           </div>
         )}
 
+      {/* Main Panel Content */}
+      <div className="flex flex-col gap-6 p-5 text-[13px] leading-[1.55] md:grid-cols-[auto_1fr]">
+
         <div className="w-full grid gap-6 md:grid-cols-[auto_1fr]">
           {/* Left Side: ASCII Art */}
-          <pre className="whitespace-pre text-[10.5px] leading-[1.35] text-[#58a6ff]">
+          <pre className="whitespace-pre text-[13px] leading-[1.35] text-[#58a6ff] flex flex-1 items-center justify-center">
             {t.image?.trim() ? t.image : defaultAscii}
           </pre>
 
