@@ -230,16 +230,16 @@ export default function SelectTemplatePage() {
         </div>
 
         {/* heading */}
-        <header className="mb-8 max-w-2xl">
-          <h1 className="font-serif text-4xl font-bold leading-[1.05] md:text-5xl">
+        <header className="my-8 md:my-14 w-full text-center">
+          <h1 className="font-serif text-4xl font-bold leading-[1.05] md:text-6xl">
             Pick a{" "}
-            <span className="bg-ink px-2 italic text-cream">terminal</span>{" "}
+            <span className="bg-nuit px-3 italic text-cream">terminal</span>{" "}
             readme
           </h1>
-          <p className="mt-3 text-sm text-ink/60">
-            Live previews below. Choose one and we&apos;ll wrap{" "}
+          <p className="mt-3 text-nuit">
+            Add n remove any component. Choose one the best u feel and we&apos;ll wrap{" "}
             <span className="font-serif italic">@{username || "you"}</span>
-            &apos;s year in code with it.
+            &apos;s year in code with it : )
           </p>
         </header>
 
