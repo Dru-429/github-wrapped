@@ -14,7 +14,7 @@ import {
 } from "lucide-react";
 import ImageUpload from "@/components/editor/sections/ImageUpload";
 import TemplateEditor from "@/components/editor/templateEditor";
-import { uid, type ReadmeTemplate, FRONTEND_SUGGESTIONS, BACKEND_SUGGESTIONS } from "@/components/editor/editor-state";
+import { type ReadmeTemplate } from "@/components/editor/editor-state";
 import handleFetchGitHubData from "@/lib/github_readme";
 
 export default function ReadmeTemplatePage() {

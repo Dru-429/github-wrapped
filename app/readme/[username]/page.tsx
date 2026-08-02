@@ -90,7 +90,7 @@ export default function SelectTemplatePage() {
         </header>
 
         {/* template grid */}
-        <div className="grid gap-6 md:grid-cols-2">
+        <div className="grid gap-6 md:grid-cols-2 ">
           {TEMPLATES.map(({ no, file, label, blurb, Preview }) => (
             <button
               key={no}
@@ -112,13 +112,13 @@ export default function SelectTemplatePage() {
               </div>
 
               {/* real preview */}
-              <div className="relative h-[448px] overflow-hidden border-b-2 border-ink">
+              <div className="relative h-[338px] overflow-hidden border-b-2 border-ink">
                 <Image 
                   src = {Preview}
                   alt = {label}
-                  height={3500}
-                  width={300}
-                  className="object-fit  h-[500px] w-[300px]"
+                  height={350}
+                  width={350}
+                  className="w-full h-full object-  h-[350px] w-[350px]"
                 />
                 <span className="pointer-events-none absolute inset-x-0 bottom-0 h-8 bg-gradient-to-t from-ink/40 to-transparent" />
               </div>
