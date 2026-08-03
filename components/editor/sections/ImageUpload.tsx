@@ -119,6 +119,30 @@ export default function ImageUpload({ setTemplateAction }: ImageUploadProps) {
     if (inputRef.current) inputRef.current.value = "";
   };
 
+  const defaultAscii = `                                             
+           %%%%%        %%%%%               
+           %%%%%%%%    %%%%%%%%%             
+           %%%%%%%%%%%%%%%%%%%%%             
+          %%%%%%%%%%%%%%%%%%%%%%%%           
+          %%%++++++++++++#%%%%%%%%           
+        %%%+:.           .::=#%%%%           
+        %%%=.**.      .=*-  -#%%%%%%         
+        %%:..##.       =%-  ..#%%%%%         
+    %%%%%#. ... :####=....    #%%%%%%%       
+    *%%#%#.     ..-%%+.       #%%%%%%#       
+      %%%#.                   #%%%%%         
+    %%%   %%#.    .........*%%%%#  %%%       
+                %%%%%%%%%%%%%%               
+                %%%%%%%%%%%%%%%@             
+              %%%%%%%%%%%%%%%%%%%            
+            %%%%%%%%%%%%%%%%%%%%%%%%%          
+            %%%%%%%%%%%%%%%%%%%%%%%%%          
+            %%%%% %%%%%%%%%%%%%%% %%%           
+                  %%%%%%%%%%%%%%             
+                   %%%%   %%%%#             
+                                      `;
+
+
   return (
     <div className="w-full bg-cream boxy p-4 md:p-6">
       <div className="mx-auto max-w-6xl">
@@ -230,16 +254,15 @@ export default function ImageUpload({ setTemplateAction }: ImageUploadProps) {
                     {ascii}
                   </pre>
                 ) : (
-                  <div className="grid h-full min-h-[300px] place-items-center text-center">
-                    <div>
-                      <p className="font-display text-xl font-bold text-cream lowercase">
-                        no preview yet
-                      </p>
-                      <p className="mt-1 text-xs text-cream/60">
-                        upload an image to see the ascii output here.
-                      </p>
-                    </div>
-                  </div>
+                  <pre
+                  className="whitespace-pre font-mono text-[10px] leading-[10px] text-lime flex flex-col items-center justify-between"
+                  style={{ fontFamily: "ui-monospace, SFMono-Regular, Menlo, monospace" }}
+                >
+                  <p className="font-display text-xl font-bold text-cream lowercase mb-2">
+                    Default ASCII Preview
+                  </p> 
+                  {defaultAscii}
+                </pre>
                 )}
               </div>
             </motion.div>
@@ -249,7 +272,7 @@ export default function ImageUpload({ setTemplateAction }: ImageUploadProps) {
                 onClick={() => clear()}
                 className="mt-3 w-full border-2 border-ink bg-lime px-3 py-2 text-sm font-bold uppercase tracking-wide text-ink hover:bg-mantis"
               >
-                Reset 
+                Reset
               </button>
             )}
           </section>
