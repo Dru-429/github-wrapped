@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { motion } from "framer-motion";
@@ -33,6 +33,18 @@ export default function ReadmeTemplatePage() {
   const [loading, setLoading] = useState(false);
   const [successMsg, setSuccessMsg] = useState<string | null>(null);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  
+  useEffect(() => {
+    if (!successMsg && !errorMsg) return;
+  
+    const timer = setTimeout(() => {
+      setSuccessMsg(null);
+      setErrorMsg(null);
+    }, 6000);
+  
+    return () => clearTimeout(timer);
+  }, [successMsg, errorMsg]);
+
 
   return (
     <main className="relative min-h-screen bg-background bg-grid text-foreground">
