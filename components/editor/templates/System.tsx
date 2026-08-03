@@ -1,9 +1,8 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { Copy } from "lucide-react";
+import { useRef } from "react";
 import type { ReadmeTemplate as BaseTemplate } from "../editor-state";
-import { toBlob } from "html-to-image";
+import { Copy } from "../ui/Copy";
 
 type ReadmeTemplate = BaseTemplate & {
   image?: string;
@@ -78,28 +77,12 @@ export default function SystemInfo({
 }) {
   const t = (templateObject ?? {}) as ReadmeTemplate;
   const cardRef = useRef<HTMLDivElement>(null);
-  const [copied, setCopied] = useState(false);
 
   const uptimeStr =
     t.uptime && (t.uptime.years || t.uptime.months || t.uptime.days)
       ? `${t.uptime.years || 0} years, ${t.uptime.months || 0} months, ${t.uptime.days || 0
       } days`
       : null;
-
-  const copy = async () => {
-    const node = cardRef.current;
-    if (!node) return;
-    try {
-      const blob = await toBlob(node, { pixelRatio: 2, cacheBust: true });
-      if (!blob) return;
-      await navigator.clipboard.write([new ClipboardItem({ "image/png": blob })]);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 1600);
-    } catch (err) {
-      console.log(err)
-    }
-  };
-
 
   const defaultAscii = `                                             
             %%%%%        %%%%%               
@@ -147,14 +130,11 @@ export default function SystemInfo({
           <span className="font-bold text-[#58a6ff]">{handle.split("@")[0]}</span> /{" "}
           {repoName}
         </span>
-        <button
-          onClick={copy}
+        <Copy
+          node={cardRef}
           className="grid h-7 w-7 place-items-center rounded text-[#8b949e] transition-colors hover:bg-[#161b22] hover:text-[#58a6ff]"
-          aria-label="Copy code"
           title="Copy"
-        >
-          <Copy size={14} />
-        </button>
+        />
       </div>
         {/* Top Banner (Position UP) */}
         {t.banner?.url && t.banner.position === "up" && (

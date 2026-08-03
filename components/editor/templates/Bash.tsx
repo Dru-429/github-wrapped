@@ -1,9 +1,8 @@
 "use client";
 
-import { Copy } from "lucide-react";
-import { useRef, useState } from "react";
-import { toBlob } from "html-to-image";
+import { useRef } from "react";
 import type { ReadmeTemplate as BaseTemplate } from "../editor-state";
+import { Copy } from "../ui/Copy";
 
 type ReadmeTemplate = BaseTemplate & {
   image?: string;
@@ -55,7 +54,6 @@ export default function BashStyle({
 }) {
   const t = (templateObject ?? {}) as ReadmeTemplate;
   const cardRef = useRef<HTMLDivElement>(null);
-  const [copied, setCopied] = useState(false);
 
   const hasLang =
     !!t.language && ((t.language.frontend?.length ?? 0) + (t.language.backend?.length ?? 0) > 0);
@@ -65,21 +63,6 @@ export default function BashStyle({
   const hasAbout = !!t.about?.trim();
   const hasOs = !!t.os?.length;
   const hasUptime = !!t.uptime && (t.uptime.years || t.uptime.months || t.uptime.days);
-
-  /** Copies the rendered terminal to the clipboard as a PNG image. */
-  const copy = async () => {
-    const node = cardRef.current;
-    if (!node) return;
-    try {
-      const blob = await toBlob(node, { pixelRatio: 2, cacheBust: true });
-      if (!blob) return;
-      await navigator.clipboard.write([new ClipboardItem({ "image/png": blob })]);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 1600);
-    } catch (err) {
-      console.log(err)
-    }
-  };
 
   const Prompt = ({ children }: { children: React.ReactNode }) => (
     <span className="text-mantis">{children}</span>
@@ -91,14 +74,10 @@ export default function BashStyle({
 
   return (
     <div className="relative">
-      <button
-        onClick={copy}
-        className="absolute right-3 top-3 z-10 grid h-8 w-8 place-items-center rounded-sm border-2 border-cream/25 bg-x/80 text-cream/70 hover:bg-cream/10"
-        aria-label="Copy as image"
-        title={copied ? "Copied as image!" : "Copy as image"}
-      >
-        <Copy size={14} />
-      </button>
+      <Copy
+        node={cardRef}
+        className="absolute right-3 top-3 z-10 grid h-8 w-8 place-items-center rounded-sm border-2 border-cream/25 bg-ink/80 text-cream/70 hover:bg-cream/10"
+      />
 
       <div
         ref={cardRef}
