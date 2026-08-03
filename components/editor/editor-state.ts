@@ -91,11 +91,16 @@ export const BANNER_URL = [
   "/banners/itachi.jpg",
   "/banners/solar.jpg",
   "/banners/lunar.jpg",
-  "/banners/cat.jpg",
-  "/banners/tempImpala.jpg",
-  "/banners/dino.jpg",
   "/banners/marrrk.png",
   "/banners/elon.png",
+  "/banners/mark.png",
+  "/banners/tempImpala.jpg",
+  "/banners/dino.jpg",
+  "/banners/cat.jpg",
+  "/banners/car.jpg",
+  "/banners/gojo.jpg",
+  "/banners/zoro.jpg",
+  "/banners/wave.jpg",
 ]
 
 export const BACKEND_SUGGESTIONS = [
