@@ -87,7 +87,7 @@ export default function TemplateEditor({
     }
 
     if (keysToActivate.length > 0) {
-      setActive(prev => Array.from(new Set([...prev, ...keysToActivate])))
+      setActive(prev => Array.from(new Set([...keysToActivate, ...prev])))
     }
   }, [template])
 
@@ -237,7 +237,7 @@ export default function TemplateEditor({
               ) : (
                 <div className='flex flex-col gap-4'>
                   <AnimatePresence initial={false}>
-                    {active.map(k => {
+                    {[...active].reverse().map(k => {
                       if (k === 'banner') {
                         return (
                           <SectionCard
