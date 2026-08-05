@@ -33,6 +33,7 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
   --color-lime: var(--lime);
+  --color-gitbg: var(--gitbg);
   --color-mantis: var(--mantis);
   --color-deep-green: var(--deep-green);
   --color-nuit: var(--nuit);
@@ -72,6 +73,7 @@
   --color-accent: var(--accent);
   --color-muted-foreground: var(--muted-foreground);
   --color-muted: var(--muted);
+  --color-gitbg: var(--gitbg);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-secondary: var(--secondary);
   --color-primary-foreground: var(--primary-foreground);
@@ -134,6 +136,7 @@
   --mantis: #74c365;
   --deep-green: #00804c;
   --nuit: #1e488f;
+  --gitbg: #151B23;
 
   --background: var(--cream);
   --foreground: var(--ink);
@@ -203,5 +206,10 @@
   .boxy-sm {
     border: 2px solid var(--ink);
     box-shadow: 4px 4px 0 0 var(--ink);
+  }
+
+  .boxy-xs {
+    border: 1px solid var(--ink);
+    box-shadow: 2px 2px 0 0 var(--ink);
   }
 }
