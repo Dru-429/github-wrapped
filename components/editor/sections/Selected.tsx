@@ -56,10 +56,7 @@ export default function Selected({ templateNo, setTemplateNo }: SelectedProps) {
         <div className="boxy mb-6 flex items-center justify-between bg-cream px-4 py-3">
           <div className="flex items-baseline gap-3">
             <span className="font-display text-xl font-bold text-ink">
-              select template
-            </span>
-            <span className="text-xs text-muted-foreground">
-              pick a style · your data carries over
+              selected template
             </span>
           </div>
         </div>

@@ -28,6 +28,7 @@ import {
 } from './editor-state'
 import BannerInput from './sections/Banner'
 import Copy from './ui/Copy'
+import Selected from './sections/Selected'
 
 // Default fallback parameters if props are omitted
 const HARDCODED_USERNAME = 'dru-429'
@@ -147,6 +148,7 @@ export default function TemplateEditor({
   return (
     <div className='w-full boxy bg-cream p-4 md:p-6'>
       <div className='mx-auto max-w-6xl'>
+        
         <div className='boxy mb-6 flex items-center justify-between bg-cream px-4 py-3'>
           <div className='flex items-center gap-3 text-ink'>
             <button
