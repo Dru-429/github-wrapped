@@ -2,6 +2,7 @@ import type { Dispatch, SetStateAction } from "react";
 import { motion } from "framer-motion";
 import { Terminal, FileJson, FileCode2, Braces } from "lucide-react";
 import { cx } from "../editor-state";
+import Image from "next/image";
 
 /**
  * Metadata for each template – id matches the `templateNo` numbers used
@@ -10,45 +11,27 @@ import { cx } from "../editor-state";
 const TEMPLATES = [
   {
     id: 1,
-    label: "System",
-    sub: "neofetch-style system info layout",
+    label: "System.tsx",
+    sub: "ASCII portrait + system rows.",
     icon: Terminal,
     accent: "#e39257",
-    preview: [
-      "OS .............. macOS",
-      "Host ............ GitHub",
-      "Uptime .......... 2 yrs",
-      "Languages ....... TS, Go",
-      "Shell ........... zsh",
-    ],
+    Preview: "/banners/covers/SystemInfo.png",
   },
   {
     id: 2,
-    label: "Bash",
-    sub: "terminal script with shell variables",
+    label: "Bash.tsx",
+    sub: "Shell commands walk through.",
     icon: FileCode2,
     accent: "#27c93f",
-    preview: [
-      "#!/usr/bin/env bash",
-      'NAME="developer"',
-      'ROLE="engineer"',
-      "LANGS=(ts go rust)",
-      "echo $NAME",
-    ],
+    Preview: "/banners/covers/Bash.png",
   },
   {
     id: 3,
-    label: "YAML",
-    sub: "config-file style key:value pairs",
+    label: "YAML.tsx",
+    sub: "Keys and columns — a tidy",
     icon: FileJson,
     accent: "#e0904a",
-    preview: [
-      "name: developer",
-      "role: engineer",
-      "skills:",
-      "  - typescript",
-      "  - go",
-    ],
+    Preview: "/banners/covers/YAML.png",
   },
   {
     id: 4,
@@ -56,13 +39,7 @@ const TEMPLATES = [
     sub: "npm package manifest format",
     icon: Braces,
     accent: "#FF7B68",
-    preview: [
-      '{',
-      '  "name": "dev",',
-      '  "title": "eng",',
-      '  "skills": [...]',
-      '}',
-    ],
+    Preview: "/banners/covers/JSON.png",
   },
 ] as const;
 
@@ -108,34 +85,47 @@ export default function Selected({ templateNo, setTemplateNo }: SelectedProps) {
                 )}
               >
                 {/* ── Mini terminal preview ── */}
+                {/* Dot mac */}
+                <div
+                  className={cx("mb-2 flex items-center gap-1.5 pt-1 pl-1",
+                    active
+                      ? "bg-lime "
+                      : " bg-cream"
+                  )}
+                >
+                  <span className="h-2 w-2 rounded-full bg-[#ff5f56]" />
+                  <span className="h-2 w-2 rounded-full bg-[#ffbd2e]" />
+                  <span className="h-2 w-2 rounded-full bg-[#27c93f]" />
+                </div>
                 <div className="relative w-full bg-[#151B23] px-3 pb-3 pt-2">
-                  {/* Dot chrome */}
-                  <div className="mb-2 flex items-center gap-1.5">
-                    <span className="h-2 w-2 rounded-full bg-[#ff5f56]" />
-                    <span className="h-2 w-2 rounded-full bg-[#ffbd2e]" />
-                    <span className="h-2 w-2 rounded-full bg-[#27c93f]" />
-                  </div>
 
                   <pre
                     className="whitespace-pre font-mono text-[9px] leading-[14px] tracking-tight"
-                    style={{
-                      color: tpl.accent,
-                      fontFamily:
-                        "ui-monospace, SFMono-Regular, Menlo, monospace",
-                    }}
                   >
-                    {tpl.preview.join("\n")}
-                  </pre>
+                    <div className="relative max-h-[180px] overflow-hidden border-b-2 border-ink">
+                      <Image
+                        src={tpl.Preview}
+                        alt={tpl.label}
+                        height={350}
+                        width={350}
+                        className="w-full h-auto object-cover"
+                      />
+                      <span className="pointer-events-none absolute inset-x-0 bottom-0 h-8 bg-gradient-to-t from-ink/40 to-transparent" />
+                    </div>
 
-                  {/* Active indicator glow */}
-                  {active && (
+                  </pre>
+                </div>
+
+                {/* Active indicator glow */}
+                {
+                  active && (
                     <motion.div
                       layoutId="selected-glow"
                       className="pointer-events-none absolute inset-0 rounded-[1px] ring-2 ring-lime/50"
                       transition={{ type: "spring", stiffness: 380, damping: 30 }}
                     />
-                  )}
-                </div>
+                  )
+                }
 
                 {/* ── Label area ── */}
                 <div className="flex flex-1 flex-col gap-1 px-3 py-3">
@@ -158,16 +148,18 @@ export default function Selected({ templateNo, setTemplateNo }: SelectedProps) {
                 </div>
 
                 {/* ── Active badge ── */}
-                {active && (
-                  <div className="absolute right-2 top-2 border-2 border-ink bg-ink px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-widest text-lime">
-                    active
-                  </div>
-                )}
+                {
+                  active && (
+                    <div className="absolute right-2 top-3 border-2 border-ink bg-nuit px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-widest text-cream">
+                      active
+                    </div>
+                  )
+                }
               </motion.button>
             );
           })}
         </div>
       </div>
-    </div>
+    </div >
   );
 }

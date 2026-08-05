@@ -101,7 +101,7 @@ export default function SelectTemplatePage() {
               key={no}
               type="button"
               onClick={() => pick(no)}
-              className="boxy group flex flex-col overflow-hidden rounded-sm bg-cream text-left transition-transform hover:-translate-y-1 focus:outline-none focus-visible:-translate-y-1 cursor-pointer"
+              className="boxy-xs group flex flex-col overflow-hidden rounded-sm bg-cream text-left transition-transform hover:-translate-y-1 focus:outline-none focus-visible:-translate-y-1 cursor-pointer hover:shadow-[6px_6px_0_var(--ink)]"
             >
               {/* window chrome */}
               <div className="flex items-center gap-2 border-b-2 border-ink bg-cream px-3 py-2 ">
