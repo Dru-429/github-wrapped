@@ -92,7 +92,7 @@ export default function Yaml({
               <img
                 src={t.banner.url}
                 alt="Header Banner"
-                className="h-36 w-full object-cover md:h-48"
+                className="h-auto w-full object-cover "
               />
             </div>
           )}
@@ -218,7 +218,7 @@ export default function Yaml({
             <img
               src={t.banner.url}
               alt="Footer Banner"
-              className="h-36 w-full object-cover md:h-48"
+              className="h-auto w-full object-cover "
             />
           </div>
         )}
