@@ -35,72 +35,126 @@ export const handleFetchGitHubData = async (
     let totalFollowersCount = 0;
     let totalLinesOfCodeCount = 0;
 
-    // Primary attempt: Call server-side /api/github endpoint
-    const res = await fetch("/api/github", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username: rawUsername }),
-    });
+    let restSuccess = false;
 
-    if (res.ok) {
-      const data = await res.json();
-      if (data.user) {
-        name = data.user.name || data.user.login || rawUsername;
-        bio = data.user.bio || "";
-        profileUrl = data.user.profileUrl || profileUrl;
-        totalFollowersCount = data.user.followers || 0;
-      }
-      if (data.stats) {
-        totalCommitsCount = data.stats.totalCommits || 0;
-        totalLinesOfCodeCount = data.stats.linesOfCode || totalCommitsCount * 25;
-        if (data.stats.topLanguages?.length) {
-          topLangs = data.stats.topLanguages.map((l: { name: string }) => l.name);
-        }
-        if (data.stats.topRepos?.length) {
-          topRepoNames = data.stats.topRepos.map((r: { name: string }) => r.name);
-          totalStarsCount = data.stats.topRepos.reduce((acc: number, r: { stars?: number }) => acc + (r.stars || 0), 0);
-          reposCount = data.stats.topRepos.length;
-          contributedCount = Math.round(reposCount * 1.4);
-        }
-      }
-    } else {
-      // Fallback attempt: Directly query GitHub Public REST API
+    // ==========================================
+    // Primary: GitHub Public REST API
+    // ==========================================
+    try {
       const userRes = await fetch(
         `https://api.github.com/users/${encodeURIComponent(rawUsername)}`
       );
+
       if (userRes.ok) {
         const userData = await userRes.json();
+
+        restSuccess = true;
+
         name = userData.name || userData.login || rawUsername;
         bio = userData.bio || "";
         profileUrl = userData.html_url || profileUrl;
         reposCount = userData.public_repos || 0;
         totalFollowersCount = userData.followers || 0;
         contributedCount = Math.round(reposCount * 1.3);
+
+        const reposRes = await fetch(
+          `https://api.github.com/users/${encodeURIComponent(
+            rawUsername
+          )}/repos?sort=updated&per_page=30`
+        );
+
+        if (reposRes.ok) {
+          const reposData = await reposRes.json();
+
+          if (Array.isArray(reposData)) {
+            const langMap: Record<string, number> = {};
+            let starsSum = 0;
+
+            reposData.forEach(
+              (repo: {
+                language?: string;
+                stargazers_count?: number;
+                name: string;
+              }) => {
+                if (repo.language) {
+                  langMap[repo.language] =
+                    (langMap[repo.language] || 0) + 1;
+                }
+
+                starsSum += repo.stargazers_count || 0;
+              }
+            );
+
+            totalStarsCount = starsSum;
+
+            topLangs = Object.keys(langMap)
+              .sort((a, b) => langMap[b] - langMap[a])
+              .slice(0, 6);
+
+            topRepoNames = reposData
+              .slice(0, 5)
+              .map((r: { name: string }) => r.name);
+
+            totalCommitsCount = (reposCount || 10) * 22;
+            totalLinesOfCodeCount = totalCommitsCount * 45;
+          }
+        }
+      }
+    } catch {
+      // Ignore REST API errors and fallback below
+    }
+
+    // ==========================================
+    // Fallback: Server API
+    // ==========================================
+    if (!restSuccess) {
+      const res = await fetch("/api/github", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: rawUsername,
+        }),
+      });
+
+      if (!res.ok) {
+        throw new Error("Failed to fetch GitHub data.");
       }
 
-      const reposRes = await fetch(
-        `https://api.github.com/users/${encodeURIComponent(
-          rawUsername
-        )}/repos?sort=updated&per_page=30`
-      );
-      if (reposRes.ok) {
-        const reposData = await reposRes.json();
-        if (Array.isArray(reposData)) {
-          const langMap: Record<string, number> = {};
-          let starsSum = 0;
-          reposData.forEach((repo: { language?: string; stargazers_count?: number }) => {
-            if (repo.language) {
-              langMap[repo.language] = (langMap[repo.language] || 0) + 1;
-            }
-            starsSum += repo.stargazers_count || 0;
-          });
-          totalStarsCount = starsSum;
-          topLangs = Object.keys(langMap)
-            .sort((a, b) => langMap[b] - langMap[a])
-            .slice(0, 6);
-          topRepoNames = reposData.slice(0, 5).map((r: { name: string }) => r.name);
-          totalCommitsCount = (reposCount || 10) * 22;
-          totalLinesOfCodeCount = totalCommitsCount * 45;
+      const data = await res.json();
+
+      if (data.user) {
+        name = data.user.name || data.user.login || rawUsername;
+        bio = data.user.bio || "";
+        profileUrl = data.user.profileUrl || profileUrl;
+        totalFollowersCount = data.user.followers || 0;
+      }
+
+      if (data.stats) {
+        totalCommitsCount = data.stats.totalCommits || 0;
+        totalLinesOfCodeCount =
+          data.stats.linesOfCode || totalCommitsCount * 25;
+
+        if (data.stats.topLanguages?.length) {
+          topLangs = data.stats.topLanguages.map(
+            (l: { name: string }) => l.name
+          );
+        }
+
+        if (data.stats.topRepos?.length) {
+          topRepoNames = data.stats.topRepos.map(
+            (r: { name: string }) => r.name
+          );
+
+          totalStarsCount = data.stats.topRepos.reduce(
+            (acc: number, r: { stars?: number }) =>
+              acc + (r.stars || 0),
+            0
+          );
+
+          reposCount = data.stats.topRepos.length;
+          contributedCount = Math.round(reposCount * 1.4);
         }
       }
     }
@@ -138,8 +192,7 @@ export const handleFetchGitHubData = async (
       // 2. Fill bio template with fetched details
       next.bio = [
         `🔭 I am ${name}`,
-        `🌱 I am currently mastering ${
-          topLangs.slice(0, 3).join(", ") || "software development"
+        `🌱 I am currently mastering ${topLangs.slice(0, 3).join(", ") || "software development"
         }`,
         `🎯 My goal is to build impactful open-source software`,
         `💡 Ask me about ${topLangs[0] || "coding"}`,
