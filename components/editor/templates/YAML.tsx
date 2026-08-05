@@ -72,6 +72,7 @@ export default function Yaml({
   const fe = t.language?.frontend ?? [];
   const be = t.language?.backend ?? [];
   const de = t.design ?? [];
+  const tools = t.tools ?? [];
   const hasStack = fe.length + be.length + de.length > 0;
 
   return (
@@ -144,7 +145,7 @@ export default function Yaml({
                 {!!fe.length && <Column title="frontend" items={fe} />}
                 {!!be.length && <Column title="backend" items={be} />}
                 {!!de.length && <Column title="design" items={de} />}
-                {!!t.tools.length && <Column title="tool" items={t.tools} />}
+                {!!tools.length && <Column title="tool" items={tools} />}
               </div>
             </div>
           )}
