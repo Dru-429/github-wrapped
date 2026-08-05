@@ -13,6 +13,7 @@ import {
   Download,
 } from "lucide-react";
 import ImageUpload from "@/components/editor/sections/ImageUpload";
+import Selected from "@/components/editor/sections/Selected";
 import TemplateEditor from "@/components/editor/templateEditor";
 import { type ReadmeTemplate } from "@/components/editor/editor-state";
 import handleFetchGitHubData from "@/lib/github_readme";
@@ -24,7 +25,10 @@ export default function ReadmeTemplatePage() {
     ? decodeURIComponent(params.username)
     : "anonymous";
   const rawTemplate = params?.template ?? "1";
-  const templateNo = parseInt(rawTemplate, 10) || 1;
+  const initialTemplateNo = parseInt(rawTemplate, 10) || 1;
+
+  // Mutable template number – starts from the URL but can be changed via the selector
+  const [templateNo, setTemplateNo] = useState(initialTemplateNo);
 
   // Shared state for the template configuration and converted ASCII image
   const [template, setTemplate] = useState<ReadmeTemplate>({});
@@ -141,6 +145,15 @@ export default function ReadmeTemplatePage() {
 
         {/* Main Content Area following wireframe vertical layout */}
         <div className="flex flex-col gap-8">
+          {/* Template Selector */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.05 }}
+          >
+            <Selected templateNo={templateNo} setTemplateNo={setTemplateNo} />
+          </motion.div>
+
           {/* Top Box: Image Upload (Left: Upload controls, Right: Image preview) */}
           {templateNo === 1 ? (
             <motion.div
