@@ -60,12 +60,17 @@ export default function SelectTemplatePage() {
     <main className="min-h-screen bg-cream bg-grid px-4 py-8 text-ink md:px-10">
       <div className="mx-auto max-w-5xl">
         {/* top bar */}
-        <div className="mb-8 flex items-center justify-between">
+        <div className="mb-8 flex items-center justify-between ">
           <Link
             href="/"
-            className="boxy rounded-sm bg-cream px-4 py-2 font-mono text-[11px] font-bold uppercase tracking-widest transition-transform hover:-translate-y-0.5"
+            className="boxy rounded-sm bg-cream px-4 py-2 font-mono text-[11px] font-bold uppercase tracking-widest transition-transform hover:-translate-y-0.5 flex gap-2 justify-center items-center group" 
           >
-            ← Back
+            <span className="inline-block text-[13px] rotate-180 transition-transform duration-200 ease-out group-hover:translate-x-[-0.625rem]">
+              →
+            </span>
+            <span className="group-hover:scale-105">
+              Back
+            </span>
           </Link>
           <div className="boxy rounded-sm bg-nuit px-4 py-2 font-mono text-[11px] uppercase tracking-widest text-cream">
             <span className="text-lime">&gt;_</span>{" "}

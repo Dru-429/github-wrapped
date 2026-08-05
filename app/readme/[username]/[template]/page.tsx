@@ -33,15 +33,15 @@ export default function ReadmeTemplatePage() {
   const [loading, setLoading] = useState(false);
   const [successMsg, setSuccessMsg] = useState<string | null>(null);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
-  
+
   useEffect(() => {
     if (!successMsg && !errorMsg) return;
-  
+
     const timer = setTimeout(() => {
       setSuccessMsg(null);
       setErrorMsg(null);
     }, 6000);
-  
+
     return () => clearTimeout(timer);
   }, [successMsg, errorMsg]);
 
@@ -58,10 +58,14 @@ export default function ReadmeTemplatePage() {
         >
           <Link
             href={`/readme/${encodeURIComponent(rawUsername)}`}
-            className="boxy-sm inline-flex items-center gap-2 bg-[var(--cream)] px-4 py-2 text-xs font-bold uppercase tracking-widest text-ink transition-transform hover:-translate-x-0.5 hover:-translate-y-0.5"
+            className="boxy rounded-sm bg-cream px-4 py-2 font-mono text-[11px] font-bold uppercase tracking-widest transition-transform hover:-translate-y-0.5 flex gap-2 justify-center items-center group"
           >
-            <ArrowLeft className="h-4 w-4" />
-            <span>back to templates</span>
+            <span className="inline-block text-[13px] rotate-180 transition-transform duration-200 ease-out group-hover:translate-x-[-0.625rem]">
+              →
+            </span>
+            <span className="group-hover:scale-105">
+              Back
+            </span>
           </Link>
 
           <div className="flex flex-wrap items-center gap-3">
@@ -110,8 +114,8 @@ export default function ReadmeTemplatePage() {
             initial={{ opacity: 0, y: -5 }}
             animate={{ opacity: 1, y: 0 }}
             className={`boxy-sm absolute top-5 right-3 max-w-2xl wrap-normal flex items-center justify-between gap-7 px-5 py-2.5 text font-semibold ${successMsg
-                ? "bg-[var(--lime)] text-ink"
-                : "bg-destructive text-destructive-foreground"
+              ? "bg-[var(--lime)] text-ink"
+              : "bg-destructive text-destructive-foreground"
               }`}
           >
             <span className="flex items-center gap-2">
