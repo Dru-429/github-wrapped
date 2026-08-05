@@ -27,6 +27,7 @@ import {
   type UptimeState
 } from './editor-state'
 import BannerInput from './sections/Banner'
+import Copy from './ui/Copy'
 
 // Default fallback parameters if props are omitted
 const HARDCODED_USERNAME = 'dru-429'
@@ -170,14 +171,14 @@ export default function TemplateEditor({
               Preview
             </button>
           </div>
-          <button
+          {/* <button
             onClick={() => {
               navigator.clipboard?.writeText(JSON.stringify(template, null, 2))
             }}
             className='border-2 border-ink bg-lime px-3 py-1 text-sm font-bold uppercase tracking-wide text-ink hover:bg-mantis'
           >
             Copy
-          </button>
+          </button> */}
         </div>
 
         {tab === 'preview' ? (
@@ -546,15 +547,6 @@ export default function TemplateEditor({
             </section>
           </div>
         )}
-
-        <details className='boxy mt-6 bg-cream p-4'>
-          <summary className='cursor-pointer font-display text-lg font-bold text-ink lowercase'>
-            template object
-          </summary>
-          <pre className='mt-3 overflow-auto border-2 border-ink bg-cream p-3 text-xs text-ink'>
-            {JSON.stringify(template, null, 2)}
-          </pre>
-        </details>
       </div>
     </div>
   )

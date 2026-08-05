@@ -223,7 +223,7 @@ async function calculateStats(userData: any, username: string): Promise<GitHubSt
   const weekdayTotal = weekdayCommits[1] + weekdayCommits[2] + weekdayCommits[3] + weekdayCommits[4] + weekdayCommits[5]
   const weekendTotal = weekdayCommits[0] + weekdayCommits[6]
   const totalContributionsCount = weekdayTotal + weekendTotal
-  
+
   let weekdayPercent = 70 // fallback
   if (totalContributionsCount > 0) {
     weekdayPercent = Math.round((weekdayTotal / totalContributionsCount) * 100)
@@ -232,7 +232,7 @@ async function calculateStats(userData: any, username: string): Promise<GitHubSt
   const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
   const peakDayIndex = weekdayCommits.indexOf(Math.max(...weekdayCommits))
   const mostActiveDay = totalContributionsCount > 0 ? dayNames[peakDayIndex] : "Monday"
- 
+
   const totalContributions = userData.contributionsCollection.totalCommitContributions
   const prsMerged = userData.contributionsCollection.totalPullRequestContributions
   const issuesClosed = userData.contributionsCollection.totalIssueContributions
@@ -255,7 +255,7 @@ async function calculateStats(userData: any, username: string): Promise<GitHubSt
     linesOfCode: totalCommits * 25,
     prsMerged,
     issuesClosed,
-    weekdayPercent,     
+    weekdayPercent,
     mostActiveDay,
   }
 }

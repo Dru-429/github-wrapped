@@ -96,10 +96,10 @@ export default function SelectTemplatePage() {
               key={no}
               type="button"
               onClick={() => pick(no)}
-              className="boxy group flex flex-col overflow-hidden rounded-sm bg-cream text-left transition-transform hover:-translate-y-1 focus:outline-none focus-visible:-translate-y-1"
+              className="boxy group flex flex-col overflow-hidden rounded-sm bg-cream text-left transition-transform hover:-translate-y-1 focus:outline-none focus-visible:-translate-y-1 cursor-pointer"
             >
               {/* window chrome */}
-              <div className="flex items-center gap-2 border-b-2 border-ink bg-cream px-3 py-2">
+              <div className="flex items-center gap-2 border-b-2 border-ink bg-cream px-3 py-2 ">
                 <span className="h-2.5 w-2.5 rounded-full border border-ink bg-[#ff5f56]" />
                 <span className="h-2.5 w-2.5 rounded-full border border-ink bg-lime" />
                 <span className="h-2.5 w-2.5 rounded-full border border-ink bg-mantis" />
@@ -113,9 +113,9 @@ export default function SelectTemplatePage() {
 
               {/* real preview */}
               <div className="relative h-[338px] overflow-hidden border-b-2 border-ink">
-                <Image 
-                  src = {Preview}
-                  alt = {label}
+                <Image
+                  src={Preview}
+                  alt={label}
                   height={350}
                   width={350}
                   className="w-full h-full object-  h-[350px] w-[350px]"
@@ -124,10 +124,13 @@ export default function SelectTemplatePage() {
               </div>
 
               {/* meta */}
-              <div className="flex items-center justify-between gap-4 px-4 py-3">
+              <div className="flex items-center justify-between gap-4 px-4 py-3 cursor-pointer">
                 <p className="text-xs text-ink/60">{blurb}</p>
-                <span className="boxy shrink-0 rounded-sm bg-lime px-3 py-1.5 font-mono text-[10px] font-bold uppercase tracking-widest text-ink">
-                  Use →
+                <span className="boxy inline-flex items-center gap-1 shrink-0 rounded-sm bg-lime px-3 py-1.5 font-mono text-[10px] font-bold uppercase tracking-widest text-ink transition-transform duration-200 ease-out group-hover:scale-105">
+                  Use
+                  <span className="inline-block transition-transform duration-200 ease-out group-hover:translate-x-2.5">
+                    →
+                  </span>
                 </span>
               </div>
             </button>
