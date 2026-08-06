@@ -4,10 +4,6 @@ import { motion } from "framer-motion"
 import { Users } from "lucide-react"
 import { useEffect, useState, useCallback } from "react"
 
-/**
- * Standalone helper function to increment the count in the database
- * and broadcast an event so all <DevCounts /> components on the page update.
- */
 export async function bumpCount() {
   try {
     const res = await fetch('/api/count', { method: 'POST' })
@@ -23,16 +19,13 @@ export async function bumpCount() {
 }
 
 type DevCountsProps = {
-  /** Label shown after the number, e.g. "devs flexed" */
   text: string
-  /** Optional custom onClick handler */
   onClick?: () => void
 }
 
 export default function DevCounts({ text, onClick }: DevCountsProps) {
   const [totalWrapped, setTotalWrapped] = useState<number | null>(null)
 
-  /** Read the current count from the DB */
   const fetchCurrentCount = useCallback(async () => {
     try {
       const res = await fetch('/api/count')
@@ -43,7 +36,6 @@ export default function DevCounts({ text, onClick }: DevCountsProps) {
     }
   }, [])
 
-  /** Handle click on the badge */
   const handleBadgeClick = useCallback(async () => {
     if (onClick) {
       onClick()

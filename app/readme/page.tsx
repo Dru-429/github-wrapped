@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import Navbar from "@/components/landing_ui/Navbar";
 import { useRouter } from "next/navigation";
+import DevCounts, { bumpCount } from "@/components/ui/DevCounts";
 
 const LoadingUnderscores = () => {
   return (
@@ -146,17 +147,7 @@ export default function ReadmePage() {
               {count === null ? (
                 <LoadingUnderscores />
               ) : (
-                <motion.span
-                  key={count}
-                  initial={{ scale: 0.92, opacity: 0.7 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{ type: "spring", stiffness: 320, damping: 18 }}
-                >
-                  <span className="font-display text-sm">
-                    {count.toLocaleString()}
-                  </span>{" "}
-                  devs used
-                </motion.span>
+                <DevCounts text="devs build" />
               )}
             </div>
           </div>
@@ -206,7 +197,8 @@ export default function ReadmePage() {
               <button
                 type="submit"
                 disabled={!parseUsername(handle)}
-                className="boxy-sm group inline-flex items-center justify-center gap-2 bg-[var(--nuit)] px-6 py-4 text-sm font-bold uppercase tracking-wider text-[var(--cream)] transition-transform hover:-translate-x-0.5 hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-x-0 disabled:hover:translate-y-0"
+                onClick={bumpCount}
+                className="boxy-sm group inline-flex items-center justify-center gap-2 bg-[var(--nuit)] px-6 py-4 text-sm font-bold uppercase tracking-wider text-[var(--cream)] transition-transform hover:-translate-x-0.5 hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-x-0 disabled:hover:translate-y-0 cursor-pointer"
               >
                 Fetch profile
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
