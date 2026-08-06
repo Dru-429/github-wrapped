@@ -142,14 +142,7 @@ export default function ReadmePage() {
               <span>Terminal edition · live</span>
             </motion.div>
 
-            <div className="boxy-sm inline-flex items-center gap-2 bg-[var(--nuit)] px-3 py-1.5 text-xs font-bold uppercase tracking-widest text-[var(--cream)]">
-              <Users className="h-3.5 w-3.5" />
-              {count === null ? (
-                <LoadingUnderscores />
-              ) : (
-                <DevCounts text="devs build" />
-              )}
-            </div>
+            <DevCounts text="devs build" />
           </div>
 
           <div className="flex min-h-0 flex-1 flex-col items-center justify-center overflow-y-auto px-5 py-8 text-center md:px-10">
@@ -157,16 +150,15 @@ export default function ReadmePage() {
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              className="font-display text-5xl font-black leading-[0.9] tracking-tight md:text-7xl"
+              className="font-display text-5xl  font-black leading-[0.9] tracking-tight md:text-7xl"
             >
-              Build a{" "}
+              Terminal {" "}
               <span className="relative inline-block">
                 <span className="relative z-10 px-3 italic text-[var(--cream)]">
                   README
                 </span>
-                <span className="absolute inset-0 -rotate-1 bg-[var(--ink)]" />
-              </span>{" "}
-              that feels like you
+                <span className="absolute inset-0 -rotate-1 bg-[var(--nuit)]" />
+              </span>
             </motion.h1>
 
             <motion.p
@@ -175,8 +167,8 @@ export default function ReadmePage() {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="mt-6 max-w-2xl text-base text-foreground/75 md:text-lg"
             >
-              Fetch your GitHub profile, choose a style, edit every detail, and
-              leave with a polished README that is ready to copy and paste.
+              Generate Terminal readme in secs...
+              
             </motion.p>
 
             <motion.form
@@ -204,6 +196,11 @@ export default function ReadmePage() {
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </button>
             </motion.form>
+
+            <p className="mt-10 inline-flex items-center gap-2 text-xs uppercase tracking-widest text-ink/50">
+              <Sparkles className="h-3.5 w-3.5" />
+              fetch profile · edit everything · copy n paste anywhere
+            </p>
 
             <motion.div
               initial={{ opacity: 0, y: 16 }}
@@ -233,10 +230,7 @@ export default function ReadmePage() {
               })}
             </motion.div>
 
-            <p className="mt-6 inline-flex items-center gap-2 text-xs uppercase tracking-widest text-ink/50">
-              <Sparkles className="h-3.5 w-3.5" />
-              fetch profile · edit everything · copy anywhere
-            </p>
+
           </div>
         </section>
       </div>
