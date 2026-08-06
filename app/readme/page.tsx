@@ -138,7 +138,7 @@ export default function ReadmePage() {
               className="boxy-sm inline-flex items-center gap-2 bg-[var(--lime)] px-3 py-1.5 text-xs font-bold uppercase tracking-widest"
             >
               <Terminal className="h-3.5 w-3.5" />
-              <span>README builder &gt; live</span>
+              <span>Terminal edition · live</span>
             </motion.div>
 
             <div className="boxy-sm inline-flex items-center gap-2 bg-[var(--nuit)] px-3 py-1.5 text-xs font-bold uppercase tracking-widest text-[var(--cream)]">
@@ -155,7 +155,7 @@ export default function ReadmePage() {
                   <span className="font-display text-sm">
                     {count.toLocaleString()}
                   </span>{" "}
-                  devs building
+                  devs used
                 </motion.span>
               )}
             </div>
