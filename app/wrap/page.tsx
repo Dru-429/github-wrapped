@@ -1,15 +1,12 @@
 "use client"
 
-import { useEffect, useState } from "react";
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { ArrowRight, Gift, Users, Sparkles } from "lucide-react";
-import { Navbar } from "@/components/landing/Navbar";
+import { ArrowRight, Sparkles, Stars } from "lucide-react";
 import { useRouter } from "next/navigation";
 import DevCounts, { bumpCount } from "@/components/ui/DevCounts";
+import Navbar from "@/components/landing_ui/Navbar";
+import { useState } from "react";
 
-
-/** Extract a bare username from a raw input or a github URL. */
 function parseUsername(raw: string): string {
   const trimmed = raw.trim();
   if (!trimmed) return "";
@@ -39,7 +36,7 @@ export default function WrapperPage() {
     e.preventDefault();
     const username = parseUsername(handle);
     if (!username) return;
-    const target = `/wrapper/${encodeURIComponent(username)}`;
+    const target = `/wrap/${encodeURIComponent(username)}`;
     try {
       router.push(target);
     } catch {
@@ -61,11 +58,11 @@ export default function WrapperPage() {
               transition={{ duration: 0.5 }}
               className="boxy-sm inline-flex items-center gap-2 bg-[var(--lime)] px-3 py-1.5 text-xs font-bold uppercase tracking-widest"
             >
-              <Gift className="h-3.5 w-3.5" />
+              <Stars className="h-3.5 w-3.5" />
               <span>2025 spotify edition &gt; live</span>
             </motion.div>
 
-            <DevCounts text="devs flexed" /> 
+            <DevCounts text="devs flexed" />
 
           </div>
 
@@ -75,16 +72,15 @@ export default function WrapperPage() {
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              className="font-display text-5xl font-black leading-[0.9] tracking-tight md:text-7xl"
+              className="font-display text-5xl font-black  md:text-7xl"
             >
               Get your{" "}
               <span className="relative inline-block">
                 <span className="relative z-10 px-3 italic text-[var(--cream)]">
                   wrapped
                 </span>
-                <span className="absolute inset-0 -rotate-1 bg-[var(--ink)]" />
-              </span>{" "}
-              cards
+                <span className="absolute inset-0 -rotate-1 bg-[var(--nuit)]" />
+              </span>
             </motion.h1>
 
             <motion.p
@@ -95,7 +91,7 @@ export default function WrapperPage() {
             >
               Ur year in code, wrapped in{" "}
               <span className="font-display italic">Spotify style</span> — one
-              handle, a full set of shareable stat cards.
+              click, a full set of shareable stats cards.
             </motion.p>
 
             <motion.form
@@ -116,12 +112,17 @@ export default function WrapperPage() {
                 type="submit"
                 disabled={!parseUsername(handle)}
                 onClick={bumpCount}
-                className="boxy-sm group inline-flex items-center justify-center gap-2 bg-[var(--nuit)] px-6 py-4 text-sm font-bold uppercase tracking-wider text-[var(--cream)] transition-transform hover:-translate-x-0.5 hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-x-0 disabled:hover:translate-y-0"
+                className="boxy-sm group inline-flex items-center justify-center gap-2 bg-[var(--nuit)] px-6 py-4 text-sm font-bold uppercase tracking-wider text-[var(--cream)] transition-transform hover:-translate-x-0.5 hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-x-0 disabled:hover:translate-y-0 cursor-pointer"
               >
                 Get my wrapped
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </button>
             </motion.form>
+
+            <p className="mt-6 inline-flex items-center gap-2 text-xs uppercase tracking-widest text-ink/50">
+              <Sparkles className="h-3.5 w-3.5" />
+              stat cards · download &amp; share anywhere
+            </p>
 
             <motion.div
               initial={{ opacity: 0, y: 16 }}
@@ -134,23 +135,19 @@ export default function WrapperPage() {
                   key={h.k}
                   className="boxy-sm bg-[var(--cream)] p-3 text-left transition-transform hover:-translate-y-0.5"
                 >
-                  <div className="flex items-center gap-2">
-                    <span className="bg-[var(--lime)] px-1.5 font-mono text-[10px] font-bold">
+                  <div className="flex items-start justify-between gap-2">
+                    <span className={`px-1.5 font-mono text-[10px] font-bold bg-lime`}>
                       {h.k}
                     </span>
-                    <span className="font-mono text-xs font-bold text-ink">
-                      {h.t}
-                    </span>
                   </div>
+                  <h2 className="mt-3 font-mono text-xs font-bold uppercase tracking-wide text-ink">
+                    {h.t}
+                  </h2>
                   <p className="mt-2 text-xs leading-snug text-ink/60">{h.d}</p>
                 </div>
               ))}
             </motion.div>
 
-            <p className="mt-6 inline-flex items-center gap-2 text-xs uppercase tracking-widest text-ink/50">
-              <Sparkles className="h-3.5 w-3.5" />
-              stat cards · drag &amp; arrange · share anywhere
-            </p>
           </div>
         </section>
       </div>

@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
@@ -11,36 +11,11 @@ import {
   PencilLine,
   Sparkles,
   Terminal,
-  Users,
 } from "lucide-react";
 import Navbar from "@/components/landing_ui/Navbar";
 import { useRouter } from "next/navigation";
 import DevCounts, { bumpCount } from "@/components/ui/DevCounts";
 
-const LoadingUnderscores = () => {
-  return (
-    <span
-      className="inline-flex items-center gap-1"
-      style={{ height: "14px", lineHeight: "10px" }}
-    >
-      {[0, 1, 2].map((i) => (
-        <motion.span
-          key={i}
-          animate={{ y: [2, -4, 2] }}
-          transition={{
-            duration: 0.9,
-            repeat: Infinity,
-            delay: i * 0.2,
-            ease: "easeInOut",
-          }}
-          className="inline-block text-sm font-black"
-        >
-          _
-        </motion.span>
-      ))}
-    </span>
-  );
-};
 
 /** Extract a bare username from a raw input or a github URL. */
 function parseUsername(raw: string): string {
@@ -77,7 +52,7 @@ const features = [
     t: "Completely editable",
     d: "Tune every section, link, stat, and skill before you publish. Nothing is locked in.",
     icon: PencilLine,
-    color: "bg-[var(--cream)]",
+    color: "bg-[var(--deep-green)]",
   },
   {
     k: "04",
@@ -98,25 +73,18 @@ const features = [
     t: "Live preview",
     d: "See every change as you make it, so your final README looks right before you share it.",
     icon: Download,
-    color: "bg-[var(--cream)]",
+    color: "bg-[var(--deep-green)]",
   },
 ];
 
 export default function ReadmePage() {
   const [handle, setHandle] = useState("");
-  const [count, setCount] = useState<number | null>(null);
   const router = useRouter();
-
-  useEffect(() => {
-    const t = setTimeout(() => setCount(631), 900);
-    return () => clearTimeout(t);
-  }, []);
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
     const username = parseUsername(handle);
     if (!username) return;
-    setCount((c) => (c === null ? c : c + 1));
     const target = `/readme/${encodeURIComponent(username)}`;
     try {
       router.push(target)
