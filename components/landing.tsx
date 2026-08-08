@@ -4,6 +4,9 @@ import Navbar from './landing_ui/Navbar';
 import Hero from './landing_ui/Hero';
 import Features from './landing_ui/Features';
 import Footer from './landing_ui/Footer';
+import Gallery from './landing_ui/Gallery';
+import Reviews from './landing_ui/Reviews';
+import Faq from './landing_ui/Faq';
 
 export default function LandingPage() {
 
@@ -13,6 +16,9 @@ export default function LandingPage() {
         <Navbar />
         <Hero />
         <Features />  {/* Feature + Gallery + Reviews + Faq */}
+        <Gallery /> 
+        <Reviews />
+        <Faq />
         <Footer />
       </div>
     </main>
