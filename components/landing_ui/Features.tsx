@@ -22,7 +22,7 @@ const features = [
     icon: Smartphone,
     title: "Spotify Wrapped",
     note: "Wrap your year in code and share it to the world.",
-    color: "var(--cream)",
+    color: "var(--bluenuit)",
     rotate: -1.2,
     stars: true,
   },
