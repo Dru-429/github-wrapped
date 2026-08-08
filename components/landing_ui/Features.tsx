@@ -1,14 +1,15 @@
 "use  client"
 
 import { motion } from "framer-motion";
-import { WalletCards, ChartNoAxesCombined, Smartphone, SquareTerminal, Sparkles } from "lucide-react";
+import { ChartNoAxesCombined, Smartphone, SquareTerminal, Sparkles, Layers } from "lucide-react";
 
 const features = [
   {
-    icon: WalletCards,
+    icon: Layers,
     title: "Github API",
     note: "Single click data fetch. Nothing stored, ever.",
     color: "var(--lime)",
+    bg: "var(--nuit)",
     rotate: -2.5,
   },
   {
@@ -16,6 +17,7 @@ const features = [
     title: "Stats & Cards",
     note: "Lines of code, fav day to code, timeline & more.",
     color: "var(--mantis)",
+    bg: "var(--nuit)",
     rotate: 1.8,
   },
   {
@@ -23,6 +25,7 @@ const features = [
     title: "Spotify Wrapped",
     note: "Wrap your year in code and share it to the world.",
     color: "var(--bluenuit)",
+    bg: "var(--nuit)",
     rotate: -1.2,
     stars: true,
   },
@@ -31,6 +34,7 @@ const features = [
     title: "Terminal Readme",
     note: "Fetch data, edit, copy and use :)",
     color: "var(--lime)",
+    bg: "var(--nuit)",
     rotate: 2.2,
     isNew: true,
   },
@@ -95,10 +99,10 @@ export default function Features() {
               className="boxy flex aspect-[3/4] flex-col p-3 transition-shadow hover:shadow-[10px_10px_0_0_var(--ink)]"
             >
               <div
-                className="relative grid h-[60%] w-full place-items-center overflow-hidden border-2 border-ink bg-cream"
+                className={`relative h-[60%] w-full grid place-items-center overflow-hidden border-2 border-ink bg-cream/70`}
                 style={{
                   backgroundImage:
-                    "linear-gradient(to right, color-mix(in srgb, var(--ink) 12%, transparent) 1px, transparent 1px), linear-gradient(to bottom, color-mix(in srgb, var(--ink) 12%, transparent) 1px, transparent 1px)",
+                    "linear-gradient(to right, color-mix(in srgb, var(--ink) 22%, transparent) 1px, transparent 1px), linear-gradient(to bottom, color-mix(in srgb, var(--ink) 22%, transparent) 1px, transparent 1px)",
                   backgroundSize: "22px 22px",
                 }}
               >
@@ -112,12 +116,12 @@ export default function Features() {
                     <>
                       <Sparkles
                         size={20}
-                        className="absolute -left-6 -top-4 text-ink/70"
+                        className="absolute -left-4 -top-4 text-ink/70"
                         strokeWidth={2.5}
                       />
                       <Sparkles
                         size={30}
-                        className="absolute -left-8 -top-3 text-ink/50"
+                        className="absolute -left-10 -top-1 text-ink/50"
                         strokeWidth={2.5}
                       />
                       <Sparkles
@@ -137,7 +141,7 @@ export default function Features() {
               </div>
               {/* 30% tag */}
               <div className="flex flex-1 flex-col justify-center px-2 pt-3">
-                  <h3 className="font-display text-xl font-black leading-tight text-ink md:text-2xl">
+                <h3 className="font-display text-xl font-black leading-tight text-ink md:text-2xl">
                   {f.title}
                 </h3>
                 <p className="mt-1 text-xs font-medium text-ink/70 md:text-sm">{f.note}</p>

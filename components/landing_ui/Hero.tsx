@@ -76,7 +76,7 @@ export default function Hero() {
           className='boxy-sm inline-flex items-center gap-2 bg-[var(--lime)] px-3 py-1.5 text-xs font-bold uppercase tracking-widest'
         >
           <Star className='h-3.5 w-3.5 fill-current' />
-          <span>2025 Spotify edition · live</span>
+          <span>Terminal Edition Readme · live</span>
         </motion.div>
 
         <DevCounts text="devs flexed" />
