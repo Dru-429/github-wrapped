@@ -1,7 +1,7 @@
 "use  client"
 
 import { motion } from "framer-motion";
-import { ChartNoAxesCombined, Smartphone, SquareTerminal, Sparkles, Layers } from "lucide-react";
+import { ChartNoAxesCombined, Smartphone, SquareTerminal, Sparkles, Layers, SquareStack } from "lucide-react";
 
 const features = [
   {
@@ -13,7 +13,7 @@ const features = [
     rotate: -2.5,
   },
   {
-    icon: ChartNoAxesCombined,
+    icon: SquareStack,
     title: "Stats & Cards",
     note: "Lines of code, fav day to code, timeline & more.",
     color: "var(--mantis)",
@@ -99,15 +99,15 @@ export default function Features() {
               className="boxy flex aspect-[3/4] flex-col p-3 transition-shadow hover:shadow-[10px_10px_0_0_var(--ink)]"
             >
               <div
-                className={`relative h-[60%] w-full grid place-items-center overflow-hidden border-2 border-ink bg-cream/70`}
+                className={`relative h-[60%] w-full grid place-items-center overflow-hidden border-2 border-ink bg-black/15`}
                 style={{
                   backgroundImage:
-                    "linear-gradient(to right, color-mix(in srgb, var(--ink) 22%, transparent) 1px, transparent 1px), linear-gradient(to bottom, color-mix(in srgb, var(--ink) 22%, transparent) 1px, transparent 1px)",
+                    "linear-gradient(to right, color-mix(in srgb, var(--cream) 22%, transparent) 1px, transparent 1px), linear-gradient(to bottom, color-mix(in srgb, var(--cream) 22%, transparent) 1px, transparent 1px)",
                   backgroundSize: "22px 22px",
                 }}
               >
                 {f.isNew && (
-                  <span className="boxy-sm absolute right-2 top-2 bg-lime px-2 py-0.5 font-mono text-[10px] font-black uppercase tracking-widest text-ink">
+                  <span className="boxy-sm absolute right-2 top-2 bg-cream px-2 py-0.5 font-mono text-[14px] font-black uppercase tracking-widest text-ink">
                     New
                   </span>
                 )}

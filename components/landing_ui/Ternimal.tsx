@@ -20,19 +20,19 @@ export function TerminalReadme() {
   const router = useRouter();
   
   return (
-    <section id="terminal-readme" className="boxy mt-10 px-6 py-16 md:px-12 md:py-24">
+    <section id="terminal-readme" className="boxy relative mt-10 px-6 py-16 md:px-12 md:py-24">
       <div className="mb-12 flex flex-col items-center text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.5 }}
-          className="flex flex-wrap items-end justify-center gap-3"
+          className="relative flex flex-wrap items-end justify-center gap-3"
         >
           <span className="boxy-sm bg-ink px-5 py-2 font-display text-4xl font-black italic text-cream md:text-6xl">
             Terminal Readme
           </span>
-          <span className="boxy-sm bg-lime px-3 py-1 font-mono text-[10px] font-black uppercase tracking-widest text-ink">
+          <span className="absolute -top-2 -right-6 boxy-sm bg-lime px-4 py-1 font-mono text-[15px] font-black uppercase tracking-widest text-ink">
             New
           </span>
         </motion.div>
@@ -69,7 +69,7 @@ export function TerminalReadme() {
                   }}
                 />
                 {t.isNew && (
-                  <span className="boxy-sm absolute right-2 top-2 bg-lime px-2 py-0.5 font-mono text-[10px] font-black uppercase tracking-widest text-ink">
+                  <span className="boxy-sm absolute right-2 top-2 bg-lime px-2 py-0.5 font-mono text-[14px] font-black uppercase tracking-widest text-ink">
                     New
                   </span>
                 )}
