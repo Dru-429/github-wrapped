@@ -27,7 +27,7 @@ const tweets = [
     name: 'keshav',
     handle: 'kshvbgde',
     avatarSrc:
-      'https://pbs.twimg.com/profile_images/2073010304032935936/WXSqXZVS_400x400.jpg',
+      'https://pbs.twimg.com/profile_images/2085330686286942208/wPdmVJA4_400x400.jpg',
     text: 'great work on the design, love the cooking animation.',
     date: 'May 25',
     verified: true
@@ -37,7 +37,7 @@ const tweets = [
     link: 'https://x.com/_nako_o0/status/2069347208135115145?s=20',
     name: 'nakooo',
     handle: '_nako_o0',
-    avatarSrc:'https://pbs.twimg.com/profile_images/1610408591931965442/oJ9tXixB.jpg',
+    avatarSrc: 'https://pbs.twimg.com/profile_images/1610408591931965442/oJ9tXixB.jpg',
     text: 'A small open-source tool that I stumbled upon by chance and that I love!\n',
     date: 'Jun 23',
     verified: true
@@ -88,17 +88,16 @@ const tweets = [
   },
   {
     id: 8,
-    link: 'https://pbs.twimg.com/profile_images/2080378757848911872/t_UhYD9w_400x400.jpg',
+    link: 'https://x.com/nirajxdev/status/2069529852064227621?s=20',
     name: 'Niraj',
     handle: 'nirajxdev',
     avatarSrc:
-      'https://pbs.twimg.com/profile_images/2061911186631954432/iz0kKLQT.jpg',
+      'https://pbs.twimg.com/profile_images/2080378757848911872/t_UhYD9w_400x400.jpg',
     text: 'you cooked UI bro 😍😍🫶🫶',
     date: 'Jun 23',
     verified: true
   }
 ]
-
 //Feature
 const features = [
   {
