@@ -1,7 +1,14 @@
-"use client";
+"use client"
 
 import { motion } from "framer-motion";
-import { User, Terminal, Database, Cpu, Sparkles, FileCode2, Smartphone, ArrowRight, ArrowDown } from "lucide-react";
+import {
+  User,
+  Terminal,
+  Cpu,
+  Sparkles,
+  FileCode2,
+  Smartphone,
+} from "lucide-react";
 
 const statsItems = [
   "About & Bio",
@@ -17,10 +24,7 @@ const containerVariants = {
   hidden: { opacity: 0 },
   show: {
     opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.1,
-    },
+    transition: { staggerChildren: 0.15, delayChildren: 0.1 },
   },
 };
 
@@ -33,9 +37,101 @@ const itemVariants = {
   },
 };
 
+/** Arrow that draws itself the first time it scrolls into view. */
+function DrawArrow({ delay = 0, label }: { delay?: number; label?: string }) {
+  const stroke = "var(--lime)";
+  const draw = {
+    hidden: { pathLength: 0, opacity: 0 },
+    show: {
+      pathLength: 1,
+      opacity: 1,
+      transition: {
+        pathLength: { duration: 0.7, delay, ease: "easeInOut" as const },
+        opacity: { duration: 0.1, delay },
+      },
+    },
+  };
+
+  return (
+    <div className="flex flex-col items-center justify-center gap-1">
+      {label && (
+        <span className="border-2 border-[var(--lime)]/40 bg-[var(--lime)]/10 px-2 py-0.5 font-mono text-[10px] font-bold text-[var(--lime)]">
+          {label}
+        </span>
+      )}
+
+      {/* Desktop: horizontal arrow */}
+      <motion.svg
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, margin: "-40px" }}
+        className="hidden lg:block"
+        width="44"
+        height="20"
+        viewBox="0 0 44 20"
+        fill="none"
+      >
+        <motion.path
+          variants={draw}
+          d="M2 10 H38"
+          stroke={stroke}
+          strokeWidth="2.5"
+          strokeLinecap="square"
+        />
+        <motion.path
+          variants={draw}
+          d="M30 3 L38 10 L30 17"
+          stroke={stroke}
+          strokeWidth="2.5"
+          strokeLinecap="square"
+          strokeLinejoin="miter"
+          fill="none"
+        />
+      </motion.svg>
+
+      {/* Mobile: vertical arrow */}
+      <motion.svg
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, margin: "-20px" }}
+        className="block lg:hidden"
+        width="20"
+        height="44"
+        viewBox="0 0 20 44"
+        fill="none"
+      >
+        <motion.path
+          variants={draw}
+          d="M10 2 V38"
+          stroke={stroke}
+          strokeWidth="2.5"
+          strokeLinecap="square"
+        />
+        <motion.path
+          variants={draw}
+          d="M3 30 L10 38 L17 30"
+          stroke={stroke}
+          strokeWidth="2.5"
+          strokeLinecap="square"
+          strokeLinejoin="miter"
+          fill="none"
+        />
+      </motion.svg>
+    </div>
+  );
+}
+
+const box =
+  "flex flex-col items-center justify-center border-2 border-[var(--lime)] bg-[var(--ink)] p-4 text-center shadow-[3px_3px_0_0_var(--lime)]";
+const iconBox =
+  "grid h-10 w-10 place-items-center border-2 border-[var(--lime)] bg-[var(--lime)]/10 text-[var(--lime)]";
+
 export default function Working() {
   return (
-    <section id="how-it-works" className="boxy mt-10 px-4 py-12 md:px-10 md:py-20 bg-cream">
+    <section
+      id="how"
+      className="boxy mt-10 bg-[var(--cream)] px-4 py-12 md:px-10 md:py-20"
+    >
       {/* Section Header */}
       <div className="mb-12 flex flex-col items-center text-center">
         <motion.div
@@ -43,7 +139,6 @@ export default function Working() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="flex flex-wrap items-center justify-center gap-3"
         >
           <span className="boxy-sm bg-[var(--lime)] px-3 py-1 font-mono text-xs font-bold uppercase tracking-widest text-ink">
             Architecture & Workflow
@@ -73,7 +168,8 @@ export default function Working() {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="mt-3 max-w-xl text-sm text-foreground/75 md:text-base"
         >
-          Single input, instant pipeline. From your GitHub handle to live stats, custom terminal readmes, and wrapped stories.
+          Single input, instant pipeline. From your GitHub handle to live stats,
+          custom terminal readmes, and wrapped stories.
         </motion.p>
       </div>
 
@@ -83,146 +179,128 @@ export default function Working() {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, margin: "-50px" }}
-        className="relative mx-auto max-w-6xl rounded-sm border-2 border-ink bg-[#151B23] p-5 md:p-8 text-white shadow-[8px_8px_0_0_var(--ink)]"
+        className="relative mx-auto max-w-6xl border-2 border-ink bg-[var(--ink)] p-5 text-[var(--cream)] shadow-[8px_8px_0_0_var(--ink)] md:p-8"
       >
         {/* Terminal Header Chrome */}
-        <div className="mb-8 flex items-center justify-between border-b-2 border-white/10 pb-4">
+        <div className="mb-8 flex items-center justify-between border-b-2 border-[var(--cream)]/15 pb-4">
           <div className="flex items-center gap-2">
-            <span className="h-3 w-3 rounded-full bg-[#ff5f56]" />
-            <span className="h-3 w-3 rounded-full bg-[#ffbd2e]" />
-            <span className="h-3 w-3 rounded-full bg-[#27c93f]" />
-            <span className="ml-2 font-mono text-xs text-white/50">workflow_architecture.sh</span>
+            <span className="h-3 w-3 bg-[var(--lime)]" />
+            <span className="h-3 w-3 bg-[var(--mantis)]" />
+            <span className="h-3 w-3 bg-[var(--cream)]/60" />
+            <span className="ml-2 font-mono text-xs text-[var(--cream)]/50">
+              workflow_architecture.sh
+            </span>
           </div>
-          <span className="boxy-sm bg-black/40 px-2.5 py-0.5 font-mono text-[11px] font-bold text-[var(--lime)]">
+          <span className="border-2 border-[var(--lime)]/40 bg-black/30 px-2.5 py-0.5 font-mono text-[11px] font-bold text-[var(--lime)]">
             LIVE PIPELINE
           </span>
         </div>
 
-        {/* Outer Frame Box (Matching structure screenshot) */}
-        <div className="relative rounded-lg border-2 border-dashed border-[#FF7B68]/60 bg-black/30 p-4 md:p-8">
-          {/* Header Title inside screenshot frame */}
+        {/* Outer Frame */}
+        <div className="relative border-2 border-dashed border-[var(--lime)]/50 bg-black/25 p-4 md:p-8">
           <div className="mb-6 flex items-center gap-2">
-            <Sparkles className="h-5 w-5 text-[#FF7B68]" />
-            <h3 className="font-display text-xl font-bold tracking-wide text-cream md:text-2xl">
+            <Sparkles className="h-5 w-5 text-[var(--lime)]" />
+            <h3 className="font-display text-xl font-bold tracking-wide text-[var(--cream)] md:text-2xl">
               Github wrapped
             </h3>
           </div>
 
-          {/* Desktop Flow: Horizontal Layout / Mobile Flow: Stacked Layout */}
           <div className="flex flex-col items-center justify-between gap-6 lg:flex-row lg:items-stretch lg:gap-4">
-            
-            {/* Step 1: User */}
+            {/* Step 1 */}
             <motion.div
               variants={itemVariants}
               whileHover={{ scale: 1.03 }}
-              className="flex min-w-[110px] flex-col items-center justify-center rounded-lg border-2 border-[#FF7B68] bg-[#151B23] p-4 text-center shadow-[3px_3px_0_0_#FF7B68]"
+              className={`${box} min-w-[110px]`}
             >
-              <div className="grid h-10 w-10 place-items-center rounded-full border border-[#FF7B68] bg-[#FF7B68]/10 text-[#FF7B68]">
+              <div className={iconBox}>
                 <User size={20} />
               </div>
-              <span className="mt-2 font-display text-base font-bold text-cream">User</span>
+              <span className="mt-2 font-display text-base font-bold text-[var(--cream)]">
+                User
+              </span>
             </motion.div>
 
-            {/* Arrow 1 */}
-            <div className="flex items-center justify-center text-[#FF7B68]">
-              <ArrowRight className="hidden h-6 w-6 lg:block animate-pulse" />
-              <ArrowDown className="block h-6 w-6 lg:hidden animate-pulse" />
-            </div>
+            <DrawArrow />
 
-            {/* Step 2: Enter github username */}
+            {/* Step 2 */}
             <motion.div
               variants={itemVariants}
               whileHover={{ scale: 1.03 }}
-              className="flex max-w-[180px] flex-col items-center justify-center rounded-lg border-2 border-[#FF7B68] bg-[#151B23] p-4 text-center shadow-[3px_3px_0_0_#FF7B68]"
+              className={`${box} max-w-[180px]`}
             >
-              <div className="grid h-10 w-10 place-items-center rounded-full border border-[#FF7B68] bg-[#FF7B68]/10 text-[#FF7B68]">
+              <div className={iconBox}>
                 <Terminal size={20} />
               </div>
-              <span className="mt-2 font-display text-sm font-bold leading-snug text-cream">
+              <span className="mt-2 font-display text-sm font-bold leading-snug text-[var(--cream)]">
                 Enter github username
               </span>
             </motion.div>
 
-            {/* Connector 2 with DB count increment tag */}
-            <div className="flex flex-col items-center justify-center text-[#FF7B68]">
-              <span className="boxy-sm bg-[#FF7B68]/15 px-2 py-0.5 font-mono text-[10px] font-bold text-[#FF7B68] border border-[#FF7B68]/40 mb-1">
-                DB count increment
-              </span>
-              <ArrowRight className="hidden h-6 w-6 lg:block animate-pulse" />
-              <ArrowDown className="block h-6 w-6 lg:hidden animate-pulse" />
-            </div>
+            <DrawArrow delay={0.15} label="DB count increment" />
 
-            {/* Step 3: GITHUB API */}
+            {/* Step 3 */}
             <motion.div
               variants={itemVariants}
               whileHover={{ scale: 1.03 }}
-              className="flex min-w-[130px] flex-col items-center justify-center rounded-2xl border-2 border-[#FF7B68] bg-[#151B23] px-5 py-6 text-center shadow-[3px_3px_0_0_#FF7B68]"
+              className={`${box} min-w-[130px] px-5 py-6`}
             >
-              <div className="grid h-10 w-10 place-items-center rounded-full border border-[#FF7B68] bg-[#FF7B68]/10 text-[#FF7B68]">
+              <div className={iconBox}>
                 <Cpu size={20} />
               </div>
-              <span className="mt-2 font-mono text-xs font-black uppercase tracking-wider text-cream">
+              <span className="mt-2 font-mono text-xs font-black uppercase tracking-wider text-[var(--cream)]">
                 GITHUB API
               </span>
             </motion.div>
 
-            {/* Connector 3 with graphQL tag */}
-            <div className="flex flex-col items-center justify-center text-[#FF7B68]">
-              <span className="boxy-sm bg-[#FF7B68]/15 px-2 py-0.5 font-mono text-[10px] font-bold text-[#FF7B68] border border-[#FF7B68]/40 mb-1">
-                graphQL
-              </span>
-              <ArrowRight className="hidden h-6 w-6 lg:block animate-pulse" />
-              <ArrowDown className="block h-6 w-6 lg:hidden animate-pulse" />
-            </div>
+            <DrawArrow delay={0.3} label="graphQL" />
 
-            {/* Step 4: Stats Box */}
+            {/* Step 4: Stats */}
             <motion.div
               variants={itemVariants}
               whileHover={{ scale: 1.02 }}
-              className="flex flex-1 flex-col rounded-xl border-2 border-[#FF7B68] bg-[#151B23] p-5 shadow-[4px_4px_0_0_#FF7B68]"
+              className="flex flex-1 flex-col border-2 border-[var(--lime)] bg-[var(--ink)] p-5 shadow-[4px_4px_0_0_var(--lime)]"
             >
-              <div className="mb-3 border-b border-[#FF7B68]/30 pb-2">
-                <span className="font-display text-xl font-black italic text-[#FF7B68]">
+              <div className="mb-3 border-b-2 border-[var(--lime)]/30 pb-2">
+                <span className="font-display text-xl font-black italic text-[var(--lime)]">
                   Stats
                 </span>
               </div>
-              <ul className="grid gap-1.5 font-mono text-xs text-cream/80">
-                {statsItems.map((item, idx) => (
-                  <li key={idx} className="flex items-center gap-2">
-                    <span className="text-[#FF7B68]">-</span>
-                    <span>{item}</span>
+              <ul className="grid gap-1.5 font-mono text-xs text-[var(--cream)]/80">
+                {statsItems.map((it) => (
+                  <li key={it} className="flex items-center gap-2">
+                    <span className="text-[var(--lime)]">-</span>
+                    <span>{it}</span>
                   </li>
                 ))}
               </ul>
             </motion.div>
 
-            {/* Connector 4 to Forked Outputs */}
-            <div className="flex flex-col items-center justify-center text-[#FF7B68]">
-              <ArrowRight className="hidden h-6 w-6 lg:block animate-pulse" />
-              <ArrowDown className="block h-6 w-6 lg:hidden animate-pulse" />
-            </div>
+            <DrawArrow delay={0.45} />
 
-            {/* Step 5: Outputs (Readme & Wrapped) */}
+            {/* Step 5: Outputs */}
             <div className="flex flex-row gap-4 lg:flex-col lg:justify-center">
               <motion.div
                 variants={itemVariants}
                 whileHover={{ scale: 1.05 }}
-                className="flex items-center gap-2 rounded-lg border-2 border-[#FF7B68] bg-[#151B23] px-5 py-3 shadow-[3px_3px_0_0_#FF7B68]"
+                className="flex items-center gap-2 border-2 border-[var(--lime)] bg-[var(--ink)] px-5 py-3 shadow-[3px_3px_0_0_var(--lime)]"
               >
                 <FileCode2 size={16} className="text-[var(--lime)]" />
-                <span className="font-display text-base font-bold text-cream">Readme</span>
+                <span className="font-display text-base font-bold text-[var(--cream)]">
+                  Readme
+                </span>
               </motion.div>
 
               <motion.div
                 variants={itemVariants}
                 whileHover={{ scale: 1.05 }}
-                className="flex items-center gap-2 rounded-lg border-2 border-[#FF7B68] bg-[#151B23] px-5 py-3 shadow-[3px_3px_0_0_#FF7B68]"
+                className="flex items-center gap-2 border-2 border-[var(--mantis)] bg-[var(--ink)] px-5 py-3 shadow-[3px_3px_0_0_var(--mantis)]"
               >
-                <Smartphone size={16} className="text-[#FF7B68]" />
-                <span className="font-display text-base font-bold text-cream">Wrapped</span>
+                <Smartphone size={16} className="text-[var(--mantis)]" />
+                <span className="font-display text-base font-bold text-[var(--cream)]">
+                  Wrapped
+                </span>
               </motion.div>
             </div>
-
           </div>
         </div>
       </motion.div>

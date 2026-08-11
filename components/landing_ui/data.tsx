@@ -88,7 +88,7 @@ const tweets = [
   },
   {
     id: 8,
-    link: 'https://x.com/nirajxdev/status/2069529852064227621?s=20',
+    link: 'https://pbs.twimg.com/profile_images/2080378757848911872/t_UhYD9w_400x400.jpg',
     name: 'Niraj',
     handle: 'nirajxdev',
     avatarSrc:

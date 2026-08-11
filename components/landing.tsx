@@ -17,10 +17,10 @@ export default function LandingPage() {
       <div className='mx-auto max-w-7xl px-4 py-6 md:px-8 md:py-8'>
         <Navbar />
         <Hero />
-        <Working />
         <TerminalReadme />
         <Features />  {/* Feature + Gallery + Reviews + Faq */}
         <Gallery /> 
+        <Working />
         <Reviews />
         <Faq />
         <Footer />
