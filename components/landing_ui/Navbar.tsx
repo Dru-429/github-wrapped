@@ -7,9 +7,9 @@ import {
 
 /* Navbar                                                             */
 const navLinks = [
-  { label: 'Features', href: '#features' },
-  { label: 'Contact', href: '#footer' },
-  { label: 'FAQ', href: '#faq' }
+  { label: 'Home', href: '/' },
+  { label: 'Readme', href: '/readme' },
+  { label: 'Wrapper', href: '/wrap' },
 ]
 
 export default function Navbar() {

@@ -13,7 +13,7 @@ import { faqData } from './data'
 
 export default function Faq() {
   return (
-    <section id='faq' className='mb-10 mt-8 p-6 md:p-12'>
+    <section id='faq' className='boxy mt-10 px-6 py-16 md:px-12 md:py-24 md:pb-28'>
       <div className='mx-auto max-w-3xl '>
         <motion.h2
           initial={{ opacity: 0, y: 16 }}

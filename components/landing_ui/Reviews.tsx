@@ -2,7 +2,6 @@
 
 import { tweets } from "./data";
 import { motion } from 'framer-motion'
-import Image from 'next/image'
 import Link from 'next/link'
 
 type Tweet = {
@@ -105,14 +104,14 @@ function TweetCard({ t, i }: { t: Tweet; i: number }) {
 
 export default function Reviews() {
   return (
-    <section className="mt-26 md:mt-40 py-14">
+    <section className=" boxy mt-10 px-6 py-16 md:px-12 md:py-24 md:pb-28">
       <div className="flex flex-col items-center text-center mb-10">
         <span className="boxy-sm bg-[color:var(--lime)] px-3 py-1 text-sm uppercase tracking-widest font-bold">
           Reviews
         </span>
-        <h2 className="font-display text-4xl md:text-6xl font-black mt-4 text-[color:var(--ink)]">
+        <h2 className="font-display text-3xl md:text-5xl font-black mt-4 text-[color:var(--ink)] mb-6 mt-4">
           Straight from the 
-          <span className="italic bg-[color:var(--nuit)] text-cream px-2 mx-2">timeline</span>
+          <span className="italic text-4xl md:text-6xl bg-[color:var(--nuit)] text-cream px-2 mx-2">Communities</span>
         </h2>
       </div>
 
