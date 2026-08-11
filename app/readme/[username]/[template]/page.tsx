@@ -16,6 +16,7 @@ import Selected from "@/components/editor/sections/Selected";
 import TemplateEditor from "@/components/editor/templateEditor";
 import { type ReadmeTemplate } from "@/components/editor/editor-state";
 import handleFetchGitHubData from "@/lib/github_readme";
+import Navbar from "@/components/landing_ui/Navbar";
 
 export default function ReadmeTemplatePage() {
   const params = useParams<{ username: string; template: string }>();
@@ -51,13 +52,14 @@ export default function ReadmeTemplatePage() {
 
   return (
     <main className="relative min-h-screen bg-background bg-grid text-foreground">
-      <div className="mx-auto max-w-6xl px-4 py-8 md:px-8 md:py-12">
+      <div className="mx-auto max-w-6xl px-4 pb-8 md:px-8 md:py-4">
         {/* Top Header Row / Navigation matching wireframe route title */}
+        <Navbar />
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
-          className="mb-8 flex flex-wrap items-center justify-between gap-4"
+          className="my-4 flex flex-wrap items-center justify-between gap-4"
         >
           <Link
             href={`/readme/${encodeURIComponent(rawUsername)}`}
