@@ -43,13 +43,13 @@ function Bubble({ show, text }: { show: boolean; text: string }) {
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 6, scale: 0.95 }}
           transition={{ type: "spring", stiffness: 420, damping: 26 }}
-          className="pointer-events-none absolute bottom-[calc(100%+14px)] left-1/2 z-20 w-[min(20rem,80vw)] -translate-x-1/2"
+          className="pointer-events-none absolute bottom-[calc(100%+14px)] -left-24 z-20 w-[min(20rem,80vw)] "
         >
           <span className="boxy-sm block rounded-[2rem] bg-[var(--cream)] px-5 py-3 text-center font-mono text-[11px] font-bold normal-case leading-relaxed tracking-normal text-ink">
             {text}
           </span>
           {/* tail */}
-          <span className="absolute -bottom-[9px] left-1/2 h-4 w-4 -translate-x-1/2 rotate-45 border-b-2 border-r-2 border-ink bg-[var(--cream)]" />
+          <span className="absolute -bottom-[11px] right-10 h-5 w-4  rotate-235 border-t-5 border-l-5 border-ink  bg-[var(--cream)]" />
         </motion.span>
       )}
     </AnimatePresence>
@@ -166,7 +166,7 @@ export default function Hero() {
             >
               <Bubble
                 show={hovered === "wrap"}
-                text="Your year in code, Spotify style — lines of code, commits, top languages & a shareable timeline."
+                text="Your year in code, in Spotify style cards lines of code, commits, top languages, etc & shareable img."
               />
               <button
                 type="submit"
@@ -186,7 +186,7 @@ export default function Hero() {
             >
               <Bubble
                 show={hovered === "readme"}
-                text="Four terminal README styles — fetch your data, edit everything, then copy + paste into your profile."
+                text="Terminal Styles Readme — select style, fetch data, edit everything, then copy + paste anywhere."
               />
               <button
                 type="button"
