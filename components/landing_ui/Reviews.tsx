@@ -2,7 +2,6 @@
 
 import { tweets } from "./data";
 import { motion } from 'framer-motion'
-import Image from 'next/image'
 import Link from 'next/link'
 
 type Tweet = {
