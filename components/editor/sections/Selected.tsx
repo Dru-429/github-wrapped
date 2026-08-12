@@ -1,3 +1,5 @@
+"use client"
+
 import type { Dispatch, SetStateAction } from "react";
 import { motion } from "framer-motion";
 import { Terminal, FileJson, FileCode2, Braces } from "lucide-react";
@@ -103,8 +105,8 @@ export default function Selected({ templateNo, setTemplateNo }: SelectedProps) {
                       <Image
                         src={tpl.Preview}
                         alt={tpl.label}
-                        height={350}
                         width={350}
+                        height={350}
                         className="w-full h-auto object-cover"
                       />
                       <span className="pointer-events-none absolute inset-x-0 bottom-0 h-8 bg-gradient-to-t from-ink/40 to-transparent" />
