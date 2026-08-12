@@ -1,14 +1,11 @@
-"use client"
-
 import type { Dispatch, SetStateAction } from "react";
 import { motion } from "framer-motion";
 import { Terminal, FileJson, FileCode2, Braces } from "lucide-react";
 import { cx } from "../editor-state";
 import Image from "next/image";
 
-/**
- * Metadata for each template – id matches the `templateNo` numbers used
- * throughout the app (1 = System, 2 = Bash, 3 = YAML, 4 = package.json).
+/**  
+ * Trying to fix the issue   
  */
 const TEMPLATES = [
   {
@@ -17,7 +14,7 @@ const TEMPLATES = [
     sub: "ASCII portrait + system rows.",
     icon: Terminal,
     accent: "#e39257",
-    Preview: "/banners/covers/system.png",
+    Preview: "/Banners/covers/system.png",
   },
   {
     id: 2,
@@ -25,7 +22,7 @@ const TEMPLATES = [
     sub: "Shell commands walk through.",
     icon: FileCode2,
     accent: "#27c93f",
-    Preview: "/banners/covers/bash.png",
+    Preview: "/Banners/covers/Bash.png",
   },
   {
     id: 3,
@@ -33,7 +30,7 @@ const TEMPLATES = [
     sub: "Keys and columns — a tidy",
     icon: FileJson,
     accent: "#e0904a",
-    Preview: "/banners/covers/yaml.png",
+    Preview: "/Banners/covers/YAML.png",
   },
   {
     id: 4,
@@ -41,9 +38,9 @@ const TEMPLATES = [
     sub: "npm package manifest format",
     icon: Braces,
     accent: "#FF7B68",
-    Preview: "/banners/covers/json.png",
+    Preview: "/Banners/covers/JSON.png",
   },
-] as const;
+] as const;   
 
 type SelectedProps = {
   templateNo: number;
@@ -105,8 +102,8 @@ export default function Selected({ templateNo, setTemplateNo }: SelectedProps) {
                       <Image
                         src={tpl.Preview}
                         alt={tpl.label}
-                        width={350}
                         height={350}
+                        width={350}
                         className="w-full h-auto object-cover"
                       />
                       <span className="pointer-events-none absolute inset-x-0 bottom-0 h-8 bg-gradient-to-t from-ink/40 to-transparent" />

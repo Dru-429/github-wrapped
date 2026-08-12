@@ -87,21 +87,21 @@ export const FRONTEND_SUGGESTIONS = [
 ]
 
 export const BANNER_URL = [
-  "/banners/spidy.jpg",
-  "/banners/itachi.jpg",
-  "/banners/solar.jpg",
-  "/banners/lunar.jpg",
-  "/banners/marrrk.png",
-  "/banners/elon.png",
-  "/banners/mark.png",
-  "/banners/tempImpala.jpg",
-  "/banners/dino.jpg",
-  "/banners/cat.jpg",
-  "/banners/gt3_rs.png",
-  "/banners/ford_gt40.png",
-  "/banners/gojo.jpg",
-  "/banners/zoro.jpg",
-  "/banners/wave.jpg",
+  "/Banners/spidy.jpg",
+  "/Banners/itachi.jpg",
+  "/Banners/solar.jpg",
+  "/Banners/lunar.jpg",
+  "/Banners/marrrk.png",
+  "/Banners/elon.png",
+  "/Banners/mark.png",
+  "/Banners/tempImpala.jpg",
+  "/Banners/dino.jpg",
+  "/Banners/cat.jpg",
+  "/Banners/gt3_rs.png",
+  "/Banners/ford_gt40.png",
+  "/Banners/gojo.jpg",
+  "/Banners/zoro.jpg",
+  "/Banners/wave.jpg",
 ]
 
 export const BACKEND_SUGGESTIONS = [
