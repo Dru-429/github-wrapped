@@ -6,9 +6,9 @@ import { useRouter } from "next/navigation";
 
 const terminals = [
   { name: "System.tsx", img: "/Banners/covers/system.png", blurb: "neofetch-style profile card." },
-  { name: "Bash.tsx", img: "/Banners/covers/bash.png", blurb: "classic prompt, clean columns." },
-  { name: "YAML.tsx", img: "/Banners/covers/yaml.png", blurb: "config-file vibes.", isNew: true },
-  { name: "packageJSON.tsx", img: "/Banners/covers/json.png", blurb: "your profile as deps.", isNew: true },
+  { name: "Bash.tsx", img: "/Banners/covers/Bash.png", blurb: "classic prompt, clean columns." },
+  { name: "YAML.tsx", img: "/Banners/covers/YAML.png", blurb: "config-file vibes.", isNew: true },
+  { name: "packageJSON.tsx", img: "/Banners/covers/JSON.png", blurb: "your profile as deps.", isNew: true },
 ];
 
 const item = {

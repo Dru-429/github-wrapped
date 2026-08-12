@@ -29,21 +29,21 @@ const TEMPLATES: Template[] = [
     file: "Bash.tsx",
     label: "prompt log",
     blurb: "Shell commands walk through bio, stack and socials.",
-    Preview: "/Banners/covers/bash.png",
+    Preview: "/Banners/covers/Bash.png",
   },
   {
     no: 3,
     file: "YAML.tsx",
     label: "profile.yaml",
     blurb: "Keys and columns — a tidy, config-file portrait.",
-    Preview: "/Banners/covers/yaml.png",
+    Preview: "/Banners/covers/YAML.png",
   },
   {
     no: 4,
     file: "packageJSON.tsx",
     label: "manifest",
     blurb: "Your year in code, shipped as a package manifest.",
-    Preview: "/Banners/covers/json.png",
+    Preview: "/Banners/covers/JSON.png",
   },
 ];
 

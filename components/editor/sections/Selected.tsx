@@ -22,7 +22,7 @@ const TEMPLATES = [
     sub: "Shell commands walk through.",
     icon: FileCode2,
     accent: "#27c93f",
-    Preview: "/Banners/covers/bash.png",
+    Preview: "/Banners/covers/Bash.png",
   },
   {
     id: 3,
@@ -30,7 +30,7 @@ const TEMPLATES = [
     sub: "Keys and columns — a tidy",
     icon: FileJson,
     accent: "#e0904a",
-    Preview: "/Banners/covers/yaml.png",
+    Preview: "/Banners/covers/YAML.png",
   },
   {
     id: 4,
@@ -38,9 +38,9 @@ const TEMPLATES = [
     sub: "npm package manifest format",
     icon: Braces,
     accent: "#FF7B68",
-    Preview: "/Banners/covers/json.png",
+    Preview: "/Banners/covers/JSON.png",
   },
-] as const;
+] as const;   
 
 type SelectedProps = {
   templateNo: number;
