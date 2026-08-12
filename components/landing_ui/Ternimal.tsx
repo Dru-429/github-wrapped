@@ -5,10 +5,10 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 const terminals = [
-  { name: "System.tsx", img: "/banners/covers/system.png", blurb: "neofetch-style profile card." },
-  { name: "Bash.tsx", img: "/banners/covers/bash.png", blurb: "classic prompt, clean columns." },
-  { name: "YAML.tsx", img: "/banners/covers/yaml.png", blurb: "config-file vibes.", isNew: true },
-  { name: "packageJSON.tsx", img: "/banners/covers/json.png", blurb: "your profile as deps.", isNew: true },
+  { name: "System.tsx", img: "/Banners/covers/system.png", blurb: "neofetch-style profile card." },
+  { name: "Bash.tsx", img: "/Banners/covers/bash.png", blurb: "classic prompt, clean columns." },
+  { name: "YAML.tsx", img: "/Banners/covers/yaml.png", blurb: "config-file vibes.", isNew: true },
+  { name: "packageJSON.tsx", img: "/Banners/covers/json.png", blurb: "your profile as deps.", isNew: true },
 ];
 
 const item = {
@@ -57,7 +57,7 @@ export function TerminalReadme() {
               className="boxy group block bg-cream p-2 transition-all hover:-translate-y-1.5 hover:shadow-[10px_10px_0_0_var(--ink)]"
             >
               <div className="relative aspect-[4/3] w-full overflow-hidden border-2 border-ink bg-ink">
-                <img
+                <Image
                   src={t.img}
                   alt={`${t.name} readme preview`}
                   height={300}

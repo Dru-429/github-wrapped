@@ -22,28 +22,28 @@ const TEMPLATES: Template[] = [
     file: "System.tsx",
     label: "neofetch",
     blurb: "ASCII portrait beside dotted-leader system rows.",
-    Preview: "/banners/covers/system.png",
+    Preview: "/Banners/covers/system.png",
   },
   {
     no: 2,
     file: "Bash.tsx",
     label: "prompt log",
     blurb: "Shell commands walk through bio, stack and socials.",
-    Preview: "/banners/covers/bash.png",
+    Preview: "/Banners/covers/bash.png",
   },
   {
     no: 3,
     file: "YAML.tsx",
     label: "profile.yaml",
     blurb: "Keys and columns — a tidy, config-file portrait.",
-    Preview: "/banners/covers/yaml.png",
+    Preview: "/Banners/covers/yaml.png",
   },
   {
     no: 4,
     file: "packageJSON.tsx",
     label: "manifest",
     blurb: "Your year in code, shipped as a package manifest.",
-    Preview: "/banners/covers/json.png",
+    Preview: "/Banners/covers/json.png",
   },
 ];
 
