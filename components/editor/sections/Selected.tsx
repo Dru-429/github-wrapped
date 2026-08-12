@@ -15,7 +15,7 @@ const TEMPLATES = [
     sub: "ASCII portrait + system rows.",
     icon: Terminal,
     accent: "#e39257",
-    Preview: "/banners/covers/SystemInfo.png",
+    Preview: "/banners/covers/system.png",
   },
   {
     id: 2,
@@ -23,7 +23,7 @@ const TEMPLATES = [
     sub: "Shell commands walk through.",
     icon: FileCode2,
     accent: "#27c93f",
-    Preview: "/banners/covers/Bash.png",
+    Preview: "/banners/covers/bash.png",
   },
   {
     id: 3,
@@ -31,7 +31,7 @@ const TEMPLATES = [
     sub: "Keys and columns — a tidy",
     icon: FileJson,
     accent: "#e0904a",
-    Preview: "/banners/covers/YAML.png",
+    Preview: "/banners/covers/yaml.png",
   },
   {
     id: 4,
@@ -39,7 +39,7 @@ const TEMPLATES = [
     sub: "npm package manifest format",
     icon: Braces,
     accent: "#FF7B68",
-    Preview: "/banners/covers/JSON.png",
+    Preview: "/banners/covers/json.png",
   },
 ] as const;
 
