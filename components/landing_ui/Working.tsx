@@ -178,7 +178,7 @@ export default function Working() {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, margin: "-50px" }}
-        className="relative mx-auto max-w-6xl border-2 border-ink bg-ink/90 p-5 text-[var(--cream)] shadow-[8px_8px_0_0_var(--ink)] md:p-8"
+        className="relative mx-auto max-w-6xl border-2 border-ink bg-zinc-900 p-5 text-[var(--cream)] shadow-[8px_8px_0_0_var(--ink)] md:p-8"
       >
         {/* Terminal Header Chrome */}
         <div className="mb-8 flex items-center justify-between border-b-2 border-[var(--cream)]/15 pb-4">
@@ -196,7 +196,7 @@ export default function Working() {
         </div>
 
         {/* Outer Frame */}
-        <div className="relative border-2 border-dashed border-[var(--lime)]/50 bg-zinc-900 p-4 md:p-8">
+        <div className="relative border-2 border-dashed border-[var(--lime)]/50 bg-ink/50 p-4 md:p-8">
           <div className="mb-6 flex items-center gap-2">
             <Sparkles className="h-5 w-5 text-[var(--lime)]" />
             <h3 className="font-display text-xl font-bold tracking-wide text-[var(--cream)] md:text-2xl">
