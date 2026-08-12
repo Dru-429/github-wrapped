@@ -102,7 +102,7 @@ export default function Selected({ templateNo, setTemplateNo }: SelectedProps) {
                     className="whitespace-pre font-mono text-[9px] leading-[14px] tracking-tight"
                   >
                     <div className="relative max-h-[180px] overflow-hidden border-b-2 border-ink">
-                      <Image
+                      <img
                         src={tpl.Preview}
                         alt={tpl.label}
                         width={350}

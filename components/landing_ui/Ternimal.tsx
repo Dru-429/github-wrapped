@@ -57,7 +57,7 @@ export function TerminalReadme() {
               className="boxy group block bg-cream p-2 transition-all hover:-translate-y-1.5 hover:shadow-[10px_10px_0_0_var(--ink)]"
             >
               <div className="relative aspect-[4/3] w-full overflow-hidden border-2 border-ink bg-ink">
-                <Image
+                <img
                   src={t.img}
                   alt={`${t.name} readme preview`}
                   height={300}
