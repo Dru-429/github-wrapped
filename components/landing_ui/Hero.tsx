@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, FileCode2, Star, Users } from "lucide-react";
+import { ArrowRight, FileCode2, FileTerminal } from "lucide-react";
 import { useRouter } from "next/navigation";
+import DevCounts, { bumpCount } from "../ui/DevCounts";
 
 /* Hero */
 const heroContainer = {
@@ -58,7 +59,6 @@ function Bubble({ show, text }: { show: boolean; text: string }) {
 
 export default function Hero() {
   const [handle, setHandle] = useState("");
-  const [count, setCount] = useState(631);
   const [hovered, setHovered] = useState<"wrap" | "readme" | null>(null);
   const router = useRouter()
 
@@ -72,11 +72,11 @@ export default function Hero() {
     } catch {
       if (typeof window !== "undefined") window.location.assign(target);
     }
+    bumpCount();
   };
 
   const handleWrap = (e: React.FormEvent) => {
     e.preventDefault();
-    setCount((c) => c + 1);
     go("wrapper");
   };
 
@@ -90,23 +90,11 @@ export default function Hero() {
           transition={{ duration: 0.5 }}
           className="boxy-sm inline-flex items-center gap-2 bg-[var(--lime)] px-3 py-1.5 text-xs font-bold uppercase tracking-widest"
         >
-          <Star className="h-3.5 w-3.5 fill-current" />
+          <FileTerminal className="h-4 w-4 " />
           <span>Terminal Edition Readme · live</span>
         </motion.div>
 
-        <motion.div
-          key={count}
-          initial={{ scale: 0.92, opacity: 0.7 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ type: "spring", stiffness: 320, damping: 18 }}
-          className="boxy-sm inline-flex items-center gap-2 bg-[var(--nuit)] px-3 py-1.5 text-xs font-bold uppercase tracking-widest text-[var(--cream)]"
-        >
-          <Users className="h-3.5 w-3.5" />
-          <span>
-            <span className="font-display text-sm">{count.toLocaleString()}</span>{" "}
-            devs flexed
-          </span>
-        </motion.div>
+        <DevCounts text="Devs Flexed"/>
       </div>
 
       {/* Center content */}
