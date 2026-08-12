@@ -29,7 +29,7 @@ export default function ReadmeTemplatePage() {
 
   // Mutable template number – starts from the URL but can be changed via the selector
   const [templateNo, setTemplateNo] = useState(initialTemplateNo);
-
+  
   // Shared state for the template configuration and converted ASCII image
   const [template, setTemplate] = useState<ReadmeTemplate>({});
 
