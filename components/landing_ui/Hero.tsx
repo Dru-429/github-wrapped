@@ -62,7 +62,7 @@ export default function Hero() {
   const [hovered, setHovered] = useState<"wrap" | "readme" | null>(null);
   const router = useRouter()
 
-  const go = (base: "wrapper" | "readme") => {
+  const go = (base: "wrap" | "readme") => {
     const username = parseUsername(handle);
     const target = username
       ? `/${base}/${encodeURIComponent(username)}`
@@ -77,7 +77,7 @@ export default function Hero() {
 
   const handleWrap = (e: React.FormEvent) => {
     e.preventDefault();
-    go("wrapper");
+    go("wrap");
   };
 
   return (
