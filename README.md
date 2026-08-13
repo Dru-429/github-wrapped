@@ -50,7 +50,12 @@ Generate a Wrapped at:
 ---
 
 ## Examples: 
+<img width="965" height="963" alt="image" src="https://github.com/user-attachments/assets/c747e7c9-d489-412f-b4f0-112cc1a1a18b" />
 
+<img width="1353" height="947" alt="image" src="https://github.com/user-attachments/assets/c4e17aea-1788-40ef-8386-5bb5a1d62446" />
+
+
+---
 
 ## 🔗 Routes
 
