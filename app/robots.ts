@@ -1,12 +1,18 @@
-import { MetadataRoute } from 'next'
+import { MetadataRoute } from "next";
 
 export default function robots(): MetadataRoute.Robots {
+  const baseUrl = "https://githubrapped.vercel.app";
+
   return {
     rules: {
-      userAgent: '*',
-      allow: '/',
-      disallow: '/private/',
+      userAgent: "*",
+      allow: "/",
+      disallow: [
+        "/api/",
+        "/_next/",
+        "/private/",
+      ],
     },
-    sitemap: 'https://githubrapped.vercel.app/sitemap.xml',
-  }
+    sitemap: `${baseUrl}/sitemap.xml`,
+  };
 }
