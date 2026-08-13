@@ -1,113 +1,218 @@
-# GitHub Wrapped 
+# GitHub Wrapped
 
-<img width="477" height="57" alt="image" src="https://github.com/user-attachments/assets/82226175-19e5-442f-8a4f-055d52808939" />
+<img width="477" height="57" alt="GitHub Wrapped" src="https://github.com/user-attachments/assets/82226175-19e5-442f-8a4f-055d52808939" />
 
-[Live Now](https://githubrapped.vercel.app)  
+[Live Now](https://githubrapped.vercel.app)
 
+**GitHub Wrapped** turns your GitHub activity into a personalized developer experience.
 
-**GitHub Wrapped** generates a year-in-review "wrapped" experience for any GitHub username, just like Spotify Wrapped 2025. The app fetches GitHub activity and presents highlights like top repositories, languages, commit streaks, seasonal activity, and a shareable image.
-
----
-
-## Features
-
-- Fetch GitHub user metrics (contributions, repos, languages, commit history)
-- Visual summaries: top repos, top languages, monthly/seasonal breakdowns, streaks, percentile
-- Client-side capture/export (uses `html2canvas`)
+Explore your year in code through a Spotify Wrapped-style experience, or generate a terminal-style GitHub profile README that you can customize and copy anywhere.
 
 ---
 
-## Tech Stack
+## ✨ Features
 
-- Next.js 16 (app directory)
-- React 19 + TypeScript
-- Tailwind CSS + Framer Motion + Recharts
-- GitHub GraphQL API for data
+### 📊 GitHub Wrapped
 
----
+Generate a personalized year-in-review experience from any public GitHub username.
 
-## Preview
-<img width="1266" height="852" alt="image" src="https://github.com/user-attachments/assets/d8028aae-6961-42a1-b528-f5b973ab26c6" />
-<img width="1283" height="907" alt="image" src="https://github.com/user-attachments/assets/815ef04a-2923-46f7-ae74-00e9199eaed3" />
+* Fetch GitHub activity and profile statistics
+* Total contributions and activity
+* Top repositories
+* Top programming languages
+* Commit and contribution history
+* Monthly and seasonal activity breakdowns
+* Commit streaks
+* Developer activity percentile
+* Interactive visualizations
+* Shareable personalized Wrapped pages
+* Export/share your Wrapped as an image
 
-## Quick start
+Generate a Wrapped at:
 
-1. Clone the repository:
-
-```bash
-git clone <this-repo-url>
-cd github-wrapped
+```text
+/wrap/<username>
 ```
 
-2. Install dependencies:
+Example:
 
-```bash
-npm install
+```text
+https://githubrapped.vercel.app/wrap/octocat
 ```
-
-3. Provide a GitHub token (required):
-
-The app uses the GitHub GraphQL API. Set `GITHUB_TOKEN` in your environment before running the app.
-
-```bash
-# macOS / Linux
-export GITHUB_TOKEN="your_token_here"
-
-# PowerShell (Windows)
-$Env:GITHUB_TOKEN = "your_token_here"
-```
-
-4. Run the dev server:
-
-```bash
-npm run dev
-# Visit http://localhost:3000
-```
-
-5. Generate a wrapped page by visiting:
-
-```
-http://localhost:3000/wrap/<username>
-# Example: http://localhost:3000/wrap/octocat
-```
-
-> The GraphQL client in `lib/github.ts` will throw an error if `GITHUB_TOKEN` is missing.
 
 ---
 
-## Environment variables
+### 💻 Terminal README Generator
 
-- `GITHUB_TOKEN` — **required**: GitHub GraphQL token with appropriate public scopes
-- (Optional) `NEXT_PUBLIC_BASE_URL` or `SITE_URL` — set your production base URL for canonical links, sitemaps, and sharing
-  
+Generate a terminal-style GitHub profile README directly from your GitHub profile.
+
+* Fetch GitHub profile information automatically
+* Generate a developer README from your GitHub data
+* Multiple terminal-inspired templates
+* Customize and edit the generated README
+* Preview changes instantly
+* Copy the final README to your clipboard
+* Use the generated README anywhere
+* Template-specific README generation
+
+Generate a README at:
+
+```text
+/readme
+```
+
+Personalized README pages are available at:
+
+```text
+/readme/<username>
+```
+
+Templates are available through:
+
+```text
+/readme/<username>/<template>
+```
+
 ---
 
-##  Deployment
+## 🔗 Routes
 
-- Recommended: Vercel (automatic Next.js support)
-- Add `GITHUB_TOKEN` to your deployment environment variables before deploying
+The application uses the Next.js App Router.
+
+| Route                           | Purpose                          |
+| ------------------------------- | -------------------------------- |
+| `/`                             | Main GitHub Wrapped landing page |
+| `/wrap`                         | GitHub Wrapped generator         |
+| `/wrap/[username]`              | Personalized GitHub Wrapped      |
+| `/readme`                       | Terminal README Generator        |
+| `/readme/[username]`            | Personalized README              |
+| `/readme/[username]/[template]` | Editable README template         |
+
+The personalized routes are generated dynamically from the GitHub username.
 
 ---
 
-## Notes
+## 🖼️ Sharing & Export
 
-- Watch for GitHub API rate limits when making many requests; consider caching responses
-- The screenshot/export feature uses `html2canvas`; cross-browser behavior may vary
+GitHub Wrapped is designed to be shared.
+
+Personalized Wrapped pages can generate social previews containing the user's GitHub statistics.
+
+The project also uses client-side rendering and `html2canvas` for image capture/export of Wrapped content.
+
+Personalized Open Graph images follow the user's route:
+
+```text
+/wrap/<username>/opengraph-image
+```
+
+This allows shared Wrapped URLs to display personalized previews on platforms such as X, Discord, LinkedIn, and other social platforms.
 
 ---
 
-## Contributing
+## 🛠️ Tech Stack
 
-Contributions are welcome — open an issue or PR. Please include tests for new logic and keep changes focused.
+### Frontend
+
+* Next.js 16
+* React 19
+* TypeScript
+* Tailwind CSS
+* Framer Motion
+* Recharts
+
+### Data
+
+* GitHub GraphQL API
+* GitHub user/profile data
+* GitHub contribution and repository data
+
+### Rendering & Export
+
+* `html2canvas`
+* Next.js dynamic routes
+* Dynamic Open Graph image generation
+
+### Deployment
+
+* Vercel
+
+---
+
+## 📁 Project Structure
+
+```text
+github-wrapped/
+│
+├── app/
+│   ├── api/
+│   │
+│   ├── readme/
+│   │   └── [username]/
+│   │       └── [template]/
+│   │           └── page.tsx
+│   │
+│   ├── wrap/
+│   │   └── [username]/
+│   │       ├── page.tsx
+│   │       └── wrap-page-client.tsx
+│   │
+│   ├── favicon.ico
+│   ├── globals.css
+│   ├── layout.tsx
+│   ├── page.tsx
+│   ├── robots.ts
+│   └── sitemap.ts
+│
+├── components/
+│   └── ...
+│
+├── lib/
+│   └── ...
+│
+├── public/
+│   └── ...
+│
+├── .env
+├── next.config.ts
+├── package.json
+├── tsconfig.json
+└── README.md
+```
+
+The project follows the Next.js App Router architecture with dynamic routes for personalized GitHub experiences.
 
 ---
 
 ## 📄 License
 
-Add a `LICENSE` file to indicate how you want to license this repository (MIT is a common choice).
+This project currently does not include a license.
+
+If you plan to allow others to freely use, modify, and distribute the project, consider adding an appropriate open-source license such as MIT.
 
 ---
 
 ## ❤️ Credits
 
-Inspired by Spotify Wrapped 2025 and built to celebrate developer activity on GitHub.
+Inspired by the Spotify Wrapped experience and built to celebrate developer activity on GitHub.
+
+Built with:
+
+**Next.js · React · TypeScript · Tailwind CSS · Framer Motion · Recharts · GitHub GraphQL API**
+
+---
+
+## 🚧 What's Next
+
+Some ideas for future improvements:
+
+* [ ] More Wrapped visualizations
+* [ ] More README templates
+* [ ] More README customization options
+* [ ] Improved sharing/export options
+* [ ] Better caching for GitHub API requests
+* [ ] More GitHub statistics
+* [ ] Custom README sections
+* [ ] Public developer profile pages
+* [ ] Improved SEO and search discoverability
+* [ ] Analytics for Wrapped and README generation
