@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import MobileWebHint from "@/components/readme/MobileWebHint";
 
 export const metadata: Metadata = {
   title: "GitHub README Generator — Terminal Style | GitHub Wrapped",
@@ -35,5 +36,10 @@ export const metadata: Metadata = {
 
 
 export default function ReadmeLayout({ children }: { children: React.ReactNode }) {
-  return <>{children}</>;
+  return (
+    <>
+      <MobileWebHint />
+      {children}
+    </>
+  );
 }
