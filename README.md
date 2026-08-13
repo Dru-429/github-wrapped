@@ -13,7 +13,7 @@ Explore your year in code through a Spotify Wrapped-style experience, or generat
 ## ✨ Features
 
 
-### 💻 Terminal README Generator
+### >_ Terminal README Generator
 
 Generate a terminal-style GitHub profile README directly from your GitHub profile.
 
@@ -57,7 +57,7 @@ Generate a Wrapped at:
 
 ---
 
-## 🔗 Routes
+##  Routes
 
 The application uses the Next.js App Router.
 
@@ -74,7 +74,7 @@ The personalized routes are generated dynamically from the GitHub username.
 
 ---
 
-## 🖼️ Sharing & Export
+##  Sharing & Export
 
 GitHub Wrapped is designed to be shared.
 
@@ -92,7 +92,7 @@ This allows shared Wrapped URLs to display personalized previews on platforms su
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 ### Frontend
 
@@ -166,7 +166,7 @@ The project follows the Next.js App Router architecture with dynamic routes for 
 
 ---
 
-## 📄 License
+##  License
 
 This project currently does not include a license.
 
@@ -174,7 +174,7 @@ If you plan to allow others to freely use, modify, and distribute the project, c
 
 ---
 
-## ❤️ Credits
+## Credits
 
 Inspired by the Spotify Wrapped experience and built to celebrate developer activity on GitHub.
 
@@ -184,7 +184,7 @@ Built with:
 
 ---
 
-## 🚧 What's Next
+## What's Next
 
 Some ideas for future improvements:
 
