@@ -12,48 +12,29 @@ Explore your year in code through a Spotify Wrapped-style experience, or generat
 
 ## ✨ Features
 
-### 📊 GitHub Wrapped
-
-Generate a personalized year-in-review experience from any public GitHub username.
-
-* Fetch GitHub activity and profile statistics
-* Total contributions and activity
-* Top repositories
-* Top programming languages
-* Commit and contribution history
-* Monthly and seasonal activity breakdowns
-* Commit streaks
-* Developer activity percentile
-* Interactive visualizations
-* Shareable personalized Wrapped pages
-* Export/share your Wrapped as an image
-
-Generate a Wrapped at:
-
-```text
-/wrap/<username>
-```
-
-Example:
-
-```text
-https://githubrapped.vercel.app/wrap/octocat
-```
-
----
 
 ### 💻 Terminal README Generator
 
 Generate a terminal-style GitHub profile README directly from your GitHub profile.
 
-* Fetch GitHub profile information automatically
-* Generate a developer README from your GitHub data
-* Multiple terminal-inspired templates
-* Customize and edit the generated README
+* Fetch GitHub profile information with a single click.
+* Add, edit, preview, all the elements as per ur need.
+* Multiple terminal-inspired templates with Elements: Banner, About, Bios, github stats, etc...
+* Customize and edit the generated README, copy and past anywhere 
 * Preview changes instantly
-* Copy the final README to your clipboard
-* Use the generated README anywhere
-* Template-specific README generation
+
+---
+
+### 📊 GitHub Wrapped
+
+Generate a personalized year-in-review experience from any public GitHub username.
+
+* Fetch GitHub activity and profile statistics, total contri., top repos, ur programing lang., steaks, devs activities, etc
+* Convert it all into Spotify Cards Theme Interactive visualizations
+* Shareable personalized Wrapped pages
+* Export/share your Wrapped as an image
+
+---
 
 Generate a README at:
 
@@ -61,19 +42,15 @@ Generate a README at:
 /readme
 ```
 
-Personalized README pages are available at:
+Generate a Wrapped at:
 
 ```text
-/readme/<username>
+/wrap/<username>
 ```
-
-Templates are available through:
-
-```text
-/readme/<username>/<template>
-```
-
 ---
+
+## Examples: 
+
 
 ## 🔗 Routes
 
