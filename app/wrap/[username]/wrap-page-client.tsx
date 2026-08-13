@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react"
 import { Github, Download, ChevronLeft, ChevronRight, Twitter, Linkedin, Copy, Check } from "lucide-react"
-import html2canvas from "html2canvas"
+import html2canvas from 'html2canvas-pro';
 import { ProfileCard } from "@/components/cards/profile-card"
 import { TopReposCard } from "@/components/cards/top-repos-card"
 import { TopLanguagesCard } from "@/components/cards/top-languages-card"
