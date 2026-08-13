@@ -105,26 +105,64 @@
 }
 
 /* Weight helpers (optional, use as needed) */
-.montserrat-100 { font-weight: 100; }
-.montserrat-200 { font-weight: 200; }
-.montserrat-300 { font-weight: 300; }
-.montserrat-400 { font-weight: 400; }
-.montserrat-500 { font-weight: 500; }
-.montserrat-600 { font-weight: 600; }
-.montserrat-700 { font-weight: 700; }
-.montserrat-800 { font-weight: 800; }
-.montserrat-900 { font-weight: 900; }
+.montserrat-100 {
+  font-weight: 100;
+}
+
+.montserrat-200 {
+  font-weight: 200;
+}
+
+.montserrat-300 {
+  font-weight: 300;
+}
+
+.montserrat-400 {
+  font-weight: 400;
+}
+
+.montserrat-500 {
+  font-weight: 500;
+}
+
+.montserrat-600 {
+  font-weight: 600;
+}
+
+.montserrat-700 {
+  font-weight: 700;
+}
+
+.montserrat-800 {
+  font-weight: 800;
+}
+
+.montserrat-900 {
+  font-weight: 900;
+}
 
 /* Theme helper: apply a theme font via CSS variable */
-.theme { font-family: var(--theme-font, inherit); }
+.theme {
+  font-family: var(--theme-font, inherit);
+}
 
 /* Theme variants - set the --theme-font to switch fonts */
-.theme-bebas { --theme-font: "Bebas Neue", sans-serif; }
-.theme-montserrat { --theme-font: "Montserrat", sans-serif; }
+.theme-bebas {
+  --theme-font: "Bebas Neue", sans-serif;
+}
+
+.theme-montserrat {
+  --theme-font: "Montserrat", sans-serif;
+}
 
 /* Utilities - apply fonts directly */
-.font-bebas { font-family: "Bebas Neue", sans-serif; }
-.font-montserrat { font-family: "Montserrat", sans-serif; }
+.font-bebas {
+  font-family: "Bebas Neue", sans-serif;
+}
+
+.font-montserrat {
+  font-family: "Montserrat", sans-serif;
+}
 
 :root {
   --radius: 0.25rem;
@@ -153,7 +191,7 @@
   --muted-foreground: #4a5a6b;
   --accent: var(--lime);
   --accent-foreground: var(--ink);
-  --destructive: oklch(0.577 0.245 27.325);
+  --destructive: #ef4444;
   --destructive-foreground: var(--cream);
   --border: var(--ink);
   --input: var(--ink);
@@ -178,7 +216,8 @@
     border-color: var(--color-border);
   }
 
-  html, body {
+  html,
+  body {
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);

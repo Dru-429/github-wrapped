@@ -51,7 +51,7 @@ export function StatsCard({ data }: { data: GitHubData }) {
 
         {/* Vertical "Wrapped" text */}
         <div className="absolute -left-38  -rotate-90">
-          <span className="text-6xl font-bold tracking-tighter font-montserrat text-[oklch(0.75_0.20_290)]">WRAPPED</span>
+          <span className="text-6xl font-bold tracking-tighter font-montserrat  text-[#8E86E8]">WRAPPED</span>
         </div>
 
 

@@ -11,9 +11,6 @@ export function ProfileCard({ data }: { data: GitHubData }) {
 
   return (
     <div className="flex items-center justify-center w-full h-full min-h-[600px] p-1 md:p-4 bg-[#1A1A1A] rounded-3xl">
-      {/* outer wrapper
-      */}
-
       <div className="relative w-full h-[630px] max-w-[400px] aspect-[9/14] bg-[#F3F3F1] border-[3px] border-black overflow-hidden flex flex-col shadow-2xl pt-4 rounded-3xl">
 
         <div className="absolute top-2 w-full flex flex-col items-center justify-center pointer-events-none z-0 ">
