@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import {
   Github,
 } from 'lucide-react'
+import Link from 'next/link'
 
 /* Navbar                                                             */
 const navLinks = [
@@ -20,24 +21,24 @@ export default function Navbar() {
       transition={{ duration: 0.5, ease: 'easeOut' }}
       className='boxy flex items-center justify-between px-4 py-3 md:px-6 md:py-4'
     >
-      <a href='#' className='flex items-center gap-2'>
+      <Link href='/' className='flex items-center gap-2'>
         <span className='grid h-8 w-8 place-items-center border-2 border-ink bg-[var(--lime)] font-display text-lg font-black'>
           G
         </span>
         <span className='font-display text-xl font-bold tracking-tight'>
           Github Wrapped
         </span>
-      </a>
+      </Link>
 
       <div className='hidden items-center gap-8 md:flex'>
         {navLinks.map(l => (
-          <a
+          <Link
             key={l.label}
             href={l.href}
             className='relative text-sm font-medium text-foreground/80 transition-colors hover:text-foreground after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-foreground after:transition-all hover:after:w-full'
           >
             {l.label}
-          </a>
+          </Link>
         ))}
       </div>
 
