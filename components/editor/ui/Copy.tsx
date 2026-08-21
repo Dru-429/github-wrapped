@@ -14,11 +14,6 @@ type CopyProps = {
   title?: string;
 };
 
-/**
- * Renders a button that captures `node` (the rendered README template)
- * as a PNG image via html-to-image and copies it to the clipboard.
- * Works with a ref (React.RefObject) or a getter function returning the element.
- */
 export const Copy = ({ node, className, title }: CopyProps) => {
   const [copied, setCopied] = useState(false);
 
@@ -29,6 +24,7 @@ export const Copy = ({ node, className, title }: CopyProps) => {
     const el = getNode();
     if (!el) return;
     try {
+      await document.fonts.ready;
       const blob = await toBlob(el, { pixelRatio: 2, cacheBust: true });
       if (!blob) return;
       await navigator.clipboard.write([
