@@ -47,12 +47,12 @@ export default function BashStyle({
   templateObject,
   name = "dhruv sahoo",
   role = "Design Engineer",
-  handel= "10xdhruv"
+  handle= "10xdhruv"
 }: {
   templateObject: ReadmeTemplate;
   name?: string;
   role?: string;
-  handel?: string;
+  handle?: string;
 }) {
   const t = (templateObject ?? {}) as ReadmeTemplate;
   const cardRef = useRef<HTMLDivElement>(null);
@@ -71,7 +71,7 @@ export default function BashStyle({
   );
   const Arrow = () => <span className="text-[#FF7B68]">{">"}</span>;
   const Comment = ({ children }: { children: React.ReactNode }) => (
-    <span className="text-cream/40">{handel} # {children}</span>
+    <span className="text-cream/40">{handle} # {children}</span>
   );
 
   return (
