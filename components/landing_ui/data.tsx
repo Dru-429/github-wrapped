@@ -16,7 +16,7 @@ const tweets = [
     name: 'ullu ka protha',
     handle: 'nitish_boht',
     avatarSrc:
-      'https://pbs.twimg.com/profile_images/1942179926439829504/Ot5VrFC-.jpg',
+      'https://pbs.twimg.com/profile_images/2086321174808858625/q0nmYuki_400x400.jpg',
     text: 'HOLY ANIMATION! \n',
     date: 'May 20',
     verified: true

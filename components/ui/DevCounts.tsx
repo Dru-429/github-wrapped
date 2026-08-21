@@ -60,7 +60,7 @@ export default function DevCounts({ text, onClick }: DevCountsProps) {
       initial={{ scale: 0.92, opacity: 0.7 }}
       animate={{ scale: 1, opacity: 1 }}
       transition={{ type: 'spring', stiffness: 320, damping: 18 }}
-      className='relative boxy-sm inline-flex items-center gap-2 bg-[var(--nuit)] px-3 py-1.5 text-xs font-bold uppercase tracking-widest text-[var(--cream)] cursor-pointer select-none'
+      className='relative boxy-sm inline-flex items-center gap-2 bg-[var(--nuit)] px-3 py-1.5 text-xs font-bold uppercase tracking-widest text-[var(--cream)] select-none'
     >
       <div className='shadow-xl/30 shadow-blue-600 w-full h-full absolute rounded-xl -left-1' />
       <Users className='h-3.5 w-3.5' />
