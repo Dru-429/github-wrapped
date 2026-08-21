@@ -4,7 +4,7 @@ import { useRef } from "react";
 import type { ReadmeTemplate as BaseTemplate } from "../editor-state";
 import { Copy } from "../ui/Copy";
 
-type ReadmeTemplate = BaseTemplate & {
+type ReadmeTemplate = BaseTemplate & {     
   image?: string;
   bio?: string;
   quote?: string;
