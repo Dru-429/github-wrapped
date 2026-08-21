@@ -60,6 +60,7 @@ export default function Preview({
         templateObject={templateObject}
         name={name}
         role={role}
+        handle={handle}
       />
     )
   }
@@ -70,6 +71,7 @@ export default function Preview({
       templateObject={templateObject}
       name={name}
       role={role}
+      handle={handle}
     />
     )
   }
